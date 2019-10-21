@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>wordcloud2 | Academic</title>
+    <link>/tags/wordcloud2/</link>
+      <atom:link href="/tags/wordcloud2/index.xml" rel="self" type="application/rss+xml" />
+    <description>wordcloud2</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Wed, 02 May 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo2.png</url>
+      <title>wordcloud2</title>
+      <link>/tags/wordcloud2/</link>
+    </image>
+    
+    <item>
+      <title>WordClouds - Visualizing gender inequality in income</title>
+      <link>/post/2018/05/2018-05-02-wordcloud/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      <guid>/post/2018/05/2018-05-02-wordcloud/</guid>
+      <description>
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+
+&lt;p&gt;This week I&amp;rsquo;m posting my visualization and a brief analysis about the
+&lt;a href=&#34;https://twitter.com/R4DScommunity/status/988790036014485504&#34; target=&#34;_blank&#34;&gt;#TidyTuesday week 4&lt;/a&gt;.
+The challenge was about the disparity between men and women when analysing their
+average incomes.&lt;br /&gt;
+The data provided was organized as follows:&lt;/p&gt;
+
+&lt;p&gt;&lt;!--html_preserve--&gt;&lt;div id=&#34;DT&#34; style=&#34;width:100%;height:100%;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;DT&#34;&gt;{&amp;ldquo;x&amp;rdquo;:{&amp;ldquo;url&amp;rdquo;:&amp;ldquo;/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_data1.html&amp;rdquo;,&amp;ldquo;options&amp;rdquo;:{&amp;ldquo;xdomain&amp;rdquo;:&amp;rdquo;*&amp;ldquo;,&amp;ldquo;allowfullscreen&amp;rdquo;:false,&amp;ldquo;lazyload&amp;rdquo;:false}},&amp;ldquo;evals&amp;rdquo;:[],&amp;ldquo;jsHooks&amp;rdquo;:[]}&lt;/script&gt;&lt;!--/html_preserve--&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;https://data.gov.au/dataset/taxation-statistics-2013-14/resource/c506c052-be2f-4fba-8a65-90f9e60f7775?inner_span=True&#34; target=&#34;_blank&#34;&gt;data souce&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;a href=&#34;http://www.womensagenda.com.au/latest/eds-blog/australia-s-50-highest-paying-jobs-are-paying-men-significantly-more/&#34; target=&#34;_blank&#34;&gt;An article about it&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;hypothesis&#34;&gt;Hypothesis&lt;/h2&gt;
+
+&lt;p&gt;In the dataset there are a lot of &lt;em&gt;composite occupations&lt;/em&gt;, i.e., occupations
+that have large descriptions or are compoused by two or more different roles.
+Due to it, I would like to see if there are words in these occupations that appears
+more in female individuals. In addition, would be nice visualize the average
+income associated with each word. To make this &amp;ldquo;average income per word&amp;rdquo;
+comparable, it was categorized by its percentile.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;If you are not interested in &lt;em&gt;how to&lt;/em&gt; build the visualization, go directly
+to the analysis &lt;a href=&#34;#analysis&#34;&gt;clicking here&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&#34;ingredients&#34;&gt;Ingredients&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;data.table&lt;/code&gt; - read the data;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;dplyr&lt;/code&gt; - for data manipulation;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;magrittr&lt;/code&gt; - it&amp;rsquo;s not just the &lt;code&gt;%&amp;gt;%&lt;/code&gt;;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;ggplot2&lt;/code&gt; - for creating the legend (certainly it can be done in a more efficient way);&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cowplot&lt;/code&gt; - extract ggplot2 legend;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;tm&lt;/code&gt; - Text Mining;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;stringr&lt;/code&gt; - string handling;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;wordcloud2&lt;/code&gt; - wordclouds.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;reading-and-manipulating-the-data&#34;&gt;Reading and manipulating the data&lt;/h2&gt;
+
+&lt;p&gt;The following script will read the data and handle with two initial problems:&lt;/p&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Encoding&lt;/strong&gt;: I&amp;rsquo;m a Linux user and the data came from Windows. To overcome encoding
+problems, we need to switch the encoding to &lt;em&gt;UTF-8&lt;/em&gt;;&lt;br /&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;Integer overflow&lt;/strong&gt;: sometimes, in this data, integers are too large. As a consequence
+a summation of integers can return a &lt;code&gt;NaN&lt;/code&gt;, when this integer exceeds a certain size. To
+remedy this problem, we can turn these integers in numerics.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;library(tm)
+library(magrittr)
+library(dplyr)
+
+Data &amp;lt;- data.table::fread(
+(&amp;quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-04-23/week4_australian_salary.csv&amp;quot;), 
+stringsAsFactors = F, data.table = F
+) %&amp;gt;% 
+as_tibble() %&amp;gt;% 
+mutate(occupation = iconv(occupation, from = &amp;quot;WINDOWS-1252&amp;quot;, to = &amp;quot;UTF-8&amp;quot;), # solving encoding problems
+     individuals = as.numeric(individuals), # avoiding integer overflow
+     individuals = as.numeric(individuals)) # avoiding integer overflow
+&lt;/code&gt;&lt;/pre&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;After that, I splitted the the data by gender.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;data_split &amp;lt;- split(Data, Data$gender) # split by gender
+data_split$Total &amp;lt;- Data # adding a list component with all data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;And then, created a function that returns the &lt;em&gt;frequency&lt;/em&gt; each word appears
+and the &lt;em&gt;average income&lt;/em&gt; related to this word.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;# if stem is TRUE, words will be &amp;quot;stemmed&amp;quot;
+
+word_counter &amp;lt;- function(data, stem = T) { 
+  
+  stopwords &amp;lt;- tm::stopwords(&#39;en&#39;) # aux to remove stopwords
+  
+  if(stem == T) {
+    data %&amp;lt;&amp;gt;% 
+      mutate(occup_text = occupation %&amp;gt;% stringr::str_to_lower() %&amp;gt;% 
+               stringr::str_replace_all(&#39;–&#39;, &amp;quot;&amp;quot;) %&amp;gt;% 
+               tm::removePunctuation() %&amp;gt;% 
+               tm::removeNumbers() %&amp;gt;% 
+               tm::removeWords(stopwords) %&amp;gt;% 
+               tm::stemDocument() %&amp;gt;%
+               tm::stripWhitespace()) 
+    
+    dtm &amp;lt;- data$occup_text %&amp;gt;%
+      VectorSource() %&amp;gt;% 
+      Corpus() %&amp;gt;% 
+      TermDocumentMatrix() 
+    
+    df_word &amp;lt;- as.matrix(dtm) %&amp;gt;% 
+      rowSums() %&amp;gt;% 
+      sort(decreasing=TRUE) %&amp;gt;% 
+      names
+  }
+  else {
+    data %&amp;lt;&amp;gt;% 
+      mutate(occup_text = occupation %&amp;gt;% stringr::str_to_lower() %&amp;gt;% 
+               stringr::str_replace_all(&#39;–&#39;, &amp;quot;&amp;quot;) %&amp;gt;%
+               tm::removePunctuation() %&amp;gt;% 
+               tm::removeNumbers() %&amp;gt;% 
+               tm::removeWords(stopwords) %&amp;gt;%
+               tm::stripWhitespace()) 
+    
+    dtm &amp;lt;- data$occup_text %&amp;gt;%
+      VectorSource() %&amp;gt;% 
+      Corpus() %&amp;gt;% 
+      TermDocumentMatrix() 
+    
+    df_word &amp;lt;- as.matrix(dtm) %&amp;gt;% 
+      rowSums() %&amp;gt;% 
+      sort(decreasing=TRUE) %&amp;gt;% 
+      names
+  }
+  
+  df_word$freq &amp;lt;- NA_real_
+  df_word$income &amp;lt;- NA_real_
+  aux &amp;lt;- NULL
+  
+  for(i in seq_len(nrow(df_word))) {
+    aux &amp;lt;- data[stringr::str_detect(data$occup_text, df_word$word[i]),]
+    df_word$freq[i] &amp;lt;- sum(aux$individuals)
+    df_word$income[i] &amp;lt;- sum(aux$average_taxable_income*aux$individuals)/df_word$freq[i]
+    aux &amp;lt;- NULL
+  }
+  
+  return(df_word)
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that, the package &lt;code&gt;tm&lt;/code&gt; is used just to create a &lt;code&gt;data.frame&lt;/code&gt; with one line
+for each word. Then, &lt;code&gt;stringr&lt;/code&gt; is used to detect the professions that
+&amp;ldquo;match&amp;rdquo; with each word. Another important detail is concerned about the
+calculation of the &lt;em&gt;average income&lt;/em&gt;. Instead of using
+&lt;code&gt;mean(aux$average_taxable_income)&lt;/code&gt;, &lt;code&gt;sum(aux$average_taxable_income*aux$individuals)/df_word$freq[i]&lt;/code&gt;
+is used. The first choice would calculate a wrong average. Because the average
+income of a word that appeared one time would be treated in the same way that
+a word that appeared a hundred times.&lt;/p&gt;
+
+&lt;h2 id=&#34;almost-there&#34;&gt;Almost there&lt;/h2&gt;
+
+&lt;p&gt;Now, we just need to run the following script to obtain everything that wee need
+to build the men and women wordclouds.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;word_counters &amp;lt;- purrr::map(data_split, word_counter, stem = F)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&#34;creating-a-color-palette-based-on-quantiles&#34;&gt;Creating a color palette based on quantiles&lt;/h3&gt;
+
+&lt;p&gt;The color palette was created based on the quantiles of the average income
+considering both men and women. The palette goes from red to white to blue,
+this means that red words are associated with low income and blue with high
+income.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;col_pal &amp;lt;- colorRampPalette(colors = c(&amp;quot;#f71616&amp;quot;, &amp;quot;#ffffff&amp;quot;, &amp;quot;#283eff&amp;quot;))
+breaks &amp;lt;- quantile(word_counters$Total$income, probs = seq(0, 1, by = .005))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;white values are associated with median income. However, the distribution
+of the average income is assymetric.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The following lines of code create a variable called &lt;code&gt;color&lt;/code&gt; that indicates
+at each quantile each average income is associated and the respective color.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;word_counters &amp;lt;- purrr::map(word_counters, 
+                            function(data) {
+                              data %&amp;lt;&amp;gt;%
+                                mutate(color = cut(x = income, 
+                                                   breaks = breaks, 
+                                                   label = col_pal(length(breaks) - 1)
+                                )
+                                )
+                            })
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;wordclouds&#34;&gt;Wordclouds&lt;/h2&gt;
+
+&lt;p&gt;Finally, we are able to create the desired wordclouds and it can be done with
+few lines of code. For example, to create a word cloud for men execute the
+following code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;wc_obj_men &amp;lt;- word_counters$Male %&amp;gt;% 
+  filter(freq &amp;gt; quantile(freq, .8)) # I&#39;m using just the 20% more frequent words.
+
+men_colors &amp;lt;- wc_obj_men$color
+
+# Data structure utilized by wordcloud2
+wc_obj_men %&amp;lt;&amp;gt;% select(word, freq)
+
+(wc_men &amp;lt;- wordcloud2::wordcloud2(data = wc_obj_men, color = men_colors,
+                                  backgroundColor = &amp;quot;black&amp;quot;,
+                                  shuffle = F, 
+                                  size = .5))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;!--html_preserve--&gt;&lt;div id=&#34;htmlwidget-03d6fb5fcdfa0c5252b2&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-03d6fb5fcdfa0c5252b2&#34;&gt;{&amp;ldquo;x&amp;rdquo;:{&amp;ldquo;url&amp;rdquo;:&amp;ldquo;/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_men_wc_print.html&amp;rdquo;,&amp;ldquo;options&amp;rdquo;:{&amp;ldquo;xdomain&amp;rdquo;:&amp;rdquo;*&amp;ldquo;,&amp;ldquo;allowfullscreen&amp;rdquo;:false,&amp;ldquo;lazyload&amp;rdquo;:false}},&amp;ldquo;evals&amp;rdquo;:[],&amp;ldquo;jsHooks&amp;rdquo;:[]}&lt;/script&gt;&lt;!--/html_preserve--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;p&gt;Similarly, if you want to visualize the women wordcloud, runs:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;wc_obj_women &amp;lt;- word_counters$Female %&amp;gt;% 
+  filter(freq &amp;gt; quantile(freq, .8))
+
+women_colors &amp;lt;- wc_obj_women$color
+
+wc_obj_women %&amp;lt;&amp;gt;% select(word, freq)
+
+(wc_women &amp;lt;- wordcloud2::wordcloud2(data = wc_obj_women, color = women_colors,
+                                    backgroundColor = &amp;quot;black&amp;quot;,
+                                    shuffle = F, 
+                                    size = .5))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;!--html_preserve--&gt;&lt;div id=&#34;htmlwidget-e69e7b1f5ea8b48b201b&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-e69e7b1f5ea8b48b201b&#34;&gt;{&amp;ldquo;x&amp;rdquo;:{&amp;ldquo;url&amp;rdquo;:&amp;ldquo;/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_women_wc_print.html&amp;rdquo;,&amp;ldquo;options&amp;rdquo;:{&amp;ldquo;xdomain&amp;rdquo;:&amp;rdquo;*&amp;ldquo;,&amp;ldquo;allowfullscreen&amp;rdquo;:false,&amp;ldquo;lazyload&amp;rdquo;:false}},&amp;ldquo;evals&amp;rdquo;:[],&amp;ldquo;jsHooks&amp;rdquo;:[]}&lt;/script&gt;&lt;!--/html_preserve--&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;br&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;creating-a-legend&#34;&gt;Creating a legend&lt;/h3&gt;
+
+&lt;p&gt;Legend will be created as follows (I&amp;rsquo;m sure it can be done in a more efficient way):&lt;/p&gt;
+
+&lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;legends &amp;lt;- ggplot2::ggplot(word_counters$Total, aes(x = freq, y = income, fill = income)) +
+  ggplot2::geom_point(alpha = .7) + 
+  ggplot2::scale_fill_gradientn(colours = c(&amp;quot;#f71616&amp;quot;, &amp;quot;#ffffff&amp;quot;, &amp;quot;#283eff&amp;quot;), 
+                                guide = ggplot2::guide_colorbar(title = &amp;quot;Avg. Income&amp;quot;, 
+                                                                title.position = &amp;quot;top&amp;quot;, 
+                                                                label.position = &amp;quot;bottom&amp;quot;,
+                                                                label.theme = ggplot2::element_text(angle = 90,
+                                                                                                    size = 6.5,
+                                                                                                    family = &amp;quot;Space Mono&amp;quot;),
+                                                                ticks = F),
+                                breaks = c(min(breaks), max(breaks)),
+                                labels = c(&amp;quot;low&amp;quot;, &amp;quot;high&amp;quot;)) +
+  ggplot2::theme(legend.justification = &amp;quot;bottom&amp;quot;, 
+                 legend.direction = &amp;quot;horizontal&amp;quot;, 
+                 legend.title = ggplot2::element_text(family = &amp;quot;Space Mono&amp;quot;,
+                                                      size = 8))
+
+
+legends &amp;lt;- cowplot::get_legend(legends)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;analysis&#34;&gt;Final WordCloud and Analysis&lt;/h2&gt;
+
+&lt;p&gt;The wordclouds below can be used to extract a lot of information about gender
+inequalities in Australia in 2013-14.
+For example, take a look at the word &lt;em&gt;office&lt;/em&gt;. Despite the number of women that
+plays a role in an office is greater than the number of men, Men have a much
+better salary at, probably, the same function. If you analyze carefully both
+worclouds, you will be able to identify several diferences in the income
+associated with a same word in different genders.&lt;/p&gt;
+
+&lt;p&gt;In conlusion, even in Australia, a country considered developed, the problem of not
+treating people of different genders equally exists. It&amp;rsquo;s a sad reality that needs to
+be showed and faced.&lt;/p&gt;
+
+&lt;div class = &#34;row&#34;&gt;
+
+&lt;div class = &#34;col-md-6 px-0&#34;&gt;
+
+#### Men
+
+&lt;!--html_preserve--&gt;&lt;div id=&#34;htmlwidget-ba5c9f0d74cd124c892d&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-ba5c9f0d74cd124c892d&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_wc1.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;&lt;!--/html_preserve--&gt;
+&lt;/div&gt;
+
+&lt;div class = &#34;col-md-6 px-0&#34;&gt;
+
+#### Women
+
+&lt;!--html_preserve--&gt;&lt;div id=&#34;htmlwidget-dd15528e6b660adb030a&#34; style=&#34;width:100%;height:480px;&#34; class=&#34;widgetframe html-widget&#34;&gt;&lt;/div&gt;
+&lt;script type=&#34;application/json&#34; data-for=&#34;htmlwidget-dd15528e6b660adb030a&#34;&gt;{&#34;x&#34;:{&#34;url&#34;:&#34;/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_wc2.html&#34;,&#34;options&#34;:{&#34;xdomain&#34;:&#34;*&#34;,&#34;allowfullscreen&#34;:false,&#34;lazyload&#34;:false}},&#34;evals&#34;:[],&#34;jsHooks&#34;:[]}&lt;/script&gt;&lt;!--/html_preserve--&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&#34;/post/2018/05/2018-05-02-wordcloud_files/figure-html/legend_final-1.png&#34; width=&#34;672&#34; style=&#34;display: block; margin: auto;&#34; /&gt;
+&lt;/div&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;It&amp;rsquo;s important to emphasize that the focus of this post is provide a way
+to analyze this data. I&amp;rsquo;m a statistician and professionals from other areas
+probably can draw more accurate conclusions about this visualization.&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
