@@ -197,7 +197,7 @@
         "message": "This website uses cookies to ensure you get the best experience on our website.",
         "dismiss": "Got it!",
         "link": "Learn more",
-        "href": "https://cookies.insites.com"
+        "href": "/privacy/"
       }
     })});
 </script>
@@ -523,10 +523,10 @@
 
 <h2 id="about-tidytuesday">About TidyTuesday</h2>
 
-<p>Tidy tuesday is a nice initiative from <a href="https://twitter.com/R4DScommunity" target="_blank">R4DS online community</a>.
+<p>Tidy Tuesday is a nice initiative from the <a href="https://twitter.com/R4DScommunity" target="_blank">R4DS online community</a>.
 The goal is is to apply your R skills, get feedback, explore other’s work, and connect with the
 greater RStats community.<br />
-Actually, it&rsquo;s also my blogging motivation.</p>
+It&rsquo;s also my blogging motivation.</p>
 
 <h2 id="the-challenge">The challenge</h2>
 
@@ -549,20 +549,20 @@ cause of death through <em>space-time</em>.</p>
 <p>To achieve my goal I used the packages:</p>
 
 <ul>
-<li><code>dplyr</code> - for data manipulation;</li>
-<li><code>ggplot2</code> - for plotting;</li>
+<li><code>dplyr</code> - data manipulation;</li>
+<li><code>ggplot2</code> - graphs;</li>
 <li><code>ggthemes</code> - map theme;</li>
-<li><code>sf</code> - for work with spatial data. This package interacts beautifully with <code>ggplot2</code>
+<li><code>sf</code> - spatial data manipulation. This package interacts beautifully with <code>ggplot2</code>
 and <code>dplyr</code>, which makes spatial data manipulation and visualization very easy (and tidy);</li>
-<li><code>magick</code> - to build the GIF&rsquo;s;</li>
+<li><code>magick</code> - build the GIF&rsquo;s;</li>
 <li><code>magrittr</code> - it&rsquo;s not just the <code>%&gt;%</code>;</li>
-<li><code>readxl</code> - reading .xlsx files;</li>
-<li><code>maps</code> - get the world map &lsquo;shape&rsquo;.</li>
+<li><code>readxl</code> - reading <code>.xlsx</code> files;</li>
+<li><code>maps</code> - world map &lsquo;shape&rsquo;.</li>
 </ul>
 
 <blockquote>
 <p><a href="https://twitter.com/WireMonkey" target="_blank">Alyssa Goldberg</a> suggestion:
-You can use <code>gganimate</code> instead of <code>magick</code>, it will need less lines of code.</p>
+You can use <code>gganimate</code> instead of <code>magick</code>, it will need fewer lines of code.</p>
 </blockquote>
 
 <h2 id="reading-and-manipulating-the-data">Reading and manipulating the data</h2>
@@ -606,11 +606,11 @@ lines of code. Here the variables <code>ID</code> from <code>world map</code> an
 
 <h2 id="creating-a-gif">Creating a GIF</h2>
 
-<h3 id="building-a-function">Building a function</h3>
+<h3 id="building-the-gif-map-function">Building the <code>gif_map</code> function</h3>
 
-<p>In order to make easier create a <em>GIF</em> for different causes of death, I built
-the following function. Basically, the inputs are the data and a string representing
-the name of the variable corresponding to the cause of death you want to visualize.</p>
+<p>To make easier to create a <em>GIF</em> for different causes of death, I built the following
+function. The inputs are the data and a string representing the name of the variable
+corresponding to the cause of death you want to visualize.</p>
 
 <pre><code class="language-r">gif_map &lt;- function(data, cause_of_death) {
   # Create limits to fix the scales
@@ -637,7 +637,7 @@ the name of the variable corresponding to the cause of death you want to visuali
 
 <h3 id="using-it">Using it</h3>
 
-<p>Now that we built a function, use it&rsquo;s very easy.</p>
+<p>Now that we&rsquo;ve already built a function, use it&rsquo;s very easy.</p>
 
 <pre><code class="language-r"># Specifying the width, height and resolution
 img &lt;- magick::image_graph(width = 800, height = 350, res = 96)
@@ -658,9 +658,9 @@ magick::image_write(animation, path = 'img/homicide.gif')
 
 <p><img src="/post/2018/04/2018-04-13-world_map_gig_files/figure-html/create_gif2.gif" width="672" /></p>
 
-<h2 id="code-with-gganimate">Code with <code>gganimate</code></h2>
+<h2 id="gganimate-code-outdated"><code>gganimate</code> code (outdated)</h2>
 
-<p>There is a option to create the GIF with <code>gganimate</code>, the syntax is very simple
+<p>There is an option to create the GIF with <code>gganimate</code>, the syntax is very simple
 and it is attached at the following block of code.</p>
 
 <pre><code class="language-r">library(gganimate)
@@ -676,8 +676,8 @@ ggplot(map_years, aes(fill = `Homicide (%)`, frame = years)) +
 
 <h2 id="final-remarks">Final remarks</h2>
 
-<p>At this post I showed how to build GIF&rsquo;s considering space-time data with few
-lines of code. I expect that you enjoyed the post, and if you have any doubt or
+<p>At this post, I showed how to build GIF’s considering space-time data with a few
+lines of code. I hope that you enjoyed the post, and if you have any doubt or
 consideration, you can contact me at twitter or email.</p>
 
     </div>
@@ -817,7 +817,7 @@ consideration, you can contact me at twitter or email.</p>
     <div class="media-body">
       <h5 class="card-title"><a href="/">Lucas Godoy</a></h5>
       <h6 class="card-subtitle">PhD Candidate / TA</h6>
-      <p class="card-text">I&rsquo;m interested in R, Stats and Open Data. matter.</p>
+      <p class="card-text">I&rsquo;m interested in R, Stats and Open Data.</p>
       <ul class="network-icon" aria-hidden="true">
   
     
@@ -1028,6 +1028,16 @@ consideration, you can contact me at twitter or email.</p>
   
   <div class="container">
     <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
   
 
   <p class="powered-by">

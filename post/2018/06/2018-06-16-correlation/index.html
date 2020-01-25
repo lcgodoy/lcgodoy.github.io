@@ -197,7 +197,7 @@
         "message": "This website uses cookies to ensure you get the best experience on our website.",
         "dismiss": "Got it!",
         "link": "Learn more",
-        "href": "https://cookies.insites.com"
+        "href": "/privacy/"
       }
     })});
 </script>
@@ -523,23 +523,22 @@
 
 <h2 id="introduction">Introduction</h2>
 
-<p>In this post I&rsquo;ll explain very briefly how to build a bar correlation plot using
-<code>ggplot2</code> and <code>dplyr</code>. Such graphs are interesting to examine the relationship
-between a outcome of interest and explanatory variables, which is an important
-task that anteceds a regression analysis. It is important to remember that
-Pearson Correlation give us a linear correlation. Consequently a low
-linear correlation doesn&rsquo;t necessarily implies that there are no correlation
-between two variables, because such correlation can follow a non-linear pattern.
-Another very interesting remark is the famous quote &ldquo;Correlation is not
-causation!&ldquo;.</p>
+<p>In this post, I’ll explain very briefly how to build a bar correlation plot
+using <code>ggplot2</code> and <code>dplyr</code>. Such graphs are interesting to examine the relationship
+between an outcome of interest and explanatory variables, which is an important
+task that precedes a regression analysis. It is important to remember that the
+Pearson Correlation gives us a linear correlation. Consequently, a low linear
+correlation doesn’t necessarily imply that there is no correlation between two
+variables because such correlation can follow a non-linear pattern. Another very
+interesting remark is the famous quote “Correlation is not causation!“.</p>
 
 <blockquote>
-<p>The data used is the well know <code>mtcars</code>.</p>
+<p>The data used is the well-know <code>mtcars</code>.</p>
 </blockquote>
 
 <h2 id="straight-to-the-point">Straight to the point</h2>
 
-<p>Let&rsquo;s say that we are interest in verify which variables have high correlations
+<p>Let&rsquo;s say that we are interested in verify which variables have high correlations
 with <code>mpg</code>. To do it, use the following piece of code to compute the correlation matrix
 for the data and then select just first the line of the matrix corresponding to the
 variable of interest, after this, exclude the first position of the resulting
@@ -553,15 +552,16 @@ correlation &lt;- cor(mtcars)[1,][-1]
 </code></pre>
 
 <blockquote>
-<p>In matter of fact, the pearson correlation is not adequated to measure correlation
-between variables that are not continuous. However, it&rsquo;s just a toy example to
-show how to create a specific plot.</p>
+<p>In matter of fact, the Pearson correlation is not adequated to measure the
+correlation between variables that are not continuous. However, this is just a
+toy example to show how to create a specific plot.</p>
 </blockquote>
 
 <p>Now that the correlations have already been computed, store it in a <code>tibble</code>
-(this is not necessarily, but make the code more organized). Note that the
-<code>Covariates</code> variable is being reordered by the correlation. As consequence,
-when the data is plotted, the bars will be ordered by the correlation.</p>
+(this is not necessary, but make the code more organized). Note that the
+<code>Covariates</code> variable is being reordered by the correlation. As a consequence,
+when the data is plotted, the bars will be ordered by their correlation
+coefficient with the response variable.</p>
 
 <pre><code class="language-r">df &lt;- tibble(Covariates = names(correlation),
              Correlation = correlation) %&gt;% 
@@ -573,11 +573,11 @@ when the data is plotted, the bars will be ordered by the correlation.</p>
 </code></pre>
 
 <p>In the following piece of code, the argument <code>fill = as.factor(sign(Correlation))</code> will
-give different colors for negative and positive correlations, this colors are specified
-with <code>scale_fill_manual</code>. Also, <code>stat = 'identity'</code> is necessary because the default of
-<code>geom_bar</code> assumes a count. In <code>geom_text</code>, the argument <code>vjust</code> needs to be multiplied
-by <code>sign(Correlation)</code> since the bars assume positive and negative values and such
-parameter needs to be different for each of these two cases.</p>
+give different colours for negative and positive correlations, these colours are specified
+with <code>scale_fill_manual</code>. Also, <code>stat = 'identity'</code> is necessary because the default of <code>geom_bar</code>
+assumes a count. In <code>geom_text</code>, the argument <code>vjust</code> needs to be multiplied by <code>sign(Correlation)</code>
+since the bars assume positive and negative values and such parameter needs to be different
+for each of these two cases.</p>
 
 <pre><code class="language-r">ggplot(df) +
   geom_bar(aes(x = Covariates, y = Correlation, fill = as.factor(sign(Correlation))),
@@ -597,11 +597,11 @@ parameter needs to be different for each of these two cases.</p>
 <p><img src="/post/2018/06/2018-06-16-correlation_files/figure-html/plot1-1.png" width="672" /></p>
 
 <p>Note that the plot above can have another interesting ordering for the bars. If we
-order the variable <code>Covariates</code> by the absolute value of the <code>Correlation</code>, then
-we&rsquo;ll have the plot ordered by the strength of the correlation, independently
-from its signal. Sometimes such approach is more interesting and it is showed in the
-next piece of code. There is just one subtle alteration, apply the function
-<code>abs</code> to <code>.$Correlation</code>.</p>
+order the variable <code>Covariates</code> by the absolute value of the <code>Correlation</code>, then we’ll
+have the plot ordered by the strength of the correlation, independently from its
+signal. Sometimes such approach is more interesting and it is shown in the next
+piece of code. There is just one subtle alteration, apply the function <code>abs</code> to
+<code>.$Correlation</code>.</p>
 
 <pre><code class="language-r">df %&lt;&gt;% mutate(Covariates = factor(Covariates, 
                                    levels = Covariates[order(abs(.$Correlation), 
@@ -761,7 +761,7 @@ ggplot(df) +
     <div class="media-body">
       <h5 class="card-title"><a href="/">Lucas Godoy</a></h5>
       <h6 class="card-subtitle">PhD Candidate / TA</h6>
-      <p class="card-text">I&rsquo;m interested in R, Stats and Open Data. matter.</p>
+      <p class="card-text">I&rsquo;m interested in R, Stats and Open Data.</p>
       <ul class="network-icon" aria-hidden="true">
   
     
@@ -981,6 +981,16 @@ ggplot(df) +
   
   <div class="container">
     <footer class="site-footer">
+  
+  <p class="powered-by">
+    
+      <a href="/privacy/">Privacy Policy</a>
+    
+    
+       &middot; 
+      <a href="/terms/">Terms</a>
+    
+  </p>
   
 
   <p class="powered-by">

@@ -21,23 +21,22 @@
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
 
-&lt;p&gt;In this post I&amp;rsquo;ll explain very briefly how to build a bar correlation plot using
-&lt;code&gt;ggplot2&lt;/code&gt; and &lt;code&gt;dplyr&lt;/code&gt;. Such graphs are interesting to examine the relationship
-between a outcome of interest and explanatory variables, which is an important
-task that anteceds a regression analysis. It is important to remember that
-Pearson Correlation give us a linear correlation. Consequently a low
-linear correlation doesn&amp;rsquo;t necessarily implies that there are no correlation
-between two variables, because such correlation can follow a non-linear pattern.
-Another very interesting remark is the famous quote &amp;ldquo;Correlation is not
-causation!&amp;ldquo;.&lt;/p&gt;
+&lt;p&gt;In this post, I’ll explain very briefly how to build a bar correlation plot
+using &lt;code&gt;ggplot2&lt;/code&gt; and &lt;code&gt;dplyr&lt;/code&gt;. Such graphs are interesting to examine the relationship
+between an outcome of interest and explanatory variables, which is an important
+task that precedes a regression analysis. It is important to remember that the
+Pearson Correlation gives us a linear correlation. Consequently, a low linear
+correlation doesn’t necessarily imply that there is no correlation between two
+variables because such correlation can follow a non-linear pattern. Another very
+interesting remark is the famous quote “Correlation is not causation!“.&lt;/p&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;The data used is the well know &lt;code&gt;mtcars&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The data used is the well-know &lt;code&gt;mtcars&lt;/code&gt;.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&#34;straight-to-the-point&#34;&gt;Straight to the point&lt;/h2&gt;
 
-&lt;p&gt;Let&amp;rsquo;s say that we are interest in verify which variables have high correlations
+&lt;p&gt;Let&amp;rsquo;s say that we are interested in verify which variables have high correlations
 with &lt;code&gt;mpg&lt;/code&gt;. To do it, use the following piece of code to compute the correlation matrix
 for the data and then select just first the line of the matrix corresponding to the
 variable of interest, after this, exclude the first position of the resulting
@@ -51,15 +50,16 @@ correlation &amp;lt;- cor(mtcars)[1,][-1]
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;blockquote&gt;
-&lt;p&gt;In matter of fact, the pearson correlation is not adequated to measure correlation
-between variables that are not continuous. However, it&amp;rsquo;s just a toy example to
-show how to create a specific plot.&lt;/p&gt;
+&lt;p&gt;In matter of fact, the Pearson correlation is not adequated to measure the
+correlation between variables that are not continuous. However, this is just a
+toy example to show how to create a specific plot.&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Now that the correlations have already been computed, store it in a &lt;code&gt;tibble&lt;/code&gt;
-(this is not necessarily, but make the code more organized). Note that the
-&lt;code&gt;Covariates&lt;/code&gt; variable is being reordered by the correlation. As consequence,
-when the data is plotted, the bars will be ordered by the correlation.&lt;/p&gt;
+(this is not necessary, but make the code more organized). Note that the
+&lt;code&gt;Covariates&lt;/code&gt; variable is being reordered by the correlation. As a consequence,
+when the data is plotted, the bars will be ordered by their correlation
+coefficient with the response variable.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;df &amp;lt;- tibble(Covariates = names(correlation),
              Correlation = correlation) %&amp;gt;% 
@@ -71,11 +71,11 @@ when the data is plotted, the bars will be ordered by the correlation.&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;In the following piece of code, the argument &lt;code&gt;fill = as.factor(sign(Correlation))&lt;/code&gt; will
-give different colors for negative and positive correlations, this colors are specified
-with &lt;code&gt;scale_fill_manual&lt;/code&gt;. Also, &lt;code&gt;stat = &#39;identity&#39;&lt;/code&gt; is necessary because the default of
-&lt;code&gt;geom_bar&lt;/code&gt; assumes a count. In &lt;code&gt;geom_text&lt;/code&gt;, the argument &lt;code&gt;vjust&lt;/code&gt; needs to be multiplied
-by &lt;code&gt;sign(Correlation)&lt;/code&gt; since the bars assume positive and negative values and such
-parameter needs to be different for each of these two cases.&lt;/p&gt;
+give different colours for negative and positive correlations, these colours are specified
+with &lt;code&gt;scale_fill_manual&lt;/code&gt;. Also, &lt;code&gt;stat = &#39;identity&#39;&lt;/code&gt; is necessary because the default of &lt;code&gt;geom_bar&lt;/code&gt;
+assumes a count. In &lt;code&gt;geom_text&lt;/code&gt;, the argument &lt;code&gt;vjust&lt;/code&gt; needs to be multiplied by &lt;code&gt;sign(Correlation)&lt;/code&gt;
+since the bars assume positive and negative values and such parameter needs to be different
+for each of these two cases.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;ggplot(df) +
   geom_bar(aes(x = Covariates, y = Correlation, fill = as.factor(sign(Correlation))),
@@ -95,11 +95,11 @@ parameter needs to be different for each of these two cases.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/post/2018/06/2018-06-16-correlation_files/figure-html/plot1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note that the plot above can have another interesting ordering for the bars. If we
-order the variable &lt;code&gt;Covariates&lt;/code&gt; by the absolute value of the &lt;code&gt;Correlation&lt;/code&gt;, then
-we&amp;rsquo;ll have the plot ordered by the strength of the correlation, independently
-from its signal. Sometimes such approach is more interesting and it is showed in the
-next piece of code. There is just one subtle alteration, apply the function
-&lt;code&gt;abs&lt;/code&gt; to &lt;code&gt;.$Correlation&lt;/code&gt;.&lt;/p&gt;
+order the variable &lt;code&gt;Covariates&lt;/code&gt; by the absolute value of the &lt;code&gt;Correlation&lt;/code&gt;, then we’ll
+have the plot ordered by the strength of the correlation, independently from its
+signal. Sometimes such approach is more interesting and it is shown in the next
+piece of code. There is just one subtle alteration, apply the function &lt;code&gt;abs&lt;/code&gt; to
+&lt;code&gt;.$Correlation&lt;/code&gt;.&lt;/p&gt;
 
 &lt;pre&gt;&lt;code class=&#34;language-r&#34;&gt;df %&amp;lt;&amp;gt;% mutate(Covariates = factor(Covariates, 
                                    levels = Covariates[order(abs(.$Correlation), 
