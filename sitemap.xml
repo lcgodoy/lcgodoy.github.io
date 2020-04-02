@@ -33,6 +33,26 @@
   </url>
   
   <url>
+    <loc>/categories/</loc>
+    <lastmod>2020-04-02T16:33:16-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/2020/04/mle/</loc>
+    <lastmod>2020-04-02T16:33:16-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-04-02T16:33:16-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/statistics/</loc>
+    <lastmod>2020-04-02T16:33:16-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/authors/admin/</loc>
     <lastmod>2019-04-07T00:00:00+00:00</lastmod>
   </url>
@@ -98,11 +118,6 @@
   </url>
   
   <url>
-    <loc>/categories/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/tags/correlation/</loc>
     <lastmod>2018-06-16T00:00:00+00:00</lastmod>
   </url>
@@ -124,11 +139,6 @@
   
   <url>
     <loc>/tags/ggplot2/</loc>
-    <lastmod>2018-06-16T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/</loc>
     <lastmod>2018-06-16T00:00:00+00:00</lastmod>
   </url>
   

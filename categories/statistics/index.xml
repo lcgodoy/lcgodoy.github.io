@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Statistics | Academic</title>
+    <link>/categories/statistics/</link>
+      <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
+    <description>Statistics</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2019</copyright><lastBuildDate>Thu, 02 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>/img/logo2.png</url>
+      <title>Statistics</title>
+      <link>/categories/statistics/</link>
+    </image>
+    
+    <item>
+      <title>Mmaximum Likelihood Estimation</title>
+      <link>/post/2020/04/mle/</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>/post/2020/04/mle/</guid>
+      <description>
+
+
+&lt;div id=&#34;intro&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Intro&lt;/h2&gt;
+&lt;p&gt;This blog post is a supplementary material for my students from the&lt;br /&gt;
+&lt;em&gt;Introduction to Mathematical Statistics (STAT 3445)&lt;/em&gt; class. The main goal
+is to give a brief, but clear, explanation on how maximum Likelihood
+Estimation (MLE for short) works.&lt;/p&gt;
+&lt;p&gt;One example with the Normal distribution be covered by this post.&lt;/p&gt;
+&lt;p&gt;One of the key concepts for the MLE is the Likelihood Function. The Likelihood
+Function can be seen as the &lt;em&gt;joint pdf&lt;/em&gt; conditioned on the data, i.e., keeping
+the data fixed. When working with only one random variable, lets say &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, the
+Likelihood function is the pdf itself. For example, consider a problem where
+we are said that &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; follows a &lt;em&gt;Binomial&lt;/em&gt; distribution with &lt;span class=&#34;math inline&#34;&gt;\(n = 10\)&lt;/span&gt; and &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt;
+unknown. We know that
+&lt;span class=&#34;math display&#34;&gt;\[
+P(X = x) = {{10}\choose{x}} p^x(1 - p)^{n - x}.
+\]&lt;/span&gt;
+Suppose now, that besides knowing that &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt; follows a &lt;span class=&#34;math inline&#34;&gt;\(Binomial(10, p)\)&lt;/span&gt;, we also
+know a realization of &lt;span class=&#34;math inline&#34;&gt;\(x = 4\)&lt;/span&gt;. Now, what we are interested in infer is, what is
+the value of &lt;span class=&#34;math inline&#34;&gt;\(p\)&lt;/span&gt; that maximizes &lt;span class=&#34;math inline&#34;&gt;\(P(X = 10)\)&lt;/span&gt;. Can you notice how different it is
+from finding a probability? We are still working with probability distributions,
+but with a different goal.&lt;/p&gt;
+&lt;div id=&#34;example-1---normal-distribution&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Example 1 - Normal Distribution&lt;/h3&gt;
+&lt;p&gt;Suppose that &lt;span class=&#34;math inline&#34;&gt;\(X_1, \, \cdots \, X_n \overset{iid}{\sim} N(\mu, 1)\)&lt;/span&gt;. How do we
+find the MLE for &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;? First of all, note that, since the random variables are
+identically distributed we have that
+&lt;span class=&#34;math display&#34;&gt;\[
+f_i(x_i) = f(x_i) = \frac{1}{\sqrt{2\pi}} \exp \left \{ - \frac{(x_i - \mu)^2}{2} \right \}.
+\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Moreover, since the random variables are independent, their joint distribution
+is equal to the product of the marginals, i.e.,
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  f(x_1, \cdots, x_n) &amp;amp; = \prod_{i = 1}^n f(x_i) \\
+  &amp;amp; = f(x_1) f(x_2) \cdots f(x_n) \\\\
+  &amp;amp; = \frac{1}{(2\pi)^{n/2}} \exp \left \{ - \frac{\sum_{i = 1}^n (x_i - \mu)^2}{2} \right \}.
+\end{align*}\]&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;Finally, as stated before, the Likelihood function is given by
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  L(\mu|X_1 = x_1, \cdots, X_n = x_n) &amp;amp; = f(x_1, \cdots, x_n) \\
+  &amp;amp; = \frac{1}{(2\pi)^{n/2}} \exp \left \{ - \frac{\sum_{i = 1}^n (x_i - \mu)^2}{2} \right \}.
+\end{align*}\]&lt;/span&gt;
+Note that, the data is fixed and the Likelihood is a function of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;. Maximizing
+this function with respect to &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; gives us the value for this parameter that this
+data is more likely to be generated from. The idea is that there is an infinite number
+of Normal probability distributions with &lt;span class=&#34;math inline&#34;&gt;\(\sigma^2 = 2\)&lt;/span&gt;, each one associated to
+one value of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;. Now, for each value of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt; we have a probability for the
+joint pdf of the data. Finding the the Maximum Likelihood estimator od &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, gives
+us the value for this parameter that maximizes this probability.&lt;/p&gt;
+&lt;p&gt;Usually, maximizing the Likelihood function is quite complicated. An alternative
+is to maximize the &lt;em&gt;log-Likelihood&lt;/em&gt; function instead. The &lt;em&gt;log-Likelihood&lt;/em&gt; function,
+as the name suggests, is the &lt;em&gt;log&lt;/em&gt; (of natural base) of the Likelihood function and
+since the &lt;em&gt;log&lt;/em&gt; is monotone non-decreasing function, the value that maximizes the
+log-likelihood also maximizes the Likelihood function.
+For this problem, the log-likelihood, denoted by &lt;span class=&#34;math inline&#34;&gt;\(\ell(\mu|\mathbf{X})\)&lt;/span&gt;, where
+&lt;span class=&#34;math inline&#34;&gt;\(\mathbf{X} = \{ X_1, \, \cdots \, X_n \}\)&lt;/span&gt;, is defined as
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \ell(\mu|\mathbf{X}) &amp;amp;= \log\left( L(\mu|\mathbf{X})  \right) \\
+  &amp;amp; = -\frac{n}{2} \log(2\pi) - \frac{\sum_{i = 1}^n (x_i^2 - 2\mu x_i + \mu^2)}{2} \\
+  &amp;amp; = -\frac{n}{2} \log(2\pi) - \frac{\sum_{i = 1}^n x_i^2}{2} + \mu \sum_{i = 1} x_i - \frac{n\mu^2}{2}.
+\end{align*}\]&lt;/span&gt;
+Now that we have found the &lt;span class=&#34;math inline&#34;&gt;\(\ell(\mu|\mathbf{X})\)&lt;/span&gt; in a simple form, we can maximize
+it. To do so, we have to take the first derivative with respect to &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, make it
+equal to 0, and, finally, isolate &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;. Then, take the second derivative of the
+function and verify if this function is less than zero when &lt;span class=&#34;math inline&#34;&gt;\(\mu = \hat{\mu}\)&lt;/span&gt;.
+The first derivative of the log-likelihood is given by:
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \ell&amp;#39;(\mu|\mathbf{X}) &amp;amp;= \frac{\delta \ell(\mu|\mathbf{X})}{\delta \mu} \\
+  &amp;amp; = \sum_{i = 1} x_i - n\mu.
+\end{align*}\]&lt;/span&gt;
+Making it equal to zero and isolating &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, gives us the Maximum Likelihood
+estimator of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, which is
+&lt;span class=&#34;math display&#34;&gt;\[
+\hat{\mu} = \bar{x}.
+\]&lt;/span&gt;
+Now, we only have to take the second derivative of the &lt;em&gt;log-Likelihood&lt;/em&gt; function
+to be sure that &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mu}\)&lt;/span&gt; is a point of maximum.
+&lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
+  \ell&amp;#39;&amp;#39;(\mu|\mathbf{X}) &amp;amp;= \frac{\delta \ell&amp;#39;(\mu|\mathbf{X})}{\delta \mu} \\
+  &amp;amp; = -n.
+\end{align*}\]&lt;/span&gt;
+Note that &lt;span class=&#34;math inline&#34;&gt;\(-n &amp;lt; 0\)&lt;/span&gt; for all possible values of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, thus the function is convex
+and &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mu} = \bar{x}\)&lt;/span&gt; is the Maximum Likelihood Estimator for &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;.&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;recap&#34; class=&#34;section level2&#34;&gt;
+&lt;h2&gt;Recap&lt;/h2&gt;
+&lt;p&gt;Summarizing the method:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Find the Likelihood function by finding the joint pdf (of pmf) and making it
+function of the parameter (or parameters) that you want to estimate;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Take the log of the Likelihood function;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Take the first derivative of the &lt;em&gt;log-Likelihood&lt;/em&gt; function, make it equal to
+zero and isolate the parameter that you want to estimate;&lt;br /&gt;
+&lt;/li&gt;
+&lt;li&gt;Find the second derivative of the &lt;em&gt;log-likelihood&lt;/em&gt; and analyze it to be sure
+that the value found for the parameter is in fact a point of maximum.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
