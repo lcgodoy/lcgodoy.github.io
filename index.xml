@@ -105,7 +105,7 @@
 &lt;h2&gt;Intro&lt;/h2&gt;
 &lt;p&gt;This blog post is a supplementary material for my students from the&lt;br /&gt;
 &lt;em&gt;Introduction to Mathematical Statistics (STAT 3445)&lt;/em&gt; class. The main goal
-is to give a brief, but clear, explanation on how maximum Likelihood
+is to give a brief, but clear, explanation of how maximum Likelihood
 Estimation (MLE for short) works.&lt;/p&gt;
 &lt;p&gt;One example with the Normal distribution be covered by this post.&lt;/p&gt;
 &lt;p&gt;One of the key concepts for the MLE is the Likelihood Function. The Likelihood
