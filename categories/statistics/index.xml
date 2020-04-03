@@ -86,7 +86,7 @@ equal to 0, and, finally, isolate &lt;span class=&#34;math inline&#34;&gt;\(\mu\
 function and verify if this function is less than zero when &lt;span class=&#34;math inline&#34;&gt;\(\mu = \hat{\mu}\)&lt;/span&gt;.
 The first derivative of the log-likelihood is given by:
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
-  \ell&amp;#39;(\mu|\mathbf{X}) &amp;amp;= \frac{\delta \ell(\mu|\mathbf{X})}{\delta \mu} \\
+  \ell&amp;#39;(\mu|\mathbf{X}) &amp;amp;= \frac{\partial \ell(\mu|\mathbf{X})}{\partial \mu} \\
   &amp;amp; = \sum_{i = 1} x_i - n\mu.
 \end{align*}\]&lt;/span&gt;
 Making it equal to zero and isolating &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, gives us the Maximum Likelihood
@@ -97,7 +97,7 @@ estimator of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, which
 Now, we only have to take the second derivative of the &lt;em&gt;log-Likelihood&lt;/em&gt; function
 to be sure that &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mu}\)&lt;/span&gt; is a point of maximum.
 &lt;span class=&#34;math display&#34;&gt;\[\begin{align*}
-  \ell&amp;#39;&amp;#39;(\mu|\mathbf{X}) &amp;amp;= \frac{\delta \ell&amp;#39;(\mu|\mathbf{X})}{\delta \mu} \\
+  \ell&amp;#39;&amp;#39;(\mu|\mathbf{X}) &amp;amp;= \frac{\partial \ell&amp;#39;(\mu|\mathbf{X})}{\partial \mu} \\
   &amp;amp; = -n.
 \end{align*}\]&lt;/span&gt;
 Note that &lt;span class=&#34;math inline&#34;&gt;\(-n &amp;lt; 0\)&lt;/span&gt; for all possible values of &lt;span class=&#34;math inline&#34;&gt;\(\mu\)&lt;/span&gt;, thus the function is convex

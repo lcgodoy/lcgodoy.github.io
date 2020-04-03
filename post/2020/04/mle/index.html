@@ -590,7 +590,7 @@ equal to 0, and, finally, isolate <span class="math inline">\(\mu\)</span>. Then
 function and verify if this function is less than zero when <span class="math inline">\(\mu = \hat{\mu}\)</span>.
 The first derivative of the log-likelihood is given by:
 <span class="math display">\[\begin{align*}
-  \ell&#39;(\mu|\mathbf{X}) &amp;= \frac{\delta \ell(\mu|\mathbf{X})}{\delta \mu} \\
+  \ell&#39;(\mu|\mathbf{X}) &amp;= \frac{\partial \ell(\mu|\mathbf{X})}{\partial \mu} \\
   &amp; = \sum_{i = 1} x_i - n\mu.
 \end{align*}\]</span>
 Making it equal to zero and isolating <span class="math inline">\(\mu\)</span>, gives us the Maximum Likelihood
@@ -601,7 +601,7 @@ estimator of <span class="math inline">\(\mu\)</span>, which is
 Now, we only have to take the second derivative of the <em>log-Likelihood</em> function
 to be sure that <span class="math inline">\(\hat{\mu}\)</span> is a point of maximum.
 <span class="math display">\[\begin{align*}
-  \ell&#39;&#39;(\mu|\mathbf{X}) &amp;= \frac{\delta \ell&#39;(\mu|\mathbf{X})}{\delta \mu} \\
+  \ell&#39;&#39;(\mu|\mathbf{X}) &amp;= \frac{\partial \ell&#39;(\mu|\mathbf{X})}{\partial \mu} \\
   &amp; = -n.
 \end{align*}\]</span>
 Note that <span class="math inline">\(-n &lt; 0\)</span> for all possible values of <span class="math inline">\(\mu\)</span>, thus the function is convex
