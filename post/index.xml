@@ -26,7 +26,7 @@
 &lt;em&gt;Introduction to Mathematical Statistics (STAT 3445)&lt;/em&gt; class. The main goal
 is to give a brief, but clear, explanation of how maximum Likelihood
 Estimation (MLE for short) works.&lt;/p&gt;
-&lt;p&gt;One example with the Normal distribution be covered by this post.&lt;/p&gt;
+&lt;p&gt;One example about the Normal distribution will be covered by this post.&lt;/p&gt;
 &lt;p&gt;One of the key concepts for the MLE is the Likelihood Function. The Likelihood
 Function can be seen as the &lt;em&gt;joint pdf&lt;/em&gt; conditioned on the data, i.e., keeping
 the data fixed. When working with only one random variable, lets say &lt;span class=&#34;math inline&#34;&gt;\(X\)&lt;/span&gt;, the

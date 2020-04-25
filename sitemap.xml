@@ -248,6 +248,11 @@
   </url>
   
   <url>
+    <loc>/slides/csds/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/courses/</loc>
   </url>
   
