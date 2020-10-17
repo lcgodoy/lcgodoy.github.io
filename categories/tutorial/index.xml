@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tutorial | Academic</title>
+    <title>Tutorial | lcgodoy</title>
     <link>/categories/tutorial/</link>
       <atom:link href="/categories/tutorial/index.xml" rel="self" type="application/rss+xml" />
     <description>Tutorial</description>

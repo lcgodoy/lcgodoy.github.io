@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Statistics | Academic</title>
+    <title>Statistics | lcgodoy</title>
     <link>/categories/statistics/</link>
       <atom:link href="/categories/statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Statistics</description>
@@ -106,7 +106,6 @@ and &lt;span class=&#34;math inline&#34;&gt;\(\hat{\mu} = \bar{x}\)&lt;/span&gt;
 &lt;/div&gt;
 &lt;div id=&#34;recap&#34; class=&#34;section level2&#34;&gt;
 &lt;h2&gt;Recap&lt;/h2&gt;
-&lt;p&gt;Summarizing the method:&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Find the Likelihood function by finding the joint pdf (of pmf) and making it
 function of the parameter (or parameters) that you want to estimate;&lt;br /&gt;
