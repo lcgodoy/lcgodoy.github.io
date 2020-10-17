@@ -5,7 +5,7 @@
     <link>/</link>
       <atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     <description>Academic</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Sat, 01 Jun 2030 13:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Thu, 02 Apr 2020 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo2.png</url>
       <title>Academic</title>
@@ -79,17 +79,6 @@
 &lt;p&gt;Suspendisse a tincidunt lacus. Curabitur at urna sagittis, dictum ante sit amet, euismod magna. Sed rutrum massa id tortor commodo, vitae elementum turpis tempus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean purus turpis, venenatis a ullamcorper nec, tincidunt et massa. Integer posuere quam rutrum arcu vehicula imperdiet. Mauris ullamcorper quam vitae purus congue, quis euismod magna eleifend. Vestibulum semper vel augue eget tincidunt. Fusce eget justo sodales, dapibus odio eu, ultrices lorem. Duis condimentum lorem id eros commodo, in facilisis mauris scelerisque. Morbi sed auctor leo. Nullam volutpat a lacus quis pharetra. Nulla congue rutrum magna a ornare.&lt;/p&gt;
 
 &lt;p&gt;Aliquam in turpis accumsan, malesuada nibh ut, hendrerit justo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Quisque sed erat nec justo posuere suscipit. Donec ut efficitur arcu, in malesuada neque. Nunc dignissim nisl massa, id vulputate nunc pretium nec. Quisque eget urna in risus suscipit ultricies. Pellentesque odio odio, tincidunt in eleifend sed, posuere a diam. Nam gravida nisl convallis semper elementum. Morbi vitae felis faucibus, vulputate orci placerat, aliquet nisi. Aliquam erat volutpat. Maecenas sagittis pulvinar purus, sed porta quam laoreet at.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Example Talk</title>
-      <link>/talk/example/</link>
-      <pubDate>Sat, 01 Jun 2030 13:00:00 +0000</pubDate>
-      <guid>/talk/example/</guid>
-      <description>
-
-&lt;h1 id=&#34;under-construction&#34;&gt;UNDER CONSTRUCTION&lt;/h1&gt;
 </description>
     </item>
     
@@ -217,6 +206,14 @@ that the value found for the parameter is in fact a point of maximum.&lt;/li&gt;
 
 &lt;p&gt;Supplementary notes can be added here, including &lt;a href=&#34;https://sourcethemes.com/academic/docs/writing-markdown-latex/&#34; target=&#34;_blank&#34;&gt;code and math&lt;/a&gt;.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>transpbrr</title>
+      <link>/talk/rusers/</link>
+      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>/talk/rusers/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -401,21 +398,27 @@ $$&lt;/p&gt;
     </item>
     
     <item>
-      <title>Privacy Policy</title>
-      <link>/privacy/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/privacy/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
+      <title>Voronoi Data Linkage</title>
+      <link>/talk/csds/</link>
+      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>/talk/csds/</guid>
+      <description></description>
     </item>
     
     <item>
-      <title>Terms</title>
-      <link>/terms/</link>
-      <pubDate>Thu, 28 Jun 2018 00:00:00 +0100</pubDate>
-      <guid>/terms/</guid>
-      <description>&lt;p&gt;&amp;hellip;&lt;/p&gt;
-</description>
+      <title>Web Scraping, Web Services e API’s</title>
+      <link>/talk/datathon/</link>
+      <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>/talk/datathon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Analyzing Brazilian Public Data</title>
+      <link>/talk/public_data/</link>
+      <pubDate>Wed, 01 Aug 2018 13:00:00 +0000</pubDate>
+      <guid>/talk/public_data/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -530,6 +533,14 @@ ggplot(df) +
 
 &lt;p&gt;So, that&amp;rsquo;s it. Hope that you liked.&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>Voronoi Cells</title>
+      <link>/talk/rbras/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      <guid>/talk/rbras/</guid>
+      <description></description>
     </item>
     
     <item>
@@ -804,6 +815,14 @@ probably can draw more accurate conclusions about this visualization.&lt;/p&gt;
     </item>
     
     <item>
+      <title>transpbrr - An `R` package</title>
+      <link>/project/external-project/</link>
+      <pubDate>Fri, 27 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>/project/external-project/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>My first #TidyTuesday - A world map GIF</title>
       <link>/post/2018/04/2018-04-13-world_map_gig/</link>
       <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
@@ -968,25 +987,6 @@ ggplot(map_years, aes(fill = `Homicide (%)`, frame = years)) +
 &lt;p&gt;At this post, I showed how to build GIF’s considering space-time data with a few
 lines of code. I hope that you enjoyed the post, and if you have any doubt or
 consideration, you can contact me at twitter or email.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>External Project</title>
-      <link>/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/project/external-project/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Internal Project</title>
-      <link>/project/internal-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/project/internal-project/</guid>
-      <description>
-
-&lt;h1 id=&#34;under-construction&#34;&gt;UNDER CONSTRUCTION&lt;/h1&gt;
 </description>
     </item>
     

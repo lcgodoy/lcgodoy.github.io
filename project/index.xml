@@ -5,7 +5,7 @@
     <link>/project/</link>
       <atom:link href="/project/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Wed, 27 Apr 2016 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2020</copyright><lastBuildDate>Fri, 27 Apr 2018 00:00:00 +0000</lastBuildDate>
     <image>
       <url>/img/logo2.png</url>
       <title>Projects</title>
@@ -13,22 +13,11 @@
     </image>
     
     <item>
-      <title>External Project</title>
+      <title>transpbrr - An `R` package</title>
       <link>/project/external-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 27 Apr 2018 00:00:00 +0000</pubDate>
       <guid>/project/external-project/</guid>
       <description></description>
-    </item>
-    
-    <item>
-      <title>Internal Project</title>
-      <link>/project/internal-project/</link>
-      <pubDate>Wed, 27 Apr 2016 00:00:00 +0000</pubDate>
-      <guid>/project/internal-project/</guid>
-      <description>
-
-&lt;h1 id=&#34;under-construction&#34;&gt;UNDER CONSTRUCTION&lt;/h1&gt;
-</description>
     </item>
     
   </channel>

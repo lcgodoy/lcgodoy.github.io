@@ -19,17 +19,7 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/example/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/talk/</loc>
-    <lastmod>2030-06-01T13:00:00+00:00</lastmod>
+    <lastmod>2020-04-02T16:33:16-04:00</lastmod>
   </url>
   
   <url>
@@ -93,6 +83,26 @@
   </url>
   
   <url>
+    <loc>/authors/augusto-felix-marcolin/</loc>
+    <lastmod>2019-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/lucas-da-cunha-godoy/</loc>
+    <lastmod>2019-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/talk/</loc>
+    <lastmod>2019-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/talk/rusers/</loc>
+    <lastmod>2019-02-06T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/slides/</loc>
     <lastmod>2019-02-05T00:00:00+00:00</lastmod>
   </url>
@@ -103,13 +113,33 @@
   </url>
   
   <url>
-    <loc>/privacy/</loc>
-    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+    <loc>/authors/douglas-r.-mesquita-de-azevedo/</loc>
+    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/terms/</loc>
-    <lastmod>2018-06-28T00:00:00+01:00</lastmod>
+    <loc>/authors/luis-gustavo-silva-e-silva/</loc>
+    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/talk/csds/</loc>
+    <lastmod>2018-10-16T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/talk/datathon/</loc>
+    <lastmod>2018-10-01T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/talk/public_data/</loc>
+    <lastmod>2018-08-01T13:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/authors/lucas-godoy/</loc>
+    <lastmod>2018-08-01T13:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -148,6 +178,11 @@
   </url>
   
   <url>
+    <loc>/talk/rbras/</loc>
+    <lastmod>2018-05-18T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/tags/gender-inequality/</loc>
     <lastmod>2018-05-02T00:00:00+00:00</lastmod>
   </url>
@@ -173,6 +208,26 @@
   </url>
   
   <url>
+    <loc>/tags/open-data/</loc>
+    <lastmod>2018-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/</loc>
+    <lastmod>2018-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/public-expenses/</loc>
+    <lastmod>2018-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/project/external-project/</loc>
+    <lastmod>2018-04-27T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/categories/gif/</loc>
     <lastmod>2018-04-24T00:00:00+00:00</lastmod>
   </url>
@@ -195,31 +250,6 @@
   <url>
     <loc>/categories/world-map/</loc>
     <lastmod>2018-04-24T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/deep-learning/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/demo/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/external-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/internal-project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/project/</loc>
-    <lastmod>2016-04-27T00:00:00+00:00</lastmod>
   </url>
   
   <url>
