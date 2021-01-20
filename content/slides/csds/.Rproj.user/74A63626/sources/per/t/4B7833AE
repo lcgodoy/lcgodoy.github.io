@@ -1,0 +1,24 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541699036111.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4133649508",
+    "id" : "4B7833AE",
+    "lastKnownWriteTime" : 1541993872,
+    "last_content_update" : 1541993872290,
+    "path" : "~/Documents/csds/index.Rmd",
+    "project_path" : "index.Rmd",
+    "properties" : {
+        "cursorPosition" : "135,9",
+        "last_setup_crc32" : "",
+        "scrollLine" : "127",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}
