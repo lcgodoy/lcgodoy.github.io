@@ -1,7 +1,7 @@
 ---
 authors:
 - admin
-bio: I'm interested in R, Stats and Open Data.
+bio: Hi, my name is Lucas. I'm from Brazil and currenltu I'm a second year PhD Student at UConn. My interests are mostly related to statistical computing, data visualization, and open data. This website was intended initially to exercise my writing in English. As a PhD student it has been hard to find time for blogging but my intention is to write here about interesting things (at least to me) whenever is possible. Additionally, you can find here informatin about my Talks, ongoing projects, and my CV. 
 education:
   courses:
   - course: PhD in Statistics
