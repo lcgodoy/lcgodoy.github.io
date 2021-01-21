@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541992622895.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "685368344",
+    "id" : "209BB29D",
+    "lastKnownWriteTime" : 1541994476,
+    "last_content_update" : 1541994476660,
+    "path" : "~/Documents/csds/./sections/03-applic.Rmd",
+    "project_path" : "./sections/03-applic.Rmd",
+    "properties" : {
+        "cursorPosition" : "18,30",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 8,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

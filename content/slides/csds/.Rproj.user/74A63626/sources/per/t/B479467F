@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541993364998.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3377901979",
+    "id" : "B479467F",
+    "lastKnownWriteTime" : 1541994569,
+    "last_content_update" : 1541994569887,
+    "path" : "~/Documents/csds/sections/04-conclusion.Rmd",
+    "project_path" : "sections/04-conclusion.Rmd",
+    "properties" : {
+        "cursorPosition" : "15,73",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_markdown"
+}

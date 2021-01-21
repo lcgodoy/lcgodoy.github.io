@@ -1,0 +1,338 @@
+---
+title: 'WordClouds - Visualizing gender inequality in income'
+author: 'Lucas Godoy'
+date: '2018-05-02'
+banner: "img/banners/banner_post2.png"
+summary: "Using wordclods to analyze gender inequalities in income in Australia."
+categories:
+  - WordCloud
+  - TidyTuesday
+  - Data Visualization
+tags:
+  - wordcloud2
+  - gender inequality
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = F, eval = T, message = F, warning = F,
+                      widgetframe_isolate_widgets = TRUE)
+library(magrittr)
+sysfonts::font_add_google("Space Mono")
+
+# runs all scripts that are located inside /scripts folder
+sapply(list.files('./scripts', full.names = TRUE), source)
+```
+
+## Introduction
+This week I’m posting my visualization and brief analysis of the 
+[#TidyTuesday week 4](https://twitter.com/R4DScommunity/status/988790036014485504). 
+The challenge was about the disparity between men and women when analysing their
+average incomes. The data provided was organized as follows:
+
+
+```{r data1}
+DT::datatable(Data[,-1], rownames = F,
+              colnames = c("Gender Rank", "Occupation",
+                           "Gender", "Individuals",
+                           "Average Income (Taxable)"),
+              options = list(pageLength = 5, dom = "ft"), 
+              style = "default") %>% 
+  DT::formatCurrency("average_taxable_income") %>% 
+  widgetframe::frameWidget(
+    height = "100%",
+    elementId = "DT")
+```
+
+- [data souce](https://data.gov.au/dataset/taxation-statistics-2013-14/resource/c506c052-be2f-4fba-8a65-90f9e60f7775?inner_span=True)  
+
+- [An article about it](http://www.womensagenda.com.au/latest/eds-blog/australia-s-50-highest-paying-jobs-are-paying-men-significantly-more/)
+
+## Hypothesis
+
+In the dataset, there are a lot of _composite occupations_, i.e., occupations
+that have large descriptions or are composed of two or more different roles. 
+Due to it, I would like to see if there are words in these occupations that 
+appear more in female individuals. In addition, would be nice visualize the 
+average income associated with each word. To make this “average income per word” 
+comparable, it was categorized by its percentile.
+
+> If you are not interested in _how to_ create the visualization, go directly
+to the analysis [clicking here](#analysis).
+
+## Ingredients
+
+- `data.table` - read the data;
+- `dplyr` - for data manipulation; 
+- `magrittr` - it's not just the `%>%`;
+- `ggplot2` - create the legend (certainly it can be done in a more efficient way);
+- `cowplot` - extract ggplot2 legend;
+- `tm` - Text Mining;
+- `stringr` - string handling;
+- `wordcloud2` - wordclouds.
+
+## Reading and manipulating the data
+
+The following script will read the data and handle with two initial problems:
+
+1. **Encoding**: I'm a Linux user and the data came from Windows. To overcome encoding
+problems, we need to switch the encoding to _UTF-8_;  
+2. **Integer overflow**: sometimes, in this data, integers are too large. As a consequence,
+a summation of integers can return a `NaN`, when this integer exceeds a certain size. To
+remedy this problem, we can turn these integers in numerics (probably not the smartest way to solve the problem).
+
+
+```{r read_data, echo = T, eval = F}
+library(tm)
+library(magrittr)
+library(dplyr)
+
+Data <- data.table::fread(
+  ("https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-04-23/week4_australian_salary.csv"), 
+  stringsAsFactors = F, data.table = F
+) %>% 
+  as_tibble() %>% 
+  mutate(occupation = iconv(occupation, from = "WINDOWS-1252", to = "UTF-8"), # solving encoding problems
+         individuals = as.numeric(individuals), # avoiding integer overflow
+         individuals = as.numeric(individuals)) # avoiding integer overflow
+```
+
+After that, I split the data by gender.
+
+```{r split_data, echo = T, eval = F}
+data_split <- split(Data, Data$gender) # split by gender
+data_split$Total <- Data # adding a list component with all data
+```
+
+And then, created a function that returns the _frequency_ each word appears
+and the _average income_ related to this word. 
+
+```{r word_counter, echo = T, eval = F}
+# if stem is TRUE, words will be "stemmed"
+
+word_counter <- function(data, stem = T) { 
+  
+  stopwords <- tm::stopwords('en') # aux to remove stopwords
+  
+  if(stem == T) {
+    data %<>% 
+      mutate(occup_text = occupation %>% stringr::str_to_lower() %>% 
+               stringr::str_replace_all('–', "") %>% 
+               tm::removePunctuation() %>% 
+               tm::removeNumbers() %>% 
+               tm::removeWords(stopwords) %>% 
+               tm::stemDocument() %>%
+               tm::stripWhitespace()) 
+    
+    dtm <- data$occup_text %>%
+      VectorSource() %>% 
+      Corpus() %>% 
+      TermDocumentMatrix() 
+    
+    df_word <- as.matrix(dtm) %>% 
+      rowSums() %>% 
+      sort(decreasing=TRUE) %>% 
+      names
+  }
+  else {
+    data %<>% 
+      mutate(occup_text = occupation %>% stringr::str_to_lower() %>% 
+               stringr::str_replace_all('–', "") %>%
+               tm::removePunctuation() %>% 
+               tm::removeNumbers() %>% 
+               tm::removeWords(stopwords) %>%
+               tm::stripWhitespace()) 
+    
+    dtm <- data$occup_text %>%
+      VectorSource() %>% 
+      Corpus() %>% 
+      TermDocumentMatrix() 
+    
+    df_word <- as.matrix(dtm) %>% 
+      rowSums() %>% 
+      sort(decreasing=TRUE) %>% 
+      names
+  }
+  
+  df_word$freq <- NA_real_
+  df_word$income <- NA_real_
+  aux <- NULL
+  
+  for(i in seq_len(nrow(df_word))) {
+    aux <- data[stringr::str_detect(data$occup_text, df_word$word[i]),]
+    df_word$freq[i] <- sum(aux$individuals)
+    df_word$income[i] <- sum(aux$average_taxable_income*aux$individuals)/df_word$freq[i]
+    aux <- NULL
+  }
+  
+  return(df_word)
+}
+```
+
+Note that, the package `tm` is used just to create a `data.frame` with one line
+for each word. Then, `stringr` is used to detect the professions that
+"match" with each word. Another important detail is concerned about the
+calculation of the _average income_. Instead of using 
+`mean(aux$average_taxable_income)`, `sum(aux$average_taxable_income*aux$individuals)/df_word$freq[i]`
+is used. The first choice would calculate the average wrongly. Because the average 
+income of a word that appeared one time would be treated in the same way that 
+a word that appeared a hundred times.
+
+## Almost there
+
+Now, we just need to run the following script to obtain everything that wee need
+to build the men and women wordclouds.
+
+```{r word_counters, echo = T, eval = F}
+word_counters <- purrr::map(data_split, word_counter, stem = F)
+```
+
+### Creating a colour palette based on the quantiles
+
+The colour palette was created based on the quantiles of the average income
+considering both men and women. The palette goes from red to white to blue,
+this means that red words are associated with low income and blue with high 
+income.
+
+```{r color_palette, echo = T, eval = F}
+col_pal <- colorRampPalette(colors = c("#f71616", "#ffffff", "#283eff"))
+breaks <- quantile(word_counters$Total$income, probs = seq(0, 1, by = .005))
+```
+
+> white values are associated with median income. However, the distribution
+of the average income is asymetric. 
+
+The following lines of code create a variable called `color` that indicates
+at each quantile each average income is associated and the respective color.
+
+```{r create_color, echo = T, eval = F}
+word_counters <- purrr::map(word_counters, 
+                            function(data) {
+                              data %<>%
+                                mutate(color = cut(x = income, 
+                                                   breaks = breaks, 
+                                                   label = col_pal(length(breaks) - 1)
+                                )
+                                )
+                            })
+```
+
+## Word clouds
+
+Finally, we can create the desired word clouds and it can be done with a few lines
+of code. For example, to create a word cloud for men execute the following code:
+
+```{r men_wc, echo = T, eval = F}
+wc_obj_men <- word_counters$Male %>% 
+  filter(freq > quantile(freq, .8)) # I'm using just the 20% more frequent words.
+
+men_colors <- wc_obj_men$color
+
+# Data structure utilized by wordcloud2
+wc_obj_men %<>% select(word, freq)
+
+(wc_men <- wordcloud2::wordcloud2(data = wc_obj_men, color = men_colors,
+                                  backgroundColor = "black",
+                                  shuffle = F, 
+                                  size = .5))
+```
+
+
+```{r men_wc_print, eval = T}
+wc_men %>% widgetframe::frameWidget()
+```
+
+<br>
+
+Similarly, if you want to visualize the women's word cloud, run:
+
+```{r women_wc, echo = T, eval = F}
+wc_obj_women <- word_counters$Female %>% 
+  filter(freq > quantile(freq, .8))
+
+women_colors <- wc_obj_women$color
+
+wc_obj_women %<>% select(word, freq)
+
+(wc_women <- wordcloud2::wordcloud2(data = wc_obj_women, color = women_colors,
+                                    backgroundColor = "black",
+                                    shuffle = F, 
+                                    size = .5))
+```
+
+```{r women_wc_print, eval = T}
+wc_women %>% widgetframe::frameWidget()
+```
+
+<br>
+
+### Creating the legend
+
+Legend will be created as follows (I'm sure it can be done more efficiently):
+
+```{r legend, echo = T, eval = F}
+legends <- ggplot2::ggplot(word_counters$Total, aes(x = freq, y = income, fill = income)) +
+  ggplot2::geom_point(alpha = .7) + 
+  ggplot2::scale_fill_gradientn(colours = c("#f71616", "#ffffff", "#283eff"), 
+                                guide = ggplot2::guide_colorbar(title = "Avg. Income", 
+                                                                title.position = "top", 
+                                                                label.position = "bottom",
+                                                                label.theme = ggplot2::element_text(angle = 90,
+                                                                                                    size = 6.5,
+                                                                                                    family = "Space Mono"),
+                                                                ticks = F),
+                                breaks = c(min(breaks), max(breaks)),
+                                labels = c("low", "high")) +
+  ggplot2::theme(legend.justification = "bottom", 
+                 legend.direction = "horizontal", 
+                 legend.title = ggplot2::element_text(family = "Space Mono",
+                                                      size = 8))
+
+
+legends <- cowplot::get_legend(legends)
+```
+
+## Final Word Cloud and Analysis {#analysis}
+
+The word clouds below can be used to extract a lot of information about gender 
+inequalities in Australia in 2013-14. For example, take a look at the word office. 
+Despite the number of women that plays a role in an _office_ is greater than the 
+number of men, Men have a much better salary at, probably, the same function. 
+If you analyze carefully both word clouds, you will be able to identify several 
+differences in the income associated with the same word in different genders.
+
+In conclusion, even in Australia, a country considered developed, the problem 
+of not treating people of different genders equally exists. It’s a sad reality 
+that needs to be showed and faced.
+
+<div class = "container">
+
+<div class = "row">
+
+<div class = "col-md">
+
+### Men
+
+```{r wc1}
+wc_men # %>% widgetframe::frameWidget()
+```
+</div>
+
+<div class = "col-md">
+
+### Women
+
+```{r wc2}
+wc_women # %>% widgetframe::frameWidget()
+```
+</div>
+
+```{r legend_final, fig.height = 1, fig.align = "center"}
+cowplot::plot_grid(legends)
+```
+</div>
+
+</div>
+
+> It's important to emphasize that the focus of this post is to provide a way
+to analyze this data. I'm a statistician and professionals from other areas
+probably can draw more accurate conclusions about this visualization.
