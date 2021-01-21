@@ -46,5 +46,11 @@ jobs:
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
           BUILD_DIR: public/                     # "_site/" by default
-
+      with:
+          email: lucasdac.godoy@gmail.com
+          build_dir: public/
+          branch: gh-pages
+          cname: lcgodoy.me 
+          jekyll: no        
+          
 
