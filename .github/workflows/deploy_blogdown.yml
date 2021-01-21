@@ -45,7 +45,6 @@ jobs:
        uses: Cecilapp/GitHub-Pages-deploy@v3
        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # https://github.com/settings/tokens
-          BUILD_DIR: public/                     # "_site/" by default
       with:
           email: lucasdac.godoy@gmail.com
           build_dir: public/
