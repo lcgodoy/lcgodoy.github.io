@@ -93,6 +93,6 @@ jobs:
           BUILD_DIR: public/
        with:
          email: lucasdac.godoy@gmail.com
-	 ## branch: gh-pages
-	 cname: lcgodoy.me
-	 jekyll: no
+         ## branch: gh-pages
+         cname: lcgodoy.me
+         jekyll: no
