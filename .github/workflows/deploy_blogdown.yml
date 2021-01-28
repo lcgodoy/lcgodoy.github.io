@@ -15,8 +15,14 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v1
       - name: Install rmarkdown
         run: Rscript -e 'install.packages(c("rmarkdown","blogdown"))'
-      - name: install hugo
-        run: Rscript -e 'blogdown::install_hugo()'
+      ## - name: install hugo
+      ##   run: Rscript -e 'blogdown::install_hugo()'
+      # install Hugo
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: '0.78.1'
+          extended: true
       - name: Render blog
         run: Rscript -e 'blogdown::build_site()'
       - uses: actions/upload-artifact@v1
