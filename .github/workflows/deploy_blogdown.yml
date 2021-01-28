@@ -10,27 +10,27 @@ jobs:
     name: Render-Blog
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install rmarkdown
-        run: Rscript -e 'install.packages(c("rmarkdown","blogdown"))'
+      ## - uses: actions/checkout@v1
+      ## - uses: r-lib/actions/setup-r@v1
+      ## - uses: r-lib/actions/setup-pandoc@v1
+      ## - name: Install rmarkdown
+      ##   run: Rscript -e 'install.packages(c("rmarkdown","blogdown"))'
       ## - name: install hugo
-      ##   run: Rscript -e 'blogdown::install_hugo()'
-      # install Hugo
-      - name: Setup Hugo
-        uses: peaceiris/actions-hugo@v2
-        with:
-          hugo-version: '0.58.3'
-          extended: true
-      - name: Get themes
-        run: git submodule update --remote
-      - name: Render blog
-        run: Rscript -e 'blogdown::hugo_build(local = FALSE)'
-      - uses: actions/upload-artifact@v1
-        with:
-          name: public
-          path: public/
+      ##   run: Rscript -e 'blogdown::install_hugo(extended = TRUE, version = "0.68.3")'
+      ## # install Hugo
+      ## ## - name: Setup Hugo
+      ## ##   uses: peaceiris/actions-hugo@v2
+      ## ##   with:
+      ## ##     hugo-version: '0.68.3'
+      ## ##     extended: true
+      ## - name: Get themes
+      ##   run: git submodule update --remote
+      ## - name: Render blog
+      ##   run: Rscript -e 'blogdown::hugo_build(local = FALSE)'
+      ## - uses: actions/upload-artifact@v1
+      ##   with:
+      ##     name: public
+      ##     path: public/
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3

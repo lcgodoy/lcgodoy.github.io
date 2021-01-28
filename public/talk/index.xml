@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks | lcgodoy</title>
+    <link>lcgodoy.github.io/talk/</link>
+      <atom:link href="lcgodoy.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Wed, 06 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>lcgodoy.github.io/img/logo2.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>lcgodoy.github.io/talk/</link>
+    </image>
+    
+    <item>
+      <title>transpbrr</title>
+      <link>lcgodoy.github.io/talk/rusers/</link>
+      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/rusers/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voronoi Data Linkage</title>
+      <link>lcgodoy.github.io/talk/csds/</link>
+      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/csds/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Web Scraping, Web Services e API’s</title>
+      <link>lcgodoy.github.io/talk/datathon/</link>
+      <pubDate>Mon, 01 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/datathon/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Analyzing Brazilian Public Data</title>
+      <link>lcgodoy.github.io/talk/public_data/</link>
+      <pubDate>Wed, 01 Aug 2018 13:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/public_data/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voronoi Cells</title>
+      <link>lcgodoy.github.io/talk/rbras/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/rbras/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

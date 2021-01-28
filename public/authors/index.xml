@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Authors | lcgodoy</title>
+    <link>lcgodoy.github.io/authors/</link>
+      <atom:link href="lcgodoy.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>lcgodoy.github.io/img/logo2.png</url>
+      <title>Authors</title>
+      <link>lcgodoy.github.io/authors/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>lcgodoy.github.io/authors/admin/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/admin/</guid>
+      <description>&lt;p&gt;Hi! My name is Lucas, I&amp;rsquo;m a brazilian PhD Student at UConn who loves &lt;code&gt;R&lt;/code&gt; and open data analysis.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Augusto Felix Marcolin</title>
+      <link>lcgodoy.github.io/authors/augusto-felix-marcolin/</link>
+      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/augusto-felix-marcolin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lucas Da Cunha Godoy</title>
+      <link>lcgodoy.github.io/authors/lucas-da-cunha-godoy/</link>
+      <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/lucas-da-cunha-godoy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Douglas R. Mesquita de Azevedo</title>
+      <link>lcgodoy.github.io/authors/douglas-r.-mesquita-de-azevedo/</link>
+      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/douglas-r.-mesquita-de-azevedo/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Luis Gustavo Silva e Silva</title>
+      <link>lcgodoy.github.io/authors/luis-gustavo-silva-e-silva/</link>
+      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/luis-gustavo-silva-e-silva/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Lucas Godoy</title>
+      <link>lcgodoy.github.io/authors/lucas-godoy/</link>
+      <pubDate>Wed, 01 Aug 2018 13:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/lucas-godoy/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Robert Ford</title>
+      <link>lcgodoy.github.io/authors/robert-ford/</link>
+      <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/authors/robert-ford/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
