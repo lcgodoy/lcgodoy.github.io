@@ -1,7 +1,7 @@
 on:
   push:
      branches:
-       - master
+       - source
 
 name: deployblog
 
@@ -21,8 +21,8 @@ jobs:
         run: Rscript -e 'blogdown::build_site()'
       - uses: actions/upload-artifact@v1
         with:
-          name: docs
-          path: docs/
+          name: public
+          path: public/
 
 # Need to first create an empty gh-pages branch
 # see https://pkgdown.r-lib.org/reference/deploy_site_github.html
@@ -37,8 +37,8 @@ jobs:
      - name: Download artifact
        uses: actions/download-artifact@v1.0.0
        with:
-         name: docs # optional
-         path: docs/ # optional
+         name: public # optional
+         path: public/ # optional
      - name: Deploy to GitHub Pages
        uses: Cecilapp/GitHub-Pages-deploy@v3
        env:
@@ -46,6 +46,6 @@ jobs:
        with:
          email: lucasdac.godoy@gmail.com
          branch: master
-         build_dir: docs/
+         build_dir: ./public
          cname: lcgodoy.me
          jekyll: no
