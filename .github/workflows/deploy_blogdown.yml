@@ -24,9 +24,9 @@ jobs:
       - name: Get themes
         run: git submodule update --remote
       - name: Look at files
-        run: Rscript -e 'dir()'
+        run: ls ./public
       - name: Render blog
-        run: Rscript -e 'blogdown::hugo_build(local = FALSE)'
+        run: Rscript -e 'blogdown::build_site(local = FALSE, method = 'html', run_hugo = TRUE)'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
