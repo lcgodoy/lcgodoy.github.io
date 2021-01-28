@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Categories | lcgodoy</title>
+    <link>lcgodoy.github.io/categories/</link>
+      <atom:link href="lcgodoy.github.io/categories/index.xml" rel="self" type="application/rss+xml" />
+    <description>Categories</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Thu, 02 Apr 2020 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>lcgodoy.github.io/img/logo2.png</url>
+      <title>Categories</title>
+      <link>lcgodoy.github.io/categories/</link>
+    </image>
+    
+    <item>
+      <title>Statistics</title>
+      <link>lcgodoy.github.io/categories/statistics/</link>
+      <pubDate>Thu, 02 Apr 2020 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Analysis</title>
+      <link>lcgodoy.github.io/categories/data-analysis/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/data-analysis/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Data Visualization</title>
+      <link>lcgodoy.github.io/categories/data-visualization/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/data-visualization/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Descriptive Statistics</title>
+      <link>lcgodoy.github.io/categories/descriptive-statistics/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/descriptive-statistics/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Tutorial</title>
+      <link>lcgodoy.github.io/categories/tutorial/</link>
+      <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/tutorial/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>TidyTuesday</title>
+      <link>lcgodoy.github.io/categories/tidytuesday/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/tidytuesday/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>WordCloud</title>
+      <link>lcgodoy.github.io/categories/wordcloud/</link>
+      <pubDate>Wed, 02 May 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/wordcloud/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>GIF</title>
+      <link>lcgodoy.github.io/categories/gif/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/gif/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>World Map</title>
+      <link>lcgodoy.github.io/categories/world-map/</link>
+      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/categories/world-map/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

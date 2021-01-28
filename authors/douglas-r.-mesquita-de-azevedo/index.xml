@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Douglas R. Mesquita de Azevedo | lcgodoy</title>
+    <link>lcgodoy.github.io/authors/douglas-r.-mesquita-de-azevedo/</link>
+      <atom:link href="lcgodoy.github.io/authors/douglas-r.-mesquita-de-azevedo/index.xml" rel="self" type="application/rss+xml" />
+    <description>Douglas R. Mesquita de Azevedo</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Tue, 16 Oct 2018 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>lcgodoy.github.io/img/logo2.png</url>
+      <title>Douglas R. Mesquita de Azevedo</title>
+      <link>lcgodoy.github.io/authors/douglas-r.-mesquita-de-azevedo/</link>
+    </image>
+    
+    <item>
+      <title>Voronoi Data Linkage</title>
+      <link>lcgodoy.github.io/talk/csds/</link>
+      <pubDate>Tue, 16 Oct 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/csds/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Voronoi Cells</title>
+      <link>lcgodoy.github.io/talk/rbras/</link>
+      <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/rbras/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
