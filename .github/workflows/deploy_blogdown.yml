@@ -26,7 +26,7 @@ jobs:
       - name: Get themes
         run: git submodule update --remote
       - name: Render blog
-        run: Rscript -e 'blogdown::hugo_build()'
+        run: Rscript -e 'blogdown::hugo_build(local = FALSE)'
       - uses: actions/upload-artifact@v1
         with:
           name: public
