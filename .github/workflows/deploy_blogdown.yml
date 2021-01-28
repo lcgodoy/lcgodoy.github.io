@@ -24,11 +24,10 @@ jobs:
           name: public
           path: public/
 
-# push the generated content into the `main` (former `master`) branch.
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: master 
-        publish_dir: ./public
-	cname: lcgodoy.me
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: master 
+          publish_dir: ./public
+	  cname: lcgodoy.me
