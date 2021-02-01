@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="generator" content="Source Themes Academic 4.5.0">
+
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  <meta name="author" content="Lucas Godoy">
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Using wordclods to analyze gender inequalities in income in Australia.">
+
+  
+  <link rel="alternate" hreflang="en-us" href="lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/">
+
+  
+
+
+  
+  
+  
+  <meta name="theme-color" content="rgb(218, 77, 77)">
+  
+
+  
+  
+  
+  
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.8.6/css/academicons.min.css" integrity="sha256-uFVgMKfistnJAfoCUQigIl+JfUaP47GrRKjf6CTPVmw=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" integrity="sha256-+N4/V/SbAFiW1MPBCXnfnP9QSN3+Keu+NlB+0ev/YKQ=" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+    
+    
+    
+      
+    
+    
+      
+      
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai-sublime.min.css" crossorigin="anonymous" title="hl-light">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/styles/monokai-sublime.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+      
+    
+
+    
+
+    
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  
+
+  
+  
+  
+  
+  <link rel="stylesheet" href="/lcgodoy.github.io/css/academic.css">
+
+  
+
+
+
+
+  
+
+
+  
+
+  <link rel="manifest" href="/lcgodoy.github.io/index.webmanifest">
+  <link rel="icon" type="image/png" href="/lcgodoy.github.io/img/icon-32.png">
+  <link rel="apple-touch-icon" type="image/png" href="/lcgodoy.github.io/img/icon-192.png">
+
+  <link rel="canonical" href="lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/">
+
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary">
+  
+  <meta property="twitter:site" content="@ldcgodoy">
+  <meta property="twitter:creator" content="@ldcgodoy">
+  
+  <meta property="og:site_name" content="lcgodoy">
+  <meta property="og:url" content="lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/">
+  <meta property="og:title" content="WordClouds - Visualizing gender inequality in income | lcgodoy">
+  <meta property="og:description" content="Using wordclods to analyze gender inequalities in income in Australia."><meta property="og:image" content="lcgodoy.github.io/img/logo2.png">
+  <meta property="twitter:image" content="lcgodoy.github.io/img/logo2.png"><meta property="og:locale" content="en-us">
+  
+    
+      <meta property="article:published_time" content="2018-05-02T00:00:00&#43;00:00">
+    
+    <meta property="article:modified_time" content="2018-05-02T00:00:00&#43;00:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/"
+  },
+  "headline": "WordClouds - Visualizing gender inequality in income",
+  
+  "datePublished": "2018-05-02T00:00:00Z",
+  "dateModified": "2018-05-02T00:00:00Z",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Lucas Godoy"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "lcgodoy",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "lcgodoy.github.io/img/logo2.png"
+    }
+  },
+  "description": "Using wordclods to analyze gender inequalities in income in Australia."
+}
+</script>
+
+  
+
+  
+
+
+  
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+<script>
+  window.addEventListener("load", function(){
+    window.cookieconsent.initialise({
+      "palette": {
+        "popup": {
+          "background": "rgb(218, 77, 77)",
+          "text": "#fff"
+        },
+        "button": {
+          "background": "#fff",
+          "text": "rgb(218, 77, 77)"
+        }
+      },
+      "theme": "classic",
+      "content": {
+        "message": "This website uses cookies to ensure you get the best experience on our website.",
+        "dismiss": "Got it!",
+        "link": "Learn more",
+        "href": "https://cookies.insites.com"
+      }
+    })});
+</script>
+
+
+
+  
+
+
+
+
+
+  <title>WordClouds - Visualizing gender inequality in income | lcgodoy</title>
+
+</head>
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="dark">
+
+  <aside class="search-results" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        
+        
+      </div>
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+  
+<nav class="navbar navbar-light fixed-top navbar-expand-lg py-0 compensate-for-scrollbar" id="navbar-main">
+  <div class="container">
+
+    
+      <a class="navbar-brand" href="/lcgodoy.github.io/"><img src="/lcgodoy.github.io/img/logo2.png" alt="lcgodoy"></a>
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+    
+    <div class="collapse navbar-collapse" id="navbar">
+
+      
+      
+      <ul class="navbar-nav ml-auto">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/lcgodoy.github.io/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/lcgodoy.github.io/#posts"><span>Blog</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/lcgodoy.github.io/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/lcgodoy.github.io/#talks"><span>Talks</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+        
+        
+        
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/lcgodoy.github.io/files/cv.pdf"><span>CV</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+
+        
+
+        
+
+        
+        <li class="nav-item">
+          <a class="nav-link js-dark-toggle" href="#"><i class="fas fa-moon" aria-hidden="true"></i></a>
+        </li>
+        
+
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+
+  <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>WordClouds - Visualizing gender inequality in income</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 2, 2018
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  <span class="middot-divider"></span>
+  <a href="lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/#disqus_thread"></a>
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="lcgodoy.github.io/categories/wordcloud/">WordCloud</a>, <a href="lcgodoy.github.io/categories/tidytuesday/">TidyTuesday</a>, <a href="lcgodoy.github.io/categories/data-visualization/">Data Visualization</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      
+<script src="/rmarkdown-libs/htmlwidgets/htmlwidgets.js"></script>
+<script src="/rmarkdown-libs/pymjs/pym.v1.js"></script>
+<script src="/rmarkdown-libs/widgetframe-binding/widgetframe.js"></script>
+<link href="/rmarkdown-libs/wordcloud2/wordcloud.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/wordcloud2/wordcloud2-all.js"></script>
+<script src="/rmarkdown-libs/wordcloud2/hover.js"></script>
+<script src="/rmarkdown-libs/wordcloud2-binding/wordcloud2.js"></script>
+
+
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This week I’m posting my visualization and brief analysis of the
+<a href="https://twitter.com/R4DScommunity/status/988790036014485504">#TidyTuesday week 4</a>.
+The challenge was about the disparity between men and women when analysing their
+average incomes. The data provided was organized as follows:</p>
+<div id="DT" style="width:100%;height:100%;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="DT">{"x":{"url":"/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_data1.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<ul>
+<li><p><a href="https://data.gov.au/dataset/taxation-statistics-2013-14/resource/c506c052-be2f-4fba-8a65-90f9e60f7775?inner_span=True">data souce</a></p></li>
+<li><p><a href="http://www.womensagenda.com.au/latest/eds-blog/australia-s-50-highest-paying-jobs-are-paying-men-significantly-more/">An article about it</a></p></li>
+</ul>
+</div>
+<div id="hypothesis" class="section level2">
+<h2>Hypothesis</h2>
+<p>In the dataset, there are a lot of <em>composite occupations</em>, i.e., occupations
+that have large descriptions or are composed of two or more different roles.
+Due to it, I would like to see if there are words in these occupations that
+appear more in female individuals. In addition, would be nice visualize the
+average income associated with each word. To make this “average income per word”
+comparable, it was categorized by its percentile.</p>
+<blockquote>
+<p>If you are not interested in <em>how to</em> create the visualization, go directly
+to the analysis <a href="#analysis">clicking here</a>.</p>
+</blockquote>
+</div>
+<div id="ingredients" class="section level2">
+<h2>Ingredients</h2>
+<ul>
+<li><code>data.table</code> - read the data;</li>
+<li><code>dplyr</code> - for data manipulation;</li>
+<li><code>magrittr</code> - it’s not just the <code>%&gt;%</code>;</li>
+<li><code>ggplot2</code> - create the legend (certainly it can be done in a more efficient way);</li>
+<li><code>cowplot</code> - extract ggplot2 legend;</li>
+<li><code>tm</code> - Text Mining;</li>
+<li><code>stringr</code> - string handling;</li>
+<li><code>wordcloud2</code> - wordclouds.</li>
+</ul>
+</div>
+<div id="reading-and-manipulating-the-data" class="section level2">
+<h2>Reading and manipulating the data</h2>
+<p>The following script will read the data and handle with two initial problems:</p>
+<ol style="list-style-type: decimal">
+<li><strong>Encoding</strong>: I’m a Linux user and the data came from Windows. To overcome encoding
+problems, we need to switch the encoding to <em>UTF-8</em>;<br />
+</li>
+<li><strong>Integer overflow</strong>: sometimes, in this data, integers are too large. As a consequence,
+a summation of integers can return a <code>NaN</code>, when this integer exceeds a certain size. To
+remedy this problem, we can turn these integers in numerics (probably not the smartest way to solve the problem).</li>
+</ol>
+<pre class="r"><code>library(tm)
+library(magrittr)
+library(dplyr)
+
+Data &lt;- data.table::fread(
+  (&quot;https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2018/2018-04-23/week4_australian_salary.csv&quot;), 
+  stringsAsFactors = F, data.table = F
+) %&gt;% 
+  as_tibble() %&gt;% 
+  mutate(occupation = iconv(occupation, from = &quot;WINDOWS-1252&quot;, to = &quot;UTF-8&quot;), # solving encoding problems
+         individuals = as.numeric(individuals), # avoiding integer overflow
+         individuals = as.numeric(individuals)) # avoiding integer overflow</code></pre>
+<p>After that, I split the data by gender.</p>
+<pre class="r"><code>data_split &lt;- split(Data, Data$gender) # split by gender
+data_split$Total &lt;- Data # adding a list component with all data</code></pre>
+<p>And then, created a function that returns the <em>frequency</em> each word appears
+and the <em>average income</em> related to this word.</p>
+<pre class="r"><code># if stem is TRUE, words will be &quot;stemmed&quot;
+
+word_counter &lt;- function(data, stem = T) { 
+  
+  stopwords &lt;- tm::stopwords(&#39;en&#39;) # aux to remove stopwords
+  
+  if(stem == T) {
+    data %&lt;&gt;% 
+      mutate(occup_text = occupation %&gt;% stringr::str_to_lower() %&gt;% 
+               stringr::str_replace_all(&#39;–&#39;, &quot;&quot;) %&gt;% 
+               tm::removePunctuation() %&gt;% 
+               tm::removeNumbers() %&gt;% 
+               tm::removeWords(stopwords) %&gt;% 
+               tm::stemDocument() %&gt;%
+               tm::stripWhitespace()) 
+    
+    dtm &lt;- data$occup_text %&gt;%
+      VectorSource() %&gt;% 
+      Corpus() %&gt;% 
+      TermDocumentMatrix() 
+    
+    df_word &lt;- as.matrix(dtm) %&gt;% 
+      rowSums() %&gt;% 
+      sort(decreasing=TRUE) %&gt;% 
+      names
+  }
+  else {
+    data %&lt;&gt;% 
+      mutate(occup_text = occupation %&gt;% stringr::str_to_lower() %&gt;% 
+               stringr::str_replace_all(&#39;–&#39;, &quot;&quot;) %&gt;%
+               tm::removePunctuation() %&gt;% 
+               tm::removeNumbers() %&gt;% 
+               tm::removeWords(stopwords) %&gt;%
+               tm::stripWhitespace()) 
+    
+    dtm &lt;- data$occup_text %&gt;%
+      VectorSource() %&gt;% 
+      Corpus() %&gt;% 
+      TermDocumentMatrix() 
+    
+    df_word &lt;- as.matrix(dtm) %&gt;% 
+      rowSums() %&gt;% 
+      sort(decreasing=TRUE) %&gt;% 
+      names
+  }
+  
+  df_word$freq &lt;- NA_real_
+  df_word$income &lt;- NA_real_
+  aux &lt;- NULL
+  
+  for(i in seq_len(nrow(df_word))) {
+    aux &lt;- data[stringr::str_detect(data$occup_text, df_word$word[i]),]
+    df_word$freq[i] &lt;- sum(aux$individuals)
+    df_word$income[i] &lt;- sum(aux$average_taxable_income*aux$individuals)/df_word$freq[i]
+    aux &lt;- NULL
+  }
+  
+  return(df_word)
+}</code></pre>
+<p>Note that, the package <code>tm</code> is used just to create a <code>data.frame</code> with one line
+for each word. Then, <code>stringr</code> is used to detect the professions that
+“match” with each word. Another important detail is concerned about the
+calculation of the <em>average income</em>. Instead of using
+<code>mean(aux$average_taxable_income)</code>, <code>sum(aux$average_taxable_income*aux$individuals)/df_word$freq[i]</code>
+is used. The first choice would calculate the average wrongly. Because the average
+income of a word that appeared one time would be treated in the same way that
+a word that appeared a hundred times.</p>
+</div>
+<div id="almost-there" class="section level2">
+<h2>Almost there</h2>
+<p>Now, we just need to run the following script to obtain everything that wee need
+to build the men and women wordclouds.</p>
+<pre class="r"><code>word_counters &lt;- purrr::map(data_split, word_counter, stem = F)</code></pre>
+<div id="creating-a-colour-palette-based-on-the-quantiles" class="section level3">
+<h3>Creating a colour palette based on the quantiles</h3>
+<p>The colour palette was created based on the quantiles of the average income
+considering both men and women. The palette goes from red to white to blue,
+this means that red words are associated with low income and blue with high
+income.</p>
+<pre class="r"><code>col_pal &lt;- colorRampPalette(colors = c(&quot;#f71616&quot;, &quot;#ffffff&quot;, &quot;#283eff&quot;))
+breaks &lt;- quantile(word_counters$Total$income, probs = seq(0, 1, by = .005))</code></pre>
+<blockquote>
+<p>white values are associated with median income. However, the distribution
+of the average income is asymetric.</p>
+</blockquote>
+<p>The following lines of code create a variable called <code>color</code> that indicates
+at each quantile each average income is associated and the respective color.</p>
+<pre class="r"><code>word_counters &lt;- purrr::map(word_counters, 
+                            function(data) {
+                              data %&lt;&gt;%
+                                mutate(color = cut(x = income, 
+                                                   breaks = breaks, 
+                                                   label = col_pal(length(breaks) - 1)
+                                )
+                                )
+                            })</code></pre>
+</div>
+</div>
+<div id="word-clouds" class="section level2">
+<h2>Word clouds</h2>
+<p>Finally, we can create the desired word clouds and it can be done with a few lines
+of code. For example, to create a word cloud for men execute the following code:</p>
+<pre class="r"><code>wc_obj_men &lt;- word_counters$Male %&gt;% 
+  filter(freq &gt; quantile(freq, .8)) # I&#39;m using just the 20% more frequent words.
+
+men_colors &lt;- wc_obj_men$color
+
+# Data structure utilized by wordcloud2
+wc_obj_men %&lt;&gt;% select(word, freq)
+
+(wc_men &lt;- wordcloud2::wordcloud2(data = wc_obj_men, color = men_colors,
+                                  backgroundColor = &quot;black&quot;,
+                                  shuffle = F, 
+                                  size = .5))</code></pre>
+<div id="htmlwidget-1" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-1">{"x":{"url":"/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_men_wc_print.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<p>Similarly, if you want to visualize the women’s word cloud, run:</p>
+<pre class="r"><code>wc_obj_women &lt;- word_counters$Female %&gt;% 
+  filter(freq &gt; quantile(freq, .8))
+
+women_colors &lt;- wc_obj_women$color
+
+wc_obj_women %&lt;&gt;% select(word, freq)
+
+(wc_women &lt;- wordcloud2::wordcloud2(data = wc_obj_women, color = women_colors,
+                                    backgroundColor = &quot;black&quot;,
+                                    shuffle = F, 
+                                    size = .5))</code></pre>
+<div id="htmlwidget-2" style="width:100%;height:480px;" class="widgetframe html-widget"></div>
+<script type="application/json" data-for="htmlwidget-2">{"x":{"url":"/post/2018/05/2018-05-02-wordcloud_files/figure-html//widgets/widget_women_wc_print.html","options":{"xdomain":"*","allowfullscreen":false,"lazyload":false}},"evals":[],"jsHooks":[]}</script>
+<p><br></p>
+<div id="creating-the-legend" class="section level3">
+<h3>Creating the legend</h3>
+<p>Legend will be created as follows (I’m sure it can be done more efficiently):</p>
+<pre class="r"><code>legends &lt;- ggplot2::ggplot(word_counters$Total, aes(x = freq, y = income, fill = income)) +
+  ggplot2::geom_point(alpha = .7) + 
+  ggplot2::scale_fill_gradientn(colours = c(&quot;#f71616&quot;, &quot;#ffffff&quot;, &quot;#283eff&quot;), 
+                                guide = ggplot2::guide_colorbar(title = &quot;Avg. Income&quot;, 
+                                                                title.position = &quot;top&quot;, 
+                                                                label.position = &quot;bottom&quot;,
+                                                                label.theme = ggplot2::element_text(angle = 90,
+                                                                                                    size = 6.5,
+                                                                                                    family = &quot;Space Mono&quot;),
+                                                                ticks = F),
+                                breaks = c(min(breaks), max(breaks)),
+                                labels = c(&quot;low&quot;, &quot;high&quot;)) +
+  ggplot2::theme(legend.justification = &quot;bottom&quot;, 
+                 legend.direction = &quot;horizontal&quot;, 
+                 legend.title = ggplot2::element_text(family = &quot;Space Mono&quot;,
+                                                      size = 8))
+
+
+legends &lt;- cowplot::get_legend(legends)</code></pre>
+</div>
+</div>
+<div id="analysis" class="section level2">
+<h2>Final Word Cloud and Analysis</h2>
+<p>The word clouds below can be used to extract a lot of information about gender
+inequalities in Australia in 2013-14. For example, take a look at the word office.
+Despite the number of women that plays a role in an <em>office</em> is greater than the
+number of men, Men have a much better salary at, probably, the same function.
+If you analyze carefully both word clouds, you will be able to identify several
+differences in the income associated with the same word in different genders.</p>
+<p>In conclusion, even in Australia, a country considered developed, the problem
+of not treating people of different genders equally exists. It’s a sad reality
+that needs to be showed and faced.</p>
+<div class="container">
+<div class="row">
+<div class="col">
+<h3 id="men">Men</h3>
+<div id="htmlwidget-3" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3">{"x":{"word":["manager","officer","operator","trainee","apprentice","worker","assistant","technician","engineer","consultant","clerk","farm","labourer","hand","nurse","maker","driver","teacher","director","attendant","medical","plant","machine","sales","retail","mechanic","salesperson","health","service","services","general","registered","business","public","specialist","engineering","television","analyst","administrator","employee","care","school","electrical","office","radio","representative","security","telecommunications","motor","senior","railway","designer","repairer","vehicle","industrial","financial","air","force","investigator","metal","building","car","factory","company","products","agent","aircraft","controller","wood","junior","adviser","bus","shop","fitter","cleaner","secretary","practice","servant","planner","mechanical","personnel","mining","maintenance","transport","programmer","cook","food","support","guard","development","furniture","construction","supervisor","goods","processing","fire","meat","bank","administrative","levels","plumber","noncommissioned","steward","cutter","systems","trades","painter","estate","real","technical","hotel","professional","rep","concrete","executive","servicer","process","accountant","legal","travel","army","gardener","stage","train","marketing","video","station","civil","truck","paper","finance","project","defence","cinema","welder","door","fabricator","park","window","computer","computing","electrician","miner","wholesale","motel","taxi","governess","commercial","police","communications","corporate","turner","market","architectural","veterinary","program","die","removalist","carpenter","joiner","chef","drink","architect","art","casino","chief","product","tax","special","electronic","horticulturist","teaching","level","university","selling","key","amusement","bricklayer","garden","storeperson","watch","rail","bar","boiler","engine","post","café","canteen","layer","van","host","paint","deputy","high","customer","account","mixer","person","lift","oil","rig","room","deliverer","delivery","pizza","waiter","earthmoving","appliances","order","garage","secondary","law","mine","night","studio","software","warehouse","chartered","accounting","actor","administration","noncommi","control","arc","asbestos","rides","sport","craft","line","bartender","end","boilermaker","bottle","cosmetician","deli","gen","brick","bricklayer’s","cab","wash","charter","managing","reg","client","fabric","coal","opal","prospector","commission","nontechnical","traveller","commissioned","lorry","semitrailer","contruction","taxitruck","dishwasher","kitchen","sandwich","beverage","dining","waitress","earth","appliance","fence","iron","forklift","petrol","ward","house","lay","rag","diesel","patrol","watchperson","listed","occupation","opera","pet","store","roller","sign","ski","stagehand","state","vision"],"freq":[785948,499373,176106,185235,101708,352776,526953,128747,298383,118814,167815,68150,175709,241963,37749,131626,279856,115756,233880,154841,56932,87168,55794,350724,253542,275316,165622,30599,319640,66171,612043,27966,87690,199070,32372,64482,29176,144724,93729,88727,38225,142027,145857,682841,32483,68967,47192,31273,123959,30897,57747,33496,125458,44541,34438,125002,251890,44333,49919,84267,131698,171308,34294,96220,29866,67241,33206,62049,34069,31351,28585,140548,187374,195080,53121,131956,47297,182790,28895,51349,58309,61720,42679,171016,34675,37808,146112,42538,55309,55889,28433,122444,62906,69413,32719,36836,26884,110703,53062,53062,58441,31383,30218,33989,60838,115225,30128,27652,27652,59217,49887,39244,371197,170302,132264,119365,56762,80050,50920,48170,44333,31458,85253,213810,109334,25679,35605,37753,193417,30976,38825,98219,37739,87154,32608,81946,76492,35774,76474,69461,34178,131125,37973,46649,47279,35834,75687,95349,45278,36933,144924,29436,129656,66412,46758,87577,46444,33263,85102,35283,83033,108914,78984,191128,28050,117270,48882,38817,34353,25613,29595,75504,145938,31171,86995,52926,27857,54220,41101,111953,33487,203234,48229,48828,301420,96639,25609,25609,60462,227567,36878,39862,120721,54348,45057,189638,143811,437781,42413,73952,68707,27047,33398,42501,47523,25759,46742,98555,34145,56526,53848,33724,46881,44248,81952,30620,132030,77112,46486,47819,36889,31383,62049,96693,27601,27601,193883,33985,54302,29291,209834,47845,83084,83084,126146,709759,55464,45001,25768,47359,77919,111813,46285,31066,85111,36613,36613,36613,76909,43349,43349,32986,143209,143209,38985,32837,36406,36406,36406,25759,25759,25759,50709,98555,41294,27517,30904,64334,51831,161257,66318,110145,34902,33171,33171,139939,159537,180086,69325,159737,62487,37952,30670,81828,27665,29176],"fontFamily":"Space Mono","fontWeight":"bold","color":["#4153EF","#4153EF","#747DD0","#DC4C4C","#CD6A6A","#B3A0A0","#C87575","#5261E4","#3E50F0","#5462E3","#C67878","#D75555","#B3A0A0","#D35E5E","#9297BD","#969ABA","#9EA1B5","#8087C8","#3145F9","#D75555","#364AF5","#4E5EE7","#9C9FB7","#868DC4","#BE8989","#606CDC","#D45D5D","#3448F7","#707AD2","#8087C8","#5A68DF","#848AC6","#4556EC","#3145F9","#3145F9","#394CF4","#727CD0","#3E50F0","#5866E1","#9297BD","#CB6F6F","#989BB9","#4959EA","#5563E2","#5563E2","#8A90C2","#ADACAC","#626FDA","#888EC3","#364AF5","#8087C8","#969ABA","#5462E3","#B49D9D","#4E5EE7","#3448F7","#6470D9","#606CDC","#4E5EE7","#727CD0","#6470D9","#ADACAC","#9A9DB8","#5C69DE","#717BD1","#6D78D4","#8A90C2","#5563E2","#8C91C1","#8289C6","#4153EF","#5866E1","#D16363","#5462E3","#E23E3E","#2E43FA","#364AF5","#3145F9","#4153EF","#4959EA","#5462E3","#3448F7","#5D6ADE","#888EC3","#4959EA","#F02323","#E63737","#A0A2B4","#ACACAD","#4858EB","#C18383","#5665E2","#6873D7","#9A9DB8","#5462E3","#4657EC","#D26060","#3A4DF3","#606CDC","#606CDC","#9A9DB8","#7880CD","#ED2929","#CB6E6E","#4556EC","#C08484","#BC8C8C","#4A5BE9","#4A5BE9","#717BD1","#D75555","#3A4DF3","#7E86C9","#8C91C1","#3044FA","#5261E4","#7E86C9","#3E50F0","#394CF4","#8188C7","#606CDC","#D16161","#CD6A6A","#CB6F6F","#4153EF","#7982CC","#DC4B4B","#3D4FF1","#9C9FB7","#AAABAE","#3549F6","#4254EE","#6571D9","#EA2F2F","#8087C8","#707AD2","#6974D6","#868DC4","#6A75D5","#505FE6","#4455ED","#5C69DE","#3549F6","#727CD0","#D75555","#DC4C4C","#707AD2","#B59B9B","#4E5EE7","#606CDC","#3448F7","#5C69DE","#4657EC","#4153EF","#364AF5","#6470D9","#606CDC","#9196BD","#AEA9A9","#C77777","#DA4F4F","#EE2626","#4254EE","#5D6ADE","#EB2E2E","#2E43FA","#5665E2","#D45B5B","#3145F9","#505FE6","#CC6C6C","#707AD2","#5A68DF","#4E5EE7","#E83232","#7A83CB","#7E86C9","#BC8C8C","#D65858","#C87474","#BA9292","#898FC2","#EA2F2F","#5E6BDD","#3E50F0","#E33D3D","#D16161","#D16161","#B59B9B","#3448F7","#F02323","#A6A7B0","#2E43FA","#6A75D5","#9EA1B5","#4556EC","#8C91C1","#B59B9B","#868DC4","#5462E3","#4E5EE7","#F41C1C","#DC4C4C","#D45D5D","#E83232","#F41A1A","#606CDC","#4E5EE7","#EA2F2F","#B1A4A4","#6A75D5","#3E50F0","#3448F7","#C87575","#D16363","#4A5BE9","#C08484","#3E50F0","#364AF5","#ADACAC","#C67878","#7880CD","#5563E2","#4556EC","#7D85CA","#7D85CA","#717BD1","#8C91C1","#9DA0B6","#EE2828","#D35E5E","#5E6BDD","#EB2E2E","#EB2E2E","#E23E3E","#5A68DF","#BC8C8C","#BB8F8F","#B89595","#F51919","#3E50F0","#2E43FA","#7880CD","#989BB9","#727CD0","#3549F6","#3549F6","#3549F6","#767FCE","#7E86C9","#7E86C9","#717BD1","#8C91C1","#8C91C1","#3D4FF1","#DC4C4C","#F71616","#F71616","#F71616","#F41A1A","#F41A1A","#F41A1A","#626FDA","#4E5EE7","#6C76D4","#626FDA","#B79696","#898FC2","#D16363","#C57B7B","#B79898","#C97272","#5261E4","#BA9292","#BA9292","#AEAAAA","#8188C7","#747DD0","#8C91C1","#BE8989","#5665E2","#999CB8","#BC8C8C","#D16363","#4A5BE9","#727CD0"],"minSize":0,"weightFactor":0.000114511392611216,"backgroundColor":"black","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":false,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+<div class="col">
+<h3 id="women">Women</h3>
+<div id="htmlwidget-4" style="width:672px;height:480px;" class="wordcloud2 html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4">{"x":{"word":["manager","officer","operator","trainee","apprentice","worker","assistant","technician","engineer","consultant","clerk","farm","labourer","hand","nurse","driver","maker","teacher","director","attendant","centre","medical","sales","retail","salesperson","health","service","services","general","registered","business","public","specialist","analyst","administrator","employee","care","insurance","school","office","instructor","representative","registrar","scientist","senior","designer","industrial","financial","air","investigator","car","company","sports","agent","aircraft","controller","therapist","relations","call","contact","artist","adviser","bus","shop","cleaner","secretary","fruit","education","practice","servant","personnel","cook","food","support","development","supervisor","goods","child","processing","dental","bank","administrative","levels","steward","cutter","estate","real","technical","hotel","rep","executive","packer","clinical","process","accountant","legal","clerical","travel","airline","animal","train","agency","nursing","marketing","detailer","station","research","aide","laboratory","personal","finance","project","cinema","beauty","community","wholesale","motel","calls","governess","practitioner","commercial","police","policy","corporate","human","occupational","data","market","receptionist","architectural","veterinary","program","media","die","chef","drink","dresser","hair","graphic","architect","art","hairdresser","casino","chief","product","domestic","recruitment","special","emergency","resource","student","social","teaching","level","primary","university","household","aged","carer","home","seller","selling","key","hospitality","storeperson","rail","credit","bar","engine","book","post","café","canteen","inbound","van","cashier","host","chemist","pharmacy","deputy","high","customer","account","workers","person","room","waiter","order","first","kindergarten","preschool","secondary","hospital","housekeeper","law","stenographer","warehouse","tutor","chartered","accounting","accounts","actor","administration","companion","disabled","respite","control","check","arc","sport","craft","line","etc","teller","union","barber","ladies’","men’s","bartender","beautician","manicurist","end","bookkeeper","bottle","cosmetician","deli","gen","keeper","caterer","restaurant","cafeteria","snack","wash","cash","cage","charter","checkout","console","managing","creche","chimney","sweep","coding","exam","reg","client","commission","nontechnical","traveller","skilled","dishwasher","kitchen","sandwich","beverage","dining","waitress","aid","preprimary","infant","ward","house","lawyer","solicitor","mail","rag","midwife","sister","listed","occupation","opera","physio","assitant","planning","lecturer","professor","property","mental","store","roller","teacher’s","sign","ski","state","tab"],"freq":[672927,551488,105958,214263,21850,622680,839558,37221,29225,200573,413444,22963,29470,113067,315130,17032,25057,379973,124573,321402,46608,157227,430342,383451,283676,57807,372830,111556,455174,236194,105940,219444,34435,118295,257932,89261,294717,21760,460131,1296214,23001,53145,42366,19403,19312,31609,24912,109133,96070,18723,302760,56747,22843,63762,22433,29827,57895,32992,35519,35372,18355,22901,113968,328175,93374,149120,18700,37290,36650,194788,51858,37772,290010,45479,91012,94576,55412,115253,29292,28888,137037,135371,135371,86998,18764,33607,33607,36658,75677,141556,106079,23703,103142,39556,81049,57690,18107,51191,20320,21023,231444,22151,125190,79616,22100,48483,16798,185494,20421,80018,96908,74038,199554,22105,34341,33547,73850,24092,236656,39491,125592,15690,22424,76182,47636,27067,18091,102082,112685,32368,37618,114742,34890,34991,33065,270070,33845,39027,15818,37968,170200,30011,69408,43185,17475,16036,30308,44877,16278,47636,111974,30385,232187,365752,147480,27049,19884,142050,103676,103818,48754,205190,42229,18505,21912,18486,55614,104687,29253,43704,198069,51675,51675,19043,201216,50688,97160,39474,34413,42206,86646,62431,224200,15777,432566,80557,78294,40695,17739,23967,23967,85662,27885,22877,37643,34137,24148,21895,78380,28263,81718,15847,293738,103676,103676,103676,29827,45743,55851,34395,23531,32263,50140,50140,50140,30011,30011,30011,33993,16399,16399,357519,35447,191711,191711,198669,558134,59834,28659,28659,23016,23016,47200,50777,50688,78477,39653,39653,41895,90620,20543,20552,26526,27094,285513,57577,37591,32055,32055,17541,45671,45671,45671,78294,78294,78294,185711,19328,127197,98452,67528,27816,27816,15609,94891,16827,96825,128239,155306,112024,16754,17522,17522,18736,18736,18088,19745,73541,29857,63803,32039,21940,33616,18750],"fontFamily":"Space Mono","fontWeight":"bold","color":["#8A90C2","#A1A3B4","#DF4545","#EE2828","#D45D5D","#DB4E4E","#DC4B4B","#B89595","#5A68DF","#A8A9AF","#DB4E4E","#F02323","#DE4848","#EE2828","#B49E9E","#B79898","#E83232","#ADACAC","#4E5EE7","#EB2C2C","#CB6F6F","#999CB8","#D95252","#E24040","#ED2929","#717BD1","#C28080","#D65858","#C57B7B","#ACACAD","#999CB8","#606CDC","#5462E3","#6470D9","#A9AAAF","#C47D7D","#DF4646","#A2A4B3","#B79696","#C08484","#EF2525","#D06464","#CB6F6F","#868DC4","#4052F0","#C28080","#4A5BE9","#5C69DE","#D95151","#6D78D4","#DE4848","#9EA1B5","#5967E0","#BA9292","#E33D3D","#8087C8","#C87474","#505FE6","#D55A5A","#D55A5A","#CB6F6F","#707AD2","#9DA0B6","#EA2F2F","#EE2828","#6A75D5","#F71616","#A9AAAF","#6974D6","#6571D9","#6571D9","#F02323","#F12020","#D75757","#A5A6B1","#E24040","#CE6767","#E23E3E","#AEAAAA","#D75555","#7E86C9","#9EA1B5","#9EA1B5","#F41C1C","#E33D3D","#ACACAD","#ACACAD","#B79696","#E83232","#C67878","#4C5CE8","#ED2929","#A8A9AF","#BA9090","#6C76D4","#8A90C2","#C47D7D","#BF8787","#C28181","#E83232","#E93131","#4556EC","#B3A0A0","#717BD1","#E83232","#F21F1F","#8E93BF","#E83434","#AEA9A9","#C97272","#ACACAD","#767FCE","#EF2525","#ED2929","#D16363","#B79696","#EA2F2F","#DD4949","#9A9DB8","#4A5BE9","#DE4848","#6873D7","#4254EE","#5866E1","#626FDA","#5866E1","#9498BC","#888EC3","#DE4848","#6873D7","#7A83CB","#B3A0A0","#A8A9AF","#E53A3A","#EA2F2F","#F21F1F","#ED2929","#ED2929","#C37E7E","#6C76D4","#ACACAD","#EB2E2E","#F31D1D","#364AF5","#999CB8","#EE2828","#868DC4","#606CDC","#8087C8","#626FDA","#B1A4A4","#B3A0A0","#989BB9","#8D92C0","#A4A5B2","#7880CD","#ED2929","#DF4545","#E83232","#E83232","#EB2C2C","#EE2828","#C28181","#E83232","#DD4949","#B69A9A","#B1A3A3","#F12222","#5A68DF","#C87474","#EE2626","#E83232","#E83232","#D75555","#6873D7","#F51919","#F41A1A","#DE4848","#EA2F2F","#3549F6","#858CC5","#C08484","#9599BB","#C08484","#D85454","#F61717","#F61717","#ED2929","#4052F0","#CC6C6C","#CC6C6C","#858CC5","#DC4B4B","#F02323","#4E5EE7","#B79898","#DB4E4E","#CB6E6E","#6D78D4","#5D6ADE","#C18383","#DD4949","#CC6C6C","#E83232","#E83232","#E83232","#8087C8","#F12020","#767FCE","#6873D7","#E33D3D","#D06464","#B2A1A1","#B2A1A1","#B2A1A1","#EB2E2E","#EB2E2E","#EB2E2E","#F02323","#ED2929","#ED2929","#EB2C2C","#C77777","#EF2525","#EF2525","#EF2525","#BC8C8C","#DA4F4F","#D95151","#D95151","#F51919","#F51919","#F31D1D","#F51919","#F51919","#6D78D4","#F41C1C","#F41C1C","#3549F6","#E83232","#E83232","#E83232","#C28080","#C28181","#B0A6A6","#C08484","#B79898","#BC8C8C","#BC8C8C","#E93131","#F31D1D","#F31D1D","#F31D1D","#F61717","#F61717","#F61717","#E83434","#C18383","#9DA0B6","#F12222","#E83232","#4153EF","#4153EF","#DF4545","#F41C1C","#A0A2B4","#ACACAD","#DC4B4B","#C87575","#DD4949","#ACACAD","#3E50F0","#3E50F0","#505FE6","#505FE6","#BC8C8C","#767FCE","#D26060","#8087C8","#E53838","#C28080","#DD4949","#ACACAD","#ED2929"],"minSize":0,"weightFactor":6.94329794308656e-05,"backgroundColor":"black","gridSize":0,"minRotation":-0.785398163397448,"maxRotation":0.785398163397448,"shuffle":false,"rotateRatio":0.4,"shape":"circle","ellipticity":0.65,"figBase64":null,"hover":null},"evals":[],"jsHooks":{"render":[{"code":"function(el,x){\n                        console.log(123);\n                        if(!iii){\n                          window.location.reload();\n                          iii = False;\n\n                        }\n  }","data":null}]}}</script>
+</div>
+<p><img src="/post/2018/05/2018-05-02-wordcloud_files/figure-html/legend_final-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
+</div>
+<blockquote>
+<p>It’s important to emphasize that the focus of this post is to provide a way
+to analyze this data. I’m a statistician and professionals from other areas
+probably can draw more accurate conclusions about this visualization.</p>
+</blockquote>
+</div>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="lcgodoy.github.io/tags/wordcloud2/">wordcloud2</a>
+  
+  <a class="badge badge-light" href="lcgodoy.github.io/tags/gender-inequality/">gender inequality</a>
+  
+</div>
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/&amp;text=WordClouds%20-%20Visualizing%20gender%20inequality%20in%20income" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/&amp;t=WordClouds%20-%20Visualizing%20gender%20inequality%20in%20income" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=WordClouds%20-%20Visualizing%20gender%20inequality%20in%20income&amp;body=lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/&amp;title=WordClouds%20-%20Visualizing%20gender%20inequality%20in%20income" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://web.whatsapp.com/send?text=WordClouds%20-%20Visualizing%20gender%20inequality%20in%20income%20lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=lcgodoy.github.io/post/2018/05/2018-05-02-wordcloud/&amp;title=WordClouds%20-%20Visualizing%20gender%20inequality%20in%20income" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+  
+  
+    
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <img class="portrait mr-3" src="/lcgodoy.github.io/authors/admin/avatar_hu7b4a77b70d7ccc12dcfcf06f5fc11ad8_27284_250x250_fill_q90_lanczos_center.jpg" alt="Avatar">
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="lcgodoy.github.io/">Lucas Godoy</a></h5>
+      <h6 class="card-subtitle">PhD Student / TA</h6>
+      <p class="card-text">Hi, my name is Lucas. I&rsquo;m from Brazil and currenltu I&rsquo;m a second year PhD Student at UConn. My interests are mostly related to statistical computing, data visualization, and open data. This website was intended initially to exercise my writing in English. As a PhD student it has been hard to find time for blogging but my intention is to write here about interesting things (at least to me) whenever is possible. Additionally, you can find here informatin about my Talks, ongoing projects, and my CV.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/lcgodoy.github.io/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/ldcgodoy" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com.br/citations?hl=en&amp;pli=1&amp;user=wzIw2_4AAAAJ" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/lcgodoy" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+<section id="comments">
+  
+    
+<div id="disqus_thread"></div>
+<script>
+  let disqus_config = function () {
+    
+    
+    
+  };
+  (function() {
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+      return;
+    }
+    var d = document, s = d.createElement('script'); s.async = true;
+    s.src = 'https://' + "lcgodoy-github-io" + '.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+  })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+  
+</section>
+
+
+
+
+
+
+  
+  
+
+
+
+  </div>
+</article>
+
+      
+
+    
+    
+    
+    <script src="/lcgodoy.github.io/js/mathjax-config.js"></script>
+    
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/highlight.min.js" integrity="sha256-1zu+3BnLYV9LdiY85uXMzii3bdrkelyp37e0ZyTAQh0=" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/bash.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/cs.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/json.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/markdown.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/r.min.js"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.10/languages/yaml.min.js"></script>
+        
+      
+
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+
+    
+    
+
+    
+    
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    
+
+    
+    
+
+    
+
+    
+    
+
+    
+    
+
+    
+    
+    <script id="dsq-count-scr" src="https://lcgodoy-github-io.disqus.com/count.js" async></script>
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/lcgodoy.github.io/js/academic.min.368ad8701ddf69c34950016f6435139b.js"></script>
+
+    
+
+
+
+
+
+
+  
+  
+  <div class="container">
+    <footer class="site-footer">
+  
+
+  <p class="powered-by">
+    © 2021 &middot; 
+
+    Powered by the
+    <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for
+    <a href="https://gohugo.io" target="_blank" rel="noopener">Hugo</a>.
+
+    
+    <span class="float-right" aria-hidden="true">
+      <a href="#" class="back-to-top">
+        <span class="button_icon">
+          <i class="fas fa-chevron-up fa-2x"></i>
+        </span>
+      </a>
+    </span>
+    
+  </p>
+</footer>
+
+  </div>
+  
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
