@@ -38,13 +38,3 @@ tramp
 ## AUCTeX auto folder
 /auto/
 
-## Outputs
-*.html
-*.pdf
-
-docs
-
-## usethis setup
-
-setup-usethis.R
-inst/doc

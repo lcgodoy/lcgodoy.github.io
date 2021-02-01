@@ -1,0 +1,121 @@
+---
+title: Maximum Likelihood Estimation
+author: Lucas Godoy
+date: '2020-04-02'
+slug: mle
+categories:
+  - Statistics
+tags: []
+subtitle: ''
+summary: 'A brief introduction to Maximum Likelihood Estimation'
+authors: []
+lastmod: '2020-04-02T16:33:16-04:00'
+featured: no
+image:
+  caption: ''
+  focal_point: 'Smart'
+  preview_only: no
+projects: []
+---
+
+
+
+<div id="intro" class="section level2">
+<h2>Intro</h2>
+<p>This blog post is a supplementary material for my students from the<br />
+<em>Introduction to Mathematical Statistics (STAT 3445)</em> class. The main goal
+is to give a brief, but clear, explanation of how maximum Likelihood
+Estimation (MLE for short) works.</p>
+<p>One example about the Normal distribution will be covered by this post.</p>
+<p>One of the key concepts for the MLE is the Likelihood Function. The Likelihood
+Function can be seen as the <em>joint pdf</em> conditioned on the data, i.e., keeping
+the data fixed. When working with only one random variable, lets say <span class="math inline">\(X\)</span>, the
+Likelihood function is the pdf itself. For example, consider a problem where
+we are said that <span class="math inline">\(X\)</span> follows a <em>Binomial</em> distribution with <span class="math inline">\(n = 10\)</span> and <span class="math inline">\(p\)</span>
+unknown. We know that
+<span class="math display">\[
+P(X = x) = {{10}\choose{x}} p^x(1 - p)^{n - x}.
+\]</span>
+Suppose now, that besides knowing that <span class="math inline">\(X\)</span> follows a <span class="math inline">\(Binomial(10, p)\)</span>, we also
+know a realization of <span class="math inline">\(x = 4\)</span>. Now, what we are interested in infer is, what is
+the value of <span class="math inline">\(p\)</span> that maximizes <span class="math inline">\(P(X = 10)\)</span>. Can you notice how different it is
+from finding a probability? We are still working with probability distributions,
+but with a different goal.</p>
+<div id="example-1---normal-distribution" class="section level3">
+<h3>Example 1 - Normal Distribution</h3>
+<p>Suppose that <span class="math inline">\(X_1, \, \cdots \, X_n \overset{iid}{\sim} N(\mu, 1)\)</span>. How do we
+find the MLE for <span class="math inline">\(\mu\)</span>? First of all, note that, since the random variables are
+identically distributed we have that
+<span class="math display">\[
+f_i(x_i) = f(x_i) = \frac{1}{\sqrt{2\pi}} \exp \left \{ - \frac{(x_i - \mu)^2}{2} \right \}.
+\]</span></p>
+<p>Moreover, since the random variables are independent, their joint distribution
+is equal to the product of the marginals, i.e.,
+<span class="math display">\[\begin{align*}
+  f(x_1, \cdots, x_n) &amp; = \prod_{i = 1}^n f(x_i) \\
+  &amp; = f(x_1) f(x_2) \cdots f(x_n) \\\\
+  &amp; = \frac{1}{(2\pi)^{n/2}} \exp \left \{ - \frac{\sum_{i = 1}^n (x_i - \mu)^2}{2} \right \}.
+\end{align*}\]</span></p>
+<p>Finally, as stated before, the Likelihood function is given by
+<span class="math display">\[\begin{align*}
+  L(\mu|X_1 = x_1, \cdots, X_n = x_n) &amp; = f(x_1, \cdots, x_n) \\
+  &amp; = \frac{1}{(2\pi)^{n/2}} \exp \left \{ - \frac{\sum_{i = 1}^n (x_i - \mu)^2}{2} \right \}.
+\end{align*}\]</span>
+Note that, the data is fixed and the Likelihood is a function of <span class="math inline">\(\mu\)</span>. Maximizing
+this function with respect to <span class="math inline">\(\mu\)</span> gives us the value for this parameter that this
+data is more likely to be generated from. The idea is that there is an infinite number
+of Normal probability distributions with <span class="math inline">\(\sigma^2 = 2\)</span>, each one associated to
+one value of <span class="math inline">\(\mu\)</span>. Now, for each value of <span class="math inline">\(\mu\)</span> we have a probability for the
+joint pdf of the data. Finding the the Maximum Likelihood estimator od <span class="math inline">\(\mu\)</span>, gives
+us the value for this parameter that maximizes this probability.</p>
+<p>Usually, maximizing the Likelihood function is quite complicated. An alternative
+is to maximize the <em>log-Likelihood</em> function instead. The <em>log-Likelihood</em> function,
+as the name suggests, is the <em>log</em> (of natural base) of the Likelihood function and
+since the <em>log</em> is monotone non-decreasing function, the value that maximizes the
+log-likelihood also maximizes the Likelihood function.
+For this problem, the log-likelihood, denoted by <span class="math inline">\(\ell(\mu|\mathbf{X})\)</span>, where
+<span class="math inline">\(\mathbf{X} = \{ X_1, \, \cdots \, X_n \}\)</span>, is defined as
+<span class="math display">\[\begin{align*}
+  \ell(\mu|\mathbf{X}) &amp;= \log\left( L(\mu|\mathbf{X})  \right) \\
+  &amp; = -\frac{n}{2} \log(2\pi) - \frac{\sum_{i = 1}^n (x_i^2 - 2\mu x_i + \mu^2)}{2} \\
+  &amp; = -\frac{n}{2} \log(2\pi) - \frac{\sum_{i = 1}^n x_i^2}{2} + \mu \sum_{i = 1} x_i - \frac{n\mu^2}{2}.
+\end{align*}\]</span>
+Now that we have found the <span class="math inline">\(\ell(\mu|\mathbf{X})\)</span> in a simple form, we can maximize
+it. To do so, we have to take the first derivative with respect to <span class="math inline">\(\mu\)</span>, make it
+equal to 0, and, finally, isolate <span class="math inline">\(\mu\)</span>. Then, take the second derivative of the
+function and verify if this function is less than zero when <span class="math inline">\(\mu = \hat{\mu}\)</span>.
+The first derivative of the log-likelihood is given by:
+<span class="math display">\[\begin{align*}
+  \ell&#39;(\mu|\mathbf{X}) &amp;= \frac{\partial \ell(\mu|\mathbf{X})}{\partial \mu} \\
+  &amp; = \sum_{i = 1} x_i - n\mu.
+\end{align*}\]</span>
+Making it equal to zero and isolating <span class="math inline">\(\mu\)</span>, gives us the Maximum Likelihood
+estimator of <span class="math inline">\(\mu\)</span>, which is
+<span class="math display">\[
+\hat{\mu} = \bar{x}.
+\]</span>
+Now, we only have to take the second derivative of the <em>log-Likelihood</em> function
+to be sure that <span class="math inline">\(\hat{\mu}\)</span> is a point of maximum.
+<span class="math display">\[\begin{align*}
+  \ell&#39;&#39;(\mu|\mathbf{X}) &amp;= \frac{\partial \ell&#39;(\mu|\mathbf{X})}{\partial \mu} \\
+  &amp; = -n.
+\end{align*}\]</span>
+Note that <span class="math inline">\(-n &lt; 0\)</span> for all possible values of <span class="math inline">\(\mu\)</span>, thus the function is convex
+and <span class="math inline">\(\hat{\mu} = \bar{x}\)</span> is the Maximum Likelihood Estimator for <span class="math inline">\(\mu\)</span>.</p>
+</div>
+</div>
+<div id="recap" class="section level2">
+<h2>Recap</h2>
+<ul>
+<li>Find the Likelihood function by finding the joint pdf (of pmf) and making it
+function of the parameter (or parameters) that you want to estimate;<br />
+</li>
+<li>Take the log of the Likelihood function;<br />
+</li>
+<li>Take the first derivative of the <em>log-Likelihood</em> function, make it equal to
+zero and isolate the parameter that you want to estimate;<br />
+</li>
+<li>Find the second derivative of the <em>log-likelihood</em> and analyze it to be sure
+that the value found for the parameter is in fact a point of maximum.</li>
+</ul>
+</div>
