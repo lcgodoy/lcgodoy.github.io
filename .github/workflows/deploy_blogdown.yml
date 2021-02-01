@@ -16,8 +16,10 @@ jobs:
           fetch-depth: 0
       - uses: r-lib/actions/setup-r@v1
       - uses: r-lib/actions/setup-pandoc@v1
-      - name: Install rmarkdown
-        run: Rscript -e 'install.packages(c("rmarkdown","blogdown"))'
+      - name: Install r packages
+        run: |
+          Rscript -e 'install.packages(c("remotes", "rmarkdown"))' \
+                  -e 'remotes::install_github("rstudio/blogdown")'
       - name: install hugo
         run: Rscript -e 'blogdown::install_hugo(extended = TRUE, version = "0.68.3")'
       # install Hugo
@@ -26,7 +28,7 @@ jobs:
       - name: Look at files
         run: ls ./public
       - name: Render blog
-        run: Rscript -e 'blogdown::build_site(local = FALSE, method = 'html', run_hugo = TRUE)'
+        run: Rscript -e 'blogdown::build_site(local = FALSE)'
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
