@@ -1,0 +1,43 @@
+\usepackage{booktabs}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{bm}
+\usepackage{bbm}
+\usepackage{tikz}
+\usepackage{float}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks = true,
+    linkcolor  = blue,
+    urlcolor   = blue,
+    citecolor  = blue,
+    pdftitle   = {Neural Network Regression - Godoy} 
+  }
+  
+\providecommand{\keywords}[1]{\textit{Keywords:} #1}
+
+% consistent with R manual
+\newcommand{\pkg}[1]{{\normalfont\fontseries{b}\selectfont #1}}
+\let\proglang=\textsf
+\let\code=\texttt
+
+%% Math operators
+
+%% bolder cdot for inner product
+\newcommand{\bcdot}{\boldsymbol{\cdot}}
+
+%% shortcut for row and col vectors
+\newcommand{\ivec}[1]{\begin{pmatrix} #1 \end{pmatrix}}
+
+%% shortcut X'X
+\newcommand{\xtx}[1]{#1'#1}
+
+%% expectation
+\newcommand{\E}{\mathbbm{E}}
+
+%% for derivatives
+\newcommand{\dd}{\mathrm{d}}
+
+%% shortcut for if and only if
+\newcommand{\iif}{\Leftrightarrow}

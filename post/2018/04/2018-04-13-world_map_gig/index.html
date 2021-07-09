@@ -519,23 +519,31 @@
   <div class="article-container">
 
     <div class="article-style">
-      <h2 id="about-tidytuesday">About TidyTuesday</h2>
+      
+
+
+<div id="about-tidytuesday" class="section level2">
+<h2>About TidyTuesday</h2>
 <p>Tidy Tuesday is a nice initiative from the <a href="https://twitter.com/R4DScommunity">R4DS online community</a>.
 The goal is is to apply your R skills, get feedback, explore other’s work, and connect with the
-greater RStats community.<br>
-It&rsquo;s also my blogging motivation.</p>
-<h2 id="the-challenge">The challenge</h2>
+greater RStats community.<br />
+It’s also my blogging motivation.</p>
+</div>
+<div id="the-challenge" class="section level2">
+<h2>The challenge</h2>
 <p>This post is about the following challenge</p>
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
-<!-- raw HTML omitted -->
+<p><blockquote class="twitter-tweet"><p lang="en" dir="ltr"><a href="https://twitter.com/hashtag/r4ds?src=hash&amp;ref_src=twsrc%5Etfw">#r4ds</a> presents Week 3 of <a href="https://twitter.com/hashtag/TidyTuesday?src=hash&amp;ref_src=twsrc%5Etfw">#TidyTuesday</a>! Let&#39;s explore global causes of mortality!<br><br>Make a meaningful graphic, and post your code!<br><br>Data: <a href="https://t.co/ygKv8PqOfI">https://t.co/ygKv8PqOfI</a><br>Article: <a href="https://t.co/MOnlCBzdaL">https://t.co/MOnlCBzdaL</a><br>Blog: <a href="https://t.co/cZJ94Hhz7U">https://t.co/cZJ94Hhz7U</a> <a href="https://twitter.com/hashtag/tidyverse?src=hash&amp;ref_src=twsrc%5Etfw">#tidyverse</a> <a href="https://twitter.com/hashtag/rstats?src=hash&amp;ref_src=twsrc%5Etfw">#rstats</a> <a href="https://twitter.com/hashtag/dataviz?src=hash&amp;ref_src=twsrc%5Etfw">#dataviz</a> <a href="https://twitter.com/hashtag/ggplot2?src=hash&amp;ref_src=twsrc%5Etfw">#ggplot2</a> <a href="https://twitter.com/R4DScommunity?ref_src=twsrc%5Etfw">@R4DScommunity</a> <a href="https://t.co/52rktsOcSQ">pic.twitter.com/52rktsOcSQ</a></p>&mdash; Tom Mock 💉💉🎉 (@thomas_mock) <a href="https://twitter.com/thomas_mock/status/985864534832402432?ref_src=twsrc%5Etfw">April 16, 2018</a></blockquote>
+<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+</p>
 <p>The dataset contains mortality rates for all countries from 1990 to 2016, the aim
 was build a meaningful visualization. My idea was show the variation of a specific
 cause of death through <em>space-time</em>.</p>
 <blockquote>
 <p>You can download the data from <a href="https://github.com/rfordatascience/tidytuesday/blob/master/data/global_mortality.xlsx">here</a></p>
 </blockquote>
-<h2 id="ingredients">Ingredients</h2>
+</div>
+<div id="ingredients" class="section level2">
+<h2>Ingredients</h2>
 <p>To achieve my goal I used the packages:</p>
 <ul>
 <li><code>dplyr</code> - data manipulation;</li>
@@ -543,104 +551,117 @@ cause of death through <em>space-time</em>.</p>
 <li><code>ggthemes</code> - map theme;</li>
 <li><code>sf</code> - spatial data manipulation. This package interacts beautifully with <code>ggplot2</code>
 and <code>dplyr</code>, which makes spatial data manipulation and visualization very easy (and tidy);</li>
-<li><code>magick</code> - build the GIF&rsquo;s;</li>
-<li><code>magrittr</code> - it&rsquo;s not just the <code>%&gt;%</code>;</li>
+<li><code>magick</code> - build the GIF’s;</li>
+<li><code>magrittr</code> - it’s not just the <code>%&gt;%</code>;</li>
 <li><code>readxl</code> - reading <code>.xlsx</code> files;</li>
-<li><code>maps</code> - world map &lsquo;shape&rsquo;.</li>
+<li><code>maps</code> - world map ‘shape’.</li>
 </ul>
 <blockquote>
 <p><a href="https://twitter.com/WireMonkey">Alyssa Goldberg</a> suggestion:
 You can use <code>gganimate</code> instead of <code>magick</code>, it will need fewer lines of code.</p>
 </blockquote>
-<h2 id="reading-and-manipulating-the-data">Reading and manipulating the data</h2>
+</div>
+<div id="reading-and-manipulating-the-data" class="section level2">
+<h2>Reading and manipulating the data</h2>
 <p>The following code is used to read and make the first manipulations at the data
 provided for the challenge. Here, <code>mutate</code> and <code>case_when</code>, are being used to
 modify the names of some countries to coincide with country names at the
 map that will be used.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(ggplot2)
-<span style="color:#a6e22e">library</span>(dplyr)
-<span style="color:#a6e22e">library</span>(sf)
-<span style="color:#a6e22e">library</span>(magrittr)
+<pre class="r"><code>library(ggplot2)
+library(dplyr)
+library(sf)
+library(magrittr)
 
-data <span style="color:#f92672">&lt;-</span> readxl<span style="color:#f92672">::</span><span style="color:#a6e22e">read_excel</span>(<span style="color:#e6db74">&#34;data/global_mortality.xlsx&#34;</span>) <span style="color:#f92672">%&gt;%</span> 
-  <span style="color:#a6e22e">mutate</span>(country <span style="color:#f92672">=</span> <span style="color:#a6e22e">case_when</span>(
-    country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Antigua and Barbuda&#39;</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#39;Antigua&#39;</span>,
-    country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;United States&#39;</span> <span style="color:#f92672">|</span> country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;United States and Virgin Islands&#39;</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#39;USA&#39;</span>,
-    country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;United Kingdom&#39;</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#39;UK&#39;</span>,
-    country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;England&#39;</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#39;UK&#39;</span>,
-    country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Scotland&#39;</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#39;UK&#39;</span>,
-    country <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;Trinidad and Tobago&#39;</span> <span style="color:#f92672">~</span> <span style="color:#e6db74">&#39;Trinidad&#39;</span>,
-    <span style="color:#66d9ef">TRUE</span> <span style="color:#f92672">~</span> country
-  ))
-</code></pre></div><p>Now we need a map and merge our data with it. This would be a little bit more
+data &lt;- readxl::read_excel(&quot;data/global_mortality.xlsx&quot;) %&gt;% 
+  mutate(country = case_when(
+    country == &#39;Antigua and Barbuda&#39; ~ &#39;Antigua&#39;,
+    country == &#39;United States&#39; | country == &#39;United States and Virgin Islands&#39; ~ &#39;USA&#39;,
+    country == &#39;United Kingdom&#39; ~ &#39;UK&#39;,
+    country == &#39;England&#39; ~ &#39;UK&#39;,
+    country == &#39;Scotland&#39; ~ &#39;UK&#39;,
+    country == &#39;Trinidad and Tobago&#39; ~ &#39;Trinidad&#39;,
+    TRUE ~ country
+  ))</code></pre>
+<p>Now we need a map and merge our data with it. This would be a little bit more
 difficult if we did not have the <code>sf</code> package.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">world_map <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">st_as_sf</span>(maps<span style="color:#f92672">::</span><span style="color:#a6e22e">map</span>(<span style="color:#e6db74">&#39;world&#39;</span>, plot <span style="color:#f92672">=</span> <span style="color:#66d9ef">FALSE</span>, fill <span style="color:#f92672">=</span> <span style="color:#66d9ef">TRUE</span>))
-</code></pre></div><p>Then we will merge the data from the map with the data provided by the R4DS
-challenge. Thank&rsquo;s to <code>dplyr</code> and <code>sf</code>, we can do this with the following
+<pre class="r"><code>world_map &lt;- st_as_sf(maps::map(&#39;world&#39;, plot = FALSE, fill = TRUE))</code></pre>
+<p>Then we will merge the data from the map with the data provided by the R4DS
+challenge. Thank’s to <code>dplyr</code> and <code>sf</code>, we can do this with the following
 lines of code. Here the variables <code>ID</code> from <code>world map</code> and <code>country</code> from
 <code>data</code> must be equal at each country.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">map_years <span style="color:#f92672">&lt;-</span> world_map <span style="color:#f92672">%&gt;%</span> 
-  <span style="color:#a6e22e">full_join</span>(data, by <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;ID&#39;</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;country&#39;</span>))
-</code></pre></div><h2 id="creating-a-gif">Creating a GIF</h2>
-<h3 id="building-the-gif_map-function">Building the <code>gif_map</code> function</h3>
+<pre class="r"><code>map_years &lt;- world_map %&gt;% 
+  full_join(data, by = c(&#39;ID&#39; = &#39;country&#39;))</code></pre>
+</div>
+<div id="creating-a-gif" class="section level2">
+<h2>Creating a GIF</h2>
+<div id="building-the-gif_map-function" class="section level3">
+<h3>Building the <code>gif_map</code> function</h3>
 <p>To make easier to create a <em>GIF</em> for different causes of death, I built the following
 function. The inputs are the data and a string representing the name of the variable
 corresponding to the cause of death you want to visualize.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">gif_map <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">function</span>(data, cause_of_death) {
-  <span style="color:#75715e"># Create limits to fix the scales</span>
-  fill_lim <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">range</span>(data <span style="color:#f92672">%$%</span> <span style="color:#a6e22e">get</span>(cause_of_death), na.rm <span style="color:#f92672">=</span> T)
+<pre class="r"><code>gif_map &lt;- function(data, cause_of_death) {
+  # Create limits to fix the scales
+  fill_lim &lt;- range(data %$% get(cause_of_death), na.rm = T)
   
-  <span style="color:#75715e"># Split the data set for different years</span>
-  data_list <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">split</span>(data, data<span style="color:#f92672">$</span>year)
+  # Split the data set for different years
+  data_list &lt;- split(data, data$year)
   
-  out <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">lapply</span>(data_list, <span style="color:#a6e22e">function</span>(data, cause_of_death, fill_lim){
-    p <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">ggplot</span>(data, <span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">get</span>(cause_of_death))) <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">geom_sf</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">.2</span>, color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;black&#39;</span>) <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#ffefef&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#720000&#34;</span>, space <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lab&#34;</span>,
-                          na.value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#c6c6c6&#34;</span>, guide <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;colourbar&#34;</span>, 
-                          limits <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(fill_lim[1], fill_lim[2]),
-                          name <span style="color:#f92672">=</span> cause_of_death) <span style="color:#f92672">+</span>
-      ggthemes<span style="color:#f92672">::</span><span style="color:#a6e22e">theme_map</span>() <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">labs</span>(title <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;Year:&#39;</span>, <span style="color:#a6e22e">unique</span>(data<span style="color:#f92672">$</span>year))) <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">theme</span>(panel.grid.major <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_line</span>(colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gray&#39;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">.2</span>, linetype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dashed&#39;</span>),
-            legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bottom&#39;</span>)
-    <span style="color:#a6e22e">print</span>(p)
+  out &lt;- lapply(data_list, function(data, cause_of_death, fill_lim){
+    p &lt;- ggplot(data, aes(fill = get(cause_of_death))) +
+      geom_sf(size = .2, color = &#39;black&#39;) +
+      scale_fill_gradient(low = &quot;#ffefef&quot;, high = &quot;#720000&quot;, space = &quot;Lab&quot;,
+                          na.value = &quot;#c6c6c6&quot;, guide = &quot;colourbar&quot;, 
+                          limits = c(fill_lim[1], fill_lim[2]),
+                          name = cause_of_death) +
+      ggthemes::theme_map() +
+      labs(title = paste(&#39;Year:&#39;, unique(data$year))) +
+      theme(panel.grid.major = element_line(colour = &#39;gray&#39;, size = .2, linetype = &#39;dashed&#39;),
+            legend.position = &#39;bottom&#39;)
+    print(p)
   }, cause_of_death, fill_lim)
-}
-</code></pre></div><h3 id="using-it">Using it</h3>
-<p>Now that we&rsquo;ve already built a function, use it&rsquo;s very easy.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#75715e"># Specifying the width, height and resolution</span>
-img <span style="color:#f92672">&lt;-</span> magick<span style="color:#f92672">::</span><span style="color:#a6e22e">image_graph</span>(width <span style="color:#f92672">=</span> <span style="color:#ae81ff">800</span>, height <span style="color:#f92672">=</span> <span style="color:#ae81ff">350</span>, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">96</span>)
+}</code></pre>
+</div>
+<div id="using-it" class="section level3">
+<h3>Using it</h3>
+<p>Now that we’ve already built a function, use it’s very easy.</p>
+<pre class="r"><code># Specifying the width, height and resolution
+img &lt;- magick::image_graph(width = 800, height = 350, res = 96)
 
-<span style="color:#75715e"># gif for Homicide mortality rate</span>
-<span style="color:#a6e22e">gif_map</span>(map_years, <span style="color:#e6db74">&#34;Homicide (%)&#34;</span>)
-<span style="color:#a6e22e">dev.off</span>()
+# gif for Homicide mortality rate
+gif_map(map_years, &quot;Homicide (%)&quot;)
+dev.off()
 
-<span style="color:#75715e"># building a gif with 8 frames per second</span>
-animation <span style="color:#f92672">&lt;-</span> magick<span style="color:#f92672">::</span><span style="color:#a6e22e">image_animate</span>(img, fps <span style="color:#f92672">=</span> <span style="color:#ae81ff">8</span>)
+# building a gif with 8 frames per second
+animation &lt;- magick::image_animate(img, fps = 8)
 
-<span style="color:#75715e"># Visualize it</span>
-<span style="color:#a6e22e">print</span>(animation)
+# Visualize it
+print(animation)
 
-<span style="color:#75715e"># Save it</span>
-magick<span style="color:#f92672">::</span><span style="color:#a6e22e">image_write</span>(animation, path <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;img/homicide.gif&#39;</span>)
-</code></pre></div><p><!-- raw HTML omitted --></p>
-<h2 id="gganimate-code-outdated"><code>gganimate</code> code (outdated)</h2>
+# Save it
+magick::image_write(animation, path = &#39;img/homicide.gif&#39;)</code></pre>
+<p><img src="/lcgodoy.github.io/post/2018/04/2018-04-13-world_map_gig_files/figure-html/create_gif2.gif" width="672" /></p>
+</div>
+</div>
+<div id="gganimate-code-outdated" class="section level2">
+<h2><code>gganimate</code> code (outdated)</h2>
 <p>There is an option to create the GIF with <code>gganimate</code>, the syntax is very simple
 and it is attached at the following block of code.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(gganimate)
-<span style="color:#a6e22e">ggplot</span>(map_years, <span style="color:#a6e22e">aes</span>(fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">`Homicide </span>(%)`, frame <span style="color:#f92672">=</span> years)) <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">geom_sf</span>(size <span style="color:#f92672">=</span> <span style="color:#ae81ff">.2</span>, color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;black&#39;</span>) <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">scale_fill_gradient</span>(low <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#ffefef&#34;</span>, high <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#720000&#34;</span>, space <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Lab&#34;</span>,
-                          na.value <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;#c6c6c6&#34;</span>, guide <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;colourbar&#34;</span>) <span style="color:#f92672">+</span>
-      ggthemes<span style="color:#f92672">::</span><span style="color:#a6e22e">theme_map</span>() <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">labs</span>(title <span style="color:#f92672">=</span> <span style="color:#a6e22e">paste</span>(<span style="color:#e6db74">&#39;Year:&#39;</span>, <span style="color:#a6e22e">unique</span>(data<span style="color:#f92672">$</span>year))) <span style="color:#f92672">+</span>
-      <span style="color:#a6e22e">theme</span>(panel.grid.major <span style="color:#f92672">=</span> <span style="color:#a6e22e">element_line</span>(colour <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;gray&#39;</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">.2</span>, linetype <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;dashed&#39;</span>),
-            legend.position <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;bottom&#39;</span>)
-</code></pre></div><h2 id="final-remarks">Final remarks</h2>
+<pre class="r"><code>library(gganimate)
+ggplot(map_years, aes(fill = `Homicide (%)`, frame = years)) +
+      geom_sf(size = .2, color = &#39;black&#39;) +
+      scale_fill_gradient(low = &quot;#ffefef&quot;, high = &quot;#720000&quot;, space = &quot;Lab&quot;,
+                          na.value = &quot;#c6c6c6&quot;, guide = &quot;colourbar&quot;) +
+      ggthemes::theme_map() +
+      labs(title = paste(&#39;Year:&#39;, unique(data$year))) +
+      theme(panel.grid.major = element_line(colour = &#39;gray&#39;, size = .2, linetype = &#39;dashed&#39;),
+            legend.position = &#39;bottom&#39;)</code></pre>
+</div>
+<div id="final-remarks" class="section level2">
+<h2>Final remarks</h2>
 <p>At this post, I showed how to build GIF’s considering space-time data with a few
 lines of code. I hope that you enjoyed the post, and if you have any doubt or
 consideration, you can contact me at twitter or email.</p>
+</div>
 
     </div>
 
