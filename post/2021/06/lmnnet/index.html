@@ -130,7 +130,7 @@ parameters associated with a Neural Network model
     
       <meta property="article:published_time" content="2021-06-23T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2021-07-09T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-07-13T00:00:00&#43;00:00">
   
 
   
@@ -161,7 +161,7 @@ parameters associated with a Neural Network model
   "headline": "Estimating regression coefficients using a Neural Network (from scratch)",
   
   "datePublished": "2021-06-23T00:00:00Z",
-  "dateModified": "2021-07-09T00:00:00Z",
+  "dateModified": "2021-07-13T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -479,7 +479,7 @@ parameters associated with a Neural Network model
           Last updated on
       
     
-    Jul 9, 2021
+    Jul 13, 2021
   </span>
   
 
@@ -534,11 +534,12 @@ parameters associated with a Neural Network model
       
 
 
+
 <div id="intro" class="section level2">
 <h2>Intro</h2>
 <p>The idea behind the Neural Networks models, as its nomeclature suggests, is to
 mimic the way human brain learns to execute of some tasks. Some works in the
-literature <span class="citation">(Cheng and Titterington <a href="#ref-cheng1994neural" role="doc-biblioref">1994</a>, @stern1996neural, @warner1996understanding)</span>
+literature (<span class="citation">Cheng and Titterington (<a href="#ref-cheng1994neural" role="doc-biblioref">1994</a>)</span>, <span class="citation">Stern (<a href="#ref-stern1996neural" role="doc-biblioref">1996</a>)</span>, <span class="citation">Warner and Misra (<a href="#ref-warner1996understanding" role="doc-biblioref">1996</a>)</span>)
 attribute of the first attemps to build a “Neural Network emulator” to
 <span class="citation">McCulloch and Pitts (<a href="#ref-mcculloch1943logical" role="doc-biblioref">1943</a>)</span>. The popularity of this method in the past decades was
 held down by the computation intensive calculations needed for such
@@ -553,7 +554,8 @@ translation.</p>
 <h2>Neural Network Regression</h2>
 <p>A neural network is a highly parametrized model that, provided we have enough
 data, can approximate any functional relationship between a set of
-<em>features</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <span class="math inline">\(\mathbf{x}\)</span> and a response variable <span class="math inline">\(y\)</span> <span class="citation">(Efron and Hastie <a href="#ref-efron2016computer" role="doc-biblioref">2016</a>, 151–52)</span>. Although there are several possible structures for neural networks,
+<em>features</em><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> <span class="math inline">\(\mathbf{x}\)</span> and a response variable <span class="math inline">\(y\)</span> (<span class="citation">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span>, pages
+151-152). Although there are several possible structures for neural networks,
 for this posrt we are going to consider only the <em>feed-forward</em><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a> neural
 networks. In order to explain how these neural networks are designed, let’s
 consider its graphical representation (see Figure <a href="#fig:nn1">1</a>). We have
@@ -574,7 +576,8 @@ parameters associated with the model. <span class="citation">Efron and Hastie (<
 this scenario, it is better to consider several units for the hidden layer and
 use some kind of regularization to avoid overfitting. Penalizations analogous to
 the Ridge and Lasso penalty for linear models are often used in the
-regularization context for neural networks <span class="citation">(Hastie, Tibshirani, and Wainwright <a href="#ref-hastie2015statistical" role="doc-biblioref">2015</a>, 210–11)</span>.</p>
+regularization context for neural networks (<span class="citation">Hastie, Tibshirani, and Wainwright (<a href="#ref-hastie2015statistical" role="doc-biblioref">2015</a>)</span>, pages
+210-211).</p>
 <p>An important remark regarding the neural network models is that they are “pure
 prediction algorithms”. That is, these models are focused only on prediction,
 neglecting the estimation, as pointed by <span class="citation">Efron (<a href="#ref-efron2020prediction" role="doc-biblioref">2020</a>)</span>. The strategy is
@@ -923,6 +926,9 @@ text and image classification, for example. The idea is the same, what changes
 is the way the researchers deal with the hidden layers. I think an interesting
 aaplication is to try to use neural networks to estimate non-parametrically
 covariance matrices for spatial data.</p>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
 <div id="refs" class="references">
 <div id="ref-cheng1994neural">
 <p>Cheng, Bing, and D Michael Titterington. 1994. “Neural Networks: A Review from a Statistical Perspective.” <em>Statistical Science</em>, 2–30.</p>
