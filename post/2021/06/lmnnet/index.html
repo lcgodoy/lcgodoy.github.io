@@ -128,9 +128,9 @@ parameters associated with a Neural Network model
   <meta property="twitter:image" content="lcgodoy.github.io/img/logo2.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2021-07-13T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2021-07-28T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2021-07-14T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-07-28T00:00:00&#43;00:00">
   
 
   
@@ -160,8 +160,8 @@ parameters associated with a Neural Network model
   },
   "headline": "Estimating regression coefficients using a Neural Network (from scratch)",
   
-  "datePublished": "2021-07-13T00:00:00Z",
-  "dateModified": "2021-07-14T00:00:00Z",
+  "datePublished": "2021-07-28T00:00:00Z",
+  "dateModified": "2021-07-28T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -476,10 +476,8 @@ parameters associated with a Neural Network model
     
     
       
-          Last updated on
-      
     
-    Jul 14, 2021
+    Jul 28, 2021
   </span>
   
 
@@ -488,7 +486,7 @@ parameters associated with a Neural Network model
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    15 min read
+    21 min read
   </span>
   
 
@@ -622,7 +620,7 @@ about these functions in the next section.</p>
 <div id="subsec:act" class="section level3">
 <h3>Activation functions</h3>
 <p>Activation functions are applied in every “Layer connection” in neural network
-models. Suppose, for example, we have a design matrix <span class="math inline">\(\mathbf{X} \in {\rm I\!R}^{n \times p}\)</span>, and a response variable <span class="math inline">\(\mathbf{y}\)</span>. Then, given an
+models. Suppose, for example, we have a design matrix <span class="math inline">\(\mathbf{X} \in {\rm I\!R}^{n \times p}\)</span>, and a response variable <span class="math inline">\(\mathbf{y}\)</span>. Then, given
 appropriate choices of the <span class="math inline">\(K - 1\)</span> (one for each layer connection), the
 mathematical model, for a single observation, behind the neural network, can be
 written in a vectorial notation as follows</p>
@@ -634,7 +632,7 @@ written in a vectorial notation as follows</p>
 \end{align}\]</span>
 where <span class="math inline">\(\mathbf{W}^{(k - 1)} \in {\rm I\!R}^{m_{k - 1} \times m_{k}}\)</span> is the
 matrix of weights that go from from the layer <span class="math inline">\(L_{k - 1}\)</span> to the layer <span class="math inline">\(L_{k}\)</span>,
-<span class="math inline">\(\mathbf{a}^{(k)} \in {R\rm I\!R}^{m_k \times m_{k + 1}}\)</span> matrix of units at
+<span class="math inline">\(\mathbf{a}^{(k)} \in {\rm I\!R}^{m_k \times m_{k + 1}}\)</span> matrix of units at
 layer <span class="math inline">\(L_k\)</span>, and <span class="math inline">\(f_{(k)}\)</span> is a (element-wise) activation function used at the
 layer <span class="math inline">\(L_k\)</span>. Note that, when <span class="math inline">\(k = 0\)</span>, then <span class="math inline">\(\mathbf{a}^{(0)} = \mathbf{X}\)</span>.
 Observe that <span class="math inline">\(m_k\)</span> is the number of units in the layer <span class="math inline">\(k\)</span> and, consequently,
@@ -651,7 +649,7 @@ is, if <span class="math inline">\(y \in [0, 1]\)</span>, we want an activation 
 the <span class="math inline">\([0, 1]\)</span> interval. In summary, for the ouput layer, we use a activation
 function that makes predictions on the same domain as the output variable,
 while, for hidden layers, we have no restrictions on the activation functions,
-besides the before mentioned ones.</p>
+besides the ones already mentioned.</p>
 <p>Some commonly used link functions are the <span class="math inline">\(\textrm{logit}\)</span>, or sigmoid,
 function, defined as
 <span class="math display">\[
@@ -675,10 +673,10 @@ f(x) = x_{+} = \max(.01 * x, x),
 \]</span></p>
 <p>These are only some examples of commonly used activation functions and they are
 illustrated in Figure <a href="#fig:act-funs">3</a>. The user does need to be restrict to
-these option since there are several other functions implemented in the software
-available to compute neural networks. However, if you want to use a activation
-function that is not implemented yet, you may have to implement your own version
-for the algorithm.</p>
+these options since there are several other functions implemented in the
+software available to compute neural networks. However, if you want to use a
+activation function that is not implemented yet, you may have to implement your
+own version for the algorithm.</p>
 <div class="figure" style="text-align: center"><span id="fig:act-funs"></span>
 <img src="/lcgodoy.github.io/post/2021/06/2021-06-23-lmnnet_files/figure-html/act-funs-1.png" alt="The most popular activation functions (figure inspired by Figure 18.6 from \cite{efron2016computer})." width="90%" />
 <p class="caption">
@@ -690,9 +688,9 @@ in the hidden layers (besides being differentiable functions), it is not
 advisable to use the identity function because it implies a waste of
 computational power. This is due to the fact that using a linear function in a
 hidden layer, makes the units from that layer a linear combination of the units
-from the previous layer. To make this clear, let’s prove<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a> that a Neural Network model with a
-single hidden layer collapses to a Generalized Linear Model when the identity
-function is used as the activation function.</p>
+from the previous layer. To make this clear, let’s prove that a Neural Network
+model with a single hidden layer collapses to a Generalized Linear Model when
+the identity function is used as the activation function.</p>
 <p>Suppose a <span class="math inline">\(n\)</span>-dimensional vector <span class="math inline">\(\mathbf{y}\)</span> is assumed to follow a
 distribution <span class="math inline">\(\mathcal{P}\)</span>, where <span class="math inline">\(\mathcal{P}\)</span> belongs to the exponential
 family of distributions. Then, given a design matrix <span class="math inline">\(\mathbf{X} \in {\rm I\!R}^{n \times p}\)</span>, the Generalized Linear Model for <span class="math inline">\(\mathbf{y}\)</span> is
@@ -717,7 +715,7 @@ Once we estimate the parameters <span class="math inline">\(\boldsymbol{\beta}\)
 units. The activation function for the hidden layer is <span class="math inline">\(f_h(x) = g(x)\)</span>, that is,
 the same as the identity function. The weights we want to find are
 <span class="math inline">\(\mathbf{W}^{(1)} \in {\rm I\!R}^{p \times 1}\)</span>, and <span class="math inline">\(\mathbf{W}^{(2)} \in {\rm I\!R}^{M \times n}\)</span>. The activation function for the activation layer is
-the link function defined in . Finally, let the loss be the
+the previously mentioned canonical link function. Finally, let the loss be the
 deviance residual associated with the distribution <span class="math inline">\(\mathcal{P}\)</span>, and the cost
 function be the average of the losses. Then, the mathematical representation of
 the Neural Network becomes
@@ -741,9 +739,9 @@ However, note that, by combining ,
 &amp; = g( \mathbf{X} \underbrace{\mathbf{W}^{(1)} \mathbf{W}^{(2)}}_{{\rm I\!R}_{p
 \times 1}} ),
 \end{align*}\]</span>
-which yields to optimal weights (see subsections <a href="#subsec:fit-nn"><strong>??</strong></a> and
-<a href="#subsec:backpro"><strong>??</strong></a>, for more information on how to fit a neural network model)
-satisfying
+which yields to optimal weights (see <a href="#subsec:fit-nn">Fitting a Neural Network</a>
+and <a href="#subsec:backpro">Backpropagation</a>, for more information on how to fit a
+neural network model) satisfying
 <span class="math display">\[
 \underbrace{\mathbf{W}^{(1)} \mathbf{W}^{(2)}}_{{\rm I\!R}_{p
 \times 1}} = \hat{\boldsymbol{\beta}},
@@ -866,6 +864,166 @@ each iteration of the algorithm. The third position of this <code>list</code> st
 weight matrices <span class="math inline">\(\mathbf{W}^{(1)}\)</span> and <span class="math inline">\(\mathbf{W}^{(2)}\)</span>, while the last two
 positions store the number of iterations until attain the convergence and a
 string indicating wheter the algorithm converged or not, respectively.</p>
+<p>See below the implementation of some activation functions (and their
+derivatives)</p>
+<pre class="r"><code>##--- activation functions and their derivatives ----
+
+## leaky ReLU
+relu &lt;- function(x) {
+    pmax(x * .01, x)
+}
+
+## derivative leaky ReLU
+d_relu &lt;- function(x) {
+    ifelse(x &gt; 0, 1, 0)
+}
+
+## leaky ReLU
+lrelu &lt;- function(x) {
+    pmax(x * .01, x)
+}
+
+## derivative leaky ReLU
+d_lrelu &lt;- function(x) {
+    ifelse(x &gt; 0, 1, .01)
+}
+
+## derivative tanh
+d_tanh &lt;- function(x) {
+    1 - (tanh(x)^2)
+}
+
+## derivative logit
+d_logit &lt;- function(x) {
+    plogis(x) * ( 1 - plogis(x) )
+}
+
+## derivative identity
+d_ident &lt;- function(x) {
+    pmax( -2 * abs(x), 1 )
+}</code></pre>
+<p>Now, let’s implement some helper functions to fit our neural network
+models. First, the cost function used in our examples is given by</p>
+<pre class="r"><code>## cost function
+cost_f &lt;- function(y, yhat) {
+    crossprod(yhat - y) / NROW(y)
+}</code></pre>
+<p>The implementation of the functions that will need to be executed at each step
+of the optimization algorithm are defined below. <code>compute_nn</code> computes the
+hidden layers given the matrix of covariates (or features) <code>X</code>, the list
+containing the the weights <code>W</code> associated to each layer connection, and two
+activation functions <code>act_hidden</code> and <code>act_out</code> for the hidden and output
+layers, respectively (this is a the implementation for a 2 layers network). The
+<code>compute_grad</code> function computes the gradient and needs some further information
+like <code>y</code> (the response variable), <code>n</code> the sample size, and the derivatives of
+the activation functions. <code>update_aux</code> and <code>update_w</code> are helper functions used
+to update the weights.</p>
+<pre class="r"><code>##--- functiosn to fit the neural network ----
+
+## computing the forward step of the neural network
+compute_nn &lt;- function(X, W, act_hidden, act_out) {
+    Z &lt;- vector(mode = &quot;list&quot;, length = 2)
+    
+    Z[[1]] &lt;- X %*% W[[1]]
+    A &lt;- act_hidden(Z[[1]])
+
+    Z[[2]] &lt;- A %*% W[[2]]
+
+    return( list(y = act_out(Z[[2]]),
+                 z = Z) )
+}
+
+## computing the gradient of the neural network
+compute_grad &lt;- function(y, X, W, act_hidden, act_out,
+                         d1_hidden, d1_out, n) {
+    nn    &lt;- compute_nn(X, W, act_hidden, act_out)
+    aux_out &lt;- (nn$y - y) * d1_out(nn$z[[2]])
+    aux_hid &lt;- tcrossprod(aux_out, W[[2]]) *
+        d1_hidden(nn$z[[1]])
+    
+    return(
+        list(crossprod(X, aux_hid) / n,
+             crossprod(act_hidden(nn$z[[1]]), aux_out) / n)
+    )
+}
+
+## aux function for updating W
+update_aux &lt;- function(w, dw, alpha) {
+    w - alpha * dw
+}
+
+## update the weights of a neural network
+update_w &lt;- function(W, alpha, y, X, act_hidden, act_out,
+                     d1_hidden, d1_out, n) {
+
+    grad_w &lt;- compute_grad(y, X, W, act_hidden, act_out,
+                           d1_hidden, d1_out, n)
+    
+    return( Map(f = update_aux, w = W,
+                dw = grad_w, alpha = alpha) )
+}</code></pre>
+<p>Finally, all these functions previously describer are used to build the <code>fit_nn</code>
+function (which is used to compute the optimal weights for the neural
+network). The <code>alpha</code> is the <span class="math inline">\(\alpha\)</span> previously mentioned in this post, <code>maxit</code>
+and <code>eps</code> are parameters used in the optimization process. The first one stands
+for the maximum number of iterations to be used in the optimization process,
+while the second stand for the “optimization error”. That is, if, from one
+iteration to another, the change between the weights does not exceed <code>eps</code>, then
+we consider that the algorithm converged and a (maybe local) optimum has been
+found.</p>
+<pre class="r"><code>fit_nn &lt;- function(y, X, hid_units,
+                   act_hidden, act_out,
+                   d1_hidden, d1_out,
+                   alpha = .25,
+                   maxit = 500L,
+                   eps   = 1e-05) {
+    m &lt;- hid_units
+    p &lt;- ncol(X)
+    N &lt;- NROW(y)
+
+    
+    W &lt;- list(matrix(runif(m * p, -.75, .75),
+                     ncol = m, nrow = p),
+              matrix(runif(m, -.75, .75), ncol = 1))
+
+    nn   &lt;- vector(mode = &quot;list&quot;, length = maxit)
+    cost &lt;- vector(mode = &quot;numeric&quot;, length = maxit)
+
+    ## initialiazing
+    nn[[1]] &lt;- compute_nn(X, W, act_hidden, act_out)
+
+    cost[1] &lt;- cost_f(y, nn[[1]]$y)
+    
+    for( i in seq_len(maxit)[-1] ) {
+        W &lt;- update_w(W, alpha, y, X,
+                      act_hidden, act_out,
+                      d1_hidden, d1_out,
+                      n = N)
+        
+        nn[[i]] &lt;- compute_nn(X, W, act_hidden, act_out)
+        cost[i] &lt;- cost_f(y, nn[[i]]$y)
+        
+        if( abs(cost[i] - cost[i - 1]) &lt; eps ) {
+            output &lt;- list(nn   = nn[[i - 1]],
+                           cost = cost[1:(i - 1)],
+                           W    = W,
+                           it   = (i - 1),
+                           conv = &quot;yes&quot;)
+            break
+        }
+    }
+
+    if( i == maxit ) {
+        output &lt;- list(yhat = nn[[maxit]]$y,
+                       cost = cost[1:maxit],
+                       W    = W,
+                       it   = maxit,
+                       conv = &quot;no&quot;)
+    }
+
+    return(output)
+}</code></pre>
+<p>Having all these functions, we can play with some numerical examples!</p>
 </div>
 <div id="sec:ne" class="section level2">
 <h2>Numerical Examples</h2>
@@ -888,6 +1046,46 @@ different approaches have yielded the exaclty same results. If we were to make
 predictions, the two methods would provide the same predicted values under these
 circumstances.</p>
 
+<p>See below the code used on this example.</p>
+<pre class="r"><code>##--- numerical examples ----
+
+##--- example 1 ----
+
+set.seed(123)
+
+n &lt;- 2000
+
+x1 &lt;- rnorm(n)
+x2 &lt;- as.numeric( scale( rexp(n) ) )
+
+y &lt;- 3 + 3 * x1 + 1.5 * x2 + rnorm(n, sd = .5)
+
+my_x &lt;- cbind( rep(1, n), x1, x2 )
+colnames(my_x) &lt;- NULL
+
+dt &lt;- as.data.frame( cbind(y, my_x[, 2:3]) )
+names(dt) &lt;- c(&quot;y&quot;, &quot;x1&quot;, &quot;x2&quot;)
+
+m &lt;- 6
+
+fit_1 &lt;-
+    fit_nn(y = y, X = my_x,
+           hid_units = m,
+           act_hidden = identity,
+           act_out    = identity,
+           d1_hidden  = d_ident,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-16)
+
+beta_hat &lt;- coef(lm(y ~ x1 + x2, data = dt))
+
+tbl_1 &lt;- as.data.frame(cbind(beta_hat,
+                             fit_1$W[[1]] %*% fit_1$W[[2]]))
+names(tbl_1) &lt;- c(&quot;$\\hat{\\boldsymbol{\\beta}}$&quot;,
+                  &quot;$\\mathbf{W}^{(1)} \\mathbf{W}^{(2)}$&quot;)
+rownames(tbl_1) &lt;- NULL</code></pre>
 </div>
 <div id="example-2-nonlinear-relationship-and-number-of-hidden-units" class="section level3">
 <h3>Example 2: Nonlinear relationship and number of hidden units</h3>
@@ -906,6 +1104,119 @@ the nonlinearity at the cost of possibly overfit the data.
 Figure 4: Different models fitted to the same simulated dataset.
 </p>
 </div>
+<p>See the code used on this example below.</p>
+<pre class="r"><code>##--- example 2 ----
+
+set.seed(124)
+
+x12 &lt;- rnorm(n)
+
+y2 &lt;- 5 - 2.5 * (x12^2) + rnorm(n, sd = .5)
+
+my_x2 &lt;- cbind(rep(1, n), x12)
+colnames(my_x2) &lt;- NULL
+
+dt2 &lt;- as.data.frame( cbind(y2, my_x2[, 2]) )
+names(dt2) &lt;- c(&quot;y&quot;, &quot;x1&quot;)
+
+n_pred &lt;- 4000
+
+## fitting linear model
+
+my_lm2 &lt;- lm(y ~ x1, data = dt2)
+
+## fitting neural network with tanh as the activation function for the hidden
+## layer - 5 hidden units
+fit_2 &lt;-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 5,
+           act_hidden = tanh,
+           act_out    = identity,
+           d1_hidden  = d_tanh,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+## fitting neural network with tanh as the activation function for the hidden
+## layer - 15 hidden units
+fit_3 &lt;-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 15,
+           act_hidden = tanh,
+           act_out    = identity,
+           d1_hidden  = d_tanh,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+## fitting neural network with leaky ReLU as the activation function for the
+## hidden layer - 10 hidden units
+fit_4 &lt;-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 10,
+           act_hidden = lrelu,
+           act_out    = identity,
+           d1_hidden  = d_lrelu,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+pred_data &lt;- data.frame(x = seq(from = min(x12), to = max(x12),
+                                length.out = n_pred))
+
+pred_data &lt;- transform(pred_data,
+                       lm = coef(my_lm2)[[1]] + coef(my_lm2)[[1]] * x)
+
+pred_data &lt;- transform(pred_data,
+                       nn_tanh_1 =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_2$W,
+                                      act_hidden = tanh,
+                                      act_out = identity)$y)
+
+pred_data &lt;- transform(pred_data,
+                       nn_tanh_2 =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_3$W,
+                                      act_hidden = tanh,
+                                      act_out = identity)$y)
+
+pred_data &lt;- transform(pred_data,
+                       nn_lrelu =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_4$W,
+                                      act_hidden = lrelu,
+                                      act_out = identity)$y)
+
+setDT(pred_data)
+
+pred_data &lt;- melt(pred_data, id = 1,
+                  value.name = &quot;pred&quot;,
+                  variable.name = &quot;method&quot;)
+
+pred_data[, method := fcase(method == &quot;nn_tanh_1&quot;, &quot;tanh - 5&quot;,
+                            method == &quot;nn_tanh_2&quot;, &quot;tanh - 15&quot;,
+                            method == &quot;nn_lrelu&quot;, &quot;leaky ReLU - 10&quot;,
+                            default = &quot;lm&quot;)]
+
+ggplot(data = pred_data) +
+    geom_point(data = dt2, aes(x = x1, y = y),
+               alpha = .5) +
+    geom_line(aes(x = x, y = pred, color = method),
+              lwd = 1.05) +
+    scale_color_discrete(name = NULL) +
+    theme_bw() +
+    theme(
+        legend.position = &quot;bottom&quot;,
+        legend.margin = margin(6, 6, 6, 6)
+    ) +
+    labs(x = &quot;X&quot;, y = &quot;Y&quot;)</code></pre>
 </div>
 </div>
 <div id="final-thoughts" class="section level2">
@@ -966,8 +1277,6 @@ covariance matrices for spatial data.</p>
 literature<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
 <li id="fn2"><p>Sometimes
 referred to as <em>multi-layer-perceptron</em>, and <em>back-propagation</em>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-<li id="fn3"><p>This prove is part of
-the “independent” section of my project.<a href="#fnref3" class="footnote-back">↩︎</a></p></li>
 </ol>
 </div>
 
