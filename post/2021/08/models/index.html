@@ -28,14 +28,12 @@
   
     
   
-  <meta name="description" content="Sometimes, when deploying Blogdown posts using Github Actions, the deployment
-failes due to missing packages. In this post we develop an R script that
-detects the packages needed by a new post and (almost) automatically installs
-all of them.
+  <meta name="description" content="Comments on the famous George Box&#39;s quote and some highlights from the
+original text.
 ">
 
   
-  <link rel="alternate" hreflang="en-us" href="lcgodoy.github.io/post/2021/07/lmnnet/">
+  <link rel="alternate" hreflang="en-us" href="lcgodoy.github.io/post/2021/08/models/">
 
   
 
@@ -100,7 +98,7 @@ all of them.
   <link rel="icon" type="image/png" href="/lcgodoy.github.io/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/lcgodoy.github.io/img/icon-192.png">
 
-  <link rel="canonical" href="lcgodoy.github.io/post/2021/07/lmnnet/">
+  <link rel="canonical" href="lcgodoy.github.io/post/2021/08/models/">
 
   
   
@@ -116,19 +114,17 @@ all of them.
   <meta property="twitter:creator" content="@ldcgodoy">
   
   <meta property="og:site_name" content="lcgodoy">
-  <meta property="og:url" content="lcgodoy.github.io/post/2021/07/lmnnet/">
-  <meta property="og:title" content="Detecting and installing blog posts dependencies on Github Actions using regex and base R | lcgodoy">
-  <meta property="og:description" content="Sometimes, when deploying Blogdown posts using Github Actions, the deployment
-failes due to missing packages. In this post we develop an R script that
-detects the packages needed by a new post and (almost) automatically installs
-all of them.
+  <meta property="og:url" content="lcgodoy.github.io/post/2021/08/models/">
+  <meta property="og:title" content="All models are wrong | lcgodoy">
+  <meta property="og:description" content="Comments on the famous George Box&#39;s quote and some highlights from the
+original text.
 "><meta property="og:image" content="lcgodoy.github.io/img/logo2.png">
   <meta property="twitter:image" content="lcgodoy.github.io/img/logo2.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2021-07-28T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2021-08-15T00:00:00&#43;00:00">
     
-    <meta property="article:modified_time" content="2021-07-28T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-08-15T00:00:00&#43;00:00">
   
 
   
@@ -154,12 +150,12 @@ all of them.
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "lcgodoy.github.io/post/2021/07/lmnnet/"
+    "@id": "lcgodoy.github.io/post/2021/08/models/"
   },
-  "headline": "Detecting and installing blog posts dependencies on Github Actions using regex and base R",
+  "headline": "All models are wrong",
   
-  "datePublished": "2021-07-28T00:00:00Z",
-  "dateModified": "2021-07-28T00:00:00Z",
+  "datePublished": "2021-08-15T00:00:00Z",
+  "dateModified": "2021-08-15T00:00:00Z",
   
   "author": {
     "@type": "Person",
@@ -174,7 +170,7 @@ all of them.
       "url": "lcgodoy.github.io/img/logo2.png"
     }
   },
-  "description": "Sometimes, when deploying Blogdown posts using Github Actions, the deployment\nfailes due to missing packages. In this post we develop an R script that\ndetects the packages needed by a new post and (almost) automatically installs\nall of them.\n"
+  "description": "Comments on the famous George Box's quote and some highlights from the\noriginal text.\n"
 }
 </script>
 
@@ -218,7 +214,7 @@ all of them.
 
 
 
-  <title>Detecting and installing blog posts dependencies on Github Actions using regex and base R | lcgodoy</title>
+  <title>All models are wrong | lcgodoy</title>
 
 </head>
 
@@ -456,7 +452,7 @@ all of them.
   
   
 <div class="article-container pt-3">
-  <h1>Detecting and installing blog posts dependencies on Github Actions using regex and base R</h1>
+  <h1>All models are wrong</h1>
 
   
 
@@ -475,7 +471,7 @@ all of them.
     
       
     
-    Jul 28, 2021
+    Aug 15, 2021
   </span>
   
 
@@ -484,7 +480,7 @@ all of them.
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    5 min read
+    2 min read
   </span>
   
 
@@ -492,14 +488,14 @@ all of them.
   
   
   <span class="middot-divider"></span>
-  <a href="lcgodoy.github.io/post/2021/07/lmnnet/#disqus_thread"></a>
+  <a href="lcgodoy.github.io/post/2021/08/models/#disqus_thread"></a>
   
 
   
   
   <span class="middot-divider"></span>
   <span class="article-categories">
-    <i class="fas fa-folder mr-1"></i><a href="lcgodoy.github.io/categories/github-actions/">Github Actions</a>, <a href="lcgodoy.github.io/categories/ci/">CI</a></span>
+    <i class="fas fa-folder mr-1"></i><a href="lcgodoy.github.io/categories/statistics/">Statistics</a></span>
   
 
 </div>
@@ -530,231 +526,36 @@ all of them.
       
 
 
-<div id="before-you-start" class="section level2">
-<h2>Before you start</h2>
-<p>In this post I assume you already have some familiarity with Github Actions and
-Blogdown. If you are interested in a gentle introduction on how to deploy your
-Blogdown website using Github Actions I recommend you read <a href="https://adsoncostanzifilho.github.io/blog/2021/04/01/github-actions-for-r-users/">this
-post</a>
-from my great friend Adson.</p>
-</div>
-<div id="my-first-github-actions-workflow" class="section level2">
-<h2>My first Github Actions “workflow”</h2>
-<p>Github Actions is a (relatively) new continuous integration tool that can be
-used for several purposes. Recently, with some help from <a href="https://orchid00.github.io/actions_sandbox/">this
-book</a> and <a href="https://www.jimhester.com/talk/2020-rsc-github-actions/">this
-presentation</a>, I set up
-my blogdown website using github actions to prevent some other (IMO) annoying
-workarounds and make the source of my website easily available. Unfortunately
-(to me) most of the material available online on deploying Blogdown, since I
-prefer to deploy my page using Github pages, I had to dig a little deeper to
-find the needed answers.</p>
-<p>That being said, let’s take a look at my first Github actions workflow<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. Below you can find the code to do so, which is stored in a <code>.yml</code>
-file inside a directory called <code>.github/workflow</code><a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a>.</p>
-<p>When I first used this code, I thought the <code>Rscript -e 'blogdown::build_site(local = FALSE)'</code> part would compile the blog posts every
-time I made a new commit. I was amazed, because I thought it would “guess” (in
-some sense) the system (and <code>R</code> packages) dependencies and installed
-them. However, when I tried to push a new post last week, it was not being show
-on the web page. What I realized was that I was pushing the posts compiled
-locally. A simple change from <code>blogdown::build_site(local = FALSE)</code> to
-<code>blogdown::build_site(local = FALSE, build_rmd = TRUE)</code> would break the GA
-(Github Actions) workflow.</p>
-<pre class="yaml"><code>on:
-  push:
-     branches:
-       - source
-
-name: deployblog
-
-jobs:
-  blogdown:
-    name: Render and deploy blogdown
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-          fetch-depth: 0
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
-
-      - name: Install r packages for blogdown
-        run: |
-          Rscript -e &#39;install.packages(c(&quot;remotes&quot;, &quot;rmarkdown&quot;))&#39; \
-                  -e &#39;remotes::install_github(&quot;rstudio/blogdown&quot;)&#39;
-
-     - name: install hugo
-        run: Rscript -e &#39;blogdown::install_hugo(extended = TRUE, version = &quot;0.78.2&quot;)&#39;
-
-     - name: Get themes
-       run: git submodule update --remote
-
-     - name: Look at files
-       run: ls ./public
-
-     - name: Render blog
-       run: Rscript -e &#39;blogdown::build_site(local = FALSE)&#39;
-
-     - name: Deploy
-       uses: peaceiris/actions-gh-pages@v3
-       with:
-         github_token: ${{ secrets.GITHUB_TOKEN }}
-         publish_branch: master
-         publish_dir: ./public
-         cname: lcgodoy.me</code></pre>
-</div>
-<div id="a-workaround-to-install-dependencies" class="section level2">
-<h2>A workaround to install dependencies</h2>
-<p>Since I did not want to rewrite the workflow file before committing any new
-post, I tried to come up with a workaround. This workaround is useful only to
-install <code>R</code> packages needed by the posts, that is, it does not install system
-dependencies as, for example, those needed by <code>sf</code>. So, if I write a new post
-that depends on a system dependency other than the ones already being installed,
-I would have to update the workflow file.</p>
-<p>So, the new workflow file is the one below. You may notice that here are several
-differences when compared to the last one. Firstly, there is a section
-installing the Linux system dependencies, including the ones needed by the <code>sf</code>
-packages. These are needed to compile some of my old posts. Right after that, we
-install the packages <code>pdftools</code>, <code>tinytex</code>, and run <code>source("pkgs.R")</code>. The
-first two packages are needed to compile some <code>tikz</code> figures I made for some
-posts. Lastly, at the “Render blog” part, we use <code>blogdown::build_site(local = FALSE, build_rmd = TRUE)</code> instead of <code>blogdown::build_site(local = FALSE)</code>. That
-is, every time I make a new commit, the blog posts are compiled (have to
-optimize this part, maybe another workflow file).</p>
-<pre class="yaml"><code>on:
-  push:
-     branches:
-       - source
-
-name: deployblog
-
-jobs:
-  blogdown:
-    name: Render and deploy blogdown
-    runs-on: ubuntu-18.04
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          submodules: true
-          fetch-depth: 0
-      - uses: r-lib/actions/setup-r@v1
-      - uses: r-lib/actions/setup-pandoc@v1
-
-      - name: Install r packages for blogdown
-        run: |
-          Rscript -e &#39;install.packages(c(&quot;remotes&quot;, &quot;rmarkdown&quot;))&#39; \
-                  -e &#39;remotes::install_github(&quot;rstudio/blogdown&quot;)&#39;
-  
-      - name: Install system dependencies
-        if: runner.os == &#39;Linux&#39;
-        run: |
-          # install spatial dependencies
-          # sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable
-          sudo apt update
-          sudo apt install \
-            libudunits2-dev \
-            libgdal-dev \
-            libgeos-dev \
-            libproj-dev \
-            libmagick++-dev \
-            imagemagick \
-            ffmpeg \
-            libpoppler-cpp-dev
-                      
-      - name: Install r packages for posts
-        run: |
-          Rscript -e &#39;install.packages(&quot;pdftools&quot;)&#39; \
-                  -e &#39;install.packages(&quot;tinytex&quot;)&#39; \
-                  -e &#39;tinytex::install_tinytex()&#39; \
-                  -e &#39;source(&quot;pkgs.R&quot;)&#39;
-                  
-      - name: install hugo
-        run: Rscript -e &#39;blogdown::install_hugo(extended = TRUE, version = &quot;0.78.2&quot;)&#39;
-
-      - name: Get themes
-        run: git submodule update --remote
-
-      - name: Look at files
-        run: ls ./public
-
-      - name: Render blog
-        run: Rscript -e &#39;blogdown::build_site(local = FALSE, build_rmd = TRUE)&#39;
-
-      - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: master
-          publish_dir: ./public
-          cname: lcgodoy.me</code></pre>
-</div>
-<div id="a-dependencies-free-script-to-install-the-needed-packages" class="section level2">
-<h2>A dependencies free script to install the needed packages</h2>
-<p>The <code>pkgs.R</code> script mentioned above is a dependency free script that needs to be
-placed in the “main” directory of the repo. The script is as displayed
-below. First we define a helper function used to extract patterns from a string
-(<code>regex_extract</code>). Next, we “detect” all the <code>Rmd</code> files within the
-repository. The lines of code after that are used to read all the <code>Rmd</code> files,
-then check all the times these files call either <code>library</code>, <code>require</code>, or use
-the <code>::</code> operator. Finally, from this last operation, we can easily identify the
-packages being used by each post and, consequently, install them.</p>
-<pre class="r"><code>## helper function
-regex_extract &lt;- function(x, pattern)
-    regmatches(x = x,
-               m = regexpr(pattern = pattern,
-                           text    = x))
-
-rmd_files &lt;-
-  list.files(path       = &quot;.&quot;, 
-             pattern    = &quot;*\\.Rmd$&quot;,
-             full.names = TRUE,
-             recursive  = TRUE)
-
-rmd_files &lt;- lapply(rmd_files, readLines)
-
-packages_1 &lt;-
-  lapply(rmd_files,
-         function(x) {
-           grep(pattern = &quot;(::|library\\(|require\\()&quot;,
-                x = x, value = TRUE)
-         })
-
-
-lib_or_req &lt;-
-  lapply(packages_1,
-         function(x) {
-           gsub(pattern = &quot;(require|library|\\(|\\))&quot;, &quot;&quot;,
-                regex_extract(x,
-                              &quot;(^library|^require)\\((.*?)\\)&quot;))
-         })
-
-lib_or_req &lt;- unlist(lib_or_req)
-
-colon_lib &lt;-
-  lapply(packages_1,
-         function(x) {
-           pkgs &lt;- regex_extract(x,
-                                 &quot;\\s*(\\w*)::&quot;)
-           trimws(gsub(&quot;::&quot;, &quot;&quot;, pkgs))
-         })
-
-colon_lib &lt;- unlist(colon_lib)
-
-to_inst &lt;- unique(c(lib_or_req, colon_lib))
-
-install.packages(to_inst)</code></pre>
-</div>
-<div class="footnotes">
-<hr />
-<ol>
-<li id="fn1"><p>The
-workflow here is the set of instructions for the deployment of the
-website.<a href="#fnref1" class="footnote-back">↩︎</a></p></li>
-<li id="fn2"><p>As I said before, I’ll omit
-most of the details about the tool itself, this post can be seen as a complement
-to Adson’s
-<a href="https://adsoncostanzifilho.github.io/blog/2021/04/01/github-actions-for-r-users/">post</a>.<a href="#fnref2" class="footnote-back">↩︎</a></p></li>
-</ol>
-</div>
+<p>George Box’s 1976 paper named <a href="https://bit.ly/3rTAzlf">“Science and Statistics”</a>
+is famous for that “all models are wrong” quote. I’m sure that the number of
+people who knows this quote is quite larger than the number of people who have
+read the paper entirely.</p>
+<p>The paper provides interesting (and insightful) discussions that still apply to
+the field of Statistics these days. IMO, one of the most remarkable things
+Dr. Box pointed out is about “Mathematistry”. Which he defines (or explains) as
+follows</p>
+<blockquote>
+<p>“Mathematistry is characterized by development of theory for theory’s sake,
+which since it seldom touches down with practice, has a tendency to redefine
+the problem rather than solve it.”</p>
+</blockquote>
+<p>Later on, in the same paper, he mentions how this “malady” (in his words) is
+harmful to statistics as a field.</p>
+<blockquote>
+<p>“An even more serious consequence of mathematistry concerns the training of
+statisticians. We have recently been passing through a period where nothing
+very much was expected of the statistician. A great deal of research money
+was available and one had the curious situation where the highest objective of
+the teacher of statistics was to produce a student who would be another
+teacher of statistics. It was thus possible for successive generations of
+teachers to be produced with no practical knowledge of the subject whatever.
+Although statistics departments in universities are now commonplace there
+continues to be a severe shortage of statisticians competent to deal with real
+problems. But such are needed.”</p>
+</blockquote>
+<p>I think that we still face this challenges (on many others he mentioned in that
+paper) in Statistics. Therefore, I thought it would be nice to share this to
+make people think about it.</p>
 
     </div>
 
@@ -777,7 +578,7 @@ to Adson’s
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=lcgodoy.github.io/post/2021/07/lmnnet/&amp;text=Detecting%20and%20installing%20blog%20posts%20dependencies%20on%20Github%20Actions%20using%20regex%20and%20base%20R" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=lcgodoy.github.io/post/2021/08/models/&amp;text=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -790,7 +591,7 @@ to Adson’s
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=lcgodoy.github.io/post/2021/07/lmnnet/&amp;t=Detecting%20and%20installing%20blog%20posts%20dependencies%20on%20Github%20Actions%20using%20regex%20and%20base%20R" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=lcgodoy.github.io/post/2021/08/models/&amp;t=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -803,7 +604,7 @@ to Adson’s
       
       
       <li>
-        <a href="mailto:?subject=Detecting%20and%20installing%20blog%20posts%20dependencies%20on%20Github%20Actions%20using%20regex%20and%20base%20R&amp;body=lcgodoy.github.io/post/2021/07/lmnnet/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=All%20models%20are%20wrong&amp;body=lcgodoy.github.io/post/2021/08/models/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -816,7 +617,7 @@ to Adson’s
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=lcgodoy.github.io/post/2021/07/lmnnet/&amp;title=Detecting%20and%20installing%20blog%20posts%20dependencies%20on%20Github%20Actions%20using%20regex%20and%20base%20R" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=lcgodoy.github.io/post/2021/08/models/&amp;title=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -829,7 +630,7 @@ to Adson’s
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=Detecting%20and%20installing%20blog%20posts%20dependencies%20on%20Github%20Actions%20using%20regex%20and%20base%20R%20lcgodoy.github.io/post/2021/07/lmnnet/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=All%20models%20are%20wrong%20lcgodoy.github.io/post/2021/08/models/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -842,7 +643,7 @@ to Adson’s
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=lcgodoy.github.io/post/2021/07/lmnnet/&amp;title=Detecting%20and%20installing%20blog%20posts%20dependencies%20on%20Github%20Actions%20using%20regex%20and%20base%20R" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=lcgodoy.github.io/post/2021/08/models/&amp;title=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
