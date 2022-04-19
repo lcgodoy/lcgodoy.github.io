@@ -519,10 +519,7 @@
   <div class="article-container">
 
     <div class="article-style">
-      
-
-<h2 id="introduction">Introduction</h2>
-
+      <h2 id="introduction">Introduction</h2>
 <p>In this post, I’ll explain very briefly how to build a bar correlation plot
 using <code>ggplot2</code> and <code>dplyr</code>. Such graphs are interesting to examine the relationship
 between an outcome of interest and explanatory variables, which is an important
@@ -531,100 +528,82 @@ Pearson Correlation gives us a linear correlation. Consequently, a low linear
 correlation doesn’t necessarily imply that there is no correlation between two
 variables because such correlation can follow a non-linear pattern. Another very
 interesting remark is the famous quote “Correlation is not causation!“.</p>
-
 <blockquote>
 <p>The data used is the well-know <code>mtcars</code>.</p>
 </blockquote>
-
 <h2 id="straight-to-the-point">Straight to the point</h2>
-
 <p>Let&rsquo;s say that we are interested in verify which variables have high correlations
 with <code>mpg</code>. To do it, use the following piece of code to compute the correlation matrix
 for the data and then select just first the line of the matrix corresponding to the
 variable of interest, after this, exclude the first position of the resulting
 vector.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">library</span>(dplyr)
+<span style="color:#a6e22e">library</span>(ggplot2)
+<span style="color:#a6e22e">library</span>(magrittr)
 
-<pre><code class="language-r">library(dplyr)
-library(ggplot2)
-library(magrittr)
-
-correlation &lt;- cor(mtcars)[1,][-1]
-</code></pre>
-
-<blockquote>
+correlation <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">cor</span>(mtcars)[1,][<span style="color:#ae81ff">-1</span>]
+</code></pre></div><blockquote>
 <p>In matter of fact, the Pearson correlation is not adequated to measure the
 correlation between variables that are not continuous. However, this is just a
 toy example to show how to create a specific plot.</p>
 </blockquote>
-
 <p>Now that the correlations have already been computed, store it in a <code>tibble</code>
 (this is not necessary, but make the code more organized). Note that the
 <code>Covariates</code> variable is being reordered by the correlation. As a consequence,
 when the data is plotted, the bars will be ordered by their correlation
 coefficient with the response variable.</p>
-
-<pre><code class="language-r">df &lt;- tibble(Covariates = names(correlation),
-             Correlation = correlation) %&gt;% 
-  mutate(Covariates = factor(Covariates, 
-                             levels = Covariates[order(.$Correlation, 
-                                                       decreasing = T)]
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">df <span style="color:#f92672">&lt;-</span> <span style="color:#a6e22e">tibble</span>(Covariates <span style="color:#f92672">=</span> <span style="color:#a6e22e">names</span>(correlation),
+             Correlation <span style="color:#f92672">=</span> correlation) <span style="color:#f92672">%&gt;%</span> 
+  <span style="color:#a6e22e">mutate</span>(Covariates <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(Covariates, 
+                             levels <span style="color:#f92672">=</span> Covariates<span style="color:#a6e22e">[order</span>(.$Correlation, 
+                                                       decreasing <span style="color:#f92672">=</span> T)]
   )
   )
-</code></pre>
-
-<p>In the following piece of code, the argument <code>fill = as.factor(sign(Correlation))</code> will
+</code></pre></div><p>In the following piece of code, the argument <code>fill = as.factor(sign(Correlation))</code> will
 give different colours for negative and positive correlations, these colours are specified
 with <code>scale_fill_manual</code>. Also, <code>stat = 'identity'</code> is necessary because the default of <code>geom_bar</code>
 assumes a count. In <code>geom_text</code>, the argument <code>vjust</code> needs to be multiplied by <code>sign(Correlation)</code>
 since the bars assume positive and negative values and such parameter needs to be different
 for each of these two cases.</p>
-
-<pre><code class="language-r">ggplot(df) +
-  geom_bar(aes(x = Covariates, y = Correlation, fill = as.factor(sign(Correlation))),
-           stat = 'identity', width = .6) +
-  geom_text(aes(x = Covariates, y = Correlation, 
-                label = formatC(Correlation, digits = 2)),
-            vjust = sign(df$Correlation)*1.6,
-            color = 'white', 
-            size = 3.5)+
-  scale_fill_manual(values = c('#9b1d1d', '#129127')) +
-  guides(fill = F) +
-  labs(y = expression(rho(X[i], Y)),
-       x = expression(X[i])) +
-  theme_bw()
-</code></pre>
-
-<p><img src="/post/2018/06/2018-06-16-correlation_files/figure-html/plot1-1.png" width="672" /></p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r"><span style="color:#a6e22e">ggplot</span>(df) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_bar</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Covariates, y <span style="color:#f92672">=</span> Correlation, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">sign</span>(Correlation))),
+           stat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;identity&#39;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">.6</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_text</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Covariates, y <span style="color:#f92672">=</span> Correlation, 
+                label <span style="color:#f92672">=</span> <span style="color:#a6e22e">formatC</span>(Correlation, digits <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)),
+            vjust <span style="color:#f92672">=</span> <span style="color:#a6e22e">sign</span>(df<span style="color:#f92672">$</span>Correlation)<span style="color:#f92672">*</span><span style="color:#ae81ff">1.6</span>,
+            color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;white&#39;</span>, 
+            size <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.5</span>)<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_fill_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;#9b1d1d&#39;</span>, <span style="color:#e6db74">&#39;#129127&#39;</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">guides</span>(fill <span style="color:#f92672">=</span> F) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#a6e22e">expression</span>(<span style="color:#a6e22e">rho</span>(X[i], Y)),
+       x <span style="color:#f92672">=</span> <span style="color:#a6e22e">expression</span>(X[i])) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>()
+</code></pre></div><p><!-- raw HTML omitted --></p>
 <p>Note that the plot above can have another interesting ordering for the bars. If we
 order the variable <code>Covariates</code> by the absolute value of the <code>Correlation</code>, then we’ll
 have the plot ordered by the strength of the correlation, independently from its
 signal. Sometimes such approach is more interesting and it is shown in the next
 piece of code. There is just one subtle alteration, apply the function <code>abs</code> to
 <code>.$Correlation</code>.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-r" data-lang="r">df <span style="color:#f92672">%&lt;&gt;%</span> <span style="color:#a6e22e">mutate</span>(Covariates <span style="color:#f92672">=</span> <span style="color:#a6e22e">factor</span>(Covariates, 
+                                   levels <span style="color:#f92672">=</span> Covariates<span style="color:#a6e22e">[order</span>(<span style="color:#a6e22e">abs</span>(.$Correlation), 
+                                                             decreasing <span style="color:#f92672">=</span> T)]))
 
-<pre><code class="language-r">df %&lt;&gt;% mutate(Covariates = factor(Covariates, 
-                                   levels = Covariates[order(abs(.$Correlation), 
-                                                             decreasing = T)]))
-
-ggplot(df) +
-  geom_bar(aes(x = Covariates, y = Correlation, fill = as.factor(sign(Correlation))),
-           stat = 'identity', width = .6) +
-  geom_text(aes(x = Covariates, y = Correlation, 
-                label = formatC(Correlation, digits = 2)),
-            vjust = sign(df$Correlation)*1.6,
-            color = 'white', 
-            size = 3.5)+
-  scale_fill_manual(values = c('#9b1d1d', '#129127')) +
-  guides(fill = F) +
-  labs(y = expression(rho(X[i], Y)),
-       x = expression(X[i])) +
-  theme_bw()
-</code></pre>
-
-<p><img src="/post/2018/06/2018-06-16-correlation_files/figure-html/plot2-1.png" width="672" /></p>
-
-<p>So, that&rsquo;s it. Hope that you liked.</p>
+<span style="color:#a6e22e">ggplot</span>(df) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_bar</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Covariates, y <span style="color:#f92672">=</span> Correlation, fill <span style="color:#f92672">=</span> <span style="color:#a6e22e">as.factor</span>(<span style="color:#a6e22e">sign</span>(Correlation))),
+           stat <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;identity&#39;</span>, width <span style="color:#f92672">=</span> <span style="color:#ae81ff">.6</span>) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">geom_text</span>(<span style="color:#a6e22e">aes</span>(x <span style="color:#f92672">=</span> Covariates, y <span style="color:#f92672">=</span> Correlation, 
+                label <span style="color:#f92672">=</span> <span style="color:#a6e22e">formatC</span>(Correlation, digits <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>)),
+            vjust <span style="color:#f92672">=</span> <span style="color:#a6e22e">sign</span>(df<span style="color:#f92672">$</span>Correlation)<span style="color:#f92672">*</span><span style="color:#ae81ff">1.6</span>,
+            color <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;white&#39;</span>, 
+            size <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.5</span>)<span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">scale_fill_manual</span>(values <span style="color:#f92672">=</span> <span style="color:#a6e22e">c</span>(<span style="color:#e6db74">&#39;#9b1d1d&#39;</span>, <span style="color:#e6db74">&#39;#129127&#39;</span>)) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">guides</span>(fill <span style="color:#f92672">=</span> F) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">labs</span>(y <span style="color:#f92672">=</span> <span style="color:#a6e22e">expression</span>(<span style="color:#a6e22e">rho</span>(X[i], Y)),
+       x <span style="color:#f92672">=</span> <span style="color:#a6e22e">expression</span>(X[i])) <span style="color:#f92672">+</span>
+  <span style="color:#a6e22e">theme_bw</span>()
+</code></pre></div><p><!-- raw HTML omitted --></p>
+<p>So, that&rsquo;s it. Hope that you&rsquo;ve enjoyed this short reading.</p>
 
     </div>
 
@@ -984,7 +963,7 @@ ggplot(df) +
   
 
   <p class="powered-by">
-    &copy; 2021 &middot; 
+    © 2021 &middot; 
 
     Powered by the
     <a href="https://sourcethemes.com/academic/" target="_blank" rel="noopener">Academic theme</a> for

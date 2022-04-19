@@ -5,7 +5,7 @@
     <link>lcgodoy.github.io/project/</link>
       <atom:link href="lcgodoy.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     <description>Projects</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Fri, 27 Apr 2018 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Wed, 15 Dec 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>lcgodoy.github.io/img/logo2.png</url>
       <title>Projects</title>
@@ -13,10 +13,19 @@
     </image>
     
     <item>
+      <title>&#34;smile - Spatial Misalignment: Interpolation, Linkage, and Estimation&#34;
+</title>
+      <link>lcgodoy.github.io/project/smile/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/project/smile/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>transpbrr - An `R` package</title>
-      <link>lcgodoy.github.io/project/external-project/</link>
+      <link>lcgodoy.github.io/project/transpbrr/</link>
       <pubDate>Fri, 27 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.github.io/project/external-project/</guid>
+      <guid>lcgodoy.github.io/project/transpbrr/</guid>
       <description></description>
     </item>
     

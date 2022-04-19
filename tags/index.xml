@@ -5,12 +5,20 @@
     <link>lcgodoy.github.io/tags/</link>
       <atom:link href="lcgodoy.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     <description>Tags</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Wed, 15 Dec 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>lcgodoy.github.io/img/logo2.png</url>
       <title>Tags</title>
       <link>lcgodoy.github.io/tags/</link>
     </image>
+    
+    <item>
+      <title>Spatial misalignment</title>
+      <link>lcgodoy.github.io/tags/spatial-misalignment/</link>
+      <pubDate>Wed, 15 Dec 2021 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/tags/spatial-misalignment/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Source Themes</title>
@@ -65,22 +73,6 @@
       <link>lcgodoy.github.io/tags/public-expenses/</link>
       <pubDate>Fri, 27 Apr 2018 00:00:00 +0000</pubDate>
       <guid>lcgodoy.github.io/tags/public-expenses/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>sf</title>
-      <link>lcgodoy.github.io/tags/sf/</link>
-      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.github.io/tags/sf/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Space-time</title>
-      <link>lcgodoy.github.io/tags/space-time/</link>
-      <pubDate>Tue, 24 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.github.io/tags/space-time/</guid>
       <description></description>
     </item>
     
