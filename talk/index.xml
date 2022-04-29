@@ -5,12 +5,30 @@
     <link>lcgodoy.github.io/talk/</link>
       <atom:link href="lcgodoy.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
-    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Wed, 06 Feb 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2021</copyright><lastBuildDate>Sat, 09 Oct 2021 00:00:00 +0000</lastBuildDate>
     <image>
       <url>lcgodoy.github.io/img/logo2.png</url>
       <title>Recent &amp; Upcoming Talks</title>
       <link>lcgodoy.github.io/talk/</link>
     </image>
+    
+    <item>
+      <title>Various sports websites produce tons of data every day. How to collect them
+might be the first difficulty that people encounter when they start doing
+sports analytics. We could collect these data by just copying and pasting
+manually, however, such way is tedious and time consuming. Web scrapping
+techniques provide an elegant way to solve this problem, which can capture
+information from website efficiently and reproducibly. In this workshop,
+topics include: 1) an overview of several web scrapping methods using R; 2)
+popular R packages for static and dynamic web pages, respectively. Examples
+are provided to illustrate how the web scrapping techniques are applied in the
+real world.
+</title>
+      <link>lcgodoy.github.io/talk/ucsas2021/</link>
+      <pubDate>Sat, 09 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>lcgodoy.github.io/talk/ucsas2021/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>transpbrr</title>
