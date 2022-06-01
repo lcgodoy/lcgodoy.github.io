@@ -2,29 +2,29 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Augusto Felix Marcolin | lcgodoy</title>
-    <link>lcgodoy.me/authors/augusto-felix-marcolin/</link>
-      <atom:link href="lcgodoy.me/authors/augusto-felix-marcolin/index.xml" rel="self" type="application/rss+xml" />
+    <link>lcgodoy.github.io/authors/augusto-felix-marcolin/</link>
+      <atom:link href="lcgodoy.github.io/authors/augusto-felix-marcolin/index.xml" rel="self" type="application/rss+xml" />
     <description>Augusto Felix Marcolin</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2022</copyright><lastBuildDate>Wed, 06 Feb 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>lcgodoy.me/img/logo2.png</url>
+      <url>lcgodoy.github.io/img/logo2.png</url>
       <title>Augusto Felix Marcolin</title>
-      <link>lcgodoy.me/authors/augusto-felix-marcolin/</link>
+      <link>lcgodoy.github.io/authors/augusto-felix-marcolin/</link>
     </image>
     
     <item>
       <title>transpbrr</title>
-      <link>lcgodoy.me/talk/rusers/</link>
+      <link>lcgodoy.github.io/talk/rusers/</link>
       <pubDate>Wed, 06 Feb 2019 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/talk/rusers/</guid>
+      <guid>lcgodoy.github.io/talk/rusers/</guid>
       <description></description>
     </item>
     
     <item>
       <title>Voronoi Cells</title>
-      <link>lcgodoy.me/talk/rbras/</link>
+      <link>lcgodoy.github.io/talk/rbras/</link>
       <pubDate>Fri, 18 May 2018 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/talk/rbras/</guid>
+      <guid>lcgodoy.github.io/talk/rbras/</guid>
       <description></description>
     </item>
     

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Open Data | lcgodoy</title>
-    <link>lcgodoy.me/tags/open-data/</link>
-      <atom:link href="lcgodoy.me/tags/open-data/index.xml" rel="self" type="application/rss+xml" />
+    <link>lcgodoy.github.io/tags/open-data/</link>
+      <atom:link href="lcgodoy.github.io/tags/open-data/index.xml" rel="self" type="application/rss+xml" />
     <description>Open Data</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2022</copyright><lastBuildDate>Fri, 27 Apr 2018 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>lcgodoy.me/img/logo2.png</url>
+      <url>lcgodoy.github.io/img/logo2.png</url>
       <title>Open Data</title>
-      <link>lcgodoy.me/tags/open-data/</link>
+      <link>lcgodoy.github.io/tags/open-data/</link>
     </image>
     
     <item>
       <title>transpbrr - An `R` package</title>
-      <link>lcgodoy.me/project/transpbrr/</link>
+      <link>lcgodoy.github.io/project/transpbrr/</link>
       <pubDate>Fri, 27 Apr 2018 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/project/transpbrr/</guid>
+      <guid>lcgodoy.github.io/project/transpbrr/</guid>
       <description></description>
     </item>
     

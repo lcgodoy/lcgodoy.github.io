@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Descriptive Statistics | lcgodoy</title>
-    <link>lcgodoy.me/categories/descriptive-statistics/</link>
-      <atom:link href="lcgodoy.me/categories/descriptive-statistics/index.xml" rel="self" type="application/rss+xml" />
+    <link>lcgodoy.github.io/categories/descriptive-statistics/</link>
+      <atom:link href="lcgodoy.github.io/categories/descriptive-statistics/index.xml" rel="self" type="application/rss+xml" />
     <description>Descriptive Statistics</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2022</copyright><lastBuildDate>Sat, 16 Jun 2018 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>lcgodoy.me/img/logo2.png</url>
+      <url>lcgodoy.github.io/img/logo2.png</url>
       <title>Descriptive Statistics</title>
-      <link>lcgodoy.me/categories/descriptive-statistics/</link>
+      <link>lcgodoy.github.io/categories/descriptive-statistics/</link>
     </image>
     
     <item>
       <title>A simple plot for correlation between response and explanatory variables</title>
-      <link>lcgodoy.me/post/2018/06/2018-06-16-correlation/</link>
+      <link>lcgodoy.github.io/post/2018/06/2018-06-16-correlation/</link>
       <pubDate>Sat, 16 Jun 2018 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/post/2018/06/2018-06-16-correlation/</guid>
+      <guid>lcgodoy.github.io/post/2018/06/2018-06-16-correlation/</guid>
       <description>
 
 &lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
@@ -92,7 +92,7 @@ for each of these two cases.&lt;/p&gt;
   theme_bw()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;lcgodoy.me/post/2018/06/2018-06-16-correlation_files/figure-html/plot1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;lcgodoy.github.io/post/2018/06/2018-06-16-correlation_files/figure-html/plot1-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Note that the plot above can have another interesting ordering for the bars. If we
 order the variable &lt;code&gt;Covariates&lt;/code&gt; by the absolute value of the &lt;code&gt;Correlation&lt;/code&gt;, then we’ll
@@ -120,7 +120,7 @@ ggplot(df) +
   theme_bw()
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;img src=&#34;lcgodoy.me/post/2018/06/2018-06-16-correlation_files/figure-html/plot2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;lcgodoy.github.io/post/2018/06/2018-06-16-correlation_files/figure-html/plot2-1.png&#34; width=&#34;672&#34; /&gt;&lt;/p&gt;
 
 &lt;p&gt;So, that&amp;rsquo;s it. Hope that you liked.&lt;/p&gt;
 </description>

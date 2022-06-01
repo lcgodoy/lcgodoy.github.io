@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>lcgodoy</title>
-    <link>lcgodoy.me/authors/admin/</link>
-      <atom:link href="lcgodoy.me/authors/admin/index.xml" rel="self" type="application/rss+xml" />
+    <link>lcgodoy.github.io/authors/admin/</link>
+      <atom:link href="lcgodoy.github.io/authors/admin/index.xml" rel="self" type="application/rss+xml" />
     <description>lcgodoy</description>
     <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator><language>en-us</language><copyright>© 2022</copyright><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
     <image>
-      <url>lcgodoy.me/img/logo2.png</url>
+      <url>lcgodoy.github.io/img/logo2.png</url>
       <title>lcgodoy</title>
-      <link>lcgodoy.me/authors/admin/</link>
+      <link>lcgodoy.github.io/authors/admin/</link>
     </image>
     
     <item>
       <title>An example preprint / working paper</title>
-      <link>lcgodoy.me/publication/preprint/</link>
+      <link>lcgodoy.github.io/publication/preprint/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/publication/preprint/</guid>
+      <guid>lcgodoy.github.io/publication/preprint/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Slides&lt;/em&gt; button above to demo Academic&amp;rsquo;s Markdown slides feature.
@@ -29,9 +29,9 @@
     
     <item>
       <title>An example journal article</title>
-      <link>lcgodoy.me/publication/journal-article/</link>
+      <link>lcgodoy.github.io/publication/journal-article/</link>
       <pubDate>Tue, 01 Sep 2015 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/publication/journal-article/</guid>
+      <guid>lcgodoy.github.io/publication/journal-article/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
@@ -50,9 +50,9 @@
     
     <item>
       <title>An example conference paper</title>
-      <link>lcgodoy.me/publication/conference-paper/</link>
+      <link>lcgodoy.github.io/publication/conference-paper/</link>
       <pubDate>Mon, 01 Jul 2013 00:00:00 +0000</pubDate>
-      <guid>lcgodoy.me/publication/conference-paper/</guid>
+      <guid>lcgodoy.github.io/publication/conference-paper/</guid>
       <description>&lt;div class=&#34;alert alert-note&#34;&gt;
   &lt;div&gt;
     Click the &lt;em&gt;Cite&lt;/em&gt; button above to demo the feature to enable visitors to import publication metadata into their reference management software.
