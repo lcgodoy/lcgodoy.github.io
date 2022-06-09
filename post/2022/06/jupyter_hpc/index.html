@@ -28,12 +28,11 @@
   
     
   
-  <meta name="description" content="Comments on the famous George Box&#39;s quote and some highlights from the
-original text.
+  <meta name="description" content="A short tutorial on how to execute jupyter notebooks on HPC clusters.
 ">
 
   
-  <link rel="alternate" hreflang="en-us" href="lcgodoy.github.io/post/2021/08/models/">
+  <link rel="alternate" hreflang="en-us" href="lcgodoy.github.io/post/2022/06/jupyter_hpc/">
 
   
 
@@ -98,7 +97,7 @@ original text.
   <link rel="icon" type="image/png" href="/lcgodoy.github.io/img/icon-32.png">
   <link rel="apple-touch-icon" type="image/png" href="/lcgodoy.github.io/img/icon-192.png">
 
-  <link rel="canonical" href="lcgodoy.github.io/post/2021/08/models/">
+  <link rel="canonical" href="lcgodoy.github.io/post/2022/06/jupyter_hpc/">
 
   
   
@@ -114,15 +113,14 @@ original text.
   <meta property="twitter:creator" content="@ldcgodoy">
   
   <meta property="og:site_name" content="lcgodoy">
-  <meta property="og:url" content="lcgodoy.github.io/post/2021/08/models/">
-  <meta property="og:title" content="All models are wrong | lcgodoy">
-  <meta property="og:description" content="Comments on the famous George Box&#39;s quote and some highlights from the
-original text.
+  <meta property="og:url" content="lcgodoy.github.io/post/2022/06/jupyter_hpc/">
+  <meta property="og:title" content="Using jupyter on an HPC cluster | lcgodoy">
+  <meta property="og:description" content="A short tutorial on how to execute jupyter notebooks on HPC clusters.
 "><meta property="og:image" content="lcgodoy.github.io/img/logo2.png">
   <meta property="twitter:image" content="lcgodoy.github.io/img/logo2.png"><meta property="og:locale" content="en-us">
   
     
-      <meta property="article:published_time" content="2021-08-15T00:00:00&#43;00:00">
+      <meta property="article:published_time" content="2022-06-09T00:00:00&#43;00:00">
     
     <meta property="article:modified_time" content="2022-06-09T00:00:00&#43;00:00">
   
@@ -150,11 +148,11 @@ original text.
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "lcgodoy.github.io/post/2021/08/models/"
+    "@id": "lcgodoy.github.io/post/2022/06/jupyter_hpc/"
   },
-  "headline": "All models are wrong",
+  "headline": "Using jupyter on an HPC cluster",
   
-  "datePublished": "2021-08-15T00:00:00Z",
+  "datePublished": "2022-06-09T00:00:00Z",
   "dateModified": "2022-06-09T00:00:00Z",
   
   "author": {
@@ -170,7 +168,7 @@ original text.
       "url": "lcgodoy.github.io/img/logo2.png"
     }
   },
-  "description": "Comments on the famous George Box's quote and some highlights from the\noriginal text.\n"
+  "description": "A short tutorial on how to execute jupyter notebooks on HPC clusters.\n"
 }
 </script>
 
@@ -214,7 +212,7 @@ original text.
 
 
 
-  <title>All models are wrong | lcgodoy</title>
+  <title>Using jupyter on an HPC cluster | lcgodoy</title>
 
 </head>
 
@@ -452,7 +450,7 @@ original text.
   
   
 <div class="article-container pt-3">
-  <h1>All models are wrong</h1>
+  <h1>Using jupyter on an HPC cluster</h1>
 
   
 
@@ -470,8 +468,6 @@ original text.
     
     
       
-          Last updated on
-      
     
     Jun 9, 2022
   </span>
@@ -482,7 +478,7 @@ original text.
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    2 min read
+    4 min read
   </span>
   
 
@@ -490,7 +486,7 @@ original text.
   
   
   <span class="middot-divider"></span>
-  <a href="lcgodoy.github.io/post/2021/08/models/#disqus_thread"></a>
+  <a href="lcgodoy.github.io/post/2022/06/jupyter_hpc/#disqus_thread"></a>
   
 
   
@@ -528,36 +524,97 @@ original text.
       
 
 
-<p>George Box’s 1976 paper named <a href="https://bit.ly/3rTAzlf">“Science and Statistics”</a>
-is famous for that “all models are wrong” quote. I’m sure that the number of
-people who knows this quote is quite larger than the number of people who have
-read the paper entirely.</p>
-<p>The paper provides interesting (and insightful) discussions that still apply to
-the field of Statistics these days. IMO, one of the most remarkable things
-Dr. Box pointed out is about “Mathematistry”. Which he defines (or explains) as
-follows</p>
 <blockquote>
-<p>“Mathematistry is characterized by development of theory for theory’s sake,
-which since it seldom touches down with practice, has a tendency to redefine
-the problem rather than solve it.”</p>
+<p>This post was originally written for the <a href="https://github.com/CBC-UCONN/software-example-guide/wiki">CBC-UCONN HC
+wiki</a></p>
 </blockquote>
-<p>Later on, in the same paper, he mentions how this “malady” (in his words) is
-harmful to statistics as a field.</p>
+<p>The purpose of this post is to enable cluster users to run <code>jupyter</code> on the
+cluster interactively, enabling them to conduct data analysis and
+visualization. There are different “flavors” of <code>jupyter</code> notebooks, the most
+appropriate are going to be pointed out at <a href="#pick-cont">Picking a container</a>.</p>
+<div id="preliminaries" class="section level2">
+<h2>Preliminaries</h2>
+<p>We assume that the user has access to <code>ssh</code> through a <code>terminal</code>. In addition,
+it is necessary to have <a href="https://sylabs.io/singularity/">SingularityCE</a>
+(<code>singularity</code> for short) installed on a computer on which you have <code>root</code>
+privileges.</p>
 <blockquote>
-<p>“An even more serious consequence of mathematistry concerns the training of
-statisticians. We have recently been passing through a period where nothing
-very much was expected of the statistician. A great deal of research money
-was available and one had the curious situation where the highest objective of
-the teacher of statistics was to produce a student who would be another
-teacher of statistics. It was thus possible for successive generations of
-teachers to be produced with no practical knowledge of the subject whatever.
-Although statistics departments in universities are now commonplace there
-continues to be a severe shortage of statisticians competent to deal with real
-problems. But such are needed.”</p>
+<p>In order to use <code>singularity</code> on a Windows (or Mac) machine, a Linux <em>Virtual
+Machine</em>(VM) needs to be set up. Setting up a VM and installing SingularityCE
+os beyond the scope of this document.</p>
 </blockquote>
-<p>I think that we still face this challenges (on many others he mentioned in that
-paper) in Statistics. Therefore, I thought it would be nice to share this to
-make people think about it.</p>
+<p>In addition, <code>singularity</code> is assumed to be available on the HPC that you have
+access to. Usually, users have to run</p>
+<pre class="bash"><code>module load singularity/&lt;version&gt;</code></pre>
+<p>before using it.</p>
+<p>Familiarity with containers is helpful but not necessary. Loosely speaking, a
+container allows us to “isolate” a set of tools and software in order to
+guarantee code reproducibility and portability. Moreover, <code>singularity</code> was
+developed (among other reasons) to integrate these tools with HPC clusters.</p>
+</div>
+<div id="pick-cont" class="section level2">
+<h2>Picking a container</h2>
+<p>The <a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/index.html">Jupyter Docker
+Stacks</a>
+contains several useful <code>docker</code> containers that can be easily used to build
+<code>singularity</code> containers.</p>
+<p>A list of the containers (along with their principal features) maintained by the
+<a href="https://jupyter.org/about">Jupyter</a> team can be found
+<a href="https://jupyter-docker-stacks.readthedocs.io/en/latest/using/selecting.html">here</a>.
+Some of these containers are detailed below</p>
+<ul>
+<li><code>jupyter/r-notebook</code>: a container containing a basic installation for Machine
+Learning using <code>R</code>.</li>
+<li><code>jupyter/scipy-notebook</code>: contains popular libraries for scientific computing
+using <code>python</code>.</li>
+<li><code>jupyter/tensorflow-notebook</code>: this is the <code>jupyter/scipy-notebook</code> with
+<code>tensorflow</code> installed on it.</li>
+<li><code>jupyter/datascience-notebook</code>: includes libraries for data analysis from the
+<code>julia</code>, <code>python, and</code>R` communities.</li>
+</ul>
+</div>
+<div id="converting-a-docker-into-a-singularity-container" class="section level2">
+<h2>Converting a <code>docker</code> into a <code>singularity</code> container</h2>
+<p>Once you have chosen a container suitable for your needs (and have root access
+to a machine with <code>singularity</code>), a <code>singularity</code> container can be generated by
+executing the following chunk of code in the terminal.</p>
+<pre class="bash"><code>## singularity pull &lt;choose-a-name&gt;.sif docker://jupyter/&lt;preferred-notebook&gt;
+singularity pull mycontainer.sif docker://jupyter/datascience-notebook</code></pre>
+<p>In the example above, I choose to use the <code>datascience-notebook</code>. After doing
+so, the <code>.sif</code> file generated by singularity needs to be transferred to the
+cluster. My personal preference is to use either <code>scp</code> or <code>rsync</code>, for example</p>
+<pre class="bash"><code>rsync mycontainer.sif &lt;username&gt;@&lt;hpc-url&gt;:&lt;location&gt;</code></pre>
+</div>
+<div id="using-the-singularity-container-on-the-cluster" class="section level2">
+<h2>Using the <code>singularity</code> container on the cluster</h2>
+<p>After transferring the <code>.sif</code> file to the cluster, follow the following
+steps. Firstly, set up the VPN and log-in to the cluster using <code>ssh</code>, then
+navigate to the location where you transferred the container (<code>.sif</code>) to. Next,
+you will have to start a interactive job. If the workload manager used in the
+HPC that you have access to is <a href="https://slurm.schedmd.com/overview.html">SLURM</a>,
+this can be done either with <code>srun</code> or <code>fisbatch</code>. To start an interactive job
+with <code>srun</code> use</p>
+<pre class="bash"><code>srun --partition=&lt;partition-name&gt; --qos=&lt;queue-name&gt; --mem=64G --pty bash</code></pre>
+<p>The same task can be achieved with <code>fisbatch</code> (if available) with</p>
+<pre class="bash"><code>fisbatch --partition=&lt;partition-name&gt; --qos=&lt;queue-name&gt; --mem=64G</code></pre>
+<p>Either of these commands will allocate your job to a specific node. It is
+<strong>important to save the name of the node</strong> that your job has been allocated
+to. Next, load <code>singularity</code> on that node as follows</p>
+<pre class="bash"><code>module load singularity/&lt;version&gt;</code></pre>
+<p>The penultimate step is to start the <code>jupyter</code> instance. It is done as follows</p>
+<pre class="bash"><code>singularity exec --nv mycontainer.sif jupyter notebook --no-browser --ip=&#39;*&#39;</code></pre>
+<p>After executing the last chunk of code, the terminal will be “busy” and will
+provide three URLs, they will look somewhat like “<a href="http://127.0.0.1:8888/" class="uri">http://127.0.0.1:8888/</a>”
+this. Copy the last address provided by the output. The last step before being
+able to access the notebook through the provided address is to create a <code>ssh</code>
+tunnel. To do so, open another terminal window and execute</p>
+<pre class="bash"><code>ssh -NL localhost:8888:&lt;node&gt;:8888 &lt;username&gt;@&lt;hpc-url&gt;</code></pre>
+<p>where <code>&lt;node&gt;</code> should be replaced by the node to which the job submitted using
+<code>srun</code> (or <code>fisbatch</code>) was submitted to. This tunnel will keep the other
+terminal window busy to.</p>
+<p>Finally, copy the address provided by the notebook (e.g.,
+“<a href="http://127.0.0.1:8888/" class="uri">http://127.0.0.1:8888/</a>”) and paste it into your browser.</p>
+</div>
 
     </div>
 
@@ -580,7 +637,7 @@ make people think about it.</p>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=lcgodoy.github.io/post/2021/08/models/&amp;text=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=lcgodoy.github.io/post/2022/06/jupyter_hpc/&amp;text=Using%20jupyter%20on%20an%20HPC%20cluster" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -593,7 +650,7 @@ make people think about it.</p>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=lcgodoy.github.io/post/2021/08/models/&amp;t=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=lcgodoy.github.io/post/2022/06/jupyter_hpc/&amp;t=Using%20jupyter%20on%20an%20HPC%20cluster" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -606,7 +663,7 @@ make people think about it.</p>
       
       
       <li>
-        <a href="mailto:?subject=All%20models%20are%20wrong&amp;body=lcgodoy.github.io/post/2021/08/models/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Using%20jupyter%20on%20an%20HPC%20cluster&amp;body=lcgodoy.github.io/post/2022/06/jupyter_hpc/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -619,7 +676,7 @@ make people think about it.</p>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=lcgodoy.github.io/post/2021/08/models/&amp;title=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=lcgodoy.github.io/post/2022/06/jupyter_hpc/&amp;title=Using%20jupyter%20on%20an%20HPC%20cluster" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -632,7 +689,7 @@ make people think about it.</p>
       
       
       <li>
-        <a href="https://web.whatsapp.com/send?text=All%20models%20are%20wrong%20lcgodoy.github.io/post/2021/08/models/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="https://web.whatsapp.com/send?text=Using%20jupyter%20on%20an%20HPC%20cluster%20lcgodoy.github.io/post/2022/06/jupyter_hpc/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -645,7 +702,7 @@ make people think about it.</p>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=lcgodoy.github.io/post/2021/08/models/&amp;title=All%20models%20are%20wrong" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=lcgodoy.github.io/post/2022/06/jupyter_hpc/&amp;title=Using%20jupyter%20on%20an%20HPC%20cluster" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
