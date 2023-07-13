@@ -1,0 +1,1204 @@
+---
+title: Estimating regression coefficients using a Neural Network (from scratch)
+author: Lucas Godoy
+execute:
+  echo: false
+date: '2021-07-28'
+slug: lmnnet
+categories:
+  - statistics
+  - neural networks
+summary: |
+  Despite the amount of “fancy” terms, Neural Network literature shares several
+  elements with the statistical literature. This post aims to provide a gentle
+  introduction of Neural Network Regression for statisticians. Additionally, we
+  elucidade how the famous Backpropagation algorithm is used to estimate the
+  parameters associated with a Neural Network model
+lastmod: '`r Sys.Date()`'
+bibliography: ref-nnet.bib
+biblio-style: asa
+---
+
+```{R load-prel-results}
+library(ggplot2)
+library(data.table)
+```
+
+## Intro
+
+The idea behind the Neural Networks models, as its nomenclature suggests, is to
+mimic the way human brain learns to execute of some tasks. Some works in the
+literature (@cheng1994neural, @stern1996neural, @warner1996understanding)
+attribute of the first attempts to build a "Neural Network emulator" to
+@mcculloch1943logical. The popularity of this method in the past decades was
+held down by the computation intensive calculations needed for such
+procedures. However, the computation resources advances in the last few years
+allied to the algorithmic nature of Neural Networks have contributed to the
+adoption of the methodology by computer scientists. These days, this models are
+very popular in the industry and are applied to several interesting applications
+such as speech recognition, image classification, and automatic text
+translation.
+
+## Neural Network Regression
+
+A neural network is a highly parametrized model that, provided we have enough
+data, can approximate any functional relationship between a set of
+_features_^[Features are the name given for predictors in the neural networks
+literature] $\mathbf{x}$ and a response variable $y$ (@efron2016computer, pages
+151-152). Although there are several possible structures for neural networks,
+for this post we are going to consider only the _feed-forward_^[Sometimes
+referred to as _multi-layer-perceptron_, and _back-propagation_.] neural
+networks. In order to explain how these neural networks are designed, let's
+consider its graphical representation (see @fig-nn1). We have
+vertices, which are called a units (or neurons), ordered horizontally by
+layers. An edge coming from one vertex can only be connected to vertices
+associated with "higher" layers. These connections represent a information flow
+from left to right (hence, the name feed-forward), where each unit computed by
+1) giving weights to each of its inputs, 2) calculating the dot product between
+weights and inputs, 3) adding a constant( usually referred to as _bias_) to it,
+and, finally, 4) applying an element-wise _activation_ function $f(\cdot)$ to
+it. These _activation functions_ are used to establish non-linear relationships
+between units.
+
+The number of hidden layers as well as the number of units associated with every
+layer can both be regard as tuning parameters. The design and architecture of a
+neural network is a complex task. In summary, when having a single hidden layer,
+the number of units associated with the hidden layer determines the number of
+parameters associated with the model. @efron2016computer suggest that, under
+this scenario, it is better to consider several units for the hidden layer and
+use some kind of regularization to avoid overfitting. Penalizations analogous to
+the Ridge and Lasso penalty for linear models are often used in the
+regularization context for neural networks (@hastie2015statistical, pages
+210-211).
+
+An important remark regarding the neural network models is that they are "pure
+prediction algorithms". That is, these models are focused only on prediction,
+neglecting the estimation, as pointed by @efron2020prediction. The strategy is
+simple and consists in searching for high predictive accuracy. That being said,
+these algorithms make no assumption on the probability distribution of the data
+and, as one of the consequences of losing these assumptions, it is not possible
+to make interval predictions or to calculate confidence intervals for the
+"estimated" parameters.
+
+```{R}
+#| label: fig-nn1
+#| engine: tikz
+#| fig-align: center
+#| fig-cap: "A _feed-forward_ neural network with a single hidden layer."
+#| fig-ext: png
+
+\def\layersep{2.5cm}
+
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{empty neuron}=[fill=none, draw=none, inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=black!25!green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{hidden neuron}=[neuron, fill=blue!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+    \node[input neuron, pin=left:$x_1$] (I-1) at (0,-1) {};
+    \node[input neuron, pin=left:$x_2$] (I-2) at (0,-2) {};
+    \node[empty neuron] (I-3) at (0,-2.65) {\LARGE $\vdots$};
+    \node[input neuron, pin=left:$x_p$] (I-4) at (0,-3.5) {};
+
+    % Draw the hidden layer nodes
+    \foreach \name / \y in {1,..., 3}
+        \path[yshift=0.5cm]
+            node[hidden neuron] (H-\name) at (\layersep,-\y cm) {};
+
+    \node[empty neuron] (H-4) at (\layersep,-3) {\LARGE $\vdots$};
+
+    \node[hidden neuron] (H-5) at (\layersep,-3.75) {};
+
+
+    % Draw the output layer node
+    \node[output neuron,pin={[pin edge={->}]right:$f(x; \mathcal{W})$}] (O) at (2 * \layersep, -2) {};
+
+    % Connect every node in the input layer with every node in the
+    % hidden layer.
+    \foreach \source in {1,2,4}
+        \foreach \dest in {1,...,3, 5}
+            \path (I-\source) edge (H-\dest);
+
+    % Connect every node in the hidden layer with the output layer
+    \foreach \source in {1,..., 3, 5}
+        \path (H-\source) edge (O);
+
+    % Annotate the layers
+    \node[annot,above of=H-1, node distance=1cm] (hl) {Hidden layer $L_2$};
+    \node[annot,left of=hl] {Input layer $L_1$};
+    \node[annot,right of=hl] {Output layer $L_3$};
+\end{tikzpicture}
+```
+
+### Single neuron feed-forward networks {#subsec:single}
+
+A single neuron feed-forward network does not possess any hidden layer in its
+structure. The absence of hidden layers makes these models resemble the
+statistical models we are most used to, like, for example, the linear regression
+and logistic regression. By analyzing the graphical representation of a single
+layer feed-forward network (@fig-nn2), it is easy to see that by
+taking the identity as the _activation function_, the functional relationship
+between $\mathbf{x}$ and $y$ considered by the neural network is equivalent to
+the one used for the general linear model. Considering the same representation,
+if we take $f(x) = \textrm{logit}(x)$ (_sigmoid_ function, according to the
+neural network models literature) and $y \in \{ 0, 1 \}$, then the neural
+network provides the same relationship between $\mathbf{x}$ and $y$ as the one
+used by the logistic regression.
+
+```{R}
+#| label: fig-nn2
+#| engine: tikz
+#| fig-align: "center"
+#| fig-cap: "A single layer _feed-forward_ neural network."
+
+\def\layersep{3cm}
+\usetikzlibrary{positioning}
+
+\begin{tikzpicture}[shorten >=1pt,->,draw=black!50, node distance=\layersep]
+    \tikzstyle{every pin edge}=[<-,shorten <=1pt]
+    \tikzstyle{neuron}=[circle,fill=black!25,minimum size=17pt,inner sep=0pt]
+    \tikzstyle{empty neuron}=[fill=none, draw=none, inner sep=0pt]
+    \tikzstyle{input neuron}=[neuron, fill=black!25!green!50];
+    \tikzstyle{output neuron}=[neuron, fill=red!50];
+    \tikzstyle{annot} = [text width=4em, text centered]
+
+    \node[input neuron, pin=left:$x_1$] (I-1) at (0,-1) {};
+    \node[input neuron, pin=left:$x_2$] (I-2) at (0,-2) {};
+    \node[input neuron, pin=left:$x_3$] (I-3) at (0,-3) {};
+    \node[empty neuron] (I-4) at (0,-3.65) {\LARGE $\vdots$};
+    \node[input neuron, pin=left:$x_p$] (I-5) at (0,-4.5) {};
+
+    % Draw the output layer node
+    \node[output neuron,pin={[pin edge={->}]right:$f(x; \mathcal{W})$}] (O) at (\layersep, -2.5) {};
+
+    % Connect every node in the hidden layer with the output layer
+    \foreach \source in {1, 2, 3, 5}
+        \path (I-\source) edge (O);
+
+    % Annotate the layers
+    \node[annot,above of=I-1, node distance=1cm] (hl) {Input layer $L_1$};
+    \node[annot,right of=hl] {Output layer $L_3$};
+\end{tikzpicture}
+```
+
+Although the functional relationship between $\mathbf{x}$ and $y$ assumed by the
+single layer neural network coincides with some statistical models, we cannot
+promptly claim an equivalence between models because the way the neural networks
+_learn_, that is estimates, the weights can lead to different solutions
+depending on the _loss_ and _cost_ functions selected, we are going to talk more
+about these functions in the next section.
+
+### Activation functions {#subsec:act}
+
+Activation functions are applied in every "Layer connection" in neural network
+models. Suppose, for example, we have a design matrix $\mathbf{X} \in {\rm
+I\!R}^{n \times p}$, and a response variable $\mathbf{y}$. Then, given
+appropriate choices of the $K - 1$ (one for each layer connection), the
+mathematical model, for a single observation, behind the neural network, can be
+written in a vectorial notation as follows
+$$
+\mathbf{z}^{(k)} = \mathbf{W}^{(k - 1)} \mathbf{a}^{(k - 1)}
+$$
+$$
+\mathbf{a}^{(k)} = f_{(k)} \left( \mathbf{z}^{(k)} \right),
+$$
+where $\mathbf{W}^{(k - 1)} \in {\rm I\!R}^{m_{k - 1} \times m_{k}}$ is the
+matrix of weights that go from from the layer $L_{k - 1}$ to the layer $L_{k}$,
+$\mathbf{a}^{(k)} \in {\rm I\!R}^{m_k \times m_{k + 1}}$ matrix of units at
+layer $L_k$, and $f_{(k)}$ is a (element-wise) activation function used at the
+layer $L_k$. Note that, when $k = 0$, then $\mathbf{a}^{(0)} = \mathbf{X}$.
+Observe that $m_k$ is the number of units in the layer $k$ and, consequently,
+for the input and output layers, respectively, we have $m_0 = p$ and $m_K = 1$.
+
+From this example, it is clear that we can apply different activation functions
+when connecting different layers. Nevertheless, the activation for one layer is
+the same along all of its units.
+
+Although, theoretically, there exists no restriction on which functions to use
+as activation function, we want these functions to be at least one time
+differentiable. This is due to the fact that most of the methods used to find
+the optimal weights are based on gradients. Another aspect to be considered when
+choosing an activation function is the domain of the output variable $y$. That
+is, if $y \in [0, 1]$, we want an activation function that maps real values to
+the $[0, 1]$ interval. In summary, for the output layer, we use a activation
+function that makes predictions on the same domain as the output variable,
+while, for hidden layers, we have no restrictions on the activation functions,
+besides the ones already mentioned.
+
+Some commonly used link functions are the $\textrm{logit}$, or sigmoid,
+function, defined as
+$$
+f(x) = \frac{1}{1 + e^{-x}},
+$$
+the hyperbolic tangent function, referred to as $\textrm{tanh}$,
+$$
+f(x) = \frac{e^z - e^{-z}}{e^{z} + e^{-z}}.
+$$
+Note that the $\textrm{tanh}$ is mapping from the real line to the $(-1, 1)$
+interval.
+The Rectified Linear Unit (ReLU) is also a popular choice and is defined as
+$$
+f(x) = x_{+} = \max(0, x),
+$$
+the main advantage of this function is a cheap to compute gradient. A different
+version of the ReLU called leaky ReLU is also quite popular, its definition is
+given as follows
+$$
+f(x) = x_{+} = \max(.01 * x, x),
+$$
+
+These are only some examples of commonly used activation functions and they are
+illustrated in @fig-act-funs. The user does need to be restrict to
+these options since there are several other functions implemented in the
+software available to compute neural networks. However, if you want to use a
+activation function that is not implemented yet, you may have to implement your
+own version for the algorithm.
+
+```{R}
+#| label: fig-act-funs
+#| fig-cap: "The most popular activation functions (figure inspired by Figure 18.6 from @efron2016computer )."
+#| warning: false
+
+ggplot() +
+    geom_hline(yintercept = 0, lty = 3) +
+    geom_vline(xintercept = 0, lty = 3) +
+    stat_function(aes(color = "logit"),
+                  fun = plogis, lwd = 1.1,
+                  xlim = c(-3, 3)) +
+    stat_function(aes(color = "tanh"),
+                  fun = tanh, lwd = 1.1,
+                  xlim = c(-3, 3)) +
+    stat_function(aes(color = "ReLU"),
+                  fun = function(x) pmax(0, x), lwd = 1.1,
+                  xlim = c(-3, 3)) +
+    scale_x_continuous(limits = c(-3, 3)) +
+    scale_y_continuous(limits = c(-1, 3)) +
+    labs(x = "x", y = "f(x)") +
+    scale_color_manual(values = c("logit" = "#ff8080", "tanh" = "#8080ff",
+                                  "ReLU" = "#80df80"),
+                       labels = c("logit", "tanh", "ReLU"),
+                       name = NULL) +
+    theme_bw() +
+    theme(
+        legend.position = c(.05, .95),
+        legend.box.background = element_rect(color = 1, size = 1.05),
+        legend.justification = c("left", "top"),
+        legend.box.just = "left",
+        legend.margin = margin(6, 6, 6, 6)
+    )
+```
+
+Although there are no restrictions on the functions used as activation functions
+in the hidden layers (besides being differentiable functions), it is not
+advisable to use the identity function because it implies a waste of
+computational power. This is due to the fact that using a linear function in a
+hidden layer, makes the units from that layer a linear combination of the units
+from the previous layer. To make this clear, let's prove that a Neural Network
+model with a single hidden layer collapses to a Generalized Linear Model when
+the identity function is used as the activation function.
+
+Suppose a $n$-dimensional vector $\mathbf{y}$ is assumed to follow a
+distribution $\mathcal{P}$, where $\mathcal{P}$ belongs to the exponential
+family of distributions. Then, given a design matrix $\mathbf{X} \in
+{\rm I\!R}^{n \times p}$, the Generalized Linear Model for $\mathbf{y}$ is
+composed by the _random component_, given by the probability density function
+associated with the distribution $\mathcal{P}$, the _systematic component_,
+defined by
+$$
+\boldsymbol{\eta} = \mathbf{X} \boldsymbol{\beta},
+$$ {#eq-syst-comp}
+and a (canonical) link function $g(\cdot)$ such that
+$$
+\boldsymbol{\mu} = g(\boldsymbol{\eta}).
+$$ {#eq-link-f}
+Once we estimate the parameters $\boldsymbol{\beta}$, we have
+$$
+\hat{\mathbf{y}} = g( \mathbf{X} \hat{\boldsymbol{\beta}} ).
+$$
+
+Define now our Neural Network model having a single hidden layer with $M$
+units. The activation function for the hidden layer is $f_h(x) = g(x)$, that is,
+the same as the identity function. The weights we want to find are
+$\mathbf{W}^{(1)} \in {\rm I\!R}^{p \times 1}$, and $\mathbf{W}^{(2)} \in
+{\rm I\!R}^{M \times n}$. The activation function for the activation layer is
+the previously mentioned canonical link function. Finally, let the loss be the
+deviance residual associated with the distribution $\mathcal{P}$, and the cost
+function be the average of the losses. Then, the mathematical representation of
+the Neural Network becomes
+$$
+\mathbf{z}^{(1)} = \mathbf{X} \mathbf{W}^{(1)} = \mathbf{a}^{(1)},
+$$ {#eq-example-glm-nn-linear}
+because the activation function for the hidden layer is the identity.
+Then, we have
+$$
+\mathbf{z}^{(2)} = \mathbf{a}^{(1)} \mathbf{W}^{(2)}
+$$ {#eq-example-glm-nn-hidden}
+$$
+\mathbf{y} = \mathbf{a}^{(2)} = g( \mathbf{\mathbf{z}^{(2)}} ).
+$${#eq-example-glm-nn-out}
+However, note that, by combining [-@eq-example-glm-nn-linear],
+[-@eq-example-glm-nn-hidden], and [-@eq-example-glm-nn-out] we get
+\begin{align*}
+\mathbf{y} & = g( \mathbf{\mathbf{z}^{(2)}} ) \\
+& = g( \mathbf{a}^{(1)} \mathbf{W}^{(2)} ) \\
+& = g( \mathbf{X} \underbrace{\mathbf{W}^{(1)} \mathbf{W}^{(2)}}_{{\rm I\!R}_{p
+\times 1}} ),
+\end{align*}
+which yields to optimal weights (see [Fitting a Neural Network](#subsec:fit-nn)
+ and [Backpropagation](#subsec:backpro), for more information on how to fit a
+ neural network model) satisfying
+$$
+\underbrace{\mathbf{W}^{(1)} \mathbf{W}^{(2)}}_{{\rm I\!R}_{p
+\times 1}} = \hat{\boldsymbol{\beta}},
+$$
+where $\hat{\boldsymbol{\beta}}$ is the Maximum Likelihood Estimator for
+$\boldsymbol{\beta}$ that can be obtained using the Iterative Reweighted Least
+Squares for the model defined by the probability density function associated
+with the distribution $\mathcal{P}$, the systematic component
+[-@eq-syst-comp] and a (canonical) link function [-@eq-link-f].
+
+### Cost functions
+
+Whenever we want to fit a neural network to a dataset we need to specify a
+_Cost_ function, which is usually based on _loss_ functions. A loss function, in
+the context of Neural Network models, measures how far our predictions
+$f(\mathbf{x}; \mathbf{W})$ are from the true value $y$. Examples of commonly
+used loss functions, for a single observation, are the mean square error loss
+and the binomial deviance defined, respectively, as
+$$
+L(\mathbf{w}, \mathbf{x}; y) = \frac{1}{2} (f(\mathbf{x}; \mathbf{w}) - y)^{2},
+$$ {#eq-loss-mse}
+and
+$$
+L(\mathbf{W}, \mathbf{x}; y) = y \log \left( \frac{y}{f(\mathbf{x}, \mathbf{w})}
+\right) + 
+(1 - y) \log \left( \frac{1 - y}{1 - f(\mathbf{x}, \mathbf{w})} \right).
+$$ {#eq-loss-bdev}
+The loss function [-@eq-loss-mse] is usually employed when the output (response)
+variable assumes continuous values, while the [-@eq-loss-bdev] is used for binary
+output variables.
+
+After choosing an appropriate loss function, the cost function is defined as the
+average of the loss function over all the observation, that is
+$$
+C(\mathbf{y}; \mathbf{x}, \mathbf{W}) = \frac{1}{n} \sum_{i = 1}^{n}
+L(\mathbf{w_i, \mathbf{x}_i; y_i}) + \lambda J(\mathbf{W}),
+$$
+where $J(\mathbf{W})$ is a non-negative regularization term and $\lambda \geq
+0$ is a tuning parameter. 
+
+In practice, we may have a regularization term for each layer, each one having
+its own $\lambda$. Some commonly used regularization terms are 
+$$
+J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert^2,
+$$
+and
+$$
+J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert,
+$$
+where $K$ is the number of layers of our neural network model, and
+$\mathbf{w}^{(k)}$ is the vector of weights from the units in the layer $L_k$ to
+the layer $L_{k + 1}$. Note that, these two regularization terms are analogous
+to the Ridge and Lasso penalizations, and they play the exact same role in
+neural networks as its analogous versions do for the linear models
+[@efron2016computer]. Mixtures of these two regularization terms, as in the
+elastic net [@zou2005regularization], are also common.
+
+### Fitting a Neural Network  {#subsec:fit-nn}
+
+Supposing a user has set the number of layers, units, an activation function and
+a loss function, to fit a neural network we seek the set of weights $\mathbf{W}
+= \{ \mathbf{W}^{(1)}, \ldots, \mathbf{W}^{(k - 1)} \}$ such that the cost
+function is minimized, that is
+$$ 
+\min_{\mathbf{W}} \left \{ \mathcal{C}(\mathbf{y}; \mathbf{X}, \mathbf{W}) \right \}.
+$$
+Therefore, the neural network fit has turned into an optimization problem. The
+most common algorithm used to solve this optimization problem is the
+Backpropagation algorithm, which is described in the next section for a general
+situation.
+
+### Backpropagation {#subsec:backpro}
+
+Backpropagation (or gradient descent) is the method used to find the weights
+which minimize the chosen cost and loss functions for a given neural network. It
+is an iterative algorithm that is guaranteed to converge whenever the cost
+function has a single local minima [@efron2016computer]. However, even if the
+cost function does not have a single local minima, the algorithm works fairly
+well. The updates for a weight matrix, $\mathbf{W}^{(k)}$ let's say, is done as
+follows
+$$
+\mathbf{W}^{(k)} = \mathbf{W}^{(k)} - \alpha \frac{\partial
+\mathcal{C}(\mathbf{y}; \mathbf{X}, \mathbf{W})}{\partial \mathbf{W}^{(k)}},
+$$ {#eq-iter}
+where $\alpha$ is a tuning parameter called _learning rate_.  The name
+backpropagation comes from the fact that the derivatives (or gradients) are
+computed according to something called a _computation graph_ in a backward
+fashion. It is heavily based on the chain rule for differentiation.
+
+Given initial values for the $\mathbf{W}$ matrices, the method repeats the
+update rule [-@eq-iter] until convergence. Provided that the columns of the design
+matrix are rescaled to mean 0 and variance 1, @hastie2009elements suggest the
+use of random starting values for the weights as uniform random variables on the
+interval $[-.75, .75]$.
+
+## Implementation {#sec:imple}
+
+I created functions for the implementation of a Neural Network with a single
+hidden layer model for generic activation functions. The implementation
+considers the cost function defined as
+$$
+C(\mathbf{y}; \mathbf{X}, \mathbf{Y}) = \frac{1}{n} \lVert \mathbf{y} -
+\hat{\mathbf{y}} \rVert^2.
+$$
+
+The inputs for the implemented function are:
+
+* A design matrix $\mathbf{X}$, including the columns of ones for the intercept;
+
+* A column vector $\mathbf{y}$ containing the response variable;
+
+* The number of units for the hidden layer;
+
+* The activation function for the hidden layer;
+
+* The activation function for the output layer;
+
+* A scalar for the learning rate $\alpha$;
+
+* Two control parameters for the convergence of the algorithm. The maximum
+  number of iterations allowed, and a relative error $\epsilon$ which controls
+  when to stop the iteration algorithm.
+
+The function returns a `list` of size 5. Its first element is the predicted
+vector for $\mathbf{y}$, the second contains the values of the cost function for
+each iteration of the algorithm. The third position of this `list` stores the
+weight matrices $\mathbf{W}^{(1)}$ and $\mathbf{W}^{(2)}$, while the last two
+positions store the number of iterations until attain the convergence and a
+string indicating whether the algorithm converged or not, respectively.
+
+See below the implementation of some activation functions (and their
+derivatives)
+```{R activation_funs}
+#| eval: false
+#| echo: true
+
+##--- activation functions and their derivatives ----
+
+## ReLU
+relu <- function(x) {
+    pmax(x, 0)
+}
+
+## derivative leaky ReLU
+d_relu <- function(x) {
+    ifelse(x > 0, 1, 0)
+}
+
+## leaky ReLU
+lrelu <- function(x) {
+    pmax(x * .01, x)
+}
+
+## derivative leaky ReLU
+d_lrelu <- function(x) {
+    ifelse(x > 0, 1, .01)
+}
+
+## derivative tanh
+d_tanh <- function(x) {
+    1 - (tanh(x)^2)
+}
+
+## derivative logit
+d_logit <- function(x) {
+    plogis(x) * ( 1 - plogis(x) )
+}
+
+## derivative identity
+d_ident <- function(x) {
+    pmax( -2 * abs(x), 1 )
+}
+```
+
+Now, let's implement some helper functions to fit our neural network
+models. First, the cost function used in our examples is given by
+```{R cost_fun}
+#| echo: true
+#| eval: false
+
+## cost function
+cost_f <- function(y, yhat) {
+    crossprod(yhat - y) / NROW(y)
+}
+```
+
+The implementation of the functions that will need to be executed at each step
+of the optimization algorithm are defined below. `compute_nn` computes the
+hidden layers given the matrix of covariates (or features) `X`, the list
+containing the the weights `W` associated to each layer connection, and two
+activation functions `act_hidden` and `act_out` for the hidden and output
+layers, respectively (this is a the implementation for a 2 layers network).  The
+`compute_grad` function computes the gradient and needs some further information
+like `y` (the response variable), `n` the sample size, and the derivatives of
+the activation functions. `update_aux` and `update_w` are helper functions used
+to update the weights.
+```{R aux_funs}
+#| echo: true
+#| eval: false
+
+##--- functiosn to fit the neural network ----
+
+## computing the forward step of the neural network
+compute_nn <- function(X, W, act_hidden, act_out) {
+    Z <- vector(mode = "list", length = 2)
+    
+    Z[[1]] <- X %*% W[[1]]
+    A <- act_hidden(Z[[1]])
+
+    Z[[2]] <- A %*% W[[2]]
+
+    return( list(y = act_out(Z[[2]]),
+                 z = Z) )
+}
+
+## computing the gradient of the neural network
+compute_grad <- function(y, X, W, act_hidden, act_out,
+                         d1_hidden, d1_out, n) {
+    nn    <- compute_nn(X, W, act_hidden, act_out)
+    aux_out <- (nn$y - y) * d1_out(nn$z[[2]])
+    aux_hid <- tcrossprod(aux_out, W[[2]]) *
+        d1_hidden(nn$z[[1]])
+    
+    return(
+        list(crossprod(X, aux_hid) / n,
+             crossprod(act_hidden(nn$z[[1]]), aux_out) / n)
+    )
+}
+
+## aux function for updating W
+update_aux <- function(w, dw, alpha) {
+    w - alpha * dw
+}
+
+## update the weights of a neural network
+update_w <- function(W, alpha, y, X, act_hidden, act_out,
+                     d1_hidden, d1_out, n) {
+
+    grad_w <- compute_grad(y, X, W, act_hidden, act_out,
+                           d1_hidden, d1_out, n)
+    
+    return( Map(f = update_aux, w = W,
+                dw = grad_w, alpha = alpha) )
+}
+```
+
+Finally, all these functions previously describer are used to build the `fit_nn`
+function (which is used to compute the optimal weights for the neural
+network). The `alpha` is the $\alpha$ previously mentioned in this post, `maxit`
+and `eps` are parameters used in the optimization process.  The first one stands
+for the maximum number of iterations to be used in the optimization process,
+while the second stand for the "optimization error". That is, if, from one
+iteration to another, the change between the weights does not exceed `eps`, then
+we consider that the algorithm converged and a (maybe local) optimum has been
+found.
+```{R fit_nn_fun}
+#| echo: true
+#| eval: false
+
+fit_nn <- function(y, X, hid_units,
+                   act_hidden, act_out,
+                   d1_hidden, d1_out,
+                   alpha = .25,
+                   maxit = 500L,
+                   eps   = 1e-05) {
+    m <- hid_units
+    p <- ncol(X)
+    N <- NROW(y)
+
+    
+    W <- list(matrix(runif(m * p, -.75, .75),
+                     ncol = m, nrow = p),
+              matrix(runif(m, -.75, .75), ncol = 1))
+
+    nn   <- vector(mode = "list", length = maxit)
+    cost <- vector(mode = "numeric", length = maxit)
+
+    ## initialiazing
+    nn[[1]] <- compute_nn(X, W, act_hidden, act_out)
+
+    cost[1] <- cost_f(y, nn[[1]]$y)
+    
+    for( i in seq_len(maxit)[-1] ) {
+        W <- update_w(W, alpha, y, X,
+                      act_hidden, act_out,
+                      d1_hidden, d1_out,
+                      n = N)
+        
+        nn[[i]] <- compute_nn(X, W, act_hidden, act_out)
+        cost[i] <- cost_f(y, nn[[i]]$y)
+        
+        if( abs(cost[i] - cost[i - 1]) < eps ) {
+            output <- list(nn   = nn[[i - 1]],
+                           cost = cost[1:(i - 1)],
+                           W    = W,
+                           it   = (i - 1),
+                           conv = "yes")
+            break
+        }
+    }
+
+    if( i == maxit ) {
+        output <- list(yhat = nn[[maxit]]$y,
+                       cost = cost[1:maxit],
+                       W    = W,
+                       it   = maxit,
+                       conv = "no")
+    }
+
+    return(output)
+}
+```
+
+Having all these functions, we can play with some numerical examples!
+
+## Numerical Examples {#sec:ne}
+
+```{R my_nn}
+##--- activation functions and their derivatives ----
+
+## ReLU
+relu <- function(x) {
+    pmax(x, 0)
+}
+
+## derivative leaky ReLU
+d_relu <- function(x) {
+    ifelse(x > 0, 1, 0)
+}
+
+## leaky ReLU
+lrelu <- function(x) {
+    pmax(x * .01, x)
+}
+
+## derivative leaky ReLU
+d_lrelu <- function(x) {
+    ifelse(x > 0, 1, .01)
+}
+
+## derivative tanh
+d_tanh <- function(x) {
+    1 - (tanh(x)^2)
+}
+
+## derivative logit
+d_logit <- function(x) {
+    plogis(x) * ( 1 - plogis(x) )
+}
+
+## derivative identity
+d_ident <- function(x) {
+    pmax( -2 * abs(x), 1 )
+}
+
+##--- functiosn to fit the neural network ----
+
+## computing the forward step of the neural network
+compute_nn <- function(X, W, act_hidden, act_out) {
+    Z <- vector(mode = "list", length = 2)
+    
+    Z[[1]] <- X %*% W[[1]]
+    A <- act_hidden(Z[[1]])
+
+    Z[[2]] <- A %*% W[[2]]
+
+    return( list(y = act_out(Z[[2]]),
+                 z = Z) )
+}
+
+## computing the gradient of the neural network
+compute_grad <- function(y, X, W, act_hidden, act_out,
+                         d1_hidden, d1_out, n) {
+    nn    <- compute_nn(X, W, act_hidden, act_out)
+    aux_out <- (nn$y - y) * d1_out(nn$z[[2]])
+    aux_hid <- tcrossprod(aux_out, W[[2]]) *
+        d1_hidden(nn$z[[1]])
+    
+    return(
+        list(crossprod(X, aux_hid) / n,
+             crossprod(act_hidden(nn$z[[1]]), aux_out) / n)
+    )
+}
+
+## aux function for updating W
+update_aux <- function(w, dw, alpha) {
+    w - alpha * dw
+}
+
+## update the weights of a neural network
+update_w <- function(W, alpha, y, X, act_hidden, act_out,
+                     d1_hidden, d1_out, n) {
+
+    grad_w <- compute_grad(y, X, W, act_hidden, act_out,
+                           d1_hidden, d1_out, n)
+    
+    return( Map(f = update_aux, w = W,
+                dw = grad_w, alpha = alpha) )
+}
+
+## cost function
+cost_f <- function(y, yhat) {
+    crossprod(yhat - y) / NROW(y)
+}
+
+fit_nn <- function(y, X, hid_units,
+                   act_hidden, act_out,
+                   d1_hidden, d1_out,
+                   alpha = .25,
+                   maxit = 500L,
+                   eps   = 1e-05) {
+    m <- hid_units
+    p <- ncol(X)
+    N <- NROW(y)
+
+    
+    W <- list(matrix(runif(m * p, -.75, .75),
+                     ncol = m, nrow = p),
+              matrix(runif(m, -.75, .75), ncol = 1))
+
+    nn   <- vector(mode = "list", length = maxit)
+    cost <- vector(mode = "numeric", length = maxit)
+
+    ## initialiazing
+    nn[[1]] <- compute_nn(X, W, act_hidden, act_out)
+
+    cost[1] <- cost_f(y, nn[[1]]$y)
+    
+    for( i in seq_len(maxit)[-1] ) {
+        W <- update_w(W, alpha, y, X,
+                      act_hidden, act_out,
+                      d1_hidden, d1_out,
+                      n = N)
+        
+        nn[[i]] <- compute_nn(X, W, act_hidden, act_out)
+        cost[i] <- cost_f(y, nn[[i]]$y)
+        
+        if( abs(cost[i] - cost[i - 1]) < eps ) {
+            output <- list(nn   = nn[[i - 1]],
+                           cost = cost[1:(i - 1)],
+                           W    = W,
+                           it   = (i - 1),
+                           conv = "yes")
+            break
+        }
+    }
+
+    if( i == maxit ) {
+        output <- list(yhat = nn[[maxit]]$y,
+                       cost = cost[1:maxit],
+                       W    = W,
+                       it   = maxit,
+                       conv = "no")
+    }
+
+    return(output)
+}
+```
+
+### Example 1: Equivalence between Neural Network and Linear Model
+
+```{R toy-sim-1}
+##--- numerical examples ----
+
+##--- example 1 ----
+
+set.seed(123)
+
+n <- 2000
+
+x1 <- rnorm(n)
+x2 <- as.numeric( scale( rexp(n) ) )
+
+y <- 3 + 3 * x1 + 1.5 * x2 + rnorm(n, sd = .5)
+
+my_x <- cbind( rep(1, n), x1, x2 )
+colnames(my_x) <- NULL
+
+dt <- as.data.frame( cbind(y, my_x[, 2:3]) )
+names(dt) <- c("y", "x1", "x2")
+
+m <- 6
+
+fit_1 <-
+    fit_nn(y = y, X = my_x,
+           hid_units = m,
+           act_hidden = identity,
+           act_out    = identity,
+           d1_hidden  = d_ident,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-16)
+
+beta_hat <- coef(lm(y ~ x1 + x2, data = dt))
+
+tbl_1 <- as.data.frame(cbind(beta_hat,
+                             fit_1$W[[1]] %*% fit_1$W[[2]]))
+names(tbl_1) <- c("$\\hat{\\boldsymbol{\\beta}}$",
+                  "$\\mathbf{W}^{(1)} \\mathbf{W}^{(2)}$")
+rownames(tbl_1) <- NULL
+```
+
+Consider a simulated dataset where
+$$
+\mathbf{y} \sim N(\mathbf{X} \boldsymbol{\beta}, \sigma^2 \mathbf{I}_n),
+$$
+where $\mathbf{X} \in {\rm I\!R}^{n \times 3}$, with the first column being the
+intercept term. To simulate the model we used $\boldsymbol{\beta} = (2, 3,
+1.5)$. Additionally, suppose $n = 2000$. 
+
+Considering the identity function as the activation function for both layers,
+the goal here is to show that the $\mathbf{W}^{(1)} \mathbf{W}^{(2)} =
+\hat{\boldsymbol{\beta}}$, where $\hat{\boldsymbol{\beta}}$ is the least squares
+solution for a linear model established as $\mathbf{y} = \mathbf{X}
+\boldsymbol{\beta}$, and $\mathbf{W}^{(1)}, \, \mathbf{W}^{(2)}$ are the optimal
+weights according to the Neural Network fitted to the data, as proved in the
+subsection \@ref(subsec:act).
+
+@tbl-ls displays the results from the simulated example. The two different
+approaches have yielded the exactly same results. If we were to make
+predictions, the two methods would provide the same predicted values under these
+circumstances.
+
+```{R}
+#| label: tbl-ls
+#| tbl-cap: "Comparing the LS solution and the product of the neural network weight matrices."
+knitr::kable(tbl_1,
+	         digits = 3, align = "c")
+```
+
+See below the code used on this example.
+```{R toy-sim-1_print}
+#| echo: true
+#| eval: false
+
+##--- numerical examples ----
+
+##--- example 1 ----
+
+set.seed(123)
+
+n <- 2000
+
+x1 <- rnorm(n)
+x2 <- as.numeric( scale( rexp(n) ) )
+
+y <- 3 + 3 * x1 + 1.5 * x2 + rnorm(n, sd = .5)
+
+my_x <- cbind( rep(1, n), x1, x2 )
+colnames(my_x) <- NULL
+
+dt <- as.data.frame( cbind(y, my_x[, 2:3]) )
+names(dt) <- c("y", "x1", "x2")
+
+m <- 6
+
+fit_1 <-
+    fit_nn(y = y, X = my_x,
+           hid_units = m,
+           act_hidden = identity,
+           act_out    = identity,
+           d1_hidden  = d_ident,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-16)
+
+beta_hat <- coef(lm(y ~ x1 + x2, data = dt))
+
+tbl_1 <- as.data.frame(cbind(beta_hat,
+                             fit_1$W[[1]] %*% fit_1$W[[2]]))
+names(tbl_1) <- c("$\\hat{\\boldsymbol{\\beta}}$",
+                  "$\\mathbf{W}^{(1)} \\mathbf{W}^{(2)}$")
+rownames(tbl_1) <- NULL
+```
+
+### Example 2: Nonlinear relationship and number of hidden units
+
+```{R toy-sim-2}
+##--- example 2 ----
+
+set.seed(124)
+
+x12 <- rnorm(n)
+
+y2 <- 5 - 2.5 * (x12^2) + rnorm(n, sd = .5)
+
+my_x2 <- cbind(rep(1, n), x12)
+colnames(my_x2) <- NULL
+
+dt2 <- as.data.frame( cbind(y2, my_x2[, 2]) )
+names(dt2) <- c("y", "x1")
+
+n_pred <- 4000
+
+## fitting linear model
+
+my_lm2 <- lm(y ~ x1, data = dt2)
+
+## fitting neural network with tanh as the activation function for the hidden
+## layer - 5 hidden units
+fit_2 <-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 5,
+           act_hidden = tanh,
+           act_out    = identity,
+           d1_hidden  = d_tanh,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+## fitting neural network with tanh as the activation function for the hidden
+## layer - 15 hidden units
+fit_3 <-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 15,
+           act_hidden = tanh,
+           act_out    = identity,
+           d1_hidden  = d_tanh,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+## fitting neural network with leaky ReLU as the activation function for the
+## hidden layer - 10 hidden units
+fit_4 <-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 10,
+           act_hidden = lrelu,
+           act_out    = identity,
+           d1_hidden  = d_lrelu,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+pred_data <- data.frame(x = seq(from = min(x12), to = max(x12),
+                                length.out = n_pred))
+
+pred_data <- transform(pred_data,
+                       lm = coef(my_lm2)[[1]] + coef(my_lm2)[[1]] * x)
+
+pred_data <- transform(pred_data,
+                       nn_tanh_1 =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_2$W,
+                                      act_hidden = tanh,
+                                      act_out = identity)$y)
+
+pred_data <- transform(pred_data,
+                       nn_tanh_2 =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_3$W,
+                                      act_hidden = tanh,
+                                      act_out = identity)$y)
+
+pred_data <- transform(pred_data,
+                       nn_lrelu =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_4$W,
+                                      act_hidden = lrelu,
+                                      act_out = identity)$y)
+
+setDT(pred_data)
+
+pred_data <- melt(pred_data, id = 1,
+                  value.name = "pred",
+                  variable.name = "method")
+
+pred_data[, method := fcase(method == "nn_tanh_1", "tanh - 5",
+                            method == "nn_tanh_2", "tanh - 15",
+                            method == "nn_lrelu", "leaky ReLU - 10",
+                            default = "lm")]
+```
+
+Consider now the following model
+$$
+y_i = \beta_0 + \beta_1 (x^2) + \varepsilon_i.
+$$
+
+In practice, we do not know before-hand the relationship between the response
+and explanatory variables is not linear. In fig-fit-nn2, we show the
+fitted curves the linear model and for neural networks under different settings
+for a dataset simulated from this example. The Neural Network deals nicely with
+the nonlinearity at the cost of possibly overfit the data.
+```{R}
+#| label: fig-fit-nn2
+#| fig-cap: "Different models fitted to the same simulated dataset."
+
+ggplot(data = pred_data) +
+    geom_point(data = dt2, aes(x = x1, y = y),
+               alpha = .5) +
+    geom_line(aes(x = x, y = pred, color = method),
+              lwd = 1.05) +
+    scale_color_discrete(name = NULL) +
+    theme_bw() +
+    theme(
+        legend.position = "bottom",
+        legend.margin = margin(6, 6, 6, 6)
+    ) +
+    labs(x = "X", y = "Y")
+```
+
+See the code used on this example below.
+```{R toy-sim-2_print}
+#| eval: false
+#| echo: true
+##--- example 2 ----
+
+set.seed(124)
+
+x12 <- rnorm(n)
+
+y2 <- 5 - 2.5 * (x12^2) + rnorm(n, sd = .5)
+
+my_x2 <- cbind(rep(1, n), x12)
+colnames(my_x2) <- NULL
+
+dt2 <- as.data.frame( cbind(y2, my_x2[, 2]) )
+names(dt2) <- c("y", "x1")
+
+n_pred <- 4000
+
+## fitting linear model
+
+my_lm2 <- lm(y ~ x1, data = dt2)
+
+## fitting neural network with tanh as the activation function for the hidden
+## layer - 5 hidden units
+fit_2 <-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 5,
+           act_hidden = tanh,
+           act_out    = identity,
+           d1_hidden  = d_tanh,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+## fitting neural network with tanh as the activation function for the hidden
+## layer - 15 hidden units
+fit_3 <-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 15,
+           act_hidden = tanh,
+           act_out    = identity,
+           d1_hidden  = d_tanh,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+## fitting neural network with leaky ReLU as the activation function for the
+## hidden layer - 10 hidden units
+fit_4 <-
+    fit_nn(y = y2, X = my_x2,
+           hid_units  = 10,
+           act_hidden = lrelu,
+           act_out    = identity,
+           d1_hidden  = d_lrelu,
+           d1_out     = d_ident,
+           alpha = .05,
+           maxit = 1000L,
+           eps   = 1e-04)
+
+pred_data <- data.frame(x = seq(from = min(x12), to = max(x12),
+                                length.out = n_pred))
+
+pred_data <- transform(pred_data,
+                       lm = coef(my_lm2)[[1]] + coef(my_lm2)[[1]] * x)
+
+pred_data <- transform(pred_data,
+                       nn_tanh_1 =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_2$W,
+                                      act_hidden = tanh,
+                                      act_out = identity)$y)
+
+pred_data <- transform(pred_data,
+                       nn_tanh_2 =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_3$W,
+                                      act_hidden = tanh,
+                                      act_out = identity)$y)
+
+pred_data <- transform(pred_data,
+                       nn_lrelu =
+                           compute_nn(X = cbind(rep(1, 4000),
+                                                x),
+                                      W = fit_4$W,
+                                      act_hidden = lrelu,
+                                      act_out = identity)$y)
+
+setDT(pred_data)
+
+pred_data <- melt(pred_data, id = 1,
+                  value.name = "pred",
+                  variable.name = "method")
+
+pred_data[, method := fcase(method == "nn_tanh_1", "tanh - 5",
+                            method == "nn_tanh_2", "tanh - 15",
+                            method == "nn_lrelu", "leaky ReLU - 10",
+                            default = "lm")]
+
+ggplot(data = pred_data) +
+    geom_point(data = dt2, aes(x = x1, y = y),
+               alpha = .5) +
+    geom_line(aes(x = x, y = pred, color = method),
+              lwd = 1.05) +
+    scale_color_discrete(name = NULL) +
+    theme_bw() +
+    theme(
+        legend.position = "bottom",
+        legend.margin = margin(6, 6, 6, 6)
+    ) +
+    labs(x = "X", y = "Y")
+
+```
+
+## Final Thoughts
+
+The Neural Network Regression models are very interesting but certainly are not
+magical as it is sold in the market. By the end of the day, these models consist
+of simple linear algebra allied to the use of element-wise nonlinear functions
+and optimization algorithms. Speaking on optimization algorithm, the gradient
+descent looks like a fixed-point iteration algorithm. These kind of algorithms
+have the advantage of not need the second derivative of the functions, however
+their convergence can be slow. I believe that using different learning rates for
+different parameters could improve the speed on which the algorithm converges.
+
+Although these models do not make any distributional assumption on the data, we
+can easily make it more suitable for certain distributions by working with the
+cost and activation functions on an appropriate fashion.
+
+There are several variants of these models suited for different problems, like
+text and image classification, for example. The idea is the same, what changes
+is the way the researchers deal with the hidden layers. I think an interesting
+application is to try to use neural networks to estimate non-parametrically
+covariance matrices for spatial data.
+
+# References
