@@ -4,6 +4,30 @@
 :::
 
 ::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-arqub2023survival .csl-entry}
+Arqub, S. A., Bashir, R., Obeng, K., **Godoy, L. da C.**, Kuo, C.-L.,
+Upadhyay, M., & Yadav, S. (2023). Survival and failure rate of lower
+lingual bonded retainers: A retrospective cohort evaluation.
+*Orthodontics & Craniofacial Research*, *26*(2), 256--264.
+https://doi.org/<https://doi.org/10.1111/ocr.12608>
+:::
+
+::: {#ref-frank2023tolerability .csl-entry}
+Frank, S., Ibrahim, B., Feng, R., Bidra, A., Lafreniere, D., Kuo, C.-L.,
+**Godoy, L. da C.**, & Falcone, T. E. (2023). Tolerability of nasal and oral
+povidone-iodine antisepsis for in-office procedures. *Clinical
+Otolaryngology*, *48*(4), 696--699.
+https://doi.org/<https://doi.org/10.1111/coa.14045>
+:::
+
+::: {#ref-kuo2023association .csl-entry}
+Kuo, C.-L., Liu, R., **Godoy, L. da C.**, Pilling, L. C., Fortinsky, R. H.,
+& Brugge, D. (2023). Association between residential exposure to air
+pollution and incident coronary heart disease is not mediated by
+leukocyte telomere length: A UK biobank study. *Toxics*, *11*(6).
+<https://doi.org/10.3390/toxics11060489>
+:::
+
 ::: {#ref-leonard2023dental .csl-entry}
 Leonard, J. F., Taxel, P., Kuo, C.-L., **Godoy, L. da C.**, & Freilich, M.
 (2023). Dental implant and bone augmentation treatment in
@@ -12,20 +36,18 @@ bone-compromised patients: Oral health-related quality of life outcomes.
 <https://doi.org/10.1016/j.prosdent.2023.01.011>
 :::
 
+::: {#ref-turshudzhyan2023alpha .csl-entry}
+Turshudzhyan, A., **Godoy, L. da C.**, Kuo, C.-L., & Wu, G. Y. (2023). Alpha
+feto-protein expression trends for screening early hepatocellular
+carcinoma. *Gene Expression*, *000*, 0--0.
+:::
+
 ::: {#ref-arqub2022association .csl-entry}
 Arqub, S. A., Banankhah, S., Sharma, R., **Godoy, L. da C.**, Kuo, C.-L.,
 Ahmed, M., Alfardan, M., & Uribe, F. (2022). Association between initial
 complexity, frequency of refinements, treatment duration, and outcome in
 invisalign orthodontic treatment. *American Journal of Orthodontics and
 Dentofacial Orthopedics*. <https://doi.org/10.1016/j.ajodo.2022.06.017>
-:::
-
-::: {#ref-arqub2022survival .csl-entry}
-Arqub, S. A., Bashir, R., Obeng, K., **Godoy, L. da C.**, Kuo, C.-L.,
-Upadhyay, M., & Yadav, S. (2022). Survival and failure rate of lower
-lingual bonded retainers: A retrospective cohort evaluation.
-*Orthodontics & Craniofacial Research*.
-<https://doi.org/10.1111/ocr.12608>
 :::
 
 ::: {#ref-Rpkg:smile .csl-entry}
