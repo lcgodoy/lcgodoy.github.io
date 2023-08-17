@@ -20,6 +20,22 @@ Otolaryngology*, *48*(4), 696--699.
 https://doi.org/<https://doi.org/10.1111/coa.14045>
 :::
 
+::: {#ref-harandi2023assessment .csl-entry}
+Harandi, M. T., Abu Arqub, S., Warren, E., Kuo, C.-L., **Godoy, L. da C.**,
+Mehta, S., Feldman, J., Upadhyay, M., & Yadav, S. (2023). Assessment of
+clear aligner accuracy of 2 clear aligners systems. *American Journal of
+Orthodontics and Dentofacial Orthopedics*.
+https://doi.org/<https://doi.org/10.1016/j.ajodo.2023.05.028>
+:::
+
+::: {#ref-de2023association .csl-entry}
+Jesus, M. de, Maheshwary, A., Kumar, M., Cunha Godoy, L. da, Kuo, C.-L.,
+& Grover, P. (2023). Association of electrocardiographic and
+echocardiographic variables with neurological outcomes after ischemic
+stroke. *American Heart Journal Plus: Cardiology Research and Practice*,
+100313.
+:::
+
 ::: {#ref-kuo2023association .csl-entry}
 Kuo, C.-L., Liu, R., **Godoy, L. da C.**, Pilling, L. C., Fortinsky, R. H.,
 & Brugge, D. (2023). Association between residential exposure to air
