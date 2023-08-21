@@ -10,7 +10,7 @@ execute:
 website:
   title: "Lucas Godoy"
   search: true
-  cookie-consent: true
+  cookie-consent: false
   twitter-card: true
   open-graph: true
   site-url: https://lcgodoy.me
