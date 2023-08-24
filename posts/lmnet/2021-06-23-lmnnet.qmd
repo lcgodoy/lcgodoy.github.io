@@ -14,7 +14,8 @@ summary: |
   introduction of Neural Network Regression for statisticians. Additionally, we
   elucidade how the famous Backpropagation algorithm is used to estimate the
   parameters associated with a Neural Network model
-lastmod: '`r Sys.Date()`'
+  lastmod: '`r Sys.Date()`'
+html-math-method: mathml
 bibliography: ref-nnet.bib
 biblio-style: asa
 ---
