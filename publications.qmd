@@ -4,12 +4,39 @@
 :::
 
 ::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-abu2023ridge .csl-entry}
+Abu Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L., Godoy, L.
+da C., & Uribe, F. (2023). Ridge mini-implants, a versatile
+biomechanical anchorage device whose success is significantly enhanced
+by splinting: A clinical report. *Progress in Orthodontics*, *24*(1),
+27.
+:::
+
+::: {#ref-abu2023insight .csl-entry}
+Abu-Arqub, S., Ahmida, A., **Godoy, L. da C.**, Kuo, C.-L., Upadhyay, M., &
+Yadav, S. (2023). Insight into clear aligner therapy protocols and
+preferences among members of the american association of orthodontists
+in the united states and canada. *The Angle Orthodontist*.
+:::
+
+::: {#ref-andreyeva2023federal .csl-entry}
+Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L. (2023).
+Federal nutrition assistance for young children: Under-utilized and
+unequally accessed. *American Journal of Preventive Medicine*.
+:::
+
 ::: {#ref-arqub2023survival .csl-entry}
 Arqub, S. A., Bashir, R., Obeng, K., **Godoy, L. da C.**, Kuo, C.-L.,
 Upadhyay, M., & Yadav, S. (2023). Survival and failure rate of lower
 lingual bonded retainers: A retrospective cohort evaluation.
 *Orthodontics & Craniofacial Research*, *26*(2), 256--264.
 https://doi.org/<https://doi.org/10.1111/ocr.12608>
+:::
+
+::: {#ref-duong2023survey .csl-entry}
+Duong, C., Zhu, Q., Aseltine Jr, R. H., Kuo, C.-L., **Godoy, L. da C.**, &
+Kaufman, B. (2023). A survey on cone-beam computed tomography usage
+among endodontists in the united states. *Journal of Endodontics*.
 :::
 
 ::: {#ref-frank2023tolerability .csl-entry}
