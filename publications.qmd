@@ -21,8 +21,9 @@ in the united states and canada. *The Angle Orthodontist*.
 
 ::: {#ref-andreyeva2023federal .csl-entry}
 Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L. (2023).
-Federal nutrition assistance for young children: Under-utilized and
+Federal nutrition assistance for young children: Underutilized and
 unequally accessed. *American Journal of Preventive Medicine*.
+https://doi.org/<https://doi.org/10.1016/j.amepre.2023.09.008>
 :::
 
 ::: {#ref-arqub2023survival .csl-entry}
