@@ -48,6 +48,14 @@ Otolaryngology*, *48*(4), 696--699.
 https://doi.org/<https://doi.org/10.1111/coa.14045>
 :::
 
+::: {#ref-fryc2023prevalence .csl-entry}
+Fryc, G. A., **Godoy, L. da C.**, Kuo, C.-L., & Lurie, A. G. (2023).
+Prevalence of likely retro-odontoid pseudotumor in patients receiving
+dental CBCT examinations. *Oral Surgery, Oral Medicine, Oral Pathology
+and Oral Radiology*.
+https://doi.org/<https://doi.org/10.1016/j.oooo.2023.11.005>
+:::
+
 ::: {#ref-harandi2023assessment .csl-entry}
 Harandi, M. T., Abu Arqub, S., Warren, E., Kuo, C.-L., **Godoy, L. da C.**,
 Mehta, S., Feldman, J., Upadhyay, M., & Yadav, S. (2023). Assessment of

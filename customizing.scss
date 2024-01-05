@@ -1,0 +1,43 @@
+/*-- scss:defaults --*/
+
+// Import fonts
+// @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=Fira+Mono:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+// @import url('https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Fira+Mono:wght@400;500;700&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+// Colors
+$nav-bk: #394867;
+$my-hl: #FF857F;
+$cream: #FDFBF7;
+// $gray: #64605f;
+// $purple: #9158A2;
+// $orange: #A7A9AC;;
+
+$alt-bg: #AED9E0;
+
+// Base document colors
+$navbar-bg: $nav-bk; // navbar
+// $navbar-fg: $dark-green; // navbar foreground elements
+$navbar-hl: $my-hl; // highlight color when hovering over navbar links
+$body-bg: $cream; // page background 
+// $body-color: $cream; // page text 
+$footer-bg: $cream; // footer 
+$link-color: $my-hl; // hyperlinks 
+
+// Inline code
+// $code-bg: $alt-bg; // inline code background color
+// $code-block-bg: $alt-bg; // inline code background color
+// $code-color: $purple; // inline code text color
+
+// $input-bg: $alt-bg;
+
+// Code blocks
+// $code-block-bg: $cream; // code block background color
+
+/*--- scss:rules --*/
+
+// h1, h2 {
+//   letter-spacing: 5px;
+//   color: $dark-green;
+// }
