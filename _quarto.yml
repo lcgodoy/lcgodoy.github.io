@@ -34,9 +34,10 @@ website:
         
 format:
   html:
-    theme: journal
+    theme:
+      - customizing.scss
+    mainfont: Noto Sans Mono # DM Mono
     toc: true
-    css: styles.css
 
 
 
