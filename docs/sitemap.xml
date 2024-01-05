@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://lcgodoy.me/blog.html</loc>
-    <lastmod>2024-01-05T00:25:54.124Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/index.html</loc>
-    <lastmod>2024-01-05T00:29:24.669Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/posts/jupyter_hpc/jupyter_hpc.html</loc>
-    <lastmod>2024-01-05T00:28:45.109Z</lastmod>
+    <loc>https://lcgodoy.me/publications.html</loc>
+    <lastmod>2024-01-05T00:35:03.260Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/posts/lmnet/2021-06-23-lmnnet.html</loc>
-    <lastmod>2023-10-29T17:34:00.655Z</lastmod>
+    <lastmod>2024-01-05T00:35:02.723Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/index.html</loc>
+    <lastmod>2024-01-05T00:35:01.392Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/blog.html</loc>
+    <lastmod>2024-01-05T00:35:01.167Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/posts/jupyter_hpc/jupyter_hpc.html</loc>
+    <lastmod>2024-01-05T00:35:01.733Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/posts/models/models.html</loc>
-    <lastmod>2024-01-05T00:05:14.693Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/publications.html</loc>
-    <lastmod>2024-01-05T00:25:50.730Z</lastmod>
+    <lastmod>2024-01-05T00:35:02.959Z</lastmod>
   </url>
 </urlset>
