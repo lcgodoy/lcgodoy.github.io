@@ -38,7 +38,3 @@ format:
       - customizing.scss
     mainfont: Noto Sans Mono # DM Mono
     toc: true
-
-comments:
-  giscus:
-    repo: lcgodoy/lcgodoy.github.io
