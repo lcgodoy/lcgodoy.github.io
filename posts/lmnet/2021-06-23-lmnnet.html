@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.553">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -24,7 +24,7 @@ ul.task-list li input[type="checkbox"] {
 }
 /* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span { line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
@@ -60,6 +60,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
+  margin-bottom: 0em;
 }
 .hanging-indent div.csl-entry {
   margin-left:2em;
@@ -100,7 +101,13 @@ div.csl-indent {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -109,6 +116,7 @@ div.csl-indent {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -118,25 +126,19 @@ div.csl-indent {
 
 <meta property="og:title" content="Lucas Godoy - Estimating regression coefficients using a Neural Network (from scratch)">
 <meta property="og:description" content="">
-<meta property="og:image" content="https://lcgodoy.me/posts/lmnet/2021-06-23-lmnnet_files/figure-html/fig-nn1-1.png">
-<meta property="og:site-name" content="Lucas Godoy">
-<meta property="og:image:height" content="594">
-<meta property="og:image:width" content="1014">
+<meta property="og:site_name" content="Lucas Godoy">
 <meta name="twitter:title" content="Lucas Godoy - Estimating regression coefficients using a Neural Network (from scratch)">
 <meta name="twitter:description" content="">
-<meta name="twitter:image" content="https://lcgodoy.me/posts/lmnet/2021-06-23-lmnnet_files/figure-html/fig-nn1-1.png">
-<meta name="twitter:image-height" content="594">
-<meta name="twitter:image-width" content="1014">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Lucas Godoy</span>
     </a>
@@ -148,37 +150,37 @@ div.csl-indent {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="../../index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../publications.html" rel="" target="">
- <span class="menu-text">Publications</span></a>
+    <a class="nav-link" href="../../publications.html"> 
+<span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog.html" rel="" target="">
- <span class="menu-text">Blog</span></a>
+    <a class="nav-link" href="../../blog.html"> 
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../cv.pdf" rel="" target="">
- <span class="menu-text">CV</span></a>
+    <a class="nav-link" href="../../cv.pdf"> 
+<span class="menu-text">CV</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/lcgodoy" rel="" target=""><i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/lcgodoy"> <i class="bi bi-github" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
   <li class="nav-item compact">
-    <a class="nav-link" href="https://twitter.com/ldcgodoy" rel="" target=""><i class="bi bi-twitter" role="img">
+    <a class="nav-link" href="https://twitter.com/ldcgodoy"> <i class="bi bi-twitter" role="img">
 </i> 
- <span class="menu-text"></span></a>
+<span class="menu-text"></span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -241,10 +243,11 @@ div.csl-indent {
   <li><a href="#final-thoughts" id="toc-final-thoughts" class="nav-link" data-scroll-target="#final-thoughts">Final Thoughts</a></li>
   <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
   </ul>
-<div class="toc-actions"><div><i class="bi bi-github"></i></div><div class="action-links"><p><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action">Report an issue</a></p></div></div></nav>
+<div class="toc-actions"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
 <!-- main -->
 <main class="content quarto-banner-title-block" id="quarto-document-content">
+
 
 
 
@@ -255,28 +258,36 @@ div.csl-indent {
 </section>
 <section id="neural-network-regression" class="level2">
 <h2 class="anchored" data-anchor-id="neural-network-regression">Neural Network Regression</h2>
-<p>A neural network is a highly parametrized model that, provided we have enough data, can approximate any functional relationship between a set of <em>features</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐱</mi><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math> and a response variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> (<span class="citation" data-cites="efron2016computer">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span>, pages 151-152). Although there are several possible structures for neural networks, for this post we are going to consider only the <em>feed-forward</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> neural networks. In order to explain how these neural networks are designed, let’s consider its graphical representation (see <a href="#fig-nn1">Figure&nbsp;1</a>). We have vertices, which are called a units (or neurons), ordered horizontally by layers. An edge coming from one vertex can only be connected to vertices associated with “higher” layers. These connections represent a information flow from left to right (hence, the name feed-forward), where each unit computed by 1) giving weights to each of its inputs, 2) calculating the dot product between weights and inputs, 3) adding a constant( usually referred to as <em>bias</em>) to it, and, finally, 4) applying an element-wise <em>activation</em> function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(\cdot)</annotation></semantics></math> to it. These <em>activation functions</em> are used to establish non-linear relationships between units.</p>
+<p>A neural network is a highly parametrized model that, provided we have enough data, can approximate any functional relationship between a set of <em>features</em><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a> <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐱</mi><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math> and a response variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> (<span class="citation" data-cites="efron2016computer">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span>, pages 151-152). Although there are several possible structures for neural networks, for this post we are going to consider only the <em>feed-forward</em><a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a> neural networks. In order to explain how these neural networks are designed, let’s consider its graphical representation (see <a href="#fig-nn1" class="quarto-xref">Figure&nbsp;1</a>). We have vertices, which are called a units (or neurons), ordered horizontally by layers. An edge coming from one vertex can only be connected to vertices associated with “higher” layers. These connections represent a information flow from left to right (hence, the name feed-forward), where each unit computed by 1) giving weights to each of its inputs, 2) calculating the dot product between weights and inputs, 3) adding a constant( usually referred to as <em>bias</em>) to it, and, finally, 4) applying an element-wise <em>activation</em> function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(\cdot)</annotation></semantics></math> to it. These <em>activation functions</em> are used to establish non-linear relationships between units.</p>
 <p>The number of hidden layers as well as the number of units associated with every layer can both be regard as tuning parameters. The design and architecture of a neural network is a complex task. In summary, when having a single hidden layer, the number of units associated with the hidden layer determines the number of parameters associated with the model. <span class="citation" data-cites="efron2016computer">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span> suggest that, under this scenario, it is better to consider several units for the hidden layer and use some kind of regularization to avoid overfitting. Penalizations analogous to the Ridge and Lasso penalty for linear models are often used in the regularization context for neural networks (<span class="citation" data-cites="hastie2015statistical">Hastie, Tibshirani, and Wainwright (<a href="#ref-hastie2015statistical" role="doc-biblioref">2015</a>)</span>, pages 210-211).</p>
 <p>An important remark regarding the neural network models is that they are “pure prediction algorithms”. That is, these models are focused only on prediction, neglecting the estimation, as pointed by <span class="citation" data-cites="efron2020prediction">Efron (<a href="#ref-efron2020prediction" role="doc-biblioref">2020</a>)</span>. The strategy is simple and consists in searching for high predictive accuracy. That being said, these algorithms make no assumption on the probability distribution of the data and, as one of the consequences of losing these assumptions, it is not possible to make interval predictions or to calculate confidence intervals for the “estimated” parameters.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-nn1" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2021-06-23-lmnnet_files/figure-html/fig-nn1-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;1: A <em>feed-forward</em> neural network with a single hidden layer.</figcaption>
+<div id="fig-nn1" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nn1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2021-06-23-lmnnet_files/figure-html/fig-nn1-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nn1-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1: A <em>feed-forward</em> neural network with a single hidden layer.
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <section id="subsec:single" class="level3">
 <h3 class="anchored" data-anchor-id="subsec:single">Single neuron feed-forward networks</h3>
-<p>A single neuron feed-forward network does not possess any hidden layer in its structure. The absence of hidden layers makes these models resemble the statistical models we are most used to, like, for example, the linear regression and logistic regression. By analyzing the graphical representation of a single layer feed-forward network (<a href="#fig-nn2">Figure&nbsp;2</a>), it is easy to see that by taking the identity as the <em>activation function</em>, the functional relationship between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐱</mi><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> considered by the neural network is equivalent to the one used for the general linear model. Considering the same representation, if we take <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mtext mathvariant="normal">logit</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(x) = \textrm{logit}(x)</annotation></semantics></math> (<em>sigmoid</em> function, according to the neural network models literature) and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">y \in \{ 0, 1 \}</annotation></semantics></math>, then the neural network provides the same relationship between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐱</mi><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> as the one used by the logistic regression.</p>
+<p>A single neuron feed-forward network does not possess any hidden layer in its structure. The absence of hidden layers makes these models resemble the statistical models we are most used to, like, for example, the linear regression and logistic regression. By analyzing the graphical representation of a single layer feed-forward network (<a href="#fig-nn2" class="quarto-xref">Figure&nbsp;2</a>), it is easy to see that by taking the identity as the <em>activation function</em>, the functional relationship between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐱</mi><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> considered by the neural network is equivalent to the one used for the general linear model. Considering the same representation, if we take <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mtext mathvariant="normal">logit</mtext><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f(x) = \textrm{logit}(x)</annotation></semantics></math> (<em>sigmoid</em> function, according to the neural network models literature) and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>y</mi><mo>∈</mo><mo stretchy="false" form="prefix">{</mo><mn>0</mn><mo>,</mo><mn>1</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">y \in \{ 0, 1 \}</annotation></semantics></math>, then the neural network provides the same relationship between <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐱</mi><annotation encoding="application/x-tex">\mathbf{x}</annotation></semantics></math> and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>y</mi><annotation encoding="application/x-tex">y</annotation></semantics></math> as the one used by the logistic regression.</p>
 <div class="cell" data-layout-align="center">
 <div class="cell-output-display">
-<div id="fig-nn2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2021-06-23-lmnnet_files/figure-html/fig-nn2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;2: A single layer <em>feed-forward</em> neural network.</figcaption>
+<div id="fig-nn2" class="quarto-figure quarto-figure-center quarto-float anchored" data-fig-align="center">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-nn2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2021-06-23-lmnnet_files/figure-html/fig-nn2-1.png" class="img-fluid quarto-figure quarto-figure-center figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-nn2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2: A single layer <em>feed-forward</em> neural network.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -285,7 +296,8 @@ div.csl-indent {
 </section>
 <section id="subsec:act" class="level3">
 <h3 class="anchored" data-anchor-id="subsec:act">Activation functions</h3>
-<p>Activation functions are applied in every “Layer connection” in neural network models. Suppose, for example, we have a design matrix <span class="math inline">$\mathbf{X} \in {\rm I\!R}^{n \times p}$</span>, and a response variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐲</mi><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math>. Then, given appropriate choices of the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">K - 1</annotation></semantics></math> (one for each layer connection), the mathematical model, for a single observation, behind the neural network, can be written in a vectorial notation as follows <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">
+<p>Activation functions are applied in every “Layer connection” in neural network models. Suppose, for example, we have a design matrix <span class="math inline">$\mathbf{X} \in {\rm
+I\!R}^{n \times p}$</span>, and a response variable <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐲</mi><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math>. Then, given appropriate choices of the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">K - 1</annotation></semantics></math> (one for each layer connection), the mathematical model, for a single observation, behind the neural network, can be written in a vectorial notation as follows <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">
 \mathbf{z}^{(k)} = \mathbf{W}^{(k - 1)} \mathbf{a}^{(k - 1)}
 </annotation></semantics></math> <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><msub><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msub><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 \mathbf{a}^{(k)} = f_{(k)} \left( \mathbf{z}^{(k)} \right),
@@ -301,32 +313,38 @@ f(x) = x_{+} = \max(0, x),
 </annotation></semantics></math> the main advantage of this function is a cheap to compute gradient. A different version of the ReLU called leaky ReLU is also quite popular, its definition is given as follows <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>f</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><msub><mi>x</mi><mo>+</mo></msub><mo>=</mo><mo>max</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>.01</mn><mo>*</mo><mi>x</mi><mo>,</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 f(x) = x_{+} = \max(.01 * x, x),
 </annotation></semantics></math></p>
-<p>These are only some examples of commonly used activation functions and they are illustrated in <a href="#fig-act-funs">Figure&nbsp;3</a>. The user does need to be restrict to these options since there are several other functions implemented in the software available to compute neural networks. However, if you want to use a activation function that is not implemented yet, you may have to implement your own version for the algorithm.</p>
+<p>These are only some examples of commonly used activation functions and they are illustrated in <a href="#fig-act-funs" class="quarto-xref">Figure&nbsp;3</a>. The user does need to be restrict to these options since there are several other functions implemented in the software available to compute neural networks. However, if you want to use a activation function that is not implemented yet, you may have to implement your own version for the algorithm.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-act-funs" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2021-06-23-lmnnet_files/figure-html/fig-act-funs-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;3: The most popular activation functions (figure inspired by Figure 18.6 from <span class="citation" data-cites="efron2016computer">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span> ).</figcaption>
+<div id="fig-act-funs" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-act-funs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2021-06-23-lmnnet_files/figure-html/fig-act-funs-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-act-funs-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;3: The most popular activation functions (figure inspired by Figure 18.6 from <span class="citation" data-cites="efron2016computer">Efron and Hastie (<a href="#ref-efron2016computer" role="doc-biblioref">2016</a>)</span> ).
+</figcaption>
 </figure>
 </div>
 </div>
 </div>
 <p>Although there are no restrictions on the functions used as activation functions in the hidden layers (besides being differentiable functions), it is not advisable to use the identity function because it implies a waste of computational power. This is due to the fact that using a linear function in a hidden layer, makes the units from that layer a linear combination of the units from the previous layer. To make this clear, let’s prove that a Neural Network model with a single hidden layer collapses to a Generalized Linear Model when the identity function is used as the activation function.</p>
-<p>Suppose a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-dimensional vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐲</mi><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math> is assumed to follow a distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math> belongs to the exponential family of distributions. Then, given a design matrix <span class="math inline">$\mathbf{X} \in {\rm I\!R}^{n \times p}$</span>, the Generalized Linear Model for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐲</mi><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math> is composed by the <em>random component</em>, given by the probability density function associated with the distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, the <em>systematic component</em>, defined by <span id="eq-syst-comp"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝛈</mi><mo>=</mo><mi>𝐗</mi><mi>𝛃</mi><mo>,</mo><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p>Suppose a <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>n</mi><annotation encoding="application/x-tex">n</annotation></semantics></math>-dimensional vector <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐲</mi><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math> is assumed to follow a distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math> belongs to the exponential family of distributions. Then, given a design matrix <span class="math inline">$\mathbf{X} \in
+{\rm I\!R}^{n \times p}$</span>, the Generalized Linear Model for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐲</mi><annotation encoding="application/x-tex">\mathbf{y}</annotation></semantics></math> is composed by the <em>random component</em>, given by the probability density function associated with the distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, the <em>systematic component</em>, defined by <span id="eq-syst-comp"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝛈</mi><mo>=</mo><mi>𝐗</mi><mi>𝛃</mi><mo>,</mo><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \boldsymbol{\eta} = \mathbf{X} \boldsymbol{\beta},
  \qquad(1)</annotation></semantics></math></span> and a (canonical) link function <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mo>⋅</mo><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">g(\cdot)</annotation></semantics></math> such that <span id="eq-link-f"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝛍</mi><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝛈</mi><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \boldsymbol{\mu} = g(\boldsymbol{\eta}).
  \qquad(2)</annotation></semantics></math></span> Once we estimate the parameters <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝛃</mi><annotation encoding="application/x-tex">\boldsymbol{\beta}</annotation></semantics></math>, we have <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mover><mi>𝐲</mi><mo accent="true">̂</mo></mover><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐗</mi><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex">
 \hat{\mathbf{y}} = g( \mathbf{X} \hat{\boldsymbol{\beta}} ).
 </annotation></semantics></math></p>
-<p>Define now our Neural Network model having a single hidden layer with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> units. The activation function for the hidden layer is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>h</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_h(x) = g(x)</annotation></semantics></math>, that is, the same as the identity function. The weights we want to find are <span class="math inline">$\mathbf{W}^{(1)} \in {\rm I\!R}^{p \times 1}$</span>, and <span class="math inline">$\mathbf{W}^{(2)} \in {\rm I\!R}^{M \times n}$</span>. The activation function for the activation layer is the previously mentioned canonical link function. Finally, let the loss be the deviance residual associated with the distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, and the cost function be the average of the losses. Then, the mathematical representation of the Neural Network becomes <span id="eq-example-glm-nn-linear"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><mi>𝐗</mi><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>,</mo><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
+<p>Define now our Neural Network model having a single hidden layer with <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>M</mi><annotation encoding="application/x-tex">M</annotation></semantics></math> units. The activation function for the hidden layer is <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msub><mi>f</mi><mi>h</mi></msub><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>x</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">f_h(x) = g(x)</annotation></semantics></math>, that is, the same as the identity function. The weights we want to find are <span class="math inline">$\mathbf{W}^{(1)} \in {\rm I\!R}^{p \times 1}$</span>, and <span class="math inline">$\mathbf{W}^{(2)} \in
+{\rm I\!R}^{M \times n}$</span>. The activation function for the activation layer is the previously mentioned canonical link function. Finally, let the loss be the deviance residual associated with the distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, and the cost function be the average of the losses. Then, the mathematical representation of the Neural Network becomes <span id="eq-example-glm-nn-linear"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><mi>𝐗</mi><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>,</mo><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>3</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \mathbf{z}^{(1)} = \mathbf{X} \mathbf{W}^{(1)} = \mathbf{a}^{(1)},
  \qquad(3)</annotation></semantics></math></span> because the activation function for the hidden layer is the identity. Then, we have <span id="eq-example-glm-nn-hidden"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>4</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \mathbf{z}^{(2)} = \mathbf{a}^{(1)} \mathbf{W}^{(2)}
  \qquad(4)</annotation></semantics></math></span> <span id="eq-example-glm-nn-out"><math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐲</mi><mo>=</mo><msup><mi>𝐚</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><mi>g</mi><mrow><mo stretchy="true" form="prefix">(</mo><msup><mi>𝐳</mi><mrow><mo stretchy="true" form="prefix" mathvariant="bold">(</mo><mn>𝟐</mn><mo stretchy="true" form="postfix" mathvariant="bold">)</mo></mrow></msup><mo stretchy="true" form="postfix">)</mo></mrow><mi>.</mi><mspace width="2.0em"></mspace><mrow><mo stretchy="true" form="prefix">(</mo><mn>5</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">
 \mathbf{y} = \mathbf{a}^{(2)} = g( \mathbf{\mathbf{z}^{(2)}} ).
- \qquad(5)</annotation></semantics></math></span> However, note that, by combining <a href="#eq-example-glm-nn-linear">3</a>, <a href="#eq-example-glm-nn-hidden">4</a>, and <a href="#eq-example-glm-nn-out">5</a> we get <span class="math display">$$\begin{align*}
+ \qquad(5)</annotation></semantics></math></span> However, note that, by combining <a href="#eq-example-glm-nn-linear" class="quarto-xref">3</a>, <a href="#eq-example-glm-nn-hidden" class="quarto-xref">4</a>, and <a href="#eq-example-glm-nn-out" class="quarto-xref">5</a> we get <span class="math display">$$\begin{align*}
 \mathbf{y} &amp; = g( \mathbf{\mathbf{z}^{(2)}} ) \\
 &amp; = g( \mathbf{a}^{(1)} \mathbf{W}^{(2)} ) \\
 &amp; = g( \mathbf{X} \underbrace{\mathbf{W}^{(1)} \mathbf{W}^{(2)}}_{{\rm I\!R}_{p
@@ -334,7 +352,7 @@ f(x) = x_{+} = \max(.01 * x, x),
 \end{align*}$$</span> which yields to optimal weights (see <a href="#subsec:fit-nn">Fitting a Neural Network</a> and <a href="#subsec:backpro">Backpropagation</a>, for more information on how to fit a neural network model) satisfying <span class="math display">$$
 \underbrace{\mathbf{W}^{(1)} \mathbf{W}^{(2)}}_{{\rm I\!R}_{p
 \times 1}} = \hat{\boldsymbol{\beta}},
-$$</span> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\boldsymbol{\beta}}</annotation></semantics></math> is the Maximum Likelihood Estimator for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝛃</mi><annotation encoding="application/x-tex">\boldsymbol{\beta}</annotation></semantics></math> that can be obtained using the Iterative Reweighted Least Squares for the model defined by the probability density function associated with the distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, the systematic component <a href="#eq-syst-comp">1</a> and a (canonical) link function <a href="#eq-link-f">2</a>.</p>
+$$</span> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\boldsymbol{\beta}}</annotation></semantics></math> is the Maximum Likelihood Estimator for <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝛃</mi><annotation encoding="application/x-tex">\boldsymbol{\beta}</annotation></semantics></math> that can be obtained using the Iterative Reweighted Least Squares for the model defined by the probability density function associated with the distribution <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝒫</mi><annotation encoding="application/x-tex">\mathcal{P}</annotation></semantics></math>, the systematic component <a href="#eq-syst-comp" class="quarto-xref">1</a> and a (canonical) link function <a href="#eq-link-f" class="quarto-xref">2</a>.</p>
 </section>
 <section id="cost-functions" class="level3">
 <h3 class="anchored" data-anchor-id="cost-functions">Cost functions</h3>
@@ -344,11 +362,12 @@ L(\mathbf{w}, \mathbf{x}; y) = \frac{1}{2} (f(\mathbf{x}; \mathbf{w}) - y)^{2},
 L(\mathbf{W}, \mathbf{x}; y) = y \log \left( \frac{y}{f(\mathbf{x}, \mathbf{w})}
 \right) + 
 (1 - y) \log \left( \frac{1 - y}{1 - f(\mathbf{x}, \mathbf{w})} \right).
- \qquad(7)</annotation></semantics></math></span> The loss function <a href="#eq-loss-mse">6</a> is usually employed when the output (response) variable assumes continuous values, while the <a href="#eq-loss-bdev">7</a> is used for binary output variables.</p>
+ \qquad(7)</annotation></semantics></math></span> The loss function <a href="#eq-loss-mse" class="quarto-xref">6</a> is usually employed when the output (response) variable assumes continuous values, while the <a href="#eq-loss-bdev" class="quarto-xref">7</a> is used for binary output variables.</p>
 <p>After choosing an appropriate loss function, the cost function is defined as the average of the loss function over all the observation, that is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐲</mi><mo>;</mo><mi>𝐱</mi><mo>,</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><munderover><mo>∑</mo><mrow><mi>i</mi><mo>=</mo><mn>1</mn></mrow><mi>n</mi></munderover><mi>L</mi><mrow><mo stretchy="true" form="prefix">(</mo><mrow><msub><mi>𝐰</mi><mi>𝐢</mi></msub><mo mathvariant="bold">,</mo><msub><mi>𝐱</mi><mi>𝐢</mi></msub><mo mathvariant="bold">;</mo><msub><mi>𝐲</mi><mi>𝐢</mi></msub></mrow><mo stretchy="true" form="postfix">)</mo></mrow><mo>+</mo><mi>λ</mi><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 C(\mathbf{y}; \mathbf{x}, \mathbf{W}) = \frac{1}{n} \sum_{i = 1}^{n}
 L(\mathbf{w_i, \mathbf{x}_i; y_i}) + \lambda J(\mathbf{W}),
-</annotation></semantics></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J(\mathbf{W})</annotation></semantics></math> is a non-negative regularization term and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda \geq 0</annotation></semantics></math> is a tuning parameter.</p>
+</annotation></semantics></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J(\mathbf{W})</annotation></semantics></math> is a non-negative regularization term and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda \geq
+0</annotation></semantics></math> is a tuning parameter.</p>
 <p>In practice, we may have a regularization term for each layer, each one having its own <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>. Some commonly used regularization terms are <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><mo stretchy="false" form="prefix">∥</mo><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">
 J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert^2,
 </annotation></semantics></math> and <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><mo stretchy="false" form="prefix">∥</mo><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="false" form="postfix">∥</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
@@ -357,7 +376,8 @@ J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert,
 </section>
 <section id="subsec:fit-nn" class="level3">
 <h3 class="anchored" data-anchor-id="subsec:fit-nn">Fitting a Neural Network</h3>
-<p>Supposing a user has set the number of layers, units, an activation function and a loss function, to fit a neural network we seek the set of weights <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐖</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>,</mo><mi>…</mi><mo>,</mo><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathbf{W} = \{ \mathbf{W}^{(1)}, \ldots, \mathbf{W}^{(k - 1)} \}</annotation></semantics></math> such that the cost function is minimized, that is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>min</mo><mi>𝐖</mi></munder><mrow><mo stretchy="true" form="prefix">{</mo><mi>𝒞</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐲</mi><mo>;</mo><mi>𝐗</mi><mo>,</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex"> 
+<p>Supposing a user has set the number of layers, units, an activation function and a loss function, to fit a neural network we seek the set of weights <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐖</mi><mo>=</mo><mo stretchy="false" form="prefix">{</mo><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>,</mo><mi>…</mi><mo>,</mo><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo>−</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\mathbf{W}
+= \{ \mathbf{W}^{(1)}, \ldots, \mathbf{W}^{(k - 1)} \}</annotation></semantics></math> such that the cost function is minimized, that is <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><munder><mo>min</mo><mi>𝐖</mi></munder><mrow><mo stretchy="true" form="prefix">{</mo><mi>𝒞</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐲</mi><mo>;</mo><mi>𝐗</mi><mo>,</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo stretchy="true" form="postfix">}</mo></mrow><mi>.</mi></mrow><annotation encoding="application/x-tex"> 
 \min_{\mathbf{W}} \left \{ \mathcal{C}(\mathbf{y}; \mathbf{X}, \mathbf{W}) \right \}.
 </annotation></semantics></math> Therefore, the neural network fit has turned into an optimization problem. The most common algorithm used to solve this optimization problem is the Backpropagation algorithm, which is described in the next section for a general situation.</p>
 </section>
@@ -367,7 +387,7 @@ J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert,
 \mathbf{W}^{(k)} = \mathbf{W}^{(k)} - \alpha \frac{\partial
 \mathcal{C}(\mathbf{y}; \mathbf{X}, \mathbf{W})}{\partial \mathbf{W}^{(k)}},
  \qquad(8)</annotation></semantics></math></span> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>α</mi><annotation encoding="application/x-tex">\alpha</annotation></semantics></math> is a tuning parameter called <em>learning rate</em>. The name backpropagation comes from the fact that the derivatives (or gradients) are computed according to something called a <em>computation graph</em> in a backward fashion. It is heavily based on the chain rule for differentiation.</p>
-<p>Given initial values for the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐖</mi><annotation encoding="application/x-tex">\mathbf{W}</annotation></semantics></math> matrices, the method repeats the update rule <a href="#eq-iter">8</a> until convergence. Provided that the columns of the design matrix are rescaled to mean 0 and variance 1, <span class="citation" data-cites="hastie2009elements">Hastie, Tibshirani, and Friedman (<a href="#ref-hastie2009elements" role="doc-biblioref">2009</a>)</span> suggest the use of random starting values for the weights as uniform random variables on the interval <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>.75</mn><mo>,</mo><mn>.75</mn><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[-.75, .75]</annotation></semantics></math>.</p>
+<p>Given initial values for the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>𝐖</mi><annotation encoding="application/x-tex">\mathbf{W}</annotation></semantics></math> matrices, the method repeats the update rule <a href="#eq-iter" class="quarto-xref">8</a> until convergence. Provided that the columns of the design matrix are rescaled to mean 0 and variance 1, <span class="citation" data-cites="hastie2009elements">Hastie, Tibshirani, and Friedman (<a href="#ref-hastie2009elements" role="doc-biblioref">2009</a>)</span> suggest the use of random starting values for the weights as uniform random variables on the interval <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="true" form="prefix">[</mo><mo>−</mo><mn>.75</mn><mo>,</mo><mn>.75</mn><mo stretchy="true" form="postfix">]</mo></mrow><annotation encoding="application/x-tex">[-.75, .75]</annotation></semantics></math>.</p>
 </section>
 </section>
 <section id="sec:imple" class="level2">
@@ -486,7 +506,7 @@ C(\mathbf{y}; \mathbf{X}, \mathbf{Y}) = \frac{1}{n} \lVert \mathbf{y} -
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>                   act_hidden, act_out,</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>                   d1_hidden, d1_out,</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                   <span class="at">alpha =</span> .<span class="dv">25</span>,</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">maxit =</span> 500L,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                   <span class="at">maxit =</span> <span class="dv">500</span>L,</span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>                   <span class="at">eps   =</span> <span class="fl">1e-05</span>) {</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>    m <span class="ot">&lt;-</span> hid_units</span>
 <span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    p <span class="ot">&lt;-</span> <span class="fu">ncol</span>(X)</span>
@@ -543,14 +563,21 @@ C(\mathbf{y}; \mathbf{X}, \mathbf{Y}) = \frac{1}{n} \lVert \mathbf{y} -
 <h3 class="anchored" data-anchor-id="example-1-equivalence-between-neural-network-and-linear-model">Example 1: Equivalence between Neural Network and Linear Model</h3>
 <p>Consider a simulated dataset where <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐲</mi><mo>∼</mo><mi>N</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐗</mi><mi>𝛃</mi><mo>,</mo><msup><mi>σ</mi><mn>2</mn></msup><msub><mi>𝐈</mi><mi>n</mi></msub><mo stretchy="true" form="postfix">)</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 \mathbf{y} \sim N(\mathbf{X} \boldsymbol{\beta}, \sigma^2 \mathbf{I}_n),
-</annotation></semantics></math> where <span class="math inline">$\mathbf{X} \in {\rm I\!R}^{n \times 3}$</span>, with the first column being the intercept term. To simulate the model we used <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝛃</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>1.5</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\boldsymbol{\beta} = (2, 3, 1.5)</annotation></semantics></math>. Additionally, suppose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2000</mn></mrow><annotation encoding="application/x-tex">n = 2000</annotation></semantics></math>.</p>
-<p>Considering the identity function as the activation function for both layers, the goal here is to show that the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{W}^{(1)} \mathbf{W}^{(2)} = \hat{\boldsymbol{\beta}}</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\boldsymbol{\beta}}</annotation></semantics></math> is the least squares solution for a linear model established as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐲</mi><mo>=</mo><mi>𝐗</mi><mi>𝛃</mi></mrow><annotation encoding="application/x-tex">\mathbf{y} = \mathbf{X} \boldsymbol{\beta}</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>,</mo><mspace width="0.167em"></mspace><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{W}^{(1)}, \, \mathbf{W}^{(2)}</annotation></semantics></math> are the optimal weights according to the Neural Network fitted to the data, as proved in the subsection @ref(subsec:act).</p>
-<p><a href="#tbl-ls">Table&nbsp;1</a> displays the results from the simulated example. The two different approaches have yielded the exactly same results. If we were to make predictions, the two methods would provide the same predicted values under these circumstances.</p>
+</annotation></semantics></math> where <span class="math inline">$\mathbf{X} \in {\rm I\!R}^{n \times 3}$</span>, with the first column being the intercept term. To simulate the model we used <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝛃</mi><mo>=</mo><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo>,</mo><mn>3</mn><mo>,</mo><mn>1.5</mn><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">\boldsymbol{\beta} = (2, 3,
+1.5)</annotation></semantics></math>. Additionally, suppose <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>n</mi><mo>=</mo><mn>2000</mn></mrow><annotation encoding="application/x-tex">n = 2000</annotation></semantics></math>.</p>
+<p>Considering the identity function as the activation function for both layers, the goal here is to show that the <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>=</mo><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover></mrow><annotation encoding="application/x-tex">\mathbf{W}^{(1)} \mathbf{W}^{(2)} =
+\hat{\boldsymbol{\beta}}</annotation></semantics></math>, where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\boldsymbol{\beta}}</annotation></semantics></math> is the least squares solution for a linear model established as <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>𝐲</mi><mo>=</mo><mi>𝐗</mi><mi>𝛃</mi></mrow><annotation encoding="application/x-tex">\mathbf{y} = \mathbf{X}
+\boldsymbol{\beta}</annotation></semantics></math>, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>1</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo>,</mo><mspace width="0.167em"></mspace><msup><mi>𝐖</mi><mrow><mo stretchy="true" form="prefix">(</mo><mn>2</mn><mo stretchy="true" form="postfix">)</mo></mrow></msup></mrow><annotation encoding="application/x-tex">\mathbf{W}^{(1)}, \, \mathbf{W}^{(2)}</annotation></semantics></math> are the optimal weights according to the Neural Network fitted to the data, as proved in the subsection @ref(subsec:act).</p>
+<p><a href="#tbl-ls" class="quarto-xref">Table&nbsp;1</a> displays the results from the simulated example. The two different approaches have yielded the exactly same results. If we were to make predictions, the two methods would provide the same predicted values under these circumstances.</p>
 <div class="cell">
+<div id="tbl-ls" class="cell quarto-float anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-ls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Comparing the LS solution and the product of the neural network weight matrices.
+</figcaption>
+<div aria-describedby="tbl-ls-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
-<div id="tbl-ls" class="anchored">
-<table class="table table-sm table-striped small">
-<caption>Table&nbsp;1: Comparing the LS solution and the product of the neural network weight matrices.</caption>
+<table class="do-not-create-environment cell table table-sm table-striped small">
 <thead>
 <tr class="header">
 <th style="text-align: center;"><math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mover><mi>𝛃</mi><mo accent="true">̂</mo></mover><annotation encoding="application/x-tex">\hat{\boldsymbol{\beta}}</annotation></semantics></math></th>
@@ -573,6 +600,8 @@ C(\mathbf{y}; \mathbf{X}, \mathbf{Y}) = \frac{1}{n} \lVert \mathbf{y} -
 </tbody>
 </table>
 </div>
+</div>
+</figure>
 </div>
 </div>
 <p>See below the code used on this example.</p>
@@ -606,7 +635,7 @@ C(\mathbf{y}; \mathbf{X}, \mathbf{Y}) = \frac{1}{n} \lVert \mathbf{y} -
 <span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_hidden  =</span> d_ident,</span>
 <span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_out     =</span> d_ident,</span>
 <span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> .<span class="dv">05</span>,</span>
-<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> 1000L,</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> <span class="dv">1000</span>L,</span>
 <span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">eps   =</span> <span class="fl">1e-16</span>)</span>
 <span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a>beta_hat <span class="ot">&lt;-</span> <span class="fu">coef</span>(<span class="fu">lm</span>(y <span class="sc">~</span> x1 <span class="sc">+</span> x2, <span class="at">data =</span> dt))</span>
@@ -626,10 +655,14 @@ y_i = \beta_0 + \beta_1 (x^2) + \varepsilon_i.
 <p>In practice, we do not know before-hand the relationship between the response and explanatory variables is not linear. In fig-fit-nn2, we show the fitted curves the linear model and for neural networks under different settings for a dataset simulated from this example. The Neural Network deals nicely with the nonlinearity at the cost of possibly overfit the data.</p>
 <div class="cell">
 <div class="cell-output-display">
-<div id="fig-fit-nn2" class="quarto-figure quarto-figure-center anchored">
-<figure class="figure">
-<p><img src="2021-06-23-lmnnet_files/figure-html/fig-fit-nn2-1.png" class="img-fluid figure-img" width="672"></p>
-<figcaption class="figure-caption">Figure&nbsp;4: Different models fitted to the same simulated dataset.</figcaption>
+<div id="fig-fit-nn2" class="quarto-figure quarto-figure-center quarto-float anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-fit-nn2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="2021-06-23-lmnnet_files/figure-html/fig-fit-nn2-1.png" class="img-fluid figure-img" width="672">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-fit-nn2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;4: Different models fitted to the same simulated dataset.
+</figcaption>
 </figure>
 </div>
 </div>
@@ -666,7 +699,7 @@ y_i = \beta_0 + \beta_1 (x^2) + \varepsilon_i.
 <span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_hidden  =</span> d_tanh,</span>
 <span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_out     =</span> d_ident,</span>
 <span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> .<span class="dv">05</span>,</span>
-<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> 1000L,</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> <span class="dv">1000</span>L,</span>
 <span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>           <span class="at">eps   =</span> <span class="fl">1e-04</span>)</span>
 <span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="do">## fitting neural network with tanh as the activation function for the hidden</span></span>
@@ -679,7 +712,7 @@ y_i = \beta_0 + \beta_1 (x^2) + \varepsilon_i.
 <span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_hidden  =</span> d_tanh,</span>
 <span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_out     =</span> d_ident,</span>
 <span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> .<span class="dv">05</span>,</span>
-<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> 1000L,</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> <span class="dv">1000</span>L,</span>
 <span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>           <span class="at">eps   =</span> <span class="fl">1e-04</span>)</span>
 <span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a><span class="do">## fitting neural network with leaky ReLU as the activation function for the</span></span>
@@ -692,7 +725,7 @@ y_i = \beta_0 + \beta_1 (x^2) + \varepsilon_i.
 <span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_hidden  =</span> d_lrelu,</span>
 <span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>           <span class="at">d1_out     =</span> d_ident,</span>
 <span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>           <span class="at">alpha =</span> .<span class="dv">05</span>,</span>
-<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> 1000L,</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a>           <span class="at">maxit =</span> <span class="dv">1000</span>L,</span>
 <span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>           <span class="at">eps   =</span> <span class="fl">1e-04</span>)</span>
 <span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>pred_data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">x =</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="fu">min</span>(x12), <span class="at">to =</span> <span class="fu">max</span>(x12),</span>
@@ -765,7 +798,7 @@ y_i = \beta_0 + \beta_1 (x^2) + \varepsilon_i.
 </section>
 
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
 <div id="ref-cheng1994neural" class="csl-entry" role="listitem">
 Cheng, Bing, and D Michael Titterington. 1994. <span>“Neural Networks: A Review from a Statistical Perspective.”</span> <em>Statistical Science</em>, 2–30.
 </div>
@@ -879,10 +912,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/lcgodoy\.me");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -892,8 +942,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -905,7 +964,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -949,6 +1131,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -974,6 +1157,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -1035,18 +1244,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <script src="https://giscus.app/client.js" data-repo="lcgodoy/lcgodoy.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMTY0Njk1MTI=" data-category="General" data-category-id="DIC_kwDODOcQCM4CcNDy" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">Copyright 2023, Lucas Godoy</div>   
+    <div class="nav-footer-left">
+<p>Copyright 2023, Lucas Godoy</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
-    </div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
   </div>
 </footer>
+
 
 
 
