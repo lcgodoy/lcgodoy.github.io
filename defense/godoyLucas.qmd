@@ -613,8 +613,7 @@ $$\begin{aligned}
 & Y(\mathbf{s}_i) \mid \mathbf{x}_i, z(\mathbf{s}_i) \overset{{\rm ind}}{\sim}
   f(\cdot \mid \mu_i, \omega) \\
 & g(\mu_i) = \mathbf{x}_i \boldsymbol{\beta} +
-  z(\mathbf{s}_i)  = \E[Y(\mathbf{s}_i) \mid \mathbf{x}_i,
-  z(\mathbf{s}_i)].
+  z(\mathbf{s}_i).
 \end{aligned}$$
 
 - [Probability distribution]{.important2}: $f(\cdot)$
