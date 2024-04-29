@@ -4,12 +4,28 @@
 :::
 
 ::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
-::: {#ref-abu2023ridge .csl-entry}
-Abu Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L., Godoy, L.
-da C., & Uribe, F. (2023). Ridge mini-implants, a versatile
-biomechanical anchorage device whose success is significantly enhanced
-by splinting: A clinical report. *Progress in Orthodontics*, *24*(1),
-27.
+::: {#ref-abuarqub2024retrospective .csl-entry}
+Abu-Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L., Godoy, L.
+da C., & Uribe, F. (2024). Retrospective evaluation of the success rate
+and factors associated with the stability of alveolar ridge orthodontic
+miniscrews: Pilot study. *Journal of the World Federation of
+Orthodontists*.
+https://doi.org/<https://doi.org/10.1016/j.ejwf.2024.02.001>
+:::
+
+::: {#ref-andreyeva2024federal .csl-entry}
+Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L. (2024).
+Federal nutrition assistance for young children: Underutilized and
+unequally accessed. *American Journal of Preventive Medicine*, *66*(1),
+18--26. https://doi.org/<https://doi.org/10.1016/j.amepre.2023.09.008>
+:::
+
+::: {#ref-fryc2024prevalence .csl-entry}
+Fryc, G. A., **Godoy, L. da C.**, Kuo, C.-L., & Lurie, A. G. (2024).
+Prevalence of likely retro-odontoid pseudotumor in patients receiving
+dental CBCT examinations. *Oral Surgery, Oral Medicine, Oral Pathology
+and Oral Radiology*, *137*(3), 301--309.
+https://doi.org/<https://doi.org/10.1016/j.oooo.2023.11.005>
 :::
 
 ::: {#ref-abu2023insight .csl-entry}
@@ -46,14 +62,6 @@ Frank, S., Ibrahim, B., Feng, R., Bidra, A., Lafreniere, D., Kuo, C.-L.,
 povidone-iodine antisepsis for in-office procedures. *Clinical
 Otolaryngology*, *48*(4), 696--699.
 https://doi.org/<https://doi.org/10.1111/coa.14045>
-:::
-
-::: {#ref-fryc2023prevalence .csl-entry}
-Fryc, G. A., **Godoy, L. da C.**, Kuo, C.-L., & Lurie, A. G. (2023).
-Prevalence of likely retro-odontoid pseudotumor in patients receiving
-dental CBCT examinations. *Oral Surgery, Oral Medicine, Oral Pathology
-and Oral Radiology*.
-https://doi.org/<https://doi.org/10.1016/j.oooo.2023.11.005>
 :::
 
 ::: {#ref-harandi2023assessment .csl-entry}
