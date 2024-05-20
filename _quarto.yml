@@ -22,6 +22,7 @@ website:
         href: index.qmd
       - publications.qmd
       - blog.qmd
+      - talks.qmd
       - text: "CV"
         href: cv.pdf
     right:
