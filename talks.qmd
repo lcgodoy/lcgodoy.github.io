@@ -1,0 +1,11 @@
+---
+title: "Talks"
+toc: false
+---
+
+### 2024
+
+- [PhD Defense](slides/2024-defense/index.html)
+
+
+- [The 27th NESS](slides/2024-ness/index.html)
