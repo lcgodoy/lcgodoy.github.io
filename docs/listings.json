@@ -6,13 +6,5 @@
       "/posts/models/models.html",
       "/posts/lmnet/2021-06-23-lmnnet.html"
     ]
-  },
-  {
-    "listing": "/talks.html",
-    "items": [
-      "/posts/models/models.html",
-      "/posts/lmnet/2021-06-23-lmnnet.html",
-      "/posts/jupyter_hpc/jupyter_hpc.html"
-    ]
   }
 ]
