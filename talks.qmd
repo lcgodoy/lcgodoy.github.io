@@ -1,13 +1,11 @@
 ---
 title: "Talks"
-listing:
-  contents: posts
-  sort: "date desc"
-  type: default
-  fields: [date, title, author]
-  table-hover: true
-  categories: true
-  sort-ui: true
-  filter-ui: false
-page-layout: full
+toc: false
 ---
+
+### 2024
+
+- [PhD Defense](slides/2024-defense/index.html)
+
+
+- [The 27th NESS](slides/2024-ness/index.html)

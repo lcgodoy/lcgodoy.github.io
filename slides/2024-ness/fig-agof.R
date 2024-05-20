@@ -1,1 +1,0 @@
-2024-defense/fig-agof.R
