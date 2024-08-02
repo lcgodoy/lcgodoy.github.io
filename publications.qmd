@@ -3,21 +3,27 @@
 ::: {#list}
 :::
 
-::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-abu2024perceptions .csl-entry}
+Abu Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
+(2024). Perceptions and utilization of tele-orthodontics: A survey of
+the members of the american association of orthodontists. *Progress in
+Orthodontics*, *25*(1), 16.
+:::
+
 ::: {#ref-abuarqub2024retrospective .csl-entry}
 Abu-Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L., Godoy, L.
 da C., & Uribe, F. (2024). Retrospective evaluation of the success rate
 and factors associated with the stability of alveolar ridge orthodontic
 miniscrews: Pilot study. *Journal of the World Federation of
-Orthodontists*.
-https://doi.org/<https://doi.org/10.1016/j.ejwf.2024.02.001>
+Orthodontists*. <https://doi.org/10.1016/j.ejwf.2024.02.001>
 :::
 
 ::: {#ref-andreyeva2024federal .csl-entry}
 Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L. (2024).
 Federal nutrition assistance for young children: Underutilized and
 unequally accessed. *American Journal of Preventive Medicine*, *66*(1),
-18--26. https://doi.org/<https://doi.org/10.1016/j.amepre.2023.09.008>
+18--26. <https://doi.org/10.1016/j.amepre.2023.09.008>
 :::
 
 ::: {#ref-fryc2024prevalence .csl-entry}
@@ -25,7 +31,25 @@ Fryc, G. A., **Godoy, L. da C.**, Kuo, C.-L., & Lurie, A. G. (2024).
 Prevalence of likely retro-odontoid pseudotumor in patients receiving
 dental CBCT examinations. *Oral Surgery, Oral Medicine, Oral Pathology
 and Oral Radiology*, *137*(3), 301--309.
-https://doi.org/<https://doi.org/10.1016/j.oooo.2023.11.005>
+<https://doi.org/10.1016/j.oooo.2023.11.005>
+:::
+
+::: {#ref-Rpkg:smile .csl-entry}
+**Godoy, L. da C.** (2024). *Smile: Spatial misalignment: Interpolation,
+linkage, and estimation*. <https://doi.org/10.32614/CRAN.package.smile>
+:::
+
+::: {#ref-godoy2024statistical .csl-entry}
+**Godoy, L. da C.**, Prates, M. O., & Yan, J. (2024). *Statistical
+inferences and predictions for areal data and spatial data fusion with
+hausdorff--gaussian processes*. <https://arxiv.org/abs/2208.07900>
+:::
+
+::: {#ref-irsheid2024comparative .csl-entry}
+Irsheid, R., **Godoy, L. da C.**, Kuo, C.-L., Metz, J., Dolce, C., & Abu
+Arqub, S. (2024). Comparative assessment of the clinical outcomes of
+clear aligners compared to fixed appliance in class II malocclusion.
+*Clinical Oral Investigations*, *28*(8), 1--10.
 :::
 
 ::: {#ref-abu2023insight .csl-entry}
@@ -35,19 +59,12 @@ preferences among members of the american association of orthodontists
 in the united states and canada. *The Angle Orthodontist*.
 :::
 
-::: {#ref-andreyeva2023federal .csl-entry}
-Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L. (2023).
-Federal nutrition assistance for young children: Underutilized and
-unequally accessed. *American Journal of Preventive Medicine*.
-https://doi.org/<https://doi.org/10.1016/j.amepre.2023.09.008>
-:::
-
 ::: {#ref-arqub2023survival .csl-entry}
 Arqub, S. A., Bashir, R., Obeng, K., **Godoy, L. da C.**, Kuo, C.-L.,
 Upadhyay, M., & Yadav, S. (2023). Survival and failure rate of lower
 lingual bonded retainers: A retrospective cohort evaluation.
 *Orthodontics & Craniofacial Research*, *26*(2), 256--264.
-https://doi.org/<https://doi.org/10.1111/ocr.12608>
+<https://doi.org/10.1111/ocr.12608>
 :::
 
 ::: {#ref-duong2023survey .csl-entry}
@@ -60,8 +77,7 @@ among endodontists in the united states. *Journal of Endodontics*.
 Frank, S., Ibrahim, B., Feng, R., Bidra, A., Lafreniere, D., Kuo, C.-L.,
 **Godoy, L. da C.**, & Falcone, T. E. (2023). Tolerability of nasal and oral
 povidone-iodine antisepsis for in-office procedures. *Clinical
-Otolaryngology*, *48*(4), 696--699.
-https://doi.org/<https://doi.org/10.1111/coa.14045>
+Otolaryngology*, *48*(4), 696--699. <https://doi.org/10.1111/coa.14045>
 :::
 
 ::: {#ref-harandi2023assessment .csl-entry}
@@ -69,12 +85,12 @@ Harandi, M. T., Abu Arqub, S., Warren, E., Kuo, C.-L., **Godoy, L. da C.**,
 Mehta, S., Feldman, J., Upadhyay, M., & Yadav, S. (2023). Assessment of
 clear aligner accuracy of 2 clear aligners systems. *American Journal of
 Orthodontics and Dentofacial Orthopedics*.
-https://doi.org/<https://doi.org/10.1016/j.ajodo.2023.05.028>
+<https://doi.org/10.1016/j.ajodo.2023.05.028>
 :::
 
 ::: {#ref-de2023association .csl-entry}
-Jesus, M. de, Maheshwary, A., Kumar, M., Cunha Godoy, L. da, Kuo, C.-L.,
-& Grover, P. (2023). Association of electrocardiographic and
+Jesus, M. de, Maheshwary, A., Kumar, M., **Godoy, L. da C.**, Kuo, C.-L., &
+Grover, P. (2023). Association of electrocardiographic and
 echocardiographic variables with neurological outcomes after ischemic
 stroke. *American Heart Journal Plus: Cardiology Research and Practice*,
 100313.
@@ -110,22 +126,11 @@ invisalign orthodontic treatment. *American Journal of Orthodontics and
 Dentofacial Orthopedics*. <https://doi.org/10.1016/j.ajodo.2022.06.017>
 :::
 
-::: {#ref-Rpkg:smile .csl-entry}
-**Godoy, L. da C.** (2022). *Smile: Spatial misalignment: Interpolation,
-linkage, and estimation*. <https://CRAN.R-project.org/package=smile>
-:::
-
 ::: {#ref-godoy2022testing .csl-entry}
 **Godoy, L. da C.**, Assunção, R. M., & Butler, K. A. (2022). Testing the
 spatial association of different types of polygons. *Spatial
 Statistics*, *51*, 100695.
 <https://doi.org/10.1016/j.spasta.2022.100695>
-:::
-
-::: {#ref-godoy2022unified .csl-entry}
-**Godoy, L. da C.**, Prates, M. O., & Yan, J. (2022). *An unified framework
-for point-level, areal, and mixed spatial data: The hausdorff-gaussian
-process*. arXiv. <https://doi.org/10.48550/ARXIV.2208.07900>
 :::
 
 ::: {#ref-hariharan2022evaluation .csl-entry}
@@ -176,4 +181,4 @@ J. M. (2021). The impact of gender in mentor-mentee success: Results
 from the women's dermatologic society mentorship survey. *International
 Journal of Women's Dermatology*.
 :::
-:::
+::::::::::::::::::::::::::::

@@ -1,31 +1,26 @@
 ---
 title: "Talks"
 toc: false
+listing:
+  contents: talks
+  type: default
+  image-align: left
+  fields: 
+    - title
+    - description
+    - date
+    - author
+    - categories
+  table-hover: true
+  categories: true
+  sort-ui: true
+  filter-ui: false
+  sort: "date desc"
+page-layout: full
 ---
 
-### 2024
+# Upcoming
 
-- [Hausdorff–Gaussian Process with Spatial and Spatiotemporal
-  Applications](slides/2024-defense/index.html)
+- August 4th, 2024 - JSM, Portland - OR.
 
-  - PhD Defense
-  - Storrs, CT - USA
-
-- [Hausdorff–Gaussian Process with a Spatiotemporal
-  Application](slides/2024-ness/index.html)
-
-  - The 37th New England Statistics Symposium
-  - Storrs, CT - USA
-
-### 2018 
-
-- [Visualizing intramunicipality votes distribution](https://lcgodoy.me/rbras)
-
-  - The 63rd Meeting of the Brazilian Chapter of the International Biometric
-    Society (RBRAS)
-  - Curitiba, Paraná - Brasil
-
-- [Voronoi Data Linkage](https://lcgodoy.me/csds)
-
-  - 1st Conference on Statistics and Data Science
-  - Salvador, Bahia - Brasil
+# Past

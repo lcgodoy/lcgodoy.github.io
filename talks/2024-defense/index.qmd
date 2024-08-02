@@ -1,0 +1,60 @@
+---
+title: "Hausdorff–Gaussian Process with Spatial and Spatiotemporal
+  Applications"
+description: "PhD defense"
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2024-04-10"
+categories:
+  - Spatial statistics
+  - Gaussian processes
+  - Air pollution
+  - Disease mapping
+---
+
+### Details
+
+* **Date**: April 10, 2024
+
+* **Location**: Storrs, CT
+
+* [Slides](https://lcgodoy.me/slides/2024-defense/index.html)
+
+### Abstract
+
+Accurate modeling of spatial dependence is crucial for analyzing spatial and
+spatiotemporal data, as it directly influences parameter estimation and
+prediction accuracy. The unique structure and geometry of spatial data demand
+tailored approaches for valid statistical inference. Traditional areal data
+models, often reliant on adjacency matrices, may not adequately capture the
+nuances of polygons with varying sizes and shapes. Data fusion models, while
+effective, can become computationally prohibitive for even moderately large
+datasets due to their reliance on intensive numerical integrals.
+
+
+To address these challenges, we propose the Hausdorff-Gaussian Process~(HGP), a
+flexible model class that employs the Hausdorff distance to quantify spatial
+dependence in both point and areal data. We establish a valid correlation
+function for the HGP, facilitating its use in diverse modeling techniques,
+including geostatistical and areal models. Seamless integration into generalized
+linear mixed-effects models expands its applicability, making it particularly
+well-suited for tackling change of support and data fusion problems.
+
+
+Our comprehensive simulation study and applications to three real-world datasets
+validate the HGP's efficacy. Applications with both areal and fused spatial data
+demonstrate our model's capabilities. Additionally, we adapt the HGP for
+spatiotemporal modeling of areal Tuberculosis data using a separable
+model. Results indicate that the HGP delivers competitive goodness-of-fit and
+prediction performance compared to specialized models. In conclusion, the HGP
+provides a versatile and robust framework for modeling spatial data across
+various types and geometries, holding significant promise for applications in
+fields like public health and climate science.
+
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-defense/index.html" title="Slides"></iframe>
+```
+

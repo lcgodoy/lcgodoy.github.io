@@ -6,5 +6,14 @@
       "/posts/models/models.html",
       "/posts/lmnet/2021-06-23-lmnnet.html"
     ]
+  },
+  {
+    "listing": "/talks.html",
+    "items": [
+      "/talks/2024-ness/index.html",
+      "/talks/2024-defense/index.html",
+      "/talks/2018-csds/index.html",
+      "/talks/2018-rbras/index.html"
+    ]
   }
 ]
