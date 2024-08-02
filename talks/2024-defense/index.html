@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lucas da Cunha Godoy">
+<meta name="dcterms.date" content="2024-04-10">
+<meta name="description" content="PhD defense">
 
-<title>Talks – Lucas Godoy</title>
+<title>Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications – Lucas Godoy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,80 +69,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-title','listing-description','listing-date','listing-author','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Talks – Lucas Godoy">
+<meta property="og:title" content="Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications – Lucas Godoy">
+<meta property="og:description" content="PhD defense">
 <meta property="og:site_name" content="Lucas Godoy">
-<meta name="twitter:title" content="Talks – Lucas Godoy">
+<meta name="twitter:title" content="Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications – Lucas Godoy">
+<meta name="twitter:description" content="PhD defense">
 <meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Lucas Godoy</span>
     </a>
   </div>
@@ -152,23 +97,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link" href="../../publications.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./talks.html" aria-current="page"> 
+    <a class="nav-link" href="../../talks.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./cv.pdf"> 
+    <a class="nav-link" href="../../cv.pdf"> 
 <span class="menu-text">CV</span></a>
   </li>  
 </ul>
@@ -191,225 +136,88 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications</h1>
+                  <div>
+        <div class="description">
+          PhD defense
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Spatial statistics</div>
+                <div class="quarto-category">Gaussian processes</div>
+                <div class="quarto-category">Air pollution</div>
+                <div class="quarto-category">Disease mapping</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lucas da Cunha Godoy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">April 10, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Air pollution">Air pollution <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Areal interpolation">Areal interpolation <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Brasil">Brasil <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Disease mapping">Disease mapping <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Elections">Elections <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Gaussian process">Gaussian process <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Gaussian processes">Gaussian processes <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Spatial statistics">Spatial statistics <span class="quarto-category-count">(4)</span></div><div class="category" data-category="Tuberculosis">Tuberculosis <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#details" id="toc-details" class="nav-link active" data-scroll-target="#details">Details</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Talks</h1>
-</div>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
 
 
-</header>
-
-
-<section id="upcoming" class="level1">
-<h1>Upcoming</h1>
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
 <ul>
-<li>August 4th, 2024 - JSM, Portland - OR.</li>
+<li><p><strong>Date</strong>: April 10, 2024</p></li>
+<li><p><strong>Location</strong>: Storrs, CT</p></li>
+<li><p><a href="https://lcgodoy.me/slides/2024-defense/index.html">Slides</a></p></li>
 </ul>
 </section>
-<section id="past" class="level1">
-<h1>Past</h1>
-
+<section id="abstract" class="level3">
+<h3 class="anchored" data-anchor-id="abstract">Abstract</h3>
+<p>Accurate modeling of spatial dependence is crucial for analyzing spatial and spatiotemporal data, as it directly influences parameter estimation and prediction accuracy. The unique structure and geometry of spatial data demand tailored approaches for valid statistical inference. Traditional areal data models, often reliant on adjacency matrices, may not adequately capture the nuances of polygons with varying sizes and shapes. Data fusion models, while effective, can become computationally prohibitive for even moderately large datasets due to their reliance on intensive numerical integrals.</p>
+<p>To address these challenges, we propose the Hausdorff-Gaussian Process~(HGP), a flexible model class that employs the Hausdorff distance to quantify spatial dependence in both point and areal data. We establish a valid correlation function for the HGP, facilitating its use in diverse modeling techniques, including geostatistical and areal models. Seamless integration into generalized linear mixed-effects models expands its applicability, making it particularly well-suited for tackling change of support and data fusion problems.</p>
+<p>Our comprehensive simulation study and applications to three real-world datasets validate the HGP’s efficacy. Applications with both areal and fused spatial data demonstrate our model’s capabilities. Additionally, we adapt the HGP for spatiotemporal modeling of areal Tuberculosis data using a separable model. Results indicate that the HGP delivers competitive goodness-of-fit and prediction performance compared to specialized models. In conclusion, the HGP provides a versatile and robust framework for modeling spatial data across various types and geometries, holding significant promise for applications in fields like public health and climate science.</p>
+</section>
+<section id="slides" class="level3">
+<h3 class="anchored" data-anchor-id="slides">Slides</h3>
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-defense/index.html" title="Slides"></iframe>
 
 
 </section>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-left" data-index="0" data-categories="Spatial statistics,Gaussian process,Disease mapping,Tuberculosis,Brasil" data-listing-date-sort="1716422400000" data-listing-file-modified-sort="1722641265175" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="176">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./talks/2024-ness/index.html" class="no-external">HAUSDORFF–GAUSSIAN PROCESS WITH A SPATIOTEMPORAL APPLICATION</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./talks/2024-ness/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Spatial statistics'); return false;">
-Spatial statistics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Gaussian process'); return false;">
-Gaussian process
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Disease mapping'); return false;">
-Disease mapping
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Tuberculosis'); return false;">
-Tuberculosis
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Brasil'); return false;">
-Brasil
-</div>
-</div>
-<div class="listing-description">
-<a href="./talks/2024-ness/index.html" class="no-external">Talk given at the 37<sup>th</sup> NESS</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./talks/2024-ness/index.html" class="no-external">
-<div class="listing-date">
-May 23, 2024
-</div>
-<div class="listing-author">
-Lucas da Cunha Godoy
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-left" data-index="1" data-categories="Spatial statistics,Gaussian processes,Air pollution,Disease mapping" data-listing-date-sort="1712707200000" data-listing-file-modified-sort="1722641265175" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="233">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./talks/2024-defense/index.html" class="no-external">Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./talks/2024-defense/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Spatial statistics'); return false;">
-Spatial statistics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Gaussian processes'); return false;">
-Gaussian processes
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Air pollution'); return false;">
-Air pollution
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Disease mapping'); return false;">
-Disease mapping
-</div>
-</div>
-<div class="listing-description">
-<a href="./talks/2024-defense/index.html" class="no-external">PhD defense</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./talks/2024-defense/index.html" class="no-external">
-<div class="listing-date">
-Apr 10, 2024
-</div>
-<div class="listing-author">
-Lucas da Cunha Godoy
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-left" data-index="2" data-categories="Spatial statistics,Areal interpolation,Elections,Brasil" data-listing-date-sort="1539648000000" data-listing-file-modified-sort="1722641265175" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="14">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./talks/2018-csds/index.html" class="no-external">Voronoi Data Linkage: Extracting Information from Polygons to Points</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./talks/2018-csds/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Spatial statistics'); return false;">
-Spatial statistics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Areal interpolation'); return false;">
-Areal interpolation
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Elections'); return false;">
-Elections
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Brasil'); return false;">
-Brasil
-</div>
-</div>
-<div class="listing-description">
-<a href="./talks/2018-csds/index.html" class="no-external">Talk given in the 1<sup>st</sup> Conference on Statistics and Data Science</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./talks/2018-csds/index.html" class="no-external">
-<div class="listing-date">
-Oct 16, 2018
-</div>
-<div class="listing-author">
-Lucas da Cunha Godoy
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-left" data-index="3" data-categories="Spatial statistics,Areal interpolation,Elections,Brasil" data-listing-date-sort="1527120000000" data-listing-file-modified-sort="1722641265175" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="1" data-listing-word-count-sort="80">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./talks/2018-rbras/index.html" class="no-external">Visualizing intramunicipality votes distribution</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./talks/2018-rbras/index.html" class="no-external"></a>
-</div>
-<div class="listing-categories">
-<div class="listing-category" onclick="window.quartoListingCategory('Spatial statistics'); return false;">
-Spatial statistics
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Areal interpolation'); return false;">
-Areal interpolation
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Elections'); return false;">
-Elections
-</div>
-<div class="listing-category" onclick="window.quartoListingCategory('Brasil'); return false;">
-Brasil
-</div>
-</div>
-<div class="listing-description">
-<a href="./talks/2018-rbras/index.html" class="no-external">Talk given at the 63<sup>rd</sup> RBRAS</a>
-</div>
-</div>
-<div class="metadata">
-<a href="./talks/2018-rbras/index.html" class="no-external">
-<div class="listing-date">
-May 24, 2018
-</div>
-<div class="listing-author">
-Lucas da Cunha Godoy
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -830,6 +638,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="lcgodoy/lcgodoy.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMTY0Njk1MTI=" data-category="General" data-category-id="DIC_kwDODOcQCM4CcNDy" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -838,7 +650,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
