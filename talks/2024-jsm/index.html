@@ -6,8 +6,11 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Lucas da Cunha Godoy">
+<meta name="dcterms.date" content="2024-05-23">
+<meta name="description" content="Talk given at the 2024 JSM">
 
-<title>Blog – Lucas Godoy</title>
+<title>FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE – Lucas Godoy</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -23,24 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-listing/list.min.js"></script>
-<script src="site_libs/quarto-listing/quarto-listing.js"></script>
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -68,80 +69,24 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Search"
   }
 }</script>
-<script>
 
-  window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-listing .list');
-    if (!listingTargetEl) {
-      // No listing discovered, do not attach.
-      return; 
-    }
 
-    const options = {
-      valueNames: ['listing-date','listing-title','listing-author','listing-reading-time',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
-      
-      searchColumns: ["listing-date","listing-title","listing-author","listing-subtitle","listing-image","listing-description","listing-categories"],
-    };
-
-    window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
-
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  });
-
-  window.addEventListener('hashchange',() => {
-    if (window['quarto-listing-loaded']) {
-      window['quarto-listing-loaded']();
-    }
-  })
-  </script>
-
-  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-const typesetMath = (el) => {
-  if (window.MathJax) {
-    // MathJax Typeset
-    window.MathJax.typeset([el]);
-  } else if (window.katex) {
-    // KaTeX Render
-    var mathElements = el.getElementsByClassName("math");
-    var macros = [];
-    for (var i = 0; i < mathElements.length; i++) {
-      var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
-        window.katex.render(texText.data, mathElements[i], {
-          displayMode: mathElements[i].classList.contains('display'),
-          throwOnError: false,
-          macros: macros,
-          fleqn: false
-        });
-      }
-    }
-  }
-}
-window.Quarto = {
-  typesetMath
-};
-</script>
-
-<meta property="og:title" content="Blog – Lucas Godoy">
+<meta property="og:title" content="FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE – Lucas Godoy">
+<meta property="og:description" content="Talk given at the 2024 JSM">
 <meta property="og:site_name" content="Lucas Godoy">
-<meta name="twitter:title" content="Blog – Lucas Godoy">
+<meta name="twitter:title" content="FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE – Lucas Godoy">
+<meta name="twitter:description" content="Talk given at the 2024 JSM">
 <meta name="twitter:card" content="summary">
 </head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">Lucas Godoy</span>
     </a>
   </div>
@@ -152,23 +97,23 @@ window.Quarto = {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./publications.html"> 
+    <a class="nav-link" href="../../publications.html"> 
 <span class="menu-text">Publications</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./talks.html"> 
+    <a class="nav-link" href="../../talks.html"> 
 <span class="menu-text">Talks</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./cv.pdf"> 
+    <a class="nav-link" href="../../cv.pdf"> 
 <span class="menu-text">CV</span></a>
   </li>  
 </ul>
@@ -191,135 +136,87 @@ window.Quarto = {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title"><p>FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE</p></h1>
+                  <div>
+        <div class="description">
+          <p>Talk given at the 2024 JSM</p>
+        </div>
+      </div>
+                          <div class="quarto-categories">
+                <div class="quarto-category">Spatial statistics</div>
+                <div class="quarto-category">Gaussian process</div>
+                <div class="quarto-category">Disease mapping</div>
+                <div class="quarto-category">Tuberculosis</div>
+                <div class="quarto-category">Brasil</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Lucas da Cunha Godoy </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">May 23, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Computing">Computing <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Statistics">Statistics <span class="quarto-category-count">(1)</span></div><div class="category" data-category="neural networks">neural networks <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(1)</span></div></div></div>
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#details" id="toc-details" class="nav-link active" data-scroll-target="#details">Details</a></li>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
+  </ul>
+<div class="toc-actions"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
+    </div>
 <!-- main -->
-<main class="content column-page-left" id="quarto-document-content">
-
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Blog</h1>
-</div>
-
-
-
-<div class="quarto-title-meta column-page-left">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
 
 
 
 
+<section id="details" class="level3">
+<h3 class="anchored" data-anchor-id="details">Details</h3>
+<ul>
+<li><p><strong>Date</strong>: Aug 4, 2024</p></li>
+<li><p><strong>Location</strong>: Portlant, OR</p></li>
+<li><p><a href="https://lcgodoy.me/slides/2024-jsm/">Slides</a></p></li>
+</ul>
+</section>
+<section id="abstract" class="level3">
+<h3 class="anchored" data-anchor-id="abstract">Abstract</h3>
+<p>Accurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and out-of-sample predictions. The spatial structure and geometry of the data significantly impact valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models, while effective, rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model class utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function within the HGP framework, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing change of support and data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios: one involving areal data and another demonstrating its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.</p>
+</section>
+<section id="slides" class="level3">
+<h3 class="anchored" data-anchor-id="slides">Slides</h3>
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-jsm" title="Slides"></iframe>
 
-<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
-<div class="listing-actions-group">
-   <div class="input-group input-group-sm quarto-listing-sort">
-     <span class="input-group-text"><i class="bi bi-sort-down"></i></span>
-     <select id="listing-listing-sort" class="form-select" aria-label="Order By" onchange="window['quarto-listings']['listing-listing'].sort(this.options[this.selectedIndex].value, { order: this.options[this.selectedIndex].getAttribute('data-direction')})">
-       <option value="" disabled="" selected="" hidden="">Order By</option>
-       <option value="index" data-direction="asc">Default</option>
-         <option value="listing-title" data-direction="asc">
-          Title
-        </option>
-         <option value="listing-date-sort" data-direction="asc">
-          Date - Oldest
-        </option>
-         <option value="listing-date-sort" data-direction="desc">
-          Date - Newest
-        </option>
-         <option value="listing-author" data-direction="asc">
-          Author
-        </option>
-     </select>
-  </div>
-</div>
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-categories="Computing" data-listing-date-sort="1654732800000" data-listing-file-modified-sort="1722713229688" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="734">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/jupyter_hpc/jupyter_hpc.html" class="no-external">Using jupyter on an HPC cluster</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/jupyter_hpc/jupyter_hpc.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/jupyter_hpc/jupyter_hpc.html" class="no-external">
-<div class="listing-date">
-Jun 9, 2022
-</div>
-<div class="listing-author">
-Lucas Godoy
-</div>
-<div class="listing-reading-time">
-4 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="1" data-categories="Statistics" data-listing-date-sort="1628985600000" data-listing-file-modified-sort="1722713229688" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="2" data-listing-word-count-sort="256">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/models/models.html" class="no-external">All models are wrong</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/models/models.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/models/models.html" class="no-external">
-<div class="listing-date">
-Aug 15, 2021
-</div>
-<div class="listing-author">
-Lucas Godoy
-</div>
-<div class="listing-reading-time">
-2 min
-</div>
-</a>
-</div>
-</div>
-<div class="quarto-post image-right" data-index="2" data-categories="statistics,neural networks" data-listing-date-sort="1627430400000" data-listing-file-modified-sort="1722713229688" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="48" data-listing-word-count-sort="9533">
-<div class="body">
-<h3 class="no-anchor listing-title">
-<a href="./posts/lmnet/2021-06-23-lmnnet.html" class="no-external">Estimating regression coefficients using a Neural Network (from scratch)</a>
-</h3>
-<div class="listing-subtitle">
-<a href="./posts/lmnet/2021-06-23-lmnnet.html" class="no-external"></a>
-</div>
-</div>
-<div class="metadata">
-<a href="./posts/lmnet/2021-06-23-lmnnet.html" class="no-external">
-<div class="listing-date">
-Jul 28, 2021
-</div>
-<div class="listing-author">
-Lucas Godoy
-</div>
-<div class="listing-reading-time">
-48 min
-</div>
-</a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div></main> <!-- /main -->
+
+</section>
+
+</main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -740,6 +637,10 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
+<script src="https://giscus.app/client.js" data-repo="lcgodoy/lcgodoy.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMTY0Njk1MTI=" data-category="General" data-category-id="DIC_kwDODOcQCM4CcNDy" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+</script>
+<input type="hidden" id="giscus-base-theme" value="light">
+<input type="hidden" id="giscus-alt-theme" value="dark">
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
@@ -748,7 +649,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div>   
     <div class="nav-footer-center">
       &nbsp;
-    <div class="toc-actions"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
+    <div class="toc-actions d-sm-block d-md-none"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></div>
     <div class="nav-footer-right">
       &nbsp;
     </div>
