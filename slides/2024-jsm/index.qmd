@@ -426,7 +426,7 @@ flowchart LR
 A generalized linear mixed effects model ([GLMM]{.important}) can be written as
 $$\begin{aligned}
 & Y(\mathbf{s}_i) \mid \mathbf{x}_i, Z(\mathbf{s}_i) \overset{{\rm ind}}{\sim}
-  f(\cdot \mid \mu_i, \omega) \\
+  f(\cdot \mid \mu_i, \boldsymbol{\gamma}) \\
 & g(\mu_i) = \mathbf{x}_i \boldsymbol{\beta} +
   Z(\mathbf{s}_i).
 \end{aligned}$$
@@ -443,7 +443,7 @@ $$\begin{aligned}
   \boldsymbol{\delta}^\top, \boldsymbol{\gamma}^\top \}}^\top$
   
 - [Joint density]{.important2}: $p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta}) =
-  \prod_{i = 1}^n f(y(\mathbf{s}_i) \mid \mu_i, \omega)$
+  \prod_{i = 1}^n f(y(\mathbf{s}_i) \mid \mu_i, \boldsymbol{\gamma})$
 
 :::{.notes}
 
