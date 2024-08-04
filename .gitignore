@@ -25,6 +25,7 @@ tramp
 
 # docs folder is not useful anymore
 /docs/
+/docs/*
   
 # elpa packages
 /elpa/
