@@ -17,10 +17,10 @@ categories:
 
 * **Location**: Salvador, Brazil
 
-* [Slides](https://lcgodoy.me/slides/csds/)
+* [Slides](https://lcgodoy.me/csds/)
 
 ### Slides
 
 ```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/csds" title="Slides"></iframe>
+<iframe width="100%" height="500" src="https://lcgodoy.me/csds" title="Slides"></iframe>
 ```

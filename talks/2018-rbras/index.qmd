@@ -17,7 +17,7 @@ categories:
 
 * **Location**: Curitiba, Brazil
 
-* [Slides](https://lcgodoy.me/slides/rbras/)
+* [Slides](https://lcgodoy.me/rbras/)
 
 ### Abstract
 
@@ -32,5 +32,5 @@ spatial support of the socioeconomic data.
 ### Slides
 
 ```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/rbras" title="Slides"></iframe>
+<iframe width="100%" height="500" src="https://lcgodoy.me/rbras" title="Slides"></iframe>
 ```
