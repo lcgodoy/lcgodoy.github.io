@@ -154,169 +154,169 @@
     "text": "Details\n\nDate: May 23, 2024\nLocation: Storrs, CT\nSlides\n\n\n\nAbstract\nTuberculosis (TB) remains a significant global health challenge, and Brazil exemplifies the complexities of controlling this infectious disease. Reliable estimates and forecasts of TB incidence rates are crucial to guide public health policies. This study focuses on the high-burden municipalities of Eastern Rio Grande do Sul, Brazil. We propose a novel spatiotemporal model based on the Hausdorff-Gaussian process to analyze TB incidence data. This model incorporates spatial dependence dictated by the Hausdorff distance, allowing it to “borrow strength” from neighboring municipalities and generate more reliable estimates, particularly for smaller areas. Our analysis has two primary goals. First, we aim to generate accurate TB incidence estimates by incorporating municipality-specific characteristics through covariates and a spatiotemporal random effect. The model delivers trustworthy expected incidence rates, consequently allowing for calculating standardized incidence ratios (SIRs). Second, our model offers predictive capabilities, forecasting TB incidence rates one year ahead to support proactive public health planning. We demonstrate our model’s effectiveness and competitive performance against other specialized areal data models. The insights gained from this study can guide policymakers in developing effective TB control strategies.\n\n\nSlides"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#spatial-statistics",
-    "href": "slides/2024-jsm/talk.html#spatial-statistics",
+    "objectID": "slides/2024-jsm/index.html#spatial-statistics",
+    "href": "slides/2024-jsm/index.html#spatial-statistics",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Spatial Statistics",
     "text": "Spatial Statistics\n\nTaking into account spatial dependence possibly present in data is a foremost aspect of spatial statistics.\nGeneral spatial model (Cressie 1993): \\(\\{\nZ(\\mathbf{s}) \\; : \\; \\mathbf{s} \\in D \\}\\), where \\(D\\) is an index set.\nStatistical inference depends heavily on the spatial structure/geometry of the observed spatial data.\n\n\n\n\nGeometry\nBranch\nIndex set\n\n\n\n\nPoints\nGeostatistics\nContinuum\n\n\nAreas/polygons\nAreal models\nCountable\n\n\nMixed\nSpatial Data Fusion\nContinuum\n\n\n\n\n\nChallenges arise when working with data from different sources:\n\nChange of support\nSpatial misalignment\nData fusion itself.\n\n\nLoosely speaking, this means the GP has stationary mean, variance, and a correlation function such that the correlation between two data points depends solely on their distance.\n\nCommon assumptions are stationarity and isotropy.\nImportance in spatial statistics: predominant foundation of geostatistical modeling.\nCompletely specified by mean and covariance functions.\n\nThe main reasons these models are not applied to areal data are:\n\nCalculating distance between areal spatial units is non-trivial;\nThe commonly used areal models are computationally efficient."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#classic-models-for-spatial-data",
-    "href": "slides/2024-jsm/talk.html#classic-models-for-spatial-data",
+    "objectID": "slides/2024-jsm/index.html#classic-models-for-spatial-data",
+    "href": "slides/2024-jsm/index.html#classic-models-for-spatial-data",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Classic Models for Spatial Data",
     "text": "Classic Models for Spatial Data\n\nAreal data\n\nCAR (Besag 1974), ICAR, BYM (Besag et al. 1991), DAGAR (Datta et al. 2019).\n\nPoint-referenced data\n\nGaussian processes (GP)\n\nMixed/fused data\n\n“Aggregated” GP (AGP) (Moraga et al. 2017): \\[\nZ(\\mathbf{s}_i)\n= \\begin{cases}\n{\\mathcal{A}(\\mathbf{s}_i)}^{-1}\n\\int_{\\mathcal{A}(\\mathbf{s}_i)} Z(\\mathbf{s}) \\mathrm{d}\\mathbf{s}, & \\text{if }\n\\mathcal{A}(\\mathbf{s}_i) &gt; 0, \\\\\nZ(\\mathbf{s}_i), & \\text{otherwise,}\n\\end{cases}\n\\]\n\n\n\n\nAreal models are usually heteroscedastic; The marginal variances decrease with the number of neighbors;\nData fusion models are also heteroscedastic (unless all the polygons are of the same size); computationally prohibitive for moderately large datasets; arbitrary choice of grid resolution."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#research-questions",
-    "href": "slides/2024-jsm/talk.html#research-questions",
+    "objectID": "slides/2024-jsm/index.html#research-questions",
+    "href": "slides/2024-jsm/index.html#research-questions",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Research Questions",
     "text": "Research Questions\n\nThe main research questions we are interested in are:\n\nCan we propose a model for spatial data that accomodates areal, point-referrenced, and fused data?\nIf so, is this model competitive when compared to specialized models?\n\nProposal: An isotropic GP defined on a flexible index set.\nMain challenge: Defining a valid correlation function."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#distances-between-sets",
-    "href": "slides/2024-jsm/talk.html#distances-between-sets",
+    "objectID": "slides/2024-jsm/index.html#distances-between-sets",
+    "href": "slides/2024-jsm/index.html#distances-between-sets",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Distances between Sets",
     "text": "Distances between Sets\n\nMetric space: \\((D, d)\\), where \\(D\\) is a spatial region of interest.\nDistance between a point and a set: \\(d(x, A) = \\inf_{a \\in A}\nd(x, a)\\), where \\(d(x, y)\\) is the distance between any two elements \\(x, y \\in\nD\\)\nDirected Hausdorff distance: \\[{\\vec h}(A, B) = \\sup_{a \\in A}\nd(a, B)\\]\nHausdorff distance: \\[h(A, B) = \\max \\left \\{ \\vec{h}(A, B),\n\\vec{h}(B, A) \\right \\}\\]\n\n\n\nSymmetric Hausdorff distance: the greater of the two directed Hausdorff distances.\nNote that if \\(A\\) and \\(B\\) are both singletons, then \\(h(A, B) = d(A, B)\\).\n\nMeric Properties: (1) Symmetry: \\(d(x, y) = d(y, x)\\); (2) Nonnegativeness: \\(d(x,\ny) \\geq 0\\) and \\(d(x, x) = 0\\); (3)Positiveness: \\(d(x, y) = 0 \\implies x = y\\); (4) Triangle inequality: \\(d(x, y) \\leq d(x, z) + d(z, y)\\)"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#hausdorff-distance-for-spatial-data-analysis",
-    "href": "slides/2024-jsm/talk.html#hausdorff-distance-for-spatial-data-analysis",
+    "objectID": "slides/2024-jsm/index.html#hausdorff-distance-for-spatial-data-analysis",
+    "href": "slides/2024-jsm/index.html#hausdorff-distance-for-spatial-data-analysis",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Hausdorff Distance for Spatial Data Analysis",
     "text": "Hausdorff Distance for Spatial Data Analysis\n\nStudy region: In spatial statistics, \\(D\\) is tipically a closed and bounded subset of \\(\\mathbb{R}^2\\).\nIn this context, the Hausdorff distance is a metric (Sendov 2004).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMetric on \\(D \\setminus \\varnothing\\)\nThe Hausdorff distance ability to account for spatial units’ shapes, sizes and orientation(Min et al. 2007) renders it an interesting tool to achieve our goals.\nMoreover, it can distinguish between overlapping, nested, and disjointed regions.\nIn the figure: (1) The dashed lines denote the Hausdorff distances; (2) The infimum distance between to sets is zero for the three cases; (3) Distance between centroids is the same for the first two figures."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#the-hgp",
-    "href": "slides/2024-jsm/talk.html#the-hgp",
+    "objectID": "slides/2024-jsm/index.html#the-hgp",
+    "href": "slides/2024-jsm/index.html#the-hgp",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "The HGP",
     "text": "The HGP\n\nIndex set: \\(\\mathcal{B}(D)\\) represents the closed and bounded subsets of \\(D \\subset \\mathbb{R}^2\\).\n\\(Z(\\mathbf{s}) \\sim \\mathrm{HGP}\\{m(\\mathbf{s}), v(\\mathbf{s}), r(h)\\}\\), where \\(\\mathbf{s} \\in \\mathcal{B}(D)\\).\nMean function: \\(m(\\mathbf{s}) = \\mathbb{E}[Z(\\mathbf{s})]\\)\nSD function: \\(v(\\mathbf{s}) =\n\\sqrt{\\mathrm{Var}(Z(\\mathbf{s}))}\\)\nCorrelation function: \\(r(h) =\n\\mathrm{Cor}(Z(\\mathbf{s}_1), Z(\\mathbf{s}_2)),\\) where \\(h\\) denotes the Hausdorff distance between \\(\\mathbf{s}_1, \\mathbf{s}_2 \\in\n\\mathcal{B}(D)\\).\nThe induced covariance function is given by \\(\\mathrm{Cov}(Z(\\mathbf{s}_1),\nZ(\\mathbf{s}_2)) = v(\\mathbf{s}_1) v(\\mathbf{s}_2) r(h(\\mathbf{s}_1,\n\\mathbf{s}_2))\\)\n\n\n\nIdeally, we want bounded, compact, and non-empty sets for the Hausdorff distance to be a metric..\nIn \\(\\mathbb{R}^2\\), a compact subset is bounded.\nempty is a subset of any set -&gt; it is bounded bc a subset of a bounded set is bounded itself.\nMean and SD functions can be informed by covariates.\nThe ensure the validity of the process, the function \\(r(\\cdot)\\) must be positive definite.\nComplex functional parametric space.\nInference is simplified (or possible) by assuming parametric forms to those functions.\nMean and SD functions can be informed by covariates.\nThe ensure the validity of the process, the function \\(r(\\cdot)\\) must be positive definite.\nComplex functional parametric space.\nInference is simplified (or possible) by assuming parametric forms to those functions.\nThe SD function allows the HGP to accommodate both homoscedastic and heteroscedastic scenarios.\n\nFor a valid process, its correlation function must satisfy the following properties:\n\nDiminish with increasing distance: \\(\\lim_{h \\to \\infty}r(h) = 0\\).\nBounded from above by 1: \\(r(0) = 1\\).\nPositive-definiteness: yields positive-definite correlation matrices for all its finite-dimensional marginal distributions.\nUnfortunately, functions that are guaranteed to be positive definite on \\((\\lVert \\cdot \\rVert_2, \\mathbb{R}^2)\\) are not necessarily positive definite on other metric spaces (Li et al. 2023)."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#the-powered-exponential-correlation-pec-function",
-    "href": "slides/2024-jsm/talk.html#the-powered-exponential-correlation-pec-function",
+    "objectID": "slides/2024-jsm/index.html#the-powered-exponential-correlation-pec-function",
+    "href": "slides/2024-jsm/index.html#the-powered-exponential-correlation-pec-function",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "The Powered Exponential Correlation (PEC) Function",
     "text": "The Powered Exponential Correlation (PEC) Function\n\nPEC function: \\[r(h; \\phi, \\nu) = \\exp\\left \\{ -\n\\frac{h^{\\nu}}{\\phi^{\\nu}}\\right \\},\\] where \\(\\nu\\) is a smoothness parameter and \\(\\phi\\) governs the range of the spatial dependence.\nParametrization: We reparametrize this function with \\(\\rho =\n{\\log(10)}^{1 / \\nu} \\phi\\).\nInterpretation: \\(\\rho\\) is the distance at which the spatial correlation reduces to \\(0.10\\).\n\n\n\nexplain \\(\\rho\\)."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#theoretical-foundation-positive-definiteness-of-the-pec",
-    "href": "slides/2024-jsm/talk.html#theoretical-foundation-positive-definiteness-of-the-pec",
+    "objectID": "slides/2024-jsm/index.html#theoretical-foundation-positive-definiteness-of-the-pec",
+    "href": "slides/2024-jsm/index.html#theoretical-foundation-positive-definiteness-of-the-pec",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Theoretical Foundation: Positive Definiteness of the PEC",
     "text": "Theoretical Foundation: Positive Definiteness of the PEC\n\n\n\nTheorem\n\n\nLet \\(h = h(\\mathbf{s}, \\mathbf{s}')\\) be the Hausdorff distance between two spatial units, denoted \\(\\mathbf{s}, \\mathbf{s}' \\in \\mathcal{B}(D)\\), where \\(D\n\\subset \\mathbb{R}^2\\). The powered exponential correlation function \\(\\exp \\{ -\nh^{\\nu} / \\phi^{\\nu} \\}\\) is positive definite for \\(\\nu \\in (1/2, 1)\\).\n\n\n\n\nThe theorem above guarantees the validity of the HGP equipped with a PEC function with \\(\\nu \\in\n(1/2, 1)\\).\nThe proof is based on embedding the Hausdorff distance into a high-dimensional \\(L_1\\) normed Euclidean space, and using the fact that the exponential correlation function is positive definite on this space."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#hgp-recap",
-    "href": "slides/2024-jsm/talk.html#hgp-recap",
+    "objectID": "slides/2024-jsm/index.html#hgp-recap",
+    "href": "slides/2024-jsm/index.html#hgp-recap",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "HGP Recap",
     "text": "HGP Recap\n\nFlexibility: A process that handles point-referrenced, areal, and mixed spatial data by construction.\nHausdorff distance: Enables HGP’s correlation function to account for the shape, size, and orientation of spatial objects.\nValidity: Using a PEC function ensures the HGP is a valid process.\n\n\n\n\n\n\nflowchart LR\n    A(Flexible index set) ==&gt; B(GP)\n    B ==&gt; E(((HGP)))\n    C(Hausdorff distance) ==&gt; D(PEC)\n    D ==&gt; E"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#spatial-glmm",
-    "href": "slides/2024-jsm/talk.html#spatial-glmm",
+    "objectID": "slides/2024-jsm/index.html#spatial-glmm",
+    "href": "slides/2024-jsm/index.html#spatial-glmm",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Spatial GLMM",
     "text": "Spatial GLMM\nA generalized linear mixed effects model (GLMM) can be written as \\[\\begin{aligned}\n& Y(\\mathbf{s}_i) \\mid \\mathbf{x}_i, Z(\\mathbf{s}_i) \\overset{{\\rm ind}}{\\sim}\n  f(\\cdot \\mid \\mu_i, \\omega) \\\\\n& g(\\mu_i) = \\mathbf{x}_i \\boldsymbol{\\beta} +\n  Z(\\mathbf{s}_i).\n\\end{aligned}\\]\n\nProbability distribution: \\(f(\\cdot)\\)\nLink function: \\(g(\\cdot)\\)\nConditional mean: \\(\\mu_i = \\mathbb{E}[Y(\\mathbf{s}_i) \\mid\n\\mathbf{x}_i, Z(\\mathbf{s}_i)]\\)\nModel parameters: \\(\\boldsymbol{\\theta} =\n{\\{\\boldsymbol{\\beta}^\\top, \\boldsymbol{\\sigma}^\\top,\n\\boldsymbol{\\delta}^\\top, \\boldsymbol{\\gamma}^\\top \\}}^\\top\\)\nJoint density: \\(p(\\mathbf{y} \\mid \\mathbf{z}, \\boldsymbol{\\theta}) =\n\\prod_{i = 1}^n f(y(\\mathbf{s}_i) \\mid \\mu_i, \\omega)\\)\n\n\n\nRealizations of random variables are represented by lowercase letters.\nModel paramers are greek letters.\nUnder a frequentist perspective, we consider the random effects to follow an HGP.\nFor Bayesian inference, we use the HGP as a prior for the random effects.\nResponse variable \\(Y\\) at a spatial unit \\(s\\) is modeled with an appropriate distribution (e.g., Poisson, Bernoulli).\nCovariates (\\(X\\)) and spatial random effects (\\(Z\\)) explain variation in the conditional mean (\\(\\mu\\)).\nThe HGP defines the spatial random effects (\\(Z\\)), capturing spatial correlation with the Hausdorff distance and a correlation function."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#bayesian-estimation-prediction",
-    "href": "slides/2024-jsm/talk.html#bayesian-estimation-prediction",
+    "objectID": "slides/2024-jsm/index.html#bayesian-estimation-prediction",
+    "href": "slides/2024-jsm/index.html#bayesian-estimation-prediction",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Bayesian Estimation & Prediction",
     "text": "Bayesian Estimation & Prediction\n\nPriors: \\[\\begin{align*}\n& \\boldsymbol{\\beta} \\sim \\mathcal{N}(\\mathbf{0}, 10\n\\mathbf{I}) & \\mathbf{Z} \\sim \\mathrm{HGP}\\{0, v(\\cdot), r(\\cdot)\n\\} & \\\\\n& \\rho \\sim \\mathrm{Exp}(a_\\rho) & \\alpha \\sim \\mathcal{N}(\\mathbf{0}, \\mathbf{I}) \\qquad \\text{ or } \\quad & \\sigma \\sim t_{+}(3)\n\\end{align*}\\]\nPosterior: \\(\\pi(\\boldsymbol{\\theta} \\mid \\mathbf{y}, \\mathbf{z}) \\propto\np(\\mathbf{y} \\mid \\mathbf{z}, \\boldsymbol{\\theta}) p(\\mathbf{z} \\mid \\boldsymbol{\\theta}) \\pi(\\boldsymbol{\\theta})\\)\nMCMC sampler: No-U-Turn (Homan and Gelman 2014).\nConvergence assessment: traceplots and split-\\({\\hat{R}}\\) (Vehtari et al. 2021).\nPosterior predictive distributions: \\(p(\\mathbf{y}^{\\ast} \\mid\n\\mathbf{y})\\)\n\n\n\nPoint and interval estimates: median and percentiles (\\(0.025\\) and \\(0.975\\)) of the marginal MCMC samples.\nParameters initialized by random sampling from their priors.\nRandom effects initialized from a standard normal distribution.\n\\(a_\\rho\\) is chosen so that: \\(\\mathbb{P}(\\rho &gt; U) = p_\\rho\\). In particular, \\(a_\\rho = - \\log(p_\\rho) / \\rho_0\\).\n\\(\\nu\\) hard to be estimated.\nGoodness-of-fit criteria: WAIC, and LOOIC (lower values indicate better fit)\nPredictions assessment: Interval Score (IS) and RMSP (lower values indicate better fit)\n\nPredictions:\n\nuse the properties of GP and multivariate Normal distribution to obtain the closed-form distribution of the vector of spatial random effects \\(\\mathbf{Z}^\\ast\\) (Diggle et al. 1998);\nsample \\(\\mathbf{z}^\\ast_{(b)}\\) from the distribution derived in the previous step;\nsample \\(\\mathbf{y}^{\\ast}_{(b)}\\) from \\(p(\\mathbf{y}^{\\ast} \\mid \\boldsymbol{\\theta}_{(b)},\n\\mathbf{z}^{\\ast}_{(b)})\\), where \\(\\boldsymbol{\\theta}_{(b)}\\) is the \\(b\\)-th MCMC sample of \\(\\boldsymbol{\\theta}\\)."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#bayesian-modeling-recap",
-    "href": "slides/2024-jsm/talk.html#bayesian-modeling-recap",
+    "objectID": "slides/2024-jsm/index.html#bayesian-modeling-recap",
+    "href": "slides/2024-jsm/index.html#bayesian-modeling-recap",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Bayesian Modeling Recap",
     "text": "Bayesian Modeling Recap\n\nHGP as a prior for the random effects disribution in a GLMM.\nBayesian inference through MCMC.\nUncertainty quantification of predictions through the posterior predictive distributions.\n\n\nDAGAR priors: \\[\n\\begin{aligned}\n  \\pi(\\beta_0) & \\propto 1 \\\\\n  \\beta_1 & \\sim N(0, 1000^2) \\\\\n  \\tau & \\sim Gamma(2, 1) \\\\\n  \\psi & \\sim U(0, 1).\n\\end{aligned}\n\\] - Precision matrix is defined based on the order of the observations and adjacency matrix (and the two parameters)"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#respiratory-disease-hospitalization-in-glasgow",
-    "href": "slides/2024-jsm/talk.html#respiratory-disease-hospitalization-in-glasgow",
+    "objectID": "slides/2024-jsm/index.html#respiratory-disease-hospitalization-in-glasgow",
+    "href": "slides/2024-jsm/index.html#respiratory-disease-hospitalization-in-glasgow",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Respiratory Disease Hospitalization in Glasgow",
     "text": "Respiratory Disease Hospitalization in Glasgow\n\nSample units: 134 intermediate zones (IZ), where the \\(i\\)-th IZ is denoted \\(\\mathbf{s}_i\\).\nNumber of hospitalizations: \\(\\mathbf{Y} = {(Y(\\mathbf{s}_1),\n\\ldots, Y(\\mathbf{s}_n))}^\\top\\).\nExpected number of hospitalizations based on the national age- and sex-standardized rates: \\(E_i\\).\nPercentage of people classified as income deprived: \\(\\mathbf{X}\\).\n\n\\[\\begin{aligned}\n& (Y(\\mathbf{s}_i) \\mid x_i, z(\\mathbf{s}_i)) \\sim \\text{Poisson}(E_i \\mu_i) \\\\\n& \\log(\\mu_i) = \\beta_0 + x_i \\beta_1 + z(\\mathbf{s}_i)\n\\end{aligned}\\]\n\n\nData from the north portion of the river Clyde in the Great Glasgow and Clyde health board in Scotland.\nAssumption: Conditional on \\(\\mathbf{Z}\\), \\(\\mathbf{Y}\\) are mutually independent.\nExplain goals of the analysis–estimate risks adjusted for income deprivation, compare methods.\n\\(\\mu_i\\) is the expected SIR at region \\(i\\).\nOutline the modeling choices (HGP, DAGAR, BYM), briefly mention priors."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#disease-mapping-estimation-gof",
-    "href": "slides/2024-jsm/talk.html#disease-mapping-estimation-gof",
+    "objectID": "slides/2024-jsm/index.html#disease-mapping-estimation-gof",
+    "href": "slides/2024-jsm/index.html#disease-mapping-estimation-gof",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Disease Mapping: Estimation & GOF",
     "text": "Disease Mapping: Estimation & GOF\n\n\n\n\n\nHGP\nDAGAR\n\n\n\n\n\\(\\beta_0\\)\n-0.21 (-0.268, -0.139)\n-0.26 (-0.450, -0.137)\n\n\n\\(\\beta_1\\)\n0.33 (0.284, 0.368)\n0.31 (0.258, 0.370)\n\n\n\\(\\sigma\\)\n0.19 (0.155, 0.234)\n0.30 (0.218, 0.484)\n\n\n\\(\\rho\\)\n2.25 (0.159, 6.948)\n\n\n\n\\(\\psi\\)\n\n0.43 (0.069, 0.827)\n\n\n\n\n\n\n\n\n\n\n\n\nLOOIC\n1081.0\n1081.9\n\n\nWAIC\n1038.0\n1032.4\n\n\n\n\n\n\nmedian (95% CI)\nsimilar estimates for covariate\nHGP indicates weak spatial correlation\nDAGAR and BYM spatial dependence are not helpful as they indicate the spatial correlation goes from weak to strong (according to the CI)"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#disease-mapping-spatial-dependence",
-    "href": "slides/2024-jsm/talk.html#disease-mapping-spatial-dependence",
+    "objectID": "slides/2024-jsm/index.html#disease-mapping-spatial-dependence",
+    "href": "slides/2024-jsm/index.html#disease-mapping-spatial-dependence",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Disease Mapping: Spatial Dependence",
     "text": "Disease Mapping: Spatial Dependence\n\n\n\nHGP provides more insight into spatial dependence\nWe could also plot the correlation function itself"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#disease-mapping-adjusted-sir",
-    "href": "slides/2024-jsm/talk.html#disease-mapping-adjusted-sir",
+    "objectID": "slides/2024-jsm/index.html#disease-mapping-adjusted-sir",
+    "href": "slides/2024-jsm/index.html#disease-mapping-adjusted-sir",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Disease Mapping: Adjusted SIR",
     "text": "Disease Mapping: Adjusted SIR\n\n\n\nFitted values are similar among the three models\nSome regions with very low risks are shrunk toward a “regional mean”"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#air-pollution-in-ventura-and-los-angeles",
-    "href": "slides/2024-jsm/talk.html#air-pollution-in-ventura-and-los-angeles",
+    "objectID": "slides/2024-jsm/index.html#air-pollution-in-ventura-and-los-angeles",
+    "href": "slides/2024-jsm/index.html#air-pollution-in-ventura-and-los-angeles",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Air Pollution in Ventura and Los Angeles",
     "text": "Air Pollution in Ventura and Los Angeles\n\n\n\n\n\n\n\nPoint-referrenced data from 19 measurement stations available daily from 1999 to date;\nSatellite-derived estimates (2010–2012) at 184 areal units.\nPM2.5: \\(\\mathbf{Y} = {(Y(\\mathbf{s}_1), \\ldots,\nY(\\mathbf{s}_n))}^\\top\\).\nModel: \\((Y(\\mathbf{s}_i) \\mid z(\\mathbf{s}_i)) \\sim\n\\mathcal{N}(\\beta_0 + z(\\mathbf{s}_i), \\tau^2)\\)\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngoals: (1); estimate model parameters using both sources. (2) use satellite data to help with interpolation.\nsquare areas (average size \\(\\approx\\) 101.95 km2)\ndata fusion challenges\nadaptability of the hgp to different problems.\nPm25 scale is micrometre per cubic meter: one one-millionth of a meter.\nconditional on \\(z\\) the \\(y\\)s are mutually independent.\nPriors on random effects: AGP1 and 2; heteroscedastic HGP with different variances for areal and point-referrenced data."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#agp-approximation",
-    "href": "slides/2024-jsm/talk.html#agp-approximation",
+    "objectID": "slides/2024-jsm/index.html#agp-approximation",
+    "href": "slides/2024-jsm/index.html#agp-approximation",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "AGP Approximation",
     "text": "AGP Approximation"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#air-pollution-estimation-and-prediction-assessment",
-    "href": "slides/2024-jsm/talk.html#air-pollution-estimation-and-prediction-assessment",
+    "objectID": "slides/2024-jsm/index.html#air-pollution-estimation-and-prediction-assessment",
+    "href": "slides/2024-jsm/index.html#air-pollution-estimation-and-prediction-assessment",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Air Pollution: Estimation and Prediction Assessment",
     "text": "Air Pollution: Estimation and Prediction Assessment\n\n\n\n\n\n\n\n\n\n\n\nHGP\n\\(\\rm AGP_1\\)\n\\(\\rm AGP_2\\)\n\n\n\n\n\\(\\beta\\)\n5.61 (4.69, 6.45)\n6.22 (2.16, 10.10)\n6.19 (5.88, 6.48)\n\n\n\\(\\rho\\)\n13.83 (7.82, 23.61)\n13.16 (5.14, 30.24)\n0.63 (0.46, 0.83)\n\n\n\\(\\tau\\)\n0.18 (0.07, 0.31)\n1.39 (1.24, 1.56)\n0.54 (0.39, 0.72)\n\n\n\\(\\sigma\\)\n3.85 (2.92, 5.18)\n1.70 (0.96, 2.91)\n2.41 (2.024, 2.84)\n\n\n\\(\\sigma_a\\)\n1.24 (1.04, 1.51)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRMSP\n1.05\n1.45\n1.64\n\n\nWidth\n3.57\n2.53\n9.67\n\n\nCPP\n95.5\n78.6\n95.5\n\n\nIS\n4.80\n15.11\n13.65\n\n\n\n\n\n\n\\(\\rho\\) rescaled to 100s of km.\nstaggering difference in estimates of the same model with different meshes."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#air-pollution-change-of-support",
-    "href": "slides/2024-jsm/talk.html#air-pollution-change-of-support",
+    "objectID": "slides/2024-jsm/index.html#air-pollution-change-of-support",
+    "href": "slides/2024-jsm/index.html#air-pollution-change-of-support",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Air Pollution: Change-of-Support",
     "text": "Air Pollution: Change-of-Support\n\n\n\nFigure confirms what we learned from 10-fold CV and simulation studies.\nHGP allows to use data from different sources seamlessly\nNo dependence on meshes/grids\nApparently, a parsimonious compromise between the two meshes.\nOnce again, the AGP seems highly dependend on the mesh and this is not highlighted in the literature."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#applications-key-findings",
-    "href": "slides/2024-jsm/talk.html#applications-key-findings",
+    "objectID": "slides/2024-jsm/index.html#applications-key-findings",
+    "href": "slides/2024-jsm/index.html#applications-key-findings",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Applications: key findings",
     "text": "Applications: key findings\n\nThe proposed method consistently demonstrated performance comparable to specialized models tailored for areal and fused data.\nUnlike traditional areal models, the HGP’s marginal variances are independent of the number of neighbors.\nThe HGP model simplifies data fusion by bypassing the need to define arbitrary grids for numerical integral evaluation, eliminating this step each time the joint probability distribution of the data and parameters is calculated.\nAcross both applications, the HGP provides an interpretable spatial dependence parameter and a spatial correlation function."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#highlights",
-    "href": "slides/2024-jsm/talk.html#highlights",
+    "objectID": "slides/2024-jsm/index.html#highlights",
+    "href": "slides/2024-jsm/index.html#highlights",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Highlights",
     "text": "Highlights\nThe HGP has proven to be a powerful model that offers:\n\nVersatility: accomodates diverse spatial data types.\nPerformance: competitive against models designed for specific spatial data types.\nReliable predictions: prediction intervals with near nominal frequentist coverage.\nOur conclusions are further supported by a comprehensive simulation study, detailed in our available preprint.\n\n\nKey Takeaway: The HGP’s versatility and performance make it a valuable tool in your spatial analysis toolkit."
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#future-work-and-limitations",
-    "href": "slides/2024-jsm/talk.html#future-work-and-limitations",
+    "objectID": "slides/2024-jsm/index.html#future-work-and-limitations",
+    "href": "slides/2024-jsm/index.html#future-work-and-limitations",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "Future work and Limitations",
     "text": "Future work and Limitations\n\nExtensions:\n\nnon-Euclidean spaces\nBig data\n\nLimitations:\n\nBig “n” problem inherited from geostatistics\nUnclear how to incorporate anisotropy\nDifficulties in obtaining spectral densities for correlation functions"
   },
   {
-    "objectID": "slides/2024-jsm/talk.html#references",
-    "href": "slides/2024-jsm/talk.html#references",
+    "objectID": "slides/2024-jsm/index.html#references",
+    "href": "slides/2024-jsm/index.html#references",
     "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
     "section": "",
     "text": "References\n\n\nBesag, J. (1974), “Spatial interaction and the statistical analysis of lattice systems,” Journal of the Royal Statistical Society. Series B (Methodological), JSTOR, 192–236.\n\n\nBesag, J., York, J., and Mollié, A. (1991), “Bayesian image restoration, with two applications in spatial statistics,” Annals of the Institute of Statistical Mathematics, 43, 1–20.\n\n\nCressie, N. (1993), Statistics for spatial data, Wiley series in probability and statistics, Wiley.\n\n\nDatta, A., Banerjee, S., Hodges, J. S., and Gao, L. (2019), “Spatial disease mapping using directed acyclic graph auto-regressive (DAGAR) models,” Bayesian analysis, NIH Public Access, 14, 1221.\n\n\nDiggle, P. J., Tawn, J. A., and Moyeed, R. A. (1998), “Model-based geostatistics,” Journal of the Royal Statistical Society Series C: Applied Statistics, Oxford University Press, 47, 299–350.\n\n\nHoman, M. D., and Gelman, A. (2014), “The No-U-turn sampler: Adaptively setting path lengths in hamiltonian Monte Carlo,” Journal of Machine Learning Research, JMLR.org, 15, 1593–1623.\n\n\nLi, D., Tang, W., and Banerjee, S. (2023), “Inference for Gaussian processes with Matérn covariogram on compact Riemannian manifolds,” Journal of Machine Learning Research, 24, 1–26.\n\n\nMin, D., Zhilin, L., and Xiaoyong, C. (2007), “Extended Hausdorff distance for spatial objects in GIS,” International Journal of Geographical Information Science, Taylor & Francis, 21, 459–475.\n\n\nMoraga, P., Cramb, S. M., Mengersen, K. L., and Pagano, M. (2017), “A geostatistical model for combined analysis of point-level and area-level data using INLA and SPDE,” Spatial Statistics, Elsevier, 21, 27–41.\n\n\nSendov, B. (2004), “Hausdorff distance and image processing,” Russian Mathematical Surveys, IOP Publishing, 59, 319. https://doi.org/10.1070/RM2004v059n02ABEH000721.\n\n\nVehtari, A., Gelman, A., Simpson, D., Carpenter, B., and Bürkner, P.-C. (2021), “Rank-normalization, folding, and localization: An improved \\(\\hat{R}\\) for assessing convergence of MCMC (with discussion),” Bayesian Analysis, International Society for Bayesian Analysis, 16, 667–718."

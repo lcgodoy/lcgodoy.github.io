@@ -23,6 +23,9 @@ tramp
 /eshell/history
 /eshell/lastdir
 
+# docs folder is not useful anymore
+/docs/
+  
 # elpa packages
 /elpa/
 
