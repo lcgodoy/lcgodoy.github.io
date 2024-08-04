@@ -5,13 +5,10 @@ description: |
     Talk given at the 2024 JSM
 author: 
   - name: Lucas da Cunha Godoy
-date: "2024-05-23"
+date: "2024-08-04"
 categories:
   - Spatial statistics
   - Gaussian process
-  - Disease mapping
-  - Tuberculosis
-  - Brasil
 ---
 
 ### Details
@@ -20,7 +17,7 @@ categories:
 
 * **Location**: Portlant, OR
 
-* [Slides](https://lcgodoy.me/slides/2024-jsm/)
+* [Slides](https://lcgodoy.me/slides/2024-jsm)
 
 ### Abstract
 
