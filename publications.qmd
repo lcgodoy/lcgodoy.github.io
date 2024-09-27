@@ -3,7 +3,7 @@
 ::: {#list}
 :::
 
-:::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-abu2024perceptions .csl-entry}
 Abu Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
 (2024). Perceptions and utilization of tele-orthodontics: A survey of
@@ -115,7 +115,8 @@ bone-compromised patients: Oral health-related quality of life outcomes.
 ::: {#ref-turshudzhyan2023alpha .csl-entry}
 Turshudzhyan, A., **Godoy, L. da C.**, Kuo, C.-L., & Wu, G. Y. (2023). Alpha
 feto-protein expression trends for screening early hepatocellular
-carcinoma. *Gene Expression*, *000*, 0--0.
+carcinoma. *Gene Expression*, *22*(2), 109--114.
+<https://doi.org/10.14218/GE.2023.00001>
 :::
 
 ::: {#ref-arqub2022association .csl-entry}
@@ -148,12 +149,6 @@ older patients with delirium. *Frontiers in Cardiovascular Medicine*,
 *9*.
 :::
 
-::: {#ref-prates2022can .csl-entry}
-Prates, M. O., Azevedo, D. R. M., **Godoy, L. da C.**, & Bandyopadhyay, D.
-(2022). Can gaussian markov random fields handle spatial confounding?
-*Journal of the Indian Statistical Association*.
-:::
-
 ::: {#ref-arqub2021patients .csl-entry}
 Arqub, S. A., Voldman, R., Ahmida, A., Kuo, C.-L., **Godoy, L. da C.**,
 Nasrawi, Y., Al-Khateeb, S. N., & Uribe, F. (2021). Patients'
@@ -181,4 +176,17 @@ J. M. (2021). The impact of gender in mentor-mentee success: Results
 from the women's dermatologic society mentorship survey. *International
 Journal of Women's Dermatology*.
 :::
-::::::::::::::::::::::::::::
+
+::: {#ref-prates2021can .csl-entry}
+Prates, M. O., Azevedo, D. R. M., **Godoy, L. da C.**, & Bandyopadhyay, D.
+(2021). Can gaussian markov random fields handle spatial confounding?
+*Journal of the Indian Statistical Association*, *59*(2), 197--220.
+:::
+
+::: {#ref-abuarqub2024accuracy .csl-entry}
+Abu-Arqub, S., Hariharan, A., Banankhah, S., **Godoy, L. da C.**, Liu, P.,
+Kuo, C.-L., & Uribe, F. Accuracy of full arch scans using the itero
+element 2® intra-oral scanner: A clinical study. *Journal of
+Orthodontics*, *0*(0), 0--0. <https://doi.org/10.1177/14653125241268755>
+:::
+:::::::::::::::::::::::::::::
