@@ -1,11 +1,11 @@
 # Publications
 
-::: {#list}
+::: {#OrderedList}
 :::
 
-::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-abu2024perceptions .csl-entry}
-Abu Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
+Abu-Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
 (2024). Perceptions and utilization of tele-orthodontics: A survey of
 the members of the american association of orthodontists. *Progress in
 Orthodontics*, *25*(1), 16.
@@ -60,7 +60,7 @@ in the united states and canada. *The Angle Orthodontist*.
 :::
 
 ::: {#ref-arqub2023survival .csl-entry}
-Arqub, S. A., Bashir, R., Obeng, K., **Godoy, L. da C.**, Kuo, C.-L.,
+Abu-Arqub, S., Bashir, R., Obeng, K., **Godoy, L. da C.**, Kuo, C.-L.,
 Upadhyay, M., & Yadav, S. (2023). Survival and failure rate of lower
 lingual bonded retainers: A retrospective cohort evaluation.
 *Orthodontics & Craniofacial Research*, *26*(2), 256--264.
@@ -81,7 +81,7 @@ Otolaryngology*, *48*(4), 696--699. <https://doi.org/10.1111/coa.14045>
 :::
 
 ::: {#ref-harandi2023assessment .csl-entry}
-Harandi, M. T., Abu Arqub, S., Warren, E., Kuo, C.-L., **Godoy, L. da C.**,
+Harandi, M. T., Abu-Arqub, S., Warren, E., Kuo, C.-L., **Godoy, L. da C.**,
 Mehta, S., Feldman, J., Upadhyay, M., & Yadav, S. (2023). Assessment of
 clear aligner accuracy of 2 clear aligners systems. *American Journal of
 Orthodontics and Dentofacial Orthopedics*.
@@ -119,8 +119,15 @@ carcinoma. *Gene Expression*, *22*(2), 109--114.
 <https://doi.org/10.14218/GE.2023.00001>
 :::
 
+::: {#ref-baruwa2022real .csl-entry}
+Baruwa Etti, A., Kuo, C., **Godoy, L. da C.**, & Andemariam, B. (2022).
+Real-world outcomes in adult sickle cell disease patients treated with
+crizanlizumab, voxelotor or both. *Blood*, *140*(Supplement 1),
+8292--8293. <https://doi.org/10.1182/blood-2022-170808>
+:::
+
 ::: {#ref-arqub2022association .csl-entry}
-Arqub, S. A., Banankhah, S., Sharma, R., **Godoy, L. da C.**, Kuo, C.-L.,
+Abu-Arqub, S., Banankhah, S., Sharma, R., **Godoy, L. da C.**, Kuo, C.-L.,
 Ahmed, M., Alfardan, M., & Uribe, F. (2022). Association between initial
 complexity, frequency of refinements, treatment duration, and outcome in
 invisalign orthodontic treatment. *American Journal of Orthodontics and
@@ -135,7 +142,7 @@ Statistics*, *51*, 100695.
 :::
 
 ::: {#ref-hariharan2022evaluation .csl-entry}
-Hariharan, A., Arqub, S. A., Gandhi, V., **Godoy, L. da C.**, Kuo, C.-L., &
+Hariharan, A., Abu-Arqub, S., Gandhi, V., **Godoy, L. da C.**, Kuo, C.-L., &
 Uribe, F. (2022). Evaluation of interproximal reduction in individual
 teeth, and full arch assessment in clear aligner therapy: Digital
 planning versus 3D model analysis after reduction. *Progress in
@@ -150,7 +157,7 @@ older patients with delirium. *Frontiers in Cardiovascular Medicine*,
 :::
 
 ::: {#ref-arqub2021patients .csl-entry}
-Arqub, S. A., Voldman, R., Ahmida, A., Kuo, C.-L., **Godoy, L. da C.**,
+Abu-Arqub, S., Voldman, R., Ahmida, A., Kuo, C.-L., **Godoy, L. da C.**,
 Nasrawi, Y., Al-Khateeb, S. N., & Uribe, F. (2021). Patients'
 perceptions of orthodontic treatment experiences during COVID-19: A
 cross-sectional study. *Progress in Orthodontics*, *22*(1), 1--12.
@@ -189,4 +196,4 @@ Kuo, C.-L., & Uribe, F. Accuracy of full arch scans using the itero
 element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 0--0. <https://doi.org/10.1177/14653125241268755>
 :::
-:::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::
