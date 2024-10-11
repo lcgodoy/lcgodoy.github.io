@@ -3,12 +3,12 @@
 ::: {#OrderedList}
 :::
 
-:::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-abu2024perceptions .csl-entry}
 Abu-Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
 (2024). Perceptions and utilization of tele-orthodontics: A survey of
 the members of the american association of orthodontists. *Progress in
-Orthodontics*, *25*(1), 16.
+Orthodontics*, *25*(1), 16. <https://doi.org/10.1186/s40510-024-00516-4>
 :::
 
 ::: {#ref-abuarqub2024retrospective .csl-entry}
@@ -16,7 +16,8 @@ Abu-Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L., Godoy, L.
 da C., & Uribe, F. (2024). Retrospective evaluation of the success rate
 and factors associated with the stability of alveolar ridge orthodontic
 miniscrews: Pilot study. *Journal of the World Federation of
-Orthodontists*. <https://doi.org/10.1016/j.ejwf.2024.02.001>
+Orthodontists*, *13*(4), 181--188.
+<https://doi.org/10.1016/j.ejwf.2024.02.001>
 :::
 
 ::: {#ref-andreyeva2024federal .csl-entry}
@@ -34,15 +35,35 @@ and Oral Radiology*, *137*(3), 301--309.
 <https://doi.org/10.1016/j.oooo.2023.11.005>
 :::
 
+::: {#ref-Rpkg:sapo .csl-entry}
+**Godoy, L. da C.** (2024). *[sapo]{.nocase}: Spatial association of
+different types of polygon*. <https://CRAN.R-project.org/package=sapo>
+:::
+
 ::: {#ref-Rpkg:smile .csl-entry}
-**Godoy, L. da C.** (2024). *Smile: Spatial misalignment: Interpolation,
-linkage, and estimation*. <https://doi.org/10.32614/CRAN.package.smile>
+**Godoy, L. da C.** (2024). *[smile]{.nocase}: Spatial misalignment:
+Interpolation, linkage, and estimation*.
+<https://doi.org/10.32614/CRAN.package.smile>
 :::
 
 ::: {#ref-godoy2024statistical .csl-entry}
 **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2024). *Statistical
 inferences and predictions for areal data and spatial data fusion with
-hausdorff--gaussian processes*. <https://arxiv.org/abs/2208.07900>
+hausdorff--gaussian processes*.
+<https://doi.org/10.48550/arXiv.2208.07900>
+:::
+
+::: {#ref-godoy2024voronoi .csl-entry}
+**Godoy, L. da C.**, Prates, M. O., & Yan, J. (2024). Voronoi linkage
+between mismatching voting stations and census tracts in analyzing the
+2018 brazilian presidential election data. *New England Journal of
+Statistics in Data Science*, (under review).
+:::
+
+::: {#ref-hernandez2024heat .csl-entry}
+Hernández, G. G., Seemann, J. R., **Godoy, L. da C.**, Slot, M., &
+García-Robledo, C. (2024). Heat tolerance of tropical herbaceous plants
+increases with elevation. *Annals of Botany*, (under review).
 :::
 
 ::: {#ref-irsheid2024comparative .csl-entry}
@@ -50,13 +71,15 @@ Irsheid, R., **Godoy, L. da C.**, Kuo, C.-L., Metz, J., Dolce, C., & Abu
 Arqub, S. (2024). Comparative assessment of the clinical outcomes of
 clear aligners compared to fixed appliance in class II malocclusion.
 *Clinical Oral Investigations*, *28*(8), 1--10.
+<https://doi.org/10.1186/s12903-018-0695-z>
 :::
 
 ::: {#ref-abu2023insight .csl-entry}
 Abu-Arqub, S., Ahmida, A., **Godoy, L. da C.**, Kuo, C.-L., Upadhyay, M., &
 Yadav, S. (2023). Insight into clear aligner therapy protocols and
 preferences among members of the american association of orthodontists
-in the united states and canada. *The Angle Orthodontist*.
+in the united states and canada. *The Angle Orthodontist*, *93*(4),
+417--428. <https://doi.org/10.2319/101022-694.1>
 :::
 
 ::: {#ref-arqub2023survival .csl-entry}
@@ -67,10 +90,19 @@ lingual bonded retainers: A retrospective cohort evaluation.
 <https://doi.org/10.1111/ocr.12608>
 :::
 
+::: {#ref-abu2023ridge .csl-entry}
+Abu-Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L., Godoy, L.
+da C., & Uribe, F. (2023). Ridge mini-implants, a versatile
+biomechanical anchorage device whose success is significantly enhanced
+by splinting: A clinical report. *Progress in Orthodontics*, *24*(1),
+27. <https://doi.org/10.1186/s40510-023-00480-5>
+:::
+
 ::: {#ref-duong2023survey .csl-entry}
 Duong, C., Zhu, Q., Aseltine Jr, R. H., Kuo, C.-L., **Godoy, L. da C.**, &
 Kaufman, B. (2023). A survey on cone-beam computed tomography usage
-among endodontists in the united states. *Journal of Endodontics*.
+among endodontists in the united states. *Journal of Endodontics*,
+*49*(11), 1559--1564. <https://doi.org/10.1016/j.joen.2023.08.020>
 :::
 
 ::: {#ref-frank2023tolerability .csl-entry}
@@ -84,7 +116,7 @@ Otolaryngology*, *48*(4), 696--699. <https://doi.org/10.1111/coa.14045>
 Harandi, M. T., Abu-Arqub, S., Warren, E., Kuo, C.-L., **Godoy, L. da C.**,
 Mehta, S., Feldman, J., Upadhyay, M., & Yadav, S. (2023). Assessment of
 clear aligner accuracy of 2 clear aligners systems. *American Journal of
-Orthodontics and Dentofacial Orthopedics*.
+Orthodontics and Dentofacial Orthopedics*, *164*(6), 793--804.
 <https://doi.org/10.1016/j.ajodo.2023.05.028>
 :::
 
@@ -93,7 +125,7 @@ Jesus, M. de, Maheshwary, A., Kumar, M., **Godoy, L. da C.**, Kuo, C.-L., &
 Grover, P. (2023). Association of electrocardiographic and
 echocardiographic variables with neurological outcomes after ischemic
 stroke. *American Heart Journal Plus: Cardiology Research and Practice*,
-100313.
+*34*, 100313. <https://doi.org/10.1016/j.ahjo.2023.100313>
 :::
 
 ::: {#ref-kuo2023association .csl-entry}
@@ -131,7 +163,8 @@ Abu-Arqub, S., Banankhah, S., Sharma, R., **Godoy, L. da C.**, Kuo, C.-L.,
 Ahmed, M., Alfardan, M., & Uribe, F. (2022). Association between initial
 complexity, frequency of refinements, treatment duration, and outcome in
 invisalign orthodontic treatment. *American Journal of Orthodontics and
-Dentofacial Orthopedics*. <https://doi.org/10.1016/j.ajodo.2022.06.017>
+Dentofacial Orthopedics*, *162*(3), e141--e155.
+<https://doi.org/10.1016/j.ajodo.2022.06.017>
 :::
 
 ::: {#ref-godoy2022testing .csl-entry}
@@ -147,13 +180,14 @@ Uribe, F. (2022). Evaluation of interproximal reduction in individual
 teeth, and full arch assessment in clear aligner therapy: Digital
 planning versus 3D model analysis after reduction. *Progress in
 Orthodontics*, *23*(1), 1--10.
+<https://doi.org/10.1186/s40510-022-00403-w>
 :::
 
 ::: {#ref-kumar2022demand .csl-entry}
 Kumar, M., Patil, S., **Godoy, L. da C.**, Kuo, C.-L., Swede, H., Kuchel, G.
 A., & Chen, K. (2022). Demand ischemia as a predictor of mortality in
 older patients with delirium. *Frontiers in Cardiovascular Medicine*,
-*9*.
+*9*. <https://doi.org/10.3389/fcvm.2022.917252>
 :::
 
 ::: {#ref-arqub2021patients .csl-entry}
@@ -161,6 +195,7 @@ Abu-Arqub, S., Voldman, R., Ahmida, A., Kuo, C.-L., **Godoy, L. da C.**,
 Nasrawi, Y., Al-Khateeb, S. N., & Uribe, F. (2021). Patients'
 perceptions of orthodontic treatment experiences during COVID-19: A
 cross-sectional study. *Progress in Orthodontics*, *22*(1), 1--12.
+<https://doi.org/10.1186/s40510-021-00363-7>
 :::
 
 ::: {#ref-boutrous2021use .csl-entry}
@@ -168,6 +203,7 @@ Boutrous, M. L., Maseto, N., Kuo, C.-L., **Godoy, L. da C.**, & Amankwah, K.
 (2021). The use of multiple carotid stents is associated with increased
 incidence of developing in-stent stenosis on long-term follow-up.
 *Journal of Vascular Surgery*, *74*(3), e240--e241.
+<https://doi.org/10.1016/j.jvs.2021.06.359>
 :::
 
 ::: {#ref-huynh2021examining .csl-entry}
@@ -175,13 +211,15 @@ Huynh, C., **Godoy, L. da C.**, Kuo, C.-L., Smeds, M., & Amankwah, K. S.
 (2021). Examining the development of operative autonomy in vascular
 surgery training and when trainees and program directors agree and
 disagree. *Annals of Vascular Surgery*, *74*, 1--10.
+<https://doi.org/10.1016/j.avsg.2021.01.121>
 :::
 
 ::: {#ref-lin2021impact .csl-entry}
 Lin, G., Murase, J. E., Murrell, D. F., **Godoy, L. da C.**, & Grant-Kels,
 J. M. (2021). The impact of gender in mentor-mentee success: Results
 from the women's dermatologic society mentorship survey. *International
-Journal of Women's Dermatology*.
+Journal of Women's Dermatology*, *7*(4), 398--402.
+<https://doi.org/10.1016/j.ijwd.2021.04.010>
 :::
 
 ::: {#ref-prates2021can .csl-entry}
@@ -196,4 +234,4 @@ Kuo, C.-L., & Uribe, F. Accuracy of full arch scans using the itero
 element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 0--0. <https://doi.org/10.1177/14653125241268755>
 :::
-::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::
