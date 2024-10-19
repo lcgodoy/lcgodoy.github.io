@@ -3,7 +3,7 @@
 ::: {#OrderedList}
 :::
 
-:::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-abu2024perceptions .csl-entry}
 Abu-Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
 (2024). Perceptions and utilization of tele-orthodontics: A survey of
@@ -151,13 +151,6 @@ carcinoma. *Gene Expression*, *22*(2), 109--114.
 <https://doi.org/10.14218/GE.2023.00001>
 :::
 
-::: {#ref-baruwa2022real .csl-entry}
-Baruwa Etti, A., Kuo, C., **Godoy, L. da C.**, & Andemariam, B. (2022).
-Real-world outcomes in adult sickle cell disease patients treated with
-crizanlizumab, voxelotor or both. *Blood*, *140*(Supplement 1),
-8292--8293. <https://doi.org/10.1182/blood-2022-170808>
-:::
-
 ::: {#ref-arqub2022association .csl-entry}
 Abu-Arqub, S., Banankhah, S., Sharma, R., **Godoy, L. da C.**, Kuo, C.-L.,
 Ahmed, M., Alfardan, M., & Uribe, F. (2022). Association between initial
@@ -198,14 +191,6 @@ cross-sectional study. *Progress in Orthodontics*, *22*(1), 1--12.
 <https://doi.org/10.1186/s40510-021-00363-7>
 :::
 
-::: {#ref-boutrous2021use .csl-entry}
-Boutrous, M. L., Maseto, N., Kuo, C.-L., **Godoy, L. da C.**, & Amankwah, K.
-(2021). The use of multiple carotid stents is associated with increased
-incidence of developing in-stent stenosis on long-term follow-up.
-*Journal of Vascular Surgery*, *74*(3), e240--e241.
-<https://doi.org/10.1016/j.jvs.2021.06.359>
-:::
-
 ::: {#ref-huynh2021examining .csl-entry}
 Huynh, C., **Godoy, L. da C.**, Kuo, C.-L., Smeds, M., & Amankwah, K. S.
 (2021). Examining the development of operative autonomy in vascular
@@ -234,4 +219,4 @@ Kuo, C.-L., & Uribe, F. Accuracy of full arch scans using the itero
 element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 0--0. <https://doi.org/10.1177/14653125241268755>
 :::
-::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::

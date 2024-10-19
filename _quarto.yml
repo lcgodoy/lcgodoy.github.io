@@ -13,7 +13,7 @@ website:
   title: "Lucas Godoy"
   search: true
   cookie-consent: false
-  twitter-card: true
+  twitter-card: false
   open-graph: true
   site-url: https://lcgodoy.me
   repo-url: https://github.com/lcgodoy/lcgodoy.github.io
@@ -30,8 +30,6 @@ website:
     right:
       - icon: github
         href: https://github.com/lcgodoy
-      - icon: twitter
-        href: https://twitter.com/ldcgodoy
   page-footer: 
     left: "Copyright 2024, Lucas Godoy"
         

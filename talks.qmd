@@ -21,6 +21,7 @@ page-layout: full
 
 # Upcoming
 
-- August 4th, 2024 - JSM, Portland - OR.
+- October 21st, 2024 - University of California, Santa Cruz - Department of
+  Statistics
 
 # Past
