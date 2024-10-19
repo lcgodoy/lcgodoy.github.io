@@ -8,15 +8,15 @@ $font-family-sans-serif: "Lato", sans-serif !default;
 // colors
 $body-bg: #FFFEFF !default;
 $body-color: #494a4e !default;
-$link-color: #f9bf02 !default;
-$selection-bg: #246aad !default;
+$link-color: #f29813 !default;
+$selection-bg: #003c6c !default;
 
-$secondary_bg: #f9bf02;
+$secondary_bg: #ffe78f;
 $secondary_body: #246aad;
 
 // headings
 // $presentation-heading-font: "League Gothic", sans-serif !default;
-$presentation-heading-color: #494a4e !default;
+$presentation-heading-color: #003c6c !default;
 $presentation-heading-text-transform: uppercase !default;
 $presentation-font-size-root: 35px;
 
@@ -44,11 +44,11 @@ html * {
 
 .section_slide {
     background-color: $secondary_bg !important; 
-    color: $secondary_body;
+    color: $presentation-heading-color !important;
 }
 
 .section_slide h1 h2 {
-    color: $secondary_body;
+    color: $presentation-heading-color;
 }
 
 /*-- title slide --*/
