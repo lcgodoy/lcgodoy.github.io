@@ -304,7 +304,7 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 
 ## The HGP
 
-:::{.incremental}
+
 * [Index set]{.important2}: $\mathcal{B}(D)$ represents the [closed and
   bounded]{.important} subsets of $D \subset \mathbb{R}^2$.
 
@@ -325,7 +325,7 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 - The induced [covariance function]{.important2} is given by $\mathrm{Cov}(Z(\mathbf{s}_1),
   Z(\mathbf{s}_2)) = v(\mathbf{s}_1) v(\mathbf{s}_2) r(h(\mathbf{s}_1,
   \mathbf{s}_2))$
-:::
+
 
 :::{.notes}
 
@@ -373,17 +373,23 @@ We may defined: $$v(\mathbf{s}) = \exp \{ \alpha_0 + \alpha_1 w(\mathbf{s})
 
 - Useful special cases:
 
-    - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0$ (consequently, $\sigma =
+    - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0$ (consequence, $\sigma =
       \exp \{ \alpha_0 \}$)
 
     - [Data Fusion]{.important2}: $w(\mathbf{s}) =
-      \mathbb{1}(\mathcal{A}(\mathbf{s}) > 0)$. We can also obtain $\sigma_a =
-      \exp \{ \alpha_0 + \alpha_1 \}$.
+      \mathbb{1}(\mathcal{A}(\mathbf{s}) > 0)$.
     
     - [Area dependent]{.important2}: $w(\mathbf{s}) = \mathcal{A}(\mathbf{s})$
 
 - Although flexible, one has to be [careful]{.important} when choosing this
   function to ensure the [process validity]{.important} [@palacios2006non].
+
+::: {.notes}
+
+- for data fusion: $\sigma_a = \exp \{ \alpha_0 + \alpha_1 \}$.
+
+:::
+
 
 ## Ensuring the process' validity
 
@@ -553,7 +559,6 @@ $$\begin{aligned}
 
 ## Priors
 
-::: {.incremental}
 - Independent normal priors for the [regression coefficients]{.important}:
 $\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
   
@@ -573,7 +578,6 @@ $\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
 
 - [Heteroscedastic HGP]{.important2}: $\alpha \sim \mathcal{N}(\mathbf{0},
 \mathbf{I})$, where $v(\mathbf{s}) = \exp \{ \alpha_0 + \sum_i \alpha_i w_i(\mathbf{s}) \}$.
-:::
 
 :::{.notes}
 
