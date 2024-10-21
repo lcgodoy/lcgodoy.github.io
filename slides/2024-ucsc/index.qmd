@@ -166,7 +166,6 @@ The main reasons these models are not applied to areal data are:
 
 ## Classic Models for Spatial Data
 
-:::{.incremental}
 * Areal data
 
     * _CAR [@besag1974spatial], ICAR, BYM [@besag1991bayesian],
@@ -188,7 +187,6 @@ The main reasons these models are not applied to areal data are:
       Z(\mathbf{s}_i), & \text{otherwise,}
       \end{cases}
       $$
-:::
 
 ::: {.notes}
 
@@ -225,7 +223,7 @@ The main reasons these models are not applied to areal data are:
 ## Distances between Sets
 
 :::{.incremental}
-- [Metric space]{.important2}: $(d, D)$, where $D$ is a spatial region of
+- [Metric space]{.important2}: $(D, d)$, where $D$ is a spatial region of
   interest.
 
 - [Distance between a point and a set]{.important2}: $d(x, A) = \inf_{a \in A}
@@ -357,7 +355,6 @@ We may defined: $$v(\mathbf{s}) = \exp \{ \alpha_0 + \alpha_1 w(\mathbf{s})
 \},$$ where $w(\mathbf{s})$ is a covariate available for any $\mathbf{s} \in
 \mathcal{B}(D)$.
 
-:::{.incremental}
 - Useful special cases:
 
     - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0 \implies \exp \{ \alpha_0
@@ -370,14 +367,13 @@ We may defined: $$v(\mathbf{s}) = \exp \{ \alpha_0 + \alpha_1 w(\mathbf{s})
 
 - Although flexible, one has to be [careful]{.important} when choosing this
   function to ensure the [process validity]{.important} [@palacios2006non].
-:::
 
 ## Ensuring the process' validity
 
 For a valid process, its [correlation function]{.important} must satisfy the following
 properties:
   
-:::{.incremental}
+
 - [Diminish with increasing distance]{.important2}: $\lim_{h \to \infty}r(h) = 0$.
 
 
@@ -389,10 +385,10 @@ properties:
 
 
 - Unfortunately, functions that are [guaranteed]{.important} to be
-  [positive-definite]{.important} on [$(\lVert \cdot \rVert_2,
-  \mathbb{R}^2)$]{.important} are [not]{.important} necessarily positive
-  definite on [other metric spaces]{.important} [@li2023inference].
-:::
+  [positive-definite]{.important} on [$(\mathbb{R}^2, \lVert \cdot
+  \rVert_2)$]{.important} are [not]{.important} necessarily positive definite on
+  [other metric spaces]{.important} [@li2023inference].
+
 
 ## The Powered Exponential Correlation (PEC) Function
 
@@ -428,7 +424,7 @@ properties:
 
 :::{.callout-note appearance="simple" icon=false}
 
-## Theorem
+## Proposition
 
 Let $h = h(\mathbf{s}, \mathbf{s}')$ be the Hausdorff distance between two
 spatial units, denoted $\mathbf{s}, \mathbf{s}' \in \mathcal{B}(D)$, where $D
@@ -470,7 +466,6 @@ h^{\nu} / \phi^{\nu} \}$ is positive definite for $\nu \in (1/2, 1)$.
 
 ## HGP Recap
 
-:::{.incremental}
 - [Flexibility]{.important2}: A process that handles [point-referrenced, areal,
   and mixed spatial data]{.important} by construction.
 
@@ -488,7 +483,7 @@ flowchart LR
     C(Hausdorff distance) ==> D(PEC)
     D ==> E
 ```
-:::
+
 
 # Spatial modeling {.section_slide visibility="uncounted"}
 
@@ -503,13 +498,12 @@ $$\begin{aligned}
   Z(\mathbf{s}_i).
 \end{aligned}$$
 
-:::{.incremental}
 - [Probability distribution]{.important2}: $f(\cdot)$
-
-- [Link function]{.important2}: $g(\cdot)$
 
 - [Conditional mean]{.important2}: $\mu_i = \E[Y(\mathbf{s}_i) \mid
   \mathbf{x}_i, Z(\mathbf{s}_i)]$
+
+- [Link function]{.important2}: $g(\cdot)$
 
 - [Model parameters]{.important2}: $\boldsymbol{\theta} =
   {\{\boldsymbol{\beta}^\top, \boldsymbol{\sigma}^\top,
@@ -517,7 +511,6 @@ $$\begin{aligned}
   
 - [Joint density]{.important2}: $p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta}) =
   \prod_{i = 1}^n f(y(\mathbf{s}_i) \mid \mu_i, \boldsymbol{\gamma})$
-:::
 
 :::{.notes}
 
@@ -554,9 +547,7 @@ $\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
 
 - Exponential prior for the [spatial dependence]{.important} parameter: $\rho
 \sim \mathrm{Exp}(a_\rho)$, where $a_{\rho} = - \log(p_{\rho}) / \rho_0$. 
-
-
-- $a_\rho$ is chosen such that $\mathbb{P}(\rho \geq \rho_0) = p_\rho$.
+    - $a_\rho$ is chosen such that $\mathbb{P}(\rho \geq \rho_0) = p_\rho$.
 
 
 - [Homoscedastic variance]{.important2}: $v(\mathbf{s}) =
@@ -578,7 +569,7 @@ $\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
 
 ## Bayesian Inference \& Model Assessment
 
-:::{.incremental}
+
 - [Posterior]{.important2}: $\pi(\boldsymbol{\theta} \mid \mathbf{y},
   \mathbf{z}) \propto p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta})
   p(\mathbf{z} \mid \boldsymbol{\theta}) \pi(\boldsymbol{\theta})$
@@ -596,7 +587,7 @@ $\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
 
 - [Predictions assessment]{.important2}: Interval Score (IS) and RMSP ([lower
   values indicate better fit]{.important})
-:::
+
 
 :::{.notes}
 
@@ -632,7 +623,7 @@ Predictions:
 
 ## Bayesian Modeling Recap {.center}
 
-:::{.incremental}
+
 - [HGP]{.important} as a prior for the random effects disribution in a
   [GLMM]{.important}.
   
@@ -640,7 +631,7 @@ Predictions:
 
 - Uncertainty quantification of predictions through the [posterior predictive
   distributions]{.important}.
-:::
+
 
 :::{.notes}
 DAGAR priors:
@@ -668,7 +659,7 @@ $$\begin{aligned}
 & \log(\mu_i) = \beta_0 + x_i \beta_1 + z(\mathbf{s}_i)
 \end{aligned}$$
 
-:::{.incremental}
+
 - [Sample units]{.important2}: 134 intermediate zones (IZ), where the $i$-th IZ
   is denoted $\mathbf{s}_i$.
 
@@ -680,7 +671,7 @@ $$\begin{aligned}
 
 - [Percentage of people]{.important} classified as [income
   deprived]{.important}: $x_i$.
-:::
+
 
 :::{.notes}
 
@@ -704,16 +695,16 @@ $$\begin{aligned}
 
 :::{.fw}
 
-|           | HGP                    | DAGAR                  |
-|:----------|:-----------------------|:-----------------------|
-| $\beta_0$ | -0.21 (-0.268, -0.139) | -0.26 (-0.450, -0.137) |
-| $\beta_1$ | 0.33 (0.284, 0.368)    | 0.31 (0.258, 0.370)    |
-| $\sigma$  | 0.19 (0.155, 0.234)    | 0.30 (0.218, 0.484)    |
-| $\rho$    | 2.25 (0.159, 6.948)    |                        |
-| $\psi$    |                        | 0.43 (0.069, 0.827)    |
-|           |                        |                        |
-|           |                        |                        |
-| LOOIC     | [1081.0]{.important}   | 1081.9                 |
+|           | HGP                               | DAGAR                             |
+|:----------|:----------------------------------|:----------------------------------|
+| $\beta_0$ | -0.21 (-0.268, -0.139)            | -0.26 (-0.450, -0.137)            |
+| $\beta_1$ | 0.33 (0.284, 0.368)               | 0.31 (0.258, 0.370)               |
+| $\sigma$  | 0.19 (0.155, 0.234)               | 0.30 (0.218, 0.484)               |
+| $\rho$    | [2.25 (0.159, 6.948)]{.important} |                                   |
+| $\psi$    |                                   | [0.43 (0.069, 0.827)]{.important} |
+|           |                                   |                                   |
+|           |                                   |                                   |
+| LOOIC     | [1081.0]{.important}              | 1081.9                            |
 
 : {.striped}
 
@@ -778,18 +769,17 @@ $$\begin{aligned}
 
 ::::{#first-column}
 
-$$\mathbf{Y} = {(Y(\mathbf{s}_1), \ldots,
-  Y(\mathbf{s}_n))}^\top$$
+$$(Y(\mathbf{s}_i) \mid z(\mathbf{s}_i)) \sim
+  \mathcal{N}(\beta_0 + z(\mathbf{s}_i), \tau^2)$$
 
-:::{.incremental}
+
+- [PM~2.5~]{.important2}: $\mathbf{Y} = {(Y(\mathbf{s}_1), \ldots,
+  Y(\mathbf{s}_n))}^\top$.
+
 - [Point-referrenced data]{.important2} from 19 measurement stations available
   daily from 1999 to date;
 
 - [Satellite-derived]{.important2} estimates (2010--2012) at 184 areal units.
-
-- [PM~2.5~]{.important2}: $\mathbf{Y} = {(Y(\mathbf{s}_1), \ldots,
-  Y(\mathbf{s}_n))}^\top$.
-:::
 
 ::::
 
@@ -918,7 +908,7 @@ rm(meshes)
 
 ## Applications: key findings
 
-:::{.incremental}
+
 - The proposed method consistently demonstrated [performance comparable to
   specialized models]{.important} tailored for areal and fused data.
   
@@ -932,7 +922,7 @@ rm(meshes)
   
 - Across both applications, the HGP provides an [interpretable spatial
   dependence]{.important} parameter and a spatial correlation function.
-:::
+
 
 # Closing remarks {.section_slide visibility="uncounted"}
 
