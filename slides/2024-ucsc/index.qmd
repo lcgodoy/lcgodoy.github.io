@@ -173,7 +173,7 @@ The main reasons these models are not applied to areal data are:
 
 * Point-referenced data
 
-    * _Gaussian processes (GP)_; _Nearest-neighbor mixture processes (NNMP)_
+    * _Gaussian processes (GP)_, _Nearest-neighbor mixture processes [@zheng2023nearest]_
 
 * Mixed/fused data
 
@@ -181,10 +181,10 @@ The main reasons these models are not applied to areal data are:
       $$
       Z(\mathbf{s}_i)
       = \begin{cases}
+      Z(\mathbf{s}_i), & \text{if } \mathcal{A}(\mathbf{s}_i) = 0 \\
       {\mathcal{A}(\mathbf{s}_i)}^{-1}
       \int_{\mathcal{A}(\mathbf{s}_i)} Z(\mathbf{s}) \dd \mathbf{s}, & \text{if }
-      \mathcal{A}(\mathbf{s}_i) > 0, \\
-      Z(\mathbf{s}_i), & \text{otherwise,}
+      \mathcal{A}(\mathbf{s}_i) > 0
       \end{cases}
       $$
 
@@ -220,7 +220,23 @@ The main reasons these models are not applied to areal data are:
 
 # Hausdorff--Gaussian Process (HGP) {.section_slide visibility="uncounted"}
 
-## Distances between Sets
+## Preliminaries {.center}
+
+- [Point-referenced]{.important} and [areal]{.important} spatial units
+  [are]{.important} (closed and bounded) [sets]{.important}.
+
+
+- We need to generalize distance between points to [distance between
+  sets]{.important}.
+  
+  
+- Ideally, this distance should: 
+  1. [Take into account]{.important} the [shape, size, and
+     orientation]{.important} of spatial sample units.
+  2. Be ["spatially interpretable"]{.important}.
+
+
+## Distances between sets
 
 :::{.incremental}
 - [Metric space]{.important2}: $(D, d)$, where $D$ is a spatial region of
