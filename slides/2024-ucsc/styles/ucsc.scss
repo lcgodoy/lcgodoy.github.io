@@ -5,14 +5,20 @@
 $presentation-heading-font: "Roboto Slab", serif !default;
 $font-family-sans-serif: "Lato", sans-serif !default;
 
-// colors
-$body-bg: #FFFEFF !default;
-$body-color: #494a4e !default;
-$link-color: #f29813 !default;
-$selection-bg: #003c6c !default;
+$vibrant_blue: #268bd2;
+$vibrant_pink: #d33682;
 
-$secondary_bg: #ffe78f;
-$secondary_body: #246aad;
+$solarized_bg: #fdf6e3;
+$solarized_body: #657b83;
+
+// colors
+$body-bg: $solarized_bg !default;
+$body-color: $solarized_body !default;
+$link-color: $vibrant_blue !default;
+$selection-bg: $vibrant_pink !default;
+
+$secondary_bg: $solarized_body;
+$secondary_body: $solarized_bg;
 
 // headings
 // $presentation-heading-font: "League Gothic", sans-serif !default;

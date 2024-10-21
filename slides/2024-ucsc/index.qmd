@@ -20,7 +20,7 @@ title-slide-attributes:
   data-background-position: 90% 90%
 format:
   revealjs:
-    theme: [styles/ucsc.scss]
+    theme: [styles/jsm.scss]
     filters: [styles/appendix.lua]
     embed-resources: true
     self-contained-math: true
@@ -166,6 +166,7 @@ The main reasons these models are not applied to areal data are:
 
 ## Classic Models for Spatial Data
 
+:::{.incremental}
 * Areal data
 
     * _CAR [@besag1974spatial], ICAR, BYM [@besag1991bayesian],
@@ -173,7 +174,7 @@ The main reasons these models are not applied to areal data are:
 
 * Point-referenced data
 
-    * _Gaussian processes (GP)_
+    * _Gaussian processes (GP)_; _Nearest-neighbor mixture processes (NNMP)_
 
 * Mixed/fused data
 
@@ -187,6 +188,7 @@ The main reasons these models are not applied to areal data are:
       Z(\mathbf{s}_i), & \text{otherwise,}
       \end{cases}
       $$
+:::
 
 ::: {.notes}
 
@@ -222,7 +224,8 @@ The main reasons these models are not applied to areal data are:
 
 ## Distances between Sets
 
-- [Metric space]{.important2}: $(D, d)$, where $D$ is a spatial region of
+:::{.incremental}
+- [Metric space]{.important2}: $(d, D)$, where $D$ is a spatial region of
   interest.
 
 - [Distance between a point and a set]{.important2}: $d(x, A) = \inf_{a \in A}
@@ -234,6 +237,7 @@ The main reasons these models are not applied to areal data are:
 
 - [Hausdorff distance]{.important2}: $$h(A, B) = \max \left \{ \vec{h}(A, B),
   \vec{h}(B, A) \right \}$$
+:::
 
 :::{.notes}
 
@@ -286,6 +290,7 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 
 ## The HGP
 
+:::{.incremental}
 * [Index set]{.important2}: $\mathcal{B}(D)$ represents the [closed and
   bounded]{.important} subsets of $D \subset \mathbb{R}^2$.
 
@@ -306,6 +311,7 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 - The induced [covariance function]{.important2} is given by $\mathrm{Cov}(Z(\mathbf{s}_1),
   Z(\mathbf{s}_2)) = v(\mathbf{s}_1) v(\mathbf{s}_2) r(h(\mathbf{s}_1,
   \mathbf{s}_2))$
+:::
 
 :::{.notes}
 
@@ -341,20 +347,51 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 - The SD function allows the HGP to accommodate both [homoscedastic and
   heteroscedastic scenarios]{.important}.
 
-For a valid process, its correlation function must satisfy the following
+:::
+
+
+## The $v(\mathbf{s})$ function
+
+
+We may defined: $$v(\mathbf{s}) = \exp \{ \alpha_0 + \alpha_1 w(\mathbf{s})
+\},$$ where $w(\mathbf{s})$ is a covariate available for any $\mathbf{s} \in
+\mathcal{B}(D)$.
+
+:::{.incremental}
+- Useful special cases:
+
+    - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0 \implies \exp \{ \alpha_0
+      \} = \sigma$
+
+    - [Data Fusion]{.important2}: $w(\mathbf{s}) =
+      \mathbb{1}(\mathcal{A}(\mathbf{s}) > 0)$.
+    
+    - [Area dependent]{.important2}: $w(\mathbf{s}) = \mathcal{A}(\mathbf{s})$
+
+- Although flexible, one has to be [careful]{.important} when choosing this
+  function to ensure the [process validity]{.important} [@palacios2006non].
+:::
+
+## Ensuring the process' validity
+
+For a valid process, its [correlation function]{.important} must satisfy the following
 properties:
   
+:::{.incremental}
 - [Diminish with increasing distance]{.important2}: $\lim_{h \to \infty}r(h) = 0$.
-  
+
+
 - [Bounded from above by 1]{.important2}: $r(0) = 1$.
-  
-- [Positive-definiteness]{.important2}: yields positive-definite correlation
-  matrices for all its finite-dimensional marginal distributions.
 
-- Unfortunately, functions that are guaranteed to be positive definite on
-  $(\lVert \cdot \rVert_2, \mathbb{R}^2)$ are not necessarily positive definite
-  on other metric spaces [@li2023inference].
 
+- [Positive-definiteness]{.important2}: yields positive-definite [correlation
+  matrices]{.important} for all its finite-dimensional marginal distributions.
+
+
+- Unfortunately, functions that are [guaranteed]{.important} to be
+  [positive-definite]{.important} on [$(\lVert \cdot \rVert_2,
+  \mathbb{R}^2)$]{.important} are [not]{.important} necessarily positive
+  definite on [other metric spaces]{.important} [@li2023inference].
 :::
 
 ## The Powered Exponential Correlation (PEC) Function
@@ -364,17 +401,28 @@ properties:
   parameter]{.important} and $\phi$ governs the range of the [spatial
   dependence]{.important}.
 
+:::{.incremental}
 - [Parametrization]{.important2}: We reparametrize this function with $\rho =
   {\log(10)}^{1 / \nu} \phi$.
 
 - [Interpretation]{.important2}: $\rho$ is the [distance]{.important} at which
   the [spatial correlation reduces to $0.10$]{.important}.
+:::
 
 ::: {.notes}
 
 - explain $\rho$.
 
 :::
+
+
+## Visualizing the PEC function
+
+```{r}
+#| label: pec-function
+#| file: code/fig-pec.R
+```
+
 
 ## Theoretical Foundation: Positive Definiteness of the PEC
 
@@ -398,8 +446,31 @@ h^{\nu} / \phi^{\nu} \}$ is positive definite for $\nu \in (1/2, 1)$.
   $L_1$ normed Euclidean space, and using the fact that the exponential
   correlation function is positive definite on this space.
 
+## Empirical Assessment of Positive Definiteness
+
+```{r}
+#| label: psd-empirical
+#| file: code/fig-psd.R
+#| fig-align: center
+```
+
+:::{.notes}
+
+- the graph displays the smallest eigenvalue of the correlation matrix induced
+  by $\rho$ (x-axis) and $\nu$ (y-axis).
+  
+- These matrices are based on the two spatial applications we will discuss in
+  the next chapter.
+  
+- The transparent regions indicate the regions of the parametric space where rho
+  is smaller than 0.
+
+:::
+
+
 ## HGP Recap
 
+:::{.incremental}
 - [Flexibility]{.important2}: A process that handles [point-referrenced, areal,
   and mixed spatial data]{.important} by construction.
 
@@ -417,7 +488,7 @@ flowchart LR
     C(Hausdorff distance) ==> D(PEC)
     D ==> E
 ```
-
+:::
 
 # Spatial modeling {.section_slide visibility="uncounted"}
 
@@ -432,6 +503,7 @@ $$\begin{aligned}
   Z(\mathbf{s}_i).
 \end{aligned}$$
 
+:::{.incremental}
 - [Probability distribution]{.important2}: $f(\cdot)$
 
 - [Link function]{.important2}: $g(\cdot)$
@@ -445,6 +517,7 @@ $$\begin{aligned}
   
 - [Joint density]{.important2}: $p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta}) =
   \prod_{i = 1}^n f(y(\mathbf{s}_i) \mid \mu_i, \boldsymbol{\gamma})$
+:::
 
 :::{.notes}
 
@@ -468,26 +541,62 @@ $$\begin{aligned}
 
 :::
 
-## Bayesian Estimation \& Prediction
+## Priors
 
-- [Priors]{.important2}: 
-  \begin{align*}
-  & \boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10
-  \mathbf{I}) & \mathbf{Z} \sim \mathrm{HGP}\{0, v(\cdot), r(\cdot)
-  \} & \\ 
-  & \rho \sim \mathrm{Exp}(a_\rho) & \alpha \sim \mathcal{N}(\mathbf{0}, \mathbf{I}) \qquad \text{ or } \quad & \sigma \sim t_{+}(3) 
-  \end{align*}
+::: {.incremental}
+- Independent normal priors for the [regression coefficients]{.important}:
+$\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
+  
+  
+- HGP prior for the [latent random effects]{.important}: $\mathbf{Z} \sim
+  \mathrm{HGP}\{0, v(\cdot), r(\cdot) \}$
 
-- [Posterior]{.important2}: $\pi(\boldsymbol{\theta} \mid \mathbf{y}, \mathbf{z}) \propto
-  p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta}) p(\mathbf{z} \mid \boldsymbol{\theta}) \pi(\boldsymbol{\theta})$
+
+- Exponential prior for the [spatial dependence]{.important} parameter: $\rho
+\sim \mathrm{Exp}(a_\rho)$, where $a_{\rho} = - \log(p_{\rho}) / \rho_0$. 
+
+
+- $a_\rho$ is chosen such that $\mathbb{P}(\rho \geq \rho_0) = p_\rho$.
+
+
+- [Homoscedastic variance]{.important2}: $v(\mathbf{s}) =
+  \sqrt{\mathrm{Var}(Z(\mathbf{s}))} = \sigma \sim t_{+}(3)$
+
+
+- [Heteroscedastic HGP]{.important2}: $\alpha \sim \mathcal{N}(\mathbf{0},
+\mathbf{I})$, where $v(\mathbf{s}) = \exp \{ \alpha_0 + \sum_i \alpha_i w_i(\mathbf{s}) \}$.
+:::
+
+:::{.notes}
+
+- For $\rho$, the prior is inspired in penalized complexity priors. A
+  conservative, but reasonable, choice for its hyperparameter is setting
+  $a_\rho$ such that $\rho_0$ is a surprisingly low practical range and $p_rho$
+  is a small probability (i.e., around .01)
+
+:::
+
+## Bayesian Inference \& Model Assessment
+
+:::{.incremental}
+- [Posterior]{.important2}: $\pi(\boldsymbol{\theta} \mid \mathbf{y},
+  \mathbf{z}) \propto p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta})
+  p(\mathbf{z} \mid \boldsymbol{\theta}) \pi(\boldsymbol{\theta})$
 
 - [MCMC sampler]{.important2}: No-U-Turn [@hoffman2014no].
 
 - [Convergence assessment]{.important2}: traceplots and split-${\hat{R}}$
   [@vehtari2021rank].
 
+- [Goodness-of-fit criteria]{.important2}: LOOIC ([lower values indicate better
+  fit]{.important})
+  
 - [Posterior predictive distributions]{.important2}: $p(\mathbf{y}^{\ast} \mid
   \mathbf{y})$
+
+- [Predictions assessment]{.important2}: Interval Score (IS) and RMSP ([lower
+  values indicate better fit]{.important})
+:::
 
 :::{.notes}
 
@@ -503,11 +612,7 @@ $$\begin{aligned}
 
 - $\nu$ hard to be estimated.
 
-- [Goodness-of-fit criteria]{.important2}: WAIC, and LOOIC ([lower values
-  indicate better fit]{.important})
-  
-- [Predictions assessment]{.important2}: Interval Score (IS) and RMSP ([lower
-  values indicate better fit]{.important})
+
 
 Predictions:
 
@@ -527,7 +632,7 @@ Predictions:
 
 ## Bayesian Modeling Recap {.center}
 
-
+:::{.incremental}
 - [HGP]{.important} as a prior for the random effects disribution in a
   [GLMM]{.important}.
   
@@ -535,6 +640,7 @@ Predictions:
 
 - Uncertainty quantification of predictions through the [posterior predictive
   distributions]{.important}.
+:::
 
 :::{.notes}
 DAGAR priors:
@@ -556,6 +662,13 @@ adjacency matrix (and the two parameters)
 
 ## Respiratory Disease Hospitalization in Glasgow
 
+
+$$\begin{aligned}
+& (Y(\mathbf{s}_i) \mid x_i, z(\mathbf{s}_i)) \sim \text{Poisson}(E_i \mu_i) \\
+& \log(\mu_i) = \beta_0 + x_i \beta_1 + z(\mathbf{s}_i)
+\end{aligned}$$
+
+:::{.incremental}
 - [Sample units]{.important2}: 134 intermediate zones (IZ), where the $i$-th IZ
   is denoted $\mathbf{s}_i$.
 
@@ -565,13 +678,9 @@ adjacency matrix (and the two parameters)
 - [Expected number of hospitalizations]{.important2} based on the national age-
   and sex-standardized rates: $E_i$.
 
-- [Percentage of people]{.important2} classified as [income
-  deprived]{.important2}: $\mathbf{X}$.
-
-$$\begin{aligned}
-& (Y(\mathbf{s}_i) \mid x_i, z(\mathbf{s}_i)) \sim \text{Poisson}(E_i \mu_i) \\
-& \log(\mu_i) = \beta_0 + x_i \beta_1 + z(\mathbf{s}_i)
-\end{aligned}$$
+- [Percentage of people]{.important} classified as [income
+  deprived]{.important}: $x_i$.
+:::
 
 :::{.notes}
 
@@ -605,7 +714,6 @@ $$\begin{aligned}
 |           |                        |                        |
 |           |                        |                        |
 | LOOIC     | [1081.0]{.important}   | 1081.9                 |
-| WAIC      | 1038.0                 | [1032.4]{.important}   |
 
 : {.striped}
 
@@ -670,6 +778,10 @@ $$\begin{aligned}
 
 ::::{#first-column}
 
+$$\mathbf{Y} = {(Y(\mathbf{s}_1), \ldots,
+  Y(\mathbf{s}_n))}^\top$$
+
+:::{.incremental}
 - [Point-referrenced data]{.important2} from 19 measurement stations available
   daily from 1999 to date;
 
@@ -677,9 +789,7 @@ $$\begin{aligned}
 
 - [PM~2.5~]{.important2}: $\mathbf{Y} = {(Y(\mathbf{s}_1), \ldots,
   Y(\mathbf{s}_n))}^\top$.
-
-- [Model]{.important2}: $(Y(\mathbf{s}_i) \mid z(\mathbf{s}_i)) \sim
-  \mathcal{N}(\beta_0 + z(\mathbf{s}_i), \tau^2)$
+:::
 
 ::::
 
@@ -754,19 +864,19 @@ rm(meshes)
 
 :::{.fw}
 
-|            | HGP                 | $\rm AGP_1$         | $\rm AGP_2$        |
-|:-----------|:--------------------|:--------------------|:-------------------|
-| $\beta$    | 5.61 (4.69, 6.45)   | 6.22 (2.16, 10.10)  | 6.19 (5.88, 6.48)  |
-| $\rho$     | 13.83 (7.82, 23.61) | 13.16 (5.14, 30.24) | 0.63 (0.46, 0.83)  |
-| $\tau$     | 0.18 (0.07, 0.31)   | 1.39 (1.24, 1.56)   | 0.54 (0.39, 0.72)  |
-| $\sigma$   | 3.85 (2.92, 5.18)   | 1.70 (0.96, 2.91)   | 2.41 (2.024, 2.84) |
-| $\sigma_a$ | 1.24 (1.04, 1.51)   |                     |                    |
-|            |                     |                     |                    |
-|            |                     |                     |                    |
-| RMSP       | [1.05]{.important}  | 1.45                | 1.64               |
-| Width      | 3.57                | [2.53]{.important}  | 9.67               |
-| CPP        | 95.5                | 78.6                | 95.5               |
-| IS         | [4.80]{.important}  | 15.11               | 13.65              |
+|            | HGP                               | $\rm AGP_1$                       | $\rm AGP_2$                     |
+|:-----------|:----------------------------------|:----------------------------------|:--------------------------------|
+| $\beta$    | 5.61 (4.69, 6.45)                 | 6.22 (2.16, 10.10)                | 6.19 (5.88, 6.48)               |
+| $\rho$     | [13.83 (7.82, 23.61)]{.important} | [13.16 (5.14, 30.24)]{.important} | [0.63 (0.46, 0.83)]{.important} |
+| $\tau$     | 0.18 (0.07, 0.31)                 | 1.39 (1.24, 1.56)                 | 0.54 (0.39, 0.72)               |
+| $\sigma$   | 3.85 (2.92, 5.18)                 | 1.70 (0.96, 2.91)                 | 2.41 (2.024, 2.84)              |
+| $\sigma_a$ | 1.24 (1.04, 1.51)                 |                                   |                                 |
+|            |                                   |                                   |                                 |
+|            |                                   |                                   |                                 |
+| RMSP       | [1.05]{.important}                | 1.45                              | 1.64                            |
+| Width      | 3.57                              | [2.53]{.important}                | 9.67                            |
+| CPP        | 95.5                              | 78.6                              | 95.5                            |
+| IS         | [4.80]{.important}                | 15.11                             | 13.65                           |
 
 : {.striped}
 
@@ -808,20 +918,21 @@ rm(meshes)
 
 ## Applications: key findings
 
-* The proposed method consistently demonstrated [performance comparable to
+:::{.incremental}
+- The proposed method consistently demonstrated [performance comparable to
   specialized models]{.important} tailored for areal and fused data.
   
-* Unlike traditional areal models, the HGP's [marginal variances]{.important}
+- Unlike traditional areal models, the HGP's [marginal variances]{.important}
   are [independent]{.important} of the [number of neighbors]{.important}.
   
-* The HGP model [simplifies data fusion]{.important} by [bypassing]{.important}
+- The HGP model [simplifies data fusion]{.important} by [bypassing]{.important}
   the need to define [arbitrary grids]{.important} for [numerical
   integral]{.important} evaluation, eliminating this step each time the joint
   probability distribution of the data and parameters is calculated.
   
-* Across both applications, the HGP provides an [interpretable spatial
+- Across both applications, the HGP provides an [interpretable spatial
   dependence]{.important} parameter and a spatial correlation function.
-
+:::
 
 # Closing remarks {.section_slide visibility="uncounted"}
 
