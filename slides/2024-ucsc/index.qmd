@@ -312,6 +312,10 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 - [Mean function]{.important2}:
   $m(\mathbf{s}) = \E[Z(\mathbf{s})]$
   
+- [Covariance function]{.important2}: $\mathrm{Cov}(Z(\mathbf{s}_1),
+  Z(\mathbf{s}_2)) = v(\mathbf{s}_1) v(\mathbf{s}_2) r(h(\mathbf{s}_1,
+  \mathbf{s}_2))$
+  
 - [SD function]{.important2}: $v(\mathbf{s}) =
   \sqrt{\mathrm{Var}(Z(\mathbf{s}))}$ 
   
@@ -319,10 +323,6 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
   \mathrm{Cor}(Z(\mathbf{s}_1), Z(\mathbf{s}_2)),$ where $h$ denotes the
   [Hausdorff distance]{.important} between $\mathbf{s}_1, \mathbf{s}_2 \in
   \mathcal{B}(D)$.
-
-- The induced [covariance function]{.important2} is given by $\mathrm{Cov}(Z(\mathbf{s}_1),
-  Z(\mathbf{s}_2)) = v(\mathbf{s}_1) v(\mathbf{s}_2) r(h(\mathbf{s}_1,
-  \mathbf{s}_2))$
 
 
 :::{.notes}
