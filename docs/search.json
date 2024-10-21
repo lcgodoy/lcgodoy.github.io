@@ -382,7 +382,7 @@
     "href": "slides/2024-ucsc/index.html#the-vmathbfs-function",
     "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
     "section": "The \\(v(\\mathbf{s})\\) function",
-    "text": "The \\(v(\\mathbf{s})\\) function\nWe may defined: \\[v(\\mathbf{s}) = \\exp \\{ \\alpha_0 + \\alpha_1 w(\\mathbf{s})\n\\},\\] where \\(w(\\mathbf{s})\\) is a covariate available for any \\(\\mathbf{s} \\in\n\\mathcal{B}(D)\\).\n\nUseful special cases:\n\nHomoscedastic: \\(w(\\mathbf{s}) = 0 \\implies \\exp \\{ \\alpha_0\n\\} = \\sigma\\)\nData Fusion: \\(w(\\mathbf{s}) =\n\\mathbb{1}(\\mathcal{A}(\\mathbf{s}) &gt; 0)\\).\nArea dependent: \\(w(\\mathbf{s}) = \\mathcal{A}(\\mathbf{s})\\)\n\nAlthough flexible, one has to be careful when choosing this function to ensure the process validity (Palacios and Steel 2006)."
+    "text": "The \\(v(\\mathbf{s})\\) function\nWe may defined: \\[v(\\mathbf{s}) = \\exp \\{ \\alpha_0 + \\alpha_1 w(\\mathbf{s})\n\\},\\] where \\(w(\\mathbf{s})\\) is a covariate available for any \\(\\mathbf{s} \\in\n\\mathcal{B}(D)\\).\n\nUseful special cases:\n\nHomoscedastic: \\(w(\\mathbf{s}) = 0\\) (consequently, \\(\\sigma =\n\\exp \\{ \\alpha_0 \\}\\))\nData Fusion: \\(w(\\mathbf{s}) =\n\\mathbb{1}(\\mathcal{A}(\\mathbf{s}) &gt; 0)\\). We can also obtain \\(\\sigma_a =\n\\exp \\{ \\alpha_0 + \\alpha_1 \\}\\).\nArea dependent: \\(w(\\mathbf{s}) = \\mathcal{A}(\\mathbf{s})\\)\n\nAlthough flexible, one has to be careful when choosing this function to ensure the process validity (Palacios and Steel 2006)."
   },
   {
     "objectID": "slides/2024-ucsc/index.html#ensuring-the-process-validity",

@@ -373,11 +373,12 @@ We may defined: $$v(\mathbf{s}) = \exp \{ \alpha_0 + \alpha_1 w(\mathbf{s})
 
 - Useful special cases:
 
-    - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0 \implies \exp \{ \alpha_0
-      \} = \sigma$
+    - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0$ (consequently, $\sigma =
+      \exp \{ \alpha_0 \}$)
 
     - [Data Fusion]{.important2}: $w(\mathbf{s}) =
-      \mathbb{1}(\mathcal{A}(\mathbf{s}) > 0)$.
+      \mathbb{1}(\mathcal{A}(\mathbf{s}) > 0)$. We can also obtain $\sigma_a =
+      \exp \{ \alpha_0 + \alpha_1 \}$.
     
     - [Area dependent]{.important2}: $w(\mathbf{s}) = \mathcal{A}(\mathbf{s})$
 
