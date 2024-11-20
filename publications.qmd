@@ -3,7 +3,14 @@
 ::: {#OrderedList}
 :::
 
-:::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-chaluparambil2024age .csl-entry}
+Chaluparambil, M., Abu-Arqub, S., Kuo, C.-L., **Godoy, L. da C.**, Upadhyay,
+M., & Yadav, S. (2024). Age-stratified assessment of orthodontic tooth
+movement outcomes with clear aligners. *Progress in Orthodontics*,
+*25*(1), 43. <https://doi.org/10.1186/s40510-024-00542-2>
+:::
+
 ::: {#ref-abu2024perceptions .csl-entry}
 Abu-Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, & Uribe, F.
 (2024). Perceptions and utilization of tele-orthodontics: A survey of
@@ -219,4 +226,12 @@ Kuo, C.-L., & Uribe, F. Accuracy of full arch scans using the itero
 element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 0--0. <https://doi.org/10.1177/14653125241268755>
 :::
-::::::::::::::::::::::::::::::::
+
+::: {#ref-abu2024accuracry .csl-entry}
+Abu-Arqub, S., Hariharan, A., Banankhah, S., **Godoy, L. da C.**, Liu, P.,
+Kuo, C.-L., & Uribe, F. Accuracy of full arch scans using the iTero
+element 2® intra-oral scanner: A clinical study. *Journal of
+Orthodontics*, *0*(0), 14653125241268755.
+<https://doi.org/10.1177/14653125241268755>
+:::
+::::::::::::::::::::::::::::::::::

@@ -21,7 +21,7 @@ page-layout: full
 
 # Upcoming
 
-- October 21st, 2024 - University of California, Santa Cruz - Department of
-  Statistics
+- December 5th, 2024 - VII Latin American Meeting on Bayesian Statistics (COBAL)
+  and XVII Brazilian Meeting of Bayesian Statistics (EBEB)
 
 # Past

@@ -1594,6 +1594,9 @@
       </else-if>
     </choose>
   </macro>
+  <macro name="citation-number">
+    <number variable="citation-number" form="numeric"/>
+  </macro>
   <citation et-al-min="21" et-al-use-first="19" et-al-use-last="true">
     <sort>
       <key macro="date-sort-group" sort="descending"/>
@@ -1640,6 +1643,7 @@
       <key variable="status"/>
       <key macro="author-bib"/>
       <key macro="title"/>
+      <key macro="citation-number" sort="descending"/>
     </sort>
     <layout>
       <choose>

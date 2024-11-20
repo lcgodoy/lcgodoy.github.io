@@ -1,0 +1,50 @@
+---
+title: |
+  STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION
+  WITH HAUSDORFF-GAUSSIAN PROCESSES
+description: |
+    Talk given at the Department of Statistics at Universidade Federal do Rio Grande do Sul
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2024-11-21"
+categories:
+  - Spatial statistics
+  - Gaussian process
+---
+
+### Details
+
+* **Date**: Nov 21, 2024
+
+* **Location**: Porto Alegre, RS - Brazil
+
+* [Slides](https://lcgodoy.me/slides/2024-ufrgs)
+
+### Abstract
+
+Accurate modeling of spatial dependence is pivotal in analyzing spatial data,
+influencing parameter estimation and predictions. The spatial structure of the
+data significantly impacts valid statistical inference. Existing models for
+areal data often rely on adjacency matrices, struggling to differentiate between
+polygons of varying sizes and shapes. Conversely, data fusion models rely on
+computationally intensive numerical integrals, presenting challenges for
+moderately large datasets. In response to these issues, we propose the
+Hausdorff-Gaussian process (HGP), a versatile model utilizing the Hausdorff
+distance to capture spatial dependence in both point and areal data. We
+introduce a valid correlation function for this model, accommodating diverse
+modeling techniques, including geostatistical and areal models. Integration into
+generalized linear mixed-effects models enhances its applicability, particularly
+in addressing data fusion challenges. We validate our approach through a
+comprehensive simulation study and application to two real-world scenarios
+involve areal data, and another demonstrates its effectiveness in data
+fusion. The results suggest that the HGP is competitive with specialized models
+regarding goodness-of-fit and prediction performances. In summary, the HGP
+offers a flexible and robust solution for modeling spatial data of various types
+and shapes, with potential applications spanning fields such as public health
+and climate science.
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-ufrgs" title="Slides"></iframe>
+```

@@ -1,9 +1,11 @@
 all: publications
 	@quarto render
 
-publications: pubs.bib apa-cv.csl lua-refs.lua
+style:=apa-cv.csl
+
+publications: pubs.bib $(style) lua-refs.lua
 	@quarto pandoc -L lua-refs.lua \
-		pubs.bib --csl=apa-cv.csl \
+		pubs.bib --csl=$(style) \
 		-V --toc=false \
 		--to=markdown-citations \
 		-o publications.qmd
