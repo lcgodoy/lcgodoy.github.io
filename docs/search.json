@@ -676,6 +676,13 @@
     "href": "slides/2024-ufrgs/index.html#respiratory-disease-hospitalization-in-glasgow",
     "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
     "section": "Respiratory Disease Hospitalization in Glasgow",
+    "text": "Respiratory Disease Hospitalization in Glasgow"
+  },
+  {
+    "objectID": "slides/2024-ufrgs/index.html#respiratory-disease-hospitalization-in-glasgow-1",
+    "href": "slides/2024-ufrgs/index.html#respiratory-disease-hospitalization-in-glasgow-1",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Respiratory Disease Hospitalization in Glasgow",
     "text": "Respiratory Disease Hospitalization in Glasgow\n\\[\\begin{aligned}\n& (Y(\\mathbf{s}_i) \\mid x_i, z(\\mathbf{s}_i)) \\sim \\text{Poisson}(E_i \\mu_i) \\\\\n& \\log(\\mu_i) = \\beta_0 + x_i \\beta_1 + z(\\mathbf{s}_i)\n\\end{aligned}\\]\n\nSample units: 134 intermediate zones (IZ), where the \\(i\\)-th IZ is denoted \\(\\mathbf{s}_i\\).\nNumber of hospitalizations: \\(\\mathbf{Y} = {(Y(\\mathbf{s}_1),\n\\ldots, Y(\\mathbf{s}_n))}^\\top\\).\nExpected number of hospitalizations based on the national age- and sex-standardized rates: \\(E_i\\).\nPercentage of people classified as income deprived: \\(x_i\\).\n\n\n\nData from the north portion of the river Clyde in the Great Glasgow and Clyde health board in Scotland.\nAssumption: Conditional on \\(\\mathbf{Z}\\), \\(\\mathbf{Y}\\) are mutually independent.\nExplain goals of the analysis–estimate risks adjusted for income deprivation, compare methods.\n\\(\\mu_i\\) is the expected SIR at region \\(i\\).\nOutline the modeling choices (HGP, DAGAR, BYM), briefly mention priors."
   },
   {
