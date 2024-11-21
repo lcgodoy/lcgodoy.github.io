@@ -3,7 +3,7 @@ title: |
   STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION
   WITH HAUSDORFF-GAUSSIAN PROCESSES
 subtitle: |
-  Available at [lcgodoy.me/slides/2024-ucsc/](https://lcgodoy.me/slides/2024-ufrgs/)
+  Available at [lcgodoy.me/slides/2024-ufrgs/](https://lcgodoy.me/slides/2024-ufrgs/)
 author:
   - name: Lucas da Cunha Godoy
     orcid: 0000-0003-4265-972X
