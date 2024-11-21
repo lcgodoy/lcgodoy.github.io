@@ -669,6 +669,15 @@ adjacency matrix (and the two parameters)
 
 # Areal Data Application {.section_slide visibility="uncounted"}
 
+## Respiratory Disease Hospitalization in Glasgow
+
+```{r}
+#| label: sirobs
+#| file: code/fig-scotobs.R
+#| crop: true
+#| fig-align: center
+#| fig-dpi: 900
+```
 
 ## Respiratory Disease Hospitalization in Glasgow
 
