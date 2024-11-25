@@ -3,7 +3,7 @@
 ::: {#OrderedList}
 :::
 
-:::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-chaluparambil2024age .csl-entry}
 Chaluparambil, M., Abu-Arqub, S., Kuo, C.-L., **Godoy, L. da C.**, Upadhyay,
 M., & Yadav, S. (2024). Age-stratified assessment of orthodontic tooth
@@ -79,6 +79,13 @@ Arqub, S. (2024). Comparative assessment of the clinical outcomes of
 clear aligners compared to fixed appliance in class II malocclusion.
 *Clinical Oral Investigations*, *28*(8), 1--10.
 <https://doi.org/10.1186/s12903-018-0695-z>
+:::
+
+::: {#ref-michelin2024fast .csl-entry}
+Michelin, L., **Godoy, L. da C.**, Ramos, H. S., & Prates, M. O. (2024).
+Fast mixture spatial regression: A mixture in the geographical and
+feature space applied to predict porosity in the post-salt. *Spatial
+Statistics*, 100873. <https://doi.org/10.1016/j.spasta.2024.100873>
 :::
 
 ::: {#ref-abu2023insight .csl-entry}
@@ -234,4 +241,4 @@ element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 14653125241268755.
 <https://doi.org/10.1177/14653125241268755>
 :::
-::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::
