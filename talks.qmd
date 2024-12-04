@@ -19,9 +19,4 @@ listing:
 page-layout: full
 ---
 
-# Upcoming
-
-- December 5th, 2024 - VII Latin American Meeting on Bayesian Statistics (COBAL)
-  and XVII Brazilian Meeting of Bayesian Statistics (EBEB)
-
 # Past

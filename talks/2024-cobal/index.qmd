@@ -1,0 +1,47 @@
+---
+title: |
+  Spatiotemporal Analysis of Tuberculosis using Hausdorff--Gaussian Processes
+description: |
+    Talk given at the XVII Encontro Brasileiro de Estatística Bayesiana and VII Congresso Bayesiano da América Latina
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2024-12-05"
+categories:
+  - Spatiotemporal statistics
+  - Gaussian process
+---
+
+### Details
+
+* **Date**: Dec 05, 2024
+
+* **Location**: Belo Horizonte, MG - Brazil
+
+* [Slides](https://lcgodoy.me/slides/2024-cobal)
+
+### Abstract
+
+Tuberculosis (TB) remains a significant global health challenge, and Brazil
+exemplifies the complexities of controlling this infectious disease. Reliable
+estimates and forecasts of TB incidence rates are crucial to guide public health
+policies. This study focuses on the high-burden municipalities of Eastern Rio
+Grande do Sul, Brazil. We propose a novel spatiotemporal model based on the
+Hausdorff-Gaussian process to analyze TB incidence data. This model incorporates
+spatial dependence dictated by the Hausdorff distance, allowing it to "borrow
+strength" from municipalities and generate more reliable estimates, particularly
+for smaller areas. Our analysis has two primary goals. First, we aim to generate
+accurate TB incidence estimates by incorporating municipality-specific
+characteristics through covariates and a spatiotemporal random effect. The model
+delivers trustworthy expected incidence rates, consequently allowing for
+calculating standardized incidence ratios (SIRs). Second, our model offers
+predictive capabilities, forecasting TB incidence ratesone year ahead to support
+proactive public health planning. We demonstrate our model's effectiveness and
+competitive performance against other specialized areal data models. The
+insights gained from this study can guide policymakers in developing effective
+TB control strategies.
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-cobal" title="Slides"></iframe>
+```
