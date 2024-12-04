@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.5.57">
+<meta name="generator" content="quarto-1.6.39">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -91,10 +91,10 @@ div.csl-indent {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-c4a94f39bf71c7c8857f91444aedbc54.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -126,7 +126,10 @@ div.csl-indent {
 
 <meta property="og:title" content="Estimating regression coefficients using a Neural Network (from scratch) – Lucas Godoy">
 <meta property="og:description" content="">
+<meta property="og:image" content="https://lcgodoy.me/posts/lmnet/2021-06-23-lmnnet_files/figure-html/fig-nn1-1.png">
 <meta property="og:site_name" content="Lucas Godoy">
+<meta property="og:image:height" content="594">
+<meta property="og:image:width" content="1014">
 </head>
 
 <body class="nav-fixed">
@@ -364,9 +367,9 @@ C(\mathbf{y}; \mathbf{x}, \mathbf{W}) = \frac{1}{n} \sum_{i = 1}^{n}
 L(\mathbf{w_i, \mathbf{x}_i; y_i}) + \lambda J(\mathbf{W}),
 </annotation></semantics></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow></mrow><annotation encoding="application/x-tex">J(\mathbf{W})</annotation></semantics></math> is a non-negative regularization term and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>λ</mi><mo>≥</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">\lambda \geq
 0</annotation></semantics></math> is a tuning parameter.</p>
-<p>In practice, we may have a regularization term for each layer, each one having its own <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>. Some commonly used regularization terms are <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><mo stretchy="false" form="prefix">∥</mo><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">
+<p>In practice, we may have a regularization term for each layer, each one having its own <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>λ</mi><annotation encoding="application/x-tex">\lambda</annotation></semantics></math>. Some commonly used regularization terms are <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><msup><mrow><mo stretchy="true" form="prefix">‖</mo><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="true" form="postfix">‖</mo></mrow><mn>2</mn></msup><mo>,</mo></mrow><annotation encoding="application/x-tex">
 J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert^2,
-</annotation></semantics></math> and <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><mo stretchy="false" form="prefix">∥</mo><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="false" form="postfix">∥</mo><mo>,</mo></mrow><annotation encoding="application/x-tex">
+</annotation></semantics></math> and <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>J</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐖</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mn>1</mn></mrow><mrow><mi>K</mi><mo>−</mo><mn>1</mn></mrow></munderover><mrow><mo stretchy="true" form="prefix">‖</mo><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><mo stretchy="true" form="postfix">‖</mo></mrow><mo>,</mo></mrow><annotation encoding="application/x-tex">
 J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert,
 </annotation></semantics></math> where <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>K</mi><annotation encoding="application/x-tex">K</annotation></semantics></math> is the number of layers of our neural network model, and <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mi>𝐰</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>k</mi><mo stretchy="true" form="postfix">)</mo></mrow></msup><annotation encoding="application/x-tex">\mathbf{w}^{(k)}</annotation></semantics></math> is the vector of weights from the units in the layer <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mi>k</mi></msub><annotation encoding="application/x-tex">L_k</annotation></semantics></math> to the layer <math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>L</mi><mrow><mi>k</mi><mo>+</mo><mn>1</mn></mrow></msub><annotation encoding="application/x-tex">L_{k + 1}</annotation></semantics></math>. Note that, these two regularization terms are analogous to the Ridge and Lasso penalizations, and they play the exact same role in neural networks as its analogous versions do for the linear models <span class="citation" data-cites="efron2016computer">(<a href="#ref-efron2016computer" role="doc-biblioref">Efron and Hastie 2016</a>)</span>. Mixtures of these two regularization terms, as in the elastic net <span class="citation" data-cites="zou2005regularization">(<a href="#ref-zou2005regularization" role="doc-biblioref">Zou and Hastie 2005</a>)</span>, are also common.</p>
 </section>
@@ -388,7 +391,7 @@ J(\mathbf{W}) = \frac{1}{2} \sum_{k = 1}^{K - 1} \lVert \mathbf{w}^{(k)} \rVert,
 </section>
 <section id="sec:imple" class="level2">
 <h2 class="anchored" data-anchor-id="sec:imple">Implementation</h2>
-<p>I created functions for the implementation of a Neural Network with a single hidden layer model for generic activation functions. The implementation considers the cost function defined as <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐲</mi><mo>;</mo><mi>𝐗</mi><mo>,</mo><mi>𝐘</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><mo stretchy="false" form="prefix">∥</mo><mi>𝐲</mi><mo>−</mo><mover><mi>𝐲</mi><mo accent="true">̂</mo></mover><msup><mo stretchy="false" form="postfix">∥</mo><mn>2</mn></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
+<p>I created functions for the implementation of a Neural Network with a single hidden layer model for generic activation functions. The implementation considers the cost function defined as <math display="block" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>C</mi><mrow><mo stretchy="true" form="prefix">(</mo><mi>𝐲</mi><mo>;</mo><mi>𝐗</mi><mo>,</mo><mi>𝐘</mi><mo stretchy="true" form="postfix">)</mo></mrow><mo>=</mo><mfrac><mn>1</mn><mi>n</mi></mfrac><msup><mrow><mo stretchy="true" form="prefix">‖</mo><mi>𝐲</mi><mo>−</mo><mover><mi>𝐲</mi><mo accent="true">̂</mo></mover><mo stretchy="true" form="postfix">‖</mo></mrow><mn>2</mn></msup><mi>.</mi></mrow><annotation encoding="application/x-tex">
 C(\mathbf{y}; \mathbf{X}, \mathbf{Y}) = \frac{1}{n} \lVert \mathbf{y} -
 \hat{\mathbf{y}} \rVert^2.
 </annotation></semantics></math></p>
@@ -922,8 +925,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
   clipboard.on('success', onCopySuccess);
   if (window.document.getElementById('quarto-embedded-source-code-modal')) {
-    // For code content inside modals, clipBoardJS needs to be initialized with a container option
-    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
     const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
       text: getTextToCopy,
       container: window.document.getElementById('quarto-embedded-source-code-modal')
@@ -1034,7 +1035,6 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       if (window.Quarto?.typesetMath) {
         window.Quarto.typesetMath(note);
       }
-      // TODO in 1.5, we should make sure this works without a callout special case
       if (note.classList.contains("callout")) {
         return note.outerHTML;
       } else {
@@ -1260,7 +1260,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
 });
 </script>
-<script src="https://giscus.app/client.js" data-repo="lcgodoy/lcgodoy.github.io" data-repo-id="" data-category="General" data-category-id="" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
+<script src="https://giscus.app/client.js" data-repo="lcgodoy/lcgodoy.github.io" data-repo-id="MDEwOlJlcG9zaXRvcnkyMTY0Njk1MTI=" data-category="General" data-category-id="DIC_kwDODOcQCM4CcNDy" data-mapping="title" data-reactions-enabled="1" data-emit-metadata="0" data-input-position="top" data-theme="light" data-lang="en" crossorigin="anonymous" async="">
 </script>
 <input type="hidden" id="giscus-base-theme" value="light">
 <input type="hidden" id="giscus-alt-theme" value="dark">
