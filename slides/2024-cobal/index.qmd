@@ -288,64 +288,50 @@ Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
 :::
 
 
-# Spatiotemporal modeling {.section_slide visibility="uncounted"}
+# Tuberculosis spatiotemporal modeling {.section_slide visibility="uncounted"}
 
 
-## Spatiotemporal GLMM
+## Data \& Model
 
-A generalized linear mixed effects model ([GLMM]{.important}) can be written as
+- [Sample units]{.important2}: 54 municipalities, across 11 years (2011 to
+  2021). We use [2022]{.important} to [assess]{.important} the quality of
+  [predictions]{.important}.
+
+- [Number of TB cases]{.important2}: $Y_t(\mathbf{s}_i)$ at location
+  $\mathbf{s}_i$ and time $t$.
+
+- [Population]{.important2}: $P_t(\mathbf{s}_i)$.
+
+- Five covariates and two way [interactions with presence of
+  prison]{.important} (except IDESE).
+
 $$\begin{aligned}
-& Y_t(\mathbf{s}_i) \mid \mathbf{x}_{it}, Z(\mathbf{s}_i, t) \overset{{\rm ind}}{\sim}
-  f(\cdot \mid \mu_{it}, \boldsymbol{\gamma}) \\
-& g(\mu_{it}) = \alpha + \mathbf{x}_{it} \boldsymbol{\beta} +
-  Z(\mathbf{s}_i, t).
+& (Y_t(\mathbf{s}_i) \mid \mathbf{X}_{t}(\mathbf{s}_i), Z(\mathbf{s}_i, t))
+  \overset{{\rm ind}}{\sim}
+  \text{Poisson}(P_t(\mathbf{s}_i) \mu_{it}) \\
+& \log(\mu_{it}) = \alpha + \mathbf{X}^\top_{t}(\mathbf{s}_i) \beta + Z(\mathbf{s}_i, t)
 \end{aligned}$$
-
-- [Probability distribution]{.important2}: $f(\cdot)$
-
-- [Conditional mean]{.important2}: $\mu_{it} = \E[Y_t(\mathbf{s}_i) \mid
-  \mathbf{x}_i, Z(\mathbf{s}_i, t)]$
-
-- [Link function]{.important2}: $g(\cdot)$
-
-- [Model parameters]{.important2}: $\boldsymbol{\theta} =
-  {\{\boldsymbol{\beta}^\top, \boldsymbol{\sigma}^\top,
-  \boldsymbol{\delta}^\top, \boldsymbol{\gamma}^\top \}}^\top$
-  
-- [Joint density]{.important2}: $p(\mathbf{y} \mid \mathbf{z},
-  \boldsymbol{\theta}) = \prod_{i = 1}^n f(y_t(\mathbf{s}_i) \mid \mu_{it},
-  \boldsymbol{\gamma})$
 
 :::{.notes}
 
-- Realizations of random variables are represented by lowercase letters.
+- $\mu_it$: rate
 
-- Model paramers are greek letters.
+- A weakly informative Beta prior with mode at 0.75 and standard deviation
+  around 0.22.
 
-- Under a frequentist perspective, we consider the random effects to follow an
-  HGP.
-  
-- For Bayesian inference, we use the HGP as a prior for the random effects.
-
-- Response variable $Y$ at a spatial unit $s$ is modeled with an appropriate
-  distribution (e.g., Poisson, Bernoulli).
-
-- Covariates ($X$) and spatial random effects ($Z$) explain variation in the
-  conditional mean ($\mu$).
-
-- The HGP defines the spatial random effects ($Z$), capturing spatial
-  correlation with the Hausdorff distance and a correlation function.
+- Prior sensitivity using Importance Sampling and power-scaling.
 
 :::
 
 ## Priors
 
-- We assume $Z(\mathbf{s}, t)$ is a separable zero-mean GP with a covariance
-  function that is the product between the HGP covariance function and the
-  $\mathrm{AR}(1)$ covariance function.
+- We assume $Z(\mathbf{s}, t)$ is a separable zero-mean Gaussian model such that
+  its [SPT covariance]{.important} matrix is the [kronecker product]{.important}
+  between a spatial covariance ([HGP]{.important}, BYM, \& DAGAR) and a temporal
+  correlation ([$\mathrm{AR}(1)$]{.important}).
 
 
-- [Spatial dependence]{.important2}: $\rho \sim \mathrm{Exp}(a_\rho)$, where
+- [HGP spatial dependence]{.important2}: $\rho \sim \mathrm{Exp}(a_\rho)$, where
   $a_{\rho} = - \log(p_{\rho}) / \rho_0$.  $a_\rho$ is chosen such that
   $\mathbb{P}(\rho > \rho_0) = p_\rho$.
 
@@ -374,18 +360,16 @@ $$\begin{aligned}
 
 ## Computational considerations {transition="zoom-in slide-out" transition-speed="slow"}
 
-::: {.incremental}
-
-- [Super naive]{.important2}: $vec(\mathbf{Z}) \sim \mathcal{N}(\mathbf{0},
+- [Super effortful]{.important2}: $vec(\mathbf{Z}) \sim \mathcal{N}(\mathbf{0},
   \sigma^2 \mathrm{R}_s \otimes \mathrm{R}_t)$ [requires $\mathcal{O}(N^3 T^3)$
   _flops_ (and storage)]{.important}.
   
 
-- [Naive]{.important2}: With linear algebra, we can reduce the computational
+- [Effortful]{.important2}: With linear algebra, we can reduce the computational
   [complexity (and storage) to $\approx \mathcal{O}(N^3 + T^3)$]{.important}
 
 
-- [Astute]{.important2}: More linear algebra can be used to evaluate a
+- [Neutral]{.important2}: More linear algebra can be used to evaluate a
   [quadratic form]{.important} with [less operations]{.important}.
 
 
@@ -396,8 +380,6 @@ $$\begin{aligned}
 - [Super clever]{.important2}: The complexity to obtain $chol(R^{-1}_s)$ is
   dramatically decreased using [nearest-neighbor approximations]{.important}
   [@finley2019efficient].
-  
-:::
 
 
 ## Bayesian Inference \& Model Assessment
@@ -452,49 +434,6 @@ Predictions:
 
 :::
 
-
-# Modeling TB {.section_slide visibility="uncounted"}
-
-<!-- ## TB over time -->
- 
-<!-- ```{r} -->
-<!-- #| label: ttrend -->
-<!-- #| file: fig-ttrend.R -->
-<!-- #| crop: true -->
-<!-- #| fig-align: center -->
-<!-- ``` -->
-
-## Data \& Model
-
-- [Sample units]{.important2}: 54 municipalities, across 11 years (2011 to
-  2021). We use [2022]{.important} to [assess]{.important} the quality of
-  [predictions]{.important}.
-
-- [Number of TB cases]{.important2}: $Y_t(\mathbf{s}_i)$ at location
-  $\mathbf{s}_i$ and time $t$.
-
-- [Population]{.important2}: $P_t(\mathbf{s}_i)$.
-
-- Five covariates and two way [interactions with presence of
-  prison]{.important} (except IDESE).
-
-$$\begin{aligned}
-& (Y_t(\mathbf{s}_i) \mid \mathbf{X}_{t}(\mathbf{s}_i), Z(\mathbf{s}_i, t))
-  \overset{{\rm ind}}{\sim}
-  \text{Poisson}(P_t(\mathbf{s}_i) \mu_{it}) \\
-& \log(\mu_{it}) = \alpha + \mathbf{X}^\top_{t}(\mathbf{s}_i) \beta + Z(\mathbf{s}_i, t)
-\end{aligned}$$
-
-:::{.notes}
-
-- $\mu_it$: rate
-
-- A weakly informative Beta prior with mode at 0.75 and standard deviation
-  around 0.22.
-
-- Prior sensitivity using Importance Sampling and power-scaling.
-
-:::
 
 ## Spatiotemporal Trend
 
@@ -572,15 +511,6 @@ $$\begin{aligned}
   prediction accuracy).
 
 :::
-
-## Sensitivity analysis
-
-```{r}
-#| label: sens
-#| file: code/fig-sens.R
-#| crop: true
-#| fig-align: center
-```
 
 ## Results: Relative Risks
 
@@ -689,3 +619,15 @@ your spatial analysis toolkit.
 # Thank you! {.unlisted .section_slide visibility="uncounted"}
 
 ![](qr-code-end.png){fig-align="center"}
+
+# Appendix {.appendix}
+
+## Sensitivity analysis
+
+```{r}
+#| label: sens
+#| file: code/fig-sens.R
+#| crop: true
+#| fig-align: center
+```
+
