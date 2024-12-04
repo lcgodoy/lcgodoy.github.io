@@ -259,18 +259,18 @@
     "text": "References\n\n\nBesag, J. (1974), “Spatial interaction and the statistical analysis of lattice systems,” Journal of the Royal Statistical Society. Series B (Methodological), JSTOR, 192–236.\n\n\nBesag, J., York, J., and Mollié, A. (1991), “Bayesian image restoration, with two applications in spatial statistics,” Annals of the Institute of Statistical Mathematics, 43, 1–20.\n\n\nCressie, N. (1993), Statistics for spatial data, Wiley series in probability and statistics, Wiley.\n\n\nDatta, A., Banerjee, S., Hodges, J. S., and Gao, L. (2019), “Spatial disease mapping using directed acyclic graph auto-regressive (DAGAR) models,” Bayesian analysis, NIH Public Access, 14, 1221.\n\n\nDiggle, P. J., Tawn, J. A., and Moyeed, R. A. (1998), “Model-based geostatistics,” Journal of the Royal Statistical Society Series C: Applied Statistics, Oxford University Press, 47, 299–350.\n\n\nHoman, M. D., and Gelman, A. (2014), “The No-U-turn sampler: Adaptively setting path lengths in hamiltonian Monte Carlo,” Journal of Machine Learning Research, JMLR.org, 15, 1593–1623.\n\n\nLi, D., Tang, W., and Banerjee, S. (2023), “Inference for Gaussian processes with Matérn covariogram on compact Riemannian manifolds,” Journal of Machine Learning Research, 24, 1–26.\n\n\nMin, D., Zhilin, L., and Xiaoyong, C. (2007), “Extended Hausdorff distance for spatial objects in GIS,” International Journal of Geographical Information Science, Taylor & Francis, 21, 459–475.\n\n\nMoraga, P., Cramb, S. M., Mengersen, K. L., and Pagano, M. (2017), “A geostatistical model for combined analysis of point-level and area-level data using INLA and SPDE,” Spatial Statistics, Elsevier, 21, 27–41.\n\n\nPalacios, M. B., and Steel, M. F. J. (2006), “Non-Gaussian Bayesian geostatistical modeling,” Journal of the American Statistical Association, Taylor & Francis, 101, 604–618.\n\n\nSendov, B. (2004), “Hausdorff distance and image processing,” Russian Mathematical Surveys, IOP Publishing, 59, 319. https://doi.org/10.1070/RM2004v059n02ABEH000721.\n\n\nVehtari, A., Gelman, A., Simpson, D., Carpenter, B., and Bürkner, P.-C. (2021), “Rank-normalization, folding, and localization: An improved \\(\\hat{R}\\) for assessing convergence of MCMC (with discussion),” Bayesian Analysis, International Society for Bayesian Analysis, 16, 667–718.\n\n\nZheng, X., Kottas, A., and Sansó, B. (2023), “Nearest-neighbor mixture models for non-gaussian spatial processes,” Bayesian Analysis, International Society for Bayesian Analysis, 18, 1191–1222."
   },
   {
-    "objectID": "slides/2024-cobal/index.html#tuberculosis-in-brazil",
-    "href": "slides/2024-cobal/index.html#tuberculosis-in-brazil",
+    "objectID": "slides/2024-cobal/index.html#too-many-slides",
+    "href": "slides/2024-cobal/index.html#too-many-slides",
     "title": "Spatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes",
-    "section": "Tuberculosis in Brazil",
-    "text": "Tuberculosis in Brazil\n\nTB in Context: The United Nations’ Millennium Declaration in 2000 outlined eight development goals to be achieved by 2015, including combating Tuberculosis (TB).\nMortality: TB remains a major global health threat, second in infectious disease mortality only to COVID-19.\nBrazilian TB Trends: Brazil’s national TB incidence declined only slightly from 2006–2015.\nRio Grande do Sul (RS) reported significantly higher incidence than the national average in 2021, with the eastern region even more affected.\n\n\n\nairborne infectious disease\nWe focus on 54 municipalities in the Eastern part of the state (briefly explain why: zero-inflation, big n.)"
+    "section": "Too many slides…",
+    "text": "Too many slides…"
   },
   {
-    "objectID": "slides/2024-cobal/index.html#previous-analyses-risk-factors",
-    "href": "slides/2024-cobal/index.html#previous-analyses-risk-factors",
+    "objectID": "slides/2024-cobal/index.html#tuberculosis-in-context",
+    "href": "slides/2024-cobal/index.html#tuberculosis-in-context",
     "title": "Spatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes",
-    "section": "Previous Analyses & Risk Factors",
-    "text": "Previous Analyses & Risk Factors\n\nSpatial Dependence: Studies demonstrate strong spatial dependence of TB infections in Brazil, both nationwide and in specific cities.\nTemporal dependence has been largely overlooked in the literature.\nRisk Factors: TB risk factors include densely populated areas, poverty, substance abuse, and incarceration (Cortez et al. 2021)."
+    "section": "Tuberculosis in context",
+    "text": "Tuberculosis in context\n\nMortality: Tuberculosis (TB) remains a major global health threat, second in infectious disease mortality only to COVID-19. Despite being among UN’s development goals in the Millennium Declaration in 2000.\nRio Grande do Sul (RS) reported significantly higher incidence than the national average in 2021, with the eastern region even more affected.\nDependence: Studies demonstrate strong spatial dependence of TB infections in Brazil, but temporal and spatiotemporal structures have been largely overlooked.\nRisk Factors: TB risk factors include densely populated areas, poverty, substance abuse, and incarceration (Cortez et al. 2021)."
   },
   {
     "objectID": "slides/2024-cobal/index.html#spatiotemporal-spt-models-for-areal-data",

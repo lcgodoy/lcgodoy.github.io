@@ -96,42 +96,28 @@ my_theme <-
 knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
 ```
 
-## Tuberculosis in Brazil
+## Too many slides...
 
-- [TB in Context]{.important2}: The United Nations' [Millennium Declaration in
-  2000]{.important} outlined eight development goals to be achieved by 2015,
-  including combating Tuberculosis (TB).
+![](kalu.jpg){fig-align="center"}
 
-- [Mortality]{.important2}: TB remains a major global health threat, [second in
-  infectious disease mortality]{.important} only to COVID-19.
-  
-- [Brazilian TB Trends]{.important2}: Brazil's national TB incidence declined
-  only slightly from 2006--2015. 
+## Tuberculosis in context
+
+- [Mortality]{.important2}: Tuberculosis (TB) remains a major global health
+  threat, [second in infectious disease mortality]{.important} only to
+  COVID-19. Despite being among UN's development goals in the [Millennium
+  Declaration in 2000]{.important}.
   
 - [Rio Grande do Sul (RS)]{.important2} reported significantly [higher
   incidence]{.important} than the national [average]{.important} in 2021, with
   the eastern region even more affected.
 
-:::{.notes}
-
-- airborne infectious disease
-
-- We focus on 54 municipalities in the Eastern part of the state (briefly
-  explain why: zero-inflation, big n.)
-
-:::
-
-## Previous Analyses \& Risk Factors
-
-- [Spatial Dependence]{.important2}: Studies demonstrate [strong spatial
-  dependence]{.important} of TB infections in Brazil, both nationwide and in
-  specific cities. 
-  
-- [Temporal dependence]{.important2} has been largely overlooked in the
-  literature.
+- [Dependence]{.important2}: Studies demonstrate [strong spatial
+  dependence]{.important} of TB infections in Brazil, but temporal and
+  spatiotemporal structures have been largely overlooked.
 
 - [Risk Factors]{.important2}: TB risk factors include densely populated areas,
   poverty, substance abuse, and incarceration [@cortez2021tuberculosis].
+
 
 ## Spatiotemporal (SPT) models for areal data
 
