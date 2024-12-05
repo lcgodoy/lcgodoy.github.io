@@ -256,7 +256,7 @@
     "href": "slides/2024-cobal/index.html#tuberculosis-in-context",
     "title": "Spatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes",
     "section": "Tuberculosis in context",
-    "text": "Tuberculosis in context\n\nMortality: Tuberculosis (TB) remains a major global health threat, second in infectious disease mortality only to COVID-19. Despite being among UN’s development goals in the Millennium Declaration in 2000.\nRio Grande do Sul (RS) reported significantly higher incidence than the national average in 2021, with the eastern region even more affected.\nDependence: Studies demonstrate strong spatial dependence of TB infections in Brazil, but temporal and spatiotemporal structures have been largely overlooked.\nRisk Factors: TB risk factors include densely populated areas, poverty, substance abuse, and incarceration (Cortez et al. 2021)."
+    "text": "Tuberculosis in context\n\nMortality: Tuberculosis (TB) remains a major global health threat, second in infectious disease mortality only to COVID-19.\nRio Grande do Sul (RS) reported significantly higher incidence than the national average in 2021, with the eastern region even more affected.\nDependence: Studies demonstrate strong spatial dependence of TB infections in Brazil, but temporal and spatiotemporal structures have been largely overlooked.\nRisk Factors: TB risk factors include densely populated areas, poverty, substance abuse, and incarceration (Cortez et al. 2021)."
   },
   {
     "objectID": "slides/2024-cobal/index.html#spatiotemporal-spt-models-for-areal-data",
