@@ -1,0 +1,243 @@
+---
+title: |
+  `git` \& friends
+subtitle: |
+  Available at [lcgodoy.me/slides/2025-git/](https://lcgodoy.me/slides/2025-git/)
+author:
+  - name: Lucas da Cunha Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+  - name: Maya Zeff
+    email: |
+      mayazeff@ucsc.edu 
+date: 2025-02-03
+bibliography: references.bib
+csl: styles/asa.csl
+format:
+  revealjs:
+    center: true
+    theme: [styles/git.scss]
+    filters:
+      - styles/appendix.lua
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    highlight-style: tango
+    code-overflow: wrap
+---
+
+# Introduction
+
+## What is version control and why should I care?
+
+- Imagine you're [writing a document]{.important}. Instead of just saving over
+  the same file every time, [version control]{.important} keeps the file's
+  [history]{.important}, like snapshots of your work.
+
+![Does anyone relate to
+this?](img/why-version-control.jpeg)
+
+## Why is it useful?
+
+- Why is this useful?
+
+  * [Collaboration]{.important2}: Multiple people can work on the same project without
+      overwriting each other's changes.
+      
+  * [Reverting]{.important2}: You can easily go back to a previous version if
+      you make a mistake or want to try something different.
+      
+  * [Tracking History]{.important2}: You can see who made what changes and when.
+
+## What is `git`?
+
+* `git` is a *distributed* version control system. This means that everyone
+  working on a project has a complete copy of the project's history on their own
+  computer.
+
+* It was created by Linus Torvalds (the creator of Linux) in 2005 because he
+  needed a better way to manage the Linux kernel source code.
+
+* The distributed nature of `git` is a key benefit. If one person's computer
+  crashes, the project history is safe because everyone else has a copy.
+
+
+## `git` vs GitHub and others
+
+This is important: Git and GitHub are *not* the same thing.
+
+*   **Git:** The tool itself. It's the software you install on your computer to
+    track changes to your files.
+*   **GitHub:** A website that hosts Git repositories.  It's a platform built
+    *around* Git.  Think of it like a place to store and share your Git
+    projects.
+
+GitHub is very popular, but it's not the only option.  Other platforms include:
+
+* GitLab
+* Bitbucket
+* You can even set up your own Git server!
+
+
+# A lightning intro to the `terminal`
+
+## Why using the terminal?
+
+
+Git is primarily used from the command line or terminal.  Why?  Because it's
+powerful and flexible.  The terminal might look intimidating at first, but it's
+just a way to talk to your computer using text commands.
+
+
+## Basics
+
+Here are a few essential commands:
+
+* `pwd` (print working directory): Tells you where you are in the file system.
+* `ls` (list files): Shows you the files and folders in your current directory.
+* `cd` (change directory): Moves you to a different folder.  `cd ..` goes up one level.
+* `mkdir` (make directory): Creates a new folder.
+* `touch` (create a file): Creates an empty file (often used for quick testing).
+
+# Basic `git` Workflow
+
+## Initializing a Repository
+
+The first step is to turn a folder into a Git repository.  Open your terminal,
+navigate to the folder, and type:
+
+```bash
+git init
+```
+
+This creates a hidden `.git` folder inside your project folder. This folder is
+where Git stores all the version history.
+
+## Staging Changes
+
+Before you can save a version (called a [commit]{.important}), you need to tell
+Git which changes you want to include.  This is called [staging]{.important}
+
+```bash
+git add <file>  # e.g., git add my_document.txt
+```
+
+To see what's been staged, use:
+
+
+```bash
+git status
+```
+
+
+## Committing Changes
+
+
+Now you can save a version of your files
+
+```bash
+git commit -m "Descriptive message"
+```
+
+The -m flag lets you add a message describing the changes you made.  [Good
+commit messages are essential!]{.important} They help you and others understand
+the history of the project.
+
+## Viewing History
+
+To see the history of commits, use:
+
+```bash
+git log
+```
+
+This will show you the commit messages, author, and date of each commit
+
+## Cloning a Repository
+
+If you want to work on a project that's already on GitHub (or another
+platform), you can "clone" it:
+
+```bash
+git clone <URL>
+```
+
+This downloads a copy of the repository to your computer.  You can find the URL
+on the platform where the project is hosted.
+
+
+## Pushing and Pulling (Very High Level)
+
+* [Pushing]{.importat2}: Uploading your changes to a remote repository (like on
+  GitHub).
+
+* [Pulling]{.importat2}: Downloading changes from a remote repository to your
+  local computer.
+  
+This is how collaboration happens!  We'll cover this in more detail later.
+
+
+## Branches
+
+Introduce the concept. "Think of branches as different versions of your project
+you can work on independently." git branch, git checkout. Very basic example.
+
+## Pull request \& merging
+
+
+Requesting to merge changes from one branch into another. "This is how teams
+collaborate." Mention merge conflicts briefly: "Sometimes Git can't
+automatically combine changes, and you have to fix them." Don't go into conflict
+resolution in detail.
+
+
+## The `.gitignore` file
+
+Explain its purpose: Telling Git which files to ignore (e.g., temporary files,
+sensitive data). Show a very simple example.
+
+Suggestive: what to ignore
+
+## Add somewhere
+
+* pull requests
+
+* merge conflicts
+
+* gitignore
+
+# Conclusion
+
+## Recap
+
+* Version control helps you track changes to your files.
+
+* Git is a powerful, distributed version control system.
+
+* GitHub is a platform for hosting Git repositories.
+
+* Basic commands: `init`, `add`, `commit`, `log`, `clone`.
+
+## Resources
+
+* [Official Git documentation](https://git-scm.com/doc)
+  
+* [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+## Next steps
+
+* Experiment with Git! Create a simple project and try out the basic commands.
+
+* Practice is key! The more you use Git, the more comfortable you'll become.
+
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
