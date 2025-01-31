@@ -3,7 +3,15 @@
 ::: {#OrderedList}
 :::
 
-::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-michelin2025fast .csl-entry}
+Michelin, L., **Godoy, L. da C.**, Ramos, H. S., & Prates, M. O. (2025).
+Fast mixture spatial regression: A mixture in the geographical and
+feature space applied to predict porosity in the post-salt. *Spatial
+Statistics*, *65*, 100873.
+<https://doi.org/10.1016/j.spasta.2024.100873>
+:::
+
 ::: {#ref-chaluparambil2024age .csl-entry}
 Chaluparambil, M., Abu-Arqub, S., Kuo, C.-L., **Godoy, L. da C.**, Upadhyay,
 M., & Yadav, S. (2024). Age-stratified assessment of orthodontic tooth
@@ -241,4 +249,4 @@ element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 14653125241268755.
 <https://doi.org/10.1177/14653125241268755>
 :::
-:::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::
