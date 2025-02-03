@@ -891,140 +891,126 @@
   {
     "objectID": "slides/2025-git/index.html#what-is-version-control-and-why-should-i-care",
     "href": "slides/2025-git/index.html#what-is-version-control-and-why-should-i-care",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "What is version control and why should I care?",
     "text": "What is version control and why should I care?\n\nImagine you’re writing a document. Instead of just saving over the same file every time, version control keeps the file’s history, like snapshots of your work.\n\n\nDoes anyone relate to this?"
   },
   {
     "objectID": "slides/2025-git/index.html#why-is-it-useful",
     "href": "slides/2025-git/index.html#why-is-it-useful",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "Why is it useful?",
     "text": "Why is it useful?\n\nWhy is this useful?\n\nCollaboration: Multiple people can work on the same project without overwriting each other’s changes.\nReverting: You can easily go back to a previous version if you make a mistake or want to try something different.\nTracking History: You can see who made what changes and when."
   },
   {
     "objectID": "slides/2025-git/index.html#what-is-git",
     "href": "slides/2025-git/index.html#what-is-git",
-    "title": "git & friends",
-    "section": "What is git?",
-    "text": "What is git?\n\ngit is a distributed version control system. This means that everyone working on a project has a complete copy of the project’s history on their own computer.\nIt was created by Linus Torvalds (the creator of Linux) in 2005 because he needed a better way to manage the Linux kernel source code.\nThe distributed nature of git is a key benefit. If one person’s computer crashes, the project history is safe because everyone else has a copy."
+    "title": "Git & friends",
+    "section": "What is Git?",
+    "text": "What is Git?\n\nGit is a distributed version control system. This means that everyone working on a project has a complete copy of the project’s history on their own computer.\nIt was created by Linus Torvalds (the creator of Linux) in 2005 because he needed a better way to manage the Linux kernel source code.\nThe distributed nature of Git is a key benefit. If one person’s computer crashes, the project history is safe because everyone else has a copy."
   },
   {
     "objectID": "slides/2025-git/index.html#git-vs-github-and-others",
     "href": "slides/2025-git/index.html#git-vs-github-and-others",
-    "title": "git & friends",
-    "section": "git vs GitHub and others",
-    "text": "git vs GitHub and others\nThis is important: Git and GitHub are not the same thing.\n\nGit: The tool itself. It’s the software you install on your computer to track changes to your files.\nGitHub: A website that hosts Git repositories. It’s a platform built around Git. Think of it like a place to store and share your Git projects.\n\nGitHub is very popular, but it’s not the only option. Other platforms include:\n\nGitLab\nBitbucket\nYou can even set up your own Git server!"
+    "title": "Git & friends",
+    "section": "Git vs GitHub and others",
+    "text": "Git vs GitHub and others\nThis is important: Git and GitHub are not the same thing.\n\nGit: The tool itself. It’s the software you install on your computer to track changes to your files.\nGitHub: A website that hosts Git repositories. It’s a platform built around Git. Think of it like a place to store and share your Git projects.\nGitHub is very popular, but it’s not the only option. Other platforms include:\n\nGitLab\nBitbucket"
+  },
+  {
+    "objectID": "slides/2025-git/index.html#downloading-and-installing",
+    "href": "slides/2025-git/index.html#downloading-and-installing",
+    "title": "Git & friends",
+    "section": "Downloading and installing",
+    "text": "Downloading and installing\n\nYou can download Git here\nOn MacOS, one can use brew or port to install it\nOn Linux it depends on the package manager being used\nOn Windows, this link provides git and a “terminal emulator” called Git BASH."
   },
   {
     "objectID": "slides/2025-git/index.html#why-using-the-terminal",
     "href": "slides/2025-git/index.html#why-using-the-terminal",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "Why using the terminal?",
-    "text": "Why using the terminal?\nGit is primarily used from the command line or terminal. Why? Because it’s powerful and flexible. The terminal might look intimidating at first, but it’s just a way to talk to your computer using text commands."
+    "text": "Why using the terminal?\n\nGit’s Best Friend: Git relies heavily on the command line (terminal).\nPower and Flexibility: The terminal offers direct control over your computer, enabling complex tasks and automation not easily achievable through graphical interfaces.\nHigh-Performance Computing: A must-have for HPC.\nNot as Scary as it Looks: The terminal is simply a text-based way to communicate with your computer. It’s a skill worth learning!"
   },
   {
     "objectID": "slides/2025-git/index.html#basics",
     "href": "slides/2025-git/index.html#basics",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "Basics",
-    "text": "Basics\nHere are a few essential commands:\n\npwd (print working directory): Tells you where you are in the file system.\nls (list files): Shows you the files and folders in your current directory.\ncd (change directory): Moves you to a different folder. cd .. goes up one level.\nmkdir (make directory): Creates a new folder.\ntouch (create a file): Creates an empty file (often used for quick testing)."
+    "text": "Basics\n\npwd (print working directory): Tells you where you are in the file system.\nls (list files): Shows you the files and folders in your current directory.\ncd (change directory): Moves you to a different folder. For instance, cd .. goes up one level.\nmkdir (make directory): Creates a new folder.\ntouch (create a file): Creates an empty file (often used for quick testing)."
   },
   {
     "objectID": "slides/2025-git/index.html#initializing-a-repository",
     "href": "slides/2025-git/index.html#initializing-a-repository",
-    "title": "git & friends",
-    "section": "Initializing a Repository",
-    "text": "Initializing a Repository\nThe first step is to turn a folder into a Git repository. Open your terminal, navigate to the folder, and type:\ngit init\nThis creates a hidden .git folder inside your project folder. This folder is where Git stores all the version history."
+    "title": "Git & friends",
+    "section": "Initializing a repository",
+    "text": "Initializing a repository\n\nA repository (often shortened to repo) is a directory/folder plus a hidden .git folder, which stores all the version history.\nThere are different ways to start a Git repository.\n\nWe can create or turn an existing directory/folder into a Git repository.\nTo turn a folder into a git repository, open your terminal, navigate to the desired folder (using cd) and then type:\ngit init\nWe can clone a git repository.\ngit clone &lt;repo-url&gt;"
   },
   {
     "objectID": "slides/2025-git/index.html#staging-changes",
     "href": "slides/2025-git/index.html#staging-changes",
-    "title": "git & friends",
-    "section": "Staging Changes",
-    "text": "Staging Changes\nBefore you can save a version (called a commit), you need to tell Git which changes you want to include. This is called staging\ngit add &lt;file&gt;  # e.g., git add my_document.txt\nTo see what’s been staged, use:\ngit status"
+    "title": "Git & friends",
+    "section": "Staging changes",
+    "text": "Staging changes\n\nBefore you can save a version (called a commit), you need to tell Git which changes you want to include. This is called staging\n\ngit add &lt;file&gt;  # e.g., git add my_document.txt\n\nIf we replace &lt;file&gt; by ., then everything that was changed will be staged.\nTo see what’s been staged, use:\n\ngit status"
   },
   {
-    "objectID": "slides/2025-git/index.html#committing-changes",
-    "href": "slides/2025-git/index.html#committing-changes",
-    "title": "git & friends",
-    "section": "Committing Changes",
-    "text": "Committing Changes\nNow you can save a version of your files\ngit commit -m \"Descriptive message\"\nThe -m flag lets you add a message describing the changes you made. Good commit messages are essential! They help you and others understand the history of the project."
-  },
-  {
-    "objectID": "slides/2025-git/index.html#viewing-history",
-    "href": "slides/2025-git/index.html#viewing-history",
-    "title": "git & friends",
-    "section": "Viewing History",
-    "text": "Viewing History\nTo see the history of commits, use:\ngit log\nThis will show you the commit messages, author, and date of each commit"
-  },
-  {
-    "objectID": "slides/2025-git/index.html#cloning-a-repository",
-    "href": "slides/2025-git/index.html#cloning-a-repository",
-    "title": "git & friends",
-    "section": "Cloning a Repository",
-    "text": "Cloning a Repository\nIf you want to work on a project that’s already on GitHub (or another platform), you can “clone” it:\ngit clone &lt;URL&gt;\nThis downloads a copy of the repository to your computer. You can find the URL on the platform where the project is hosted."
-  },
-  {
-    "objectID": "slides/2025-git/index.html#pushing-and-pulling-very-high-level",
-    "href": "slides/2025-git/index.html#pushing-and-pulling-very-high-level",
-    "title": "git & friends",
-    "section": "Pushing and Pulling (Very High Level)",
-    "text": "Pushing and Pulling (Very High Level)\n\nPushing: Uploading your changes to a remote repository (like on GitHub).\nPulling: Downloading changes from a remote repository to your local computer.\n\nThis is how collaboration happens! We’ll cover this in more detail later."
-  },
-  {
-    "objectID": "slides/2025-git/index.html#branches",
-    "href": "slides/2025-git/index.html#branches",
-    "title": "git & friends",
-    "section": "Branches",
-    "text": "Branches\nIntroduce the concept. “Think of branches as different versions of your project you can work on independently.” git branch, git checkout. Very basic example."
-  },
-  {
-    "objectID": "slides/2025-git/index.html#pull-request-merging",
-    "href": "slides/2025-git/index.html#pull-request-merging",
-    "title": "git & friends",
-    "section": "Pull request & merging",
-    "text": "Pull request & merging\nRequesting to merge changes from one branch into another. “This is how teams collaborate.” Mention merge conflicts briefly: “Sometimes Git can’t automatically combine changes, and you have to fix them.” Don’t go into conflict resolution in detail."
+    "objectID": "slides/2025-git/index.html#committing-changes-viewing-history",
+    "href": "slides/2025-git/index.html#committing-changes-viewing-history",
+    "title": "Git & friends",
+    "section": "Committing changes & viewing history",
+    "text": "Committing changes & viewing history\n\nA commit saves your staged changes.\n\ngit commit -m \"Descriptive message\"\n\nThe -m flag lets you pair the staged changes with a message describing the changes you made.\nGood commit messages are essential! They help you and others understand the history of the project.\nTo see the history of commits (the commit messages, author, and date of each commit), use:\n\ngit log"
   },
   {
     "objectID": "slides/2025-git/index.html#the-.gitignore-file",
     "href": "slides/2025-git/index.html#the-.gitignore-file",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "The .gitignore file",
-    "text": "The .gitignore file\nExplain its purpose: Telling Git which files to ignore (e.g., temporary files, sensitive data). Show a very simple example.\nSuggestive: what to ignore"
+    "text": "The .gitignore file\n\nThe .gitignore file is text file that tells Git which files and directories to ignore. This prevents them from being accidentally added to your repository and keeps your commit history clean.\nExclude unnecessary files: Avoid committing temporary files, log files, or system-specific files that clutter your repository.\nProtect sensitive data: Prevent accidentally committing passwords, API keys, or other confidential information.\nExample .gitignore:\n\n.DS_Store      # macOS file\n*.tmp          # Temporary files\nconfig.ini     # Sensitive configuration\nmy_secret_key  # Never commit secrets!"
   },
   {
-    "objectID": "slides/2025-git/index.html#add-somewhere",
-    "href": "slides/2025-git/index.html#add-somewhere",
-    "title": "git & friends",
-    "section": "Add somewhere",
-    "text": "Add somewhere\n\npull requests\nmerge conflicts\ngitignore"
+    "objectID": "slides/2025-git/index.html#pushing-pulling",
+    "href": "slides/2025-git/index.html#pushing-pulling",
+    "title": "Git & friends",
+    "section": "Pushing & pulling",
+    "text": "Pushing & pulling\n\nPushing: Uploading your changes to a remote repository (like on GitHub). After a commit, to upload our changes to the remote repository, we run:\ngit push\nPulling: Downloading changes from a remote repository to your local computer.\ngit pull\nBest practice: Run git pull before starting to edit a file to avoid conflicts."
+  },
+  {
+    "objectID": "slides/2025-git/index.html#there-is-much-more-out-there",
+    "href": "slides/2025-git/index.html#there-is-much-more-out-there",
+    "title": "Git & friends",
+    "section": "There is much more out there",
+    "text": "There is much more out there\n\nBranches\nPull requests\nMerging"
+  },
+  {
+    "objectID": "slides/2025-git/index.html#live-example",
+    "href": "slides/2025-git/index.html#live-example",
+    "title": "Git & friends",
+    "section": "Live example",
+    "text": "Live example"
   },
   {
     "objectID": "slides/2025-git/index.html#recap",
     "href": "slides/2025-git/index.html#recap",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "Recap",
     "text": "Recap\n\nVersion control helps you track changes to your files.\nGit is a powerful, distributed version control system.\nGitHub is a platform for hosting Git repositories.\nBasic commands: init, add, commit, log, clone."
   },
   {
     "objectID": "slides/2025-git/index.html#resources",
     "href": "slides/2025-git/index.html#resources",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "Resources",
-    "text": "Resources\n\nOfficial Git documentation\nHappy Git and GitHub for the useR"
+    "text": "Resources\n\nOfficial Git documentation\nHappy Git and GitHub for the useR\nGit practice: more advanced exercises"
   },
   {
     "objectID": "slides/2025-git/index.html#next-steps",
     "href": "slides/2025-git/index.html#next-steps",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "Next steps",
     "text": "Next steps\n\nExperiment with Git! Create a simple project and try out the basic commands.\nPractice is key! The more you use Git, the more comfortable you’ll become."
   },
   {
     "objectID": "slides/2025-git/index.html#references",
     "href": "slides/2025-git/index.html#references",
-    "title": "git & friends",
+    "title": "Git & friends",
     "section": "",
     "text": "References"
   },
