@@ -1,6 +1,6 @@
 ---
 title: |
-  `git` \& friends
+  Git \& friends
 subtitle: |
   Available at [lcgodoy.me/slides/2025-git/](https://lcgodoy.me/slides/2025-git/)
 author:
@@ -55,162 +55,201 @@ this?](img/why-version-control.jpeg)
       
   * [Tracking History]{.important2}: You can see who made what changes and when.
 
-## What is `git`?
+## What is Git?
 
-* `git` is a *distributed* version control system. This means that everyone
+* Git is a *distributed* version control system. This means that everyone
   working on a project has a complete copy of the project's history on their own
   computer.
 
 * It was created by Linus Torvalds (the creator of Linux) in 2005 because he
   needed a better way to manage the Linux kernel source code.
 
-* The distributed nature of `git` is a key benefit. If one person's computer
+* The distributed nature of Git is a key benefit. If one person's computer
   crashes, the project history is safe because everyone else has a copy.
 
 
-## `git` vs GitHub and others
+## Git vs GitHub and others
 
 This is important: Git and GitHub are *not* the same thing.
 
-*   **Git:** The tool itself. It's the software you install on your computer to
-    track changes to your files.
-*   **GitHub:** A website that hosts Git repositories.  It's a platform built
-    *around* Git.  Think of it like a place to store and share your Git
-    projects.
+*   [Git]{.important2}: The tool itself. It's the software you install on your
+    computer to track changes to your files.
 
-GitHub is very popular, but it's not the only option.  Other platforms include:
+*   [GitHub]{.important2}: A website that hosts Git repositories.  It's a
+    platform [built around Git]{.important}. Think of it like a [place to
+    store]{.important} and share your [Git projects]{.important}.
 
-* GitLab
-* Bitbucket
-* You can even set up your own Git server!
+* GitHub is very popular, but it's not the only option. Other platforms include:
+  * GitLab
+  * Bitbucket
+
+
+## Downloading and installing
+
+* You can download Git [here](https://git-scm.com/downloads)
+
+* On MacOS, one can use `brew` or `port` to install it
+
+* On Linux it depends on the package manager being used
+
+* On Windows, this [link](https://gitforwindows.org/) provides git and a
+  "terminal emulator" called Git BASH.
 
 
 # A lightning intro to the `terminal`
 
 ## Why using the terminal?
 
+* [Git's Best Friend]{.important2}: Git relies heavily on the command line
+  (terminal).
 
-Git is primarily used from the command line or terminal.  Why?  Because it's
-powerful and flexible.  The terminal might look intimidating at first, but it's
-just a way to talk to your computer using text commands.
+* [Power and Flexibility]{.important2}: The terminal offers direct control over
+  your computer, enabling complex tasks and automation not easily achievable
+  through graphical interfaces.
 
+* [High-Performance Computing]{.important2}: A must-have for HPC.
+
+* [Not as Scary as it Looks]{.important2}: The terminal is simply a [text-based
+  way]{.important} to [communicate]{.important} with your
+  [computer]{.important}.  It's a skill worth learning!
 
 ## Basics
 
-Here are a few essential commands:
-
 * `pwd` (print working directory): Tells you where you are in the file system.
+
 * `ls` (list files): Shows you the files and folders in your current directory.
-* `cd` (change directory): Moves you to a different folder.  `cd ..` goes up one level.
+
+* `cd` (change directory): Moves you to a different folder.  For instance, 
+  `cd ..` goes up one level.
+
 * `mkdir` (make directory): Creates a new folder.
+
 * `touch` (create a file): Creates an empty file (often used for quick testing).
 
-# Basic `git` Workflow
 
-## Initializing a Repository
+# Basic Git workflow
 
-The first step is to turn a folder into a Git repository.  Open your terminal,
-navigate to the folder, and type:
 
-```bash
-git init
-```
+## Initializing a repository
 
-This creates a hidden `.git` folder inside your project folder. This folder is
-where Git stores all the version history.
 
-## Staging Changes
+* A repository (often shortened to [repo]{.important}) is a directory/folder
+  plus a hidden `.git` folder, which [stores]{.important} all the [version
+  history]{.important}.
 
-Before you can save a version (called a [commit]{.important}), you need to tell
-Git which changes you want to include.  This is called [staging]{.important}
+* There are [different ways]{.important} to start a [Git
+  repository]{.important}.
+
+    * We can create or turn an existing directory/folder into a Git repository.
+    
+    * To turn a folder into a git repository, open your terminal, navigate to
+      the desired folder (using `cd`) and then type:
+
+      ```bash
+      git init
+      ```
+
+    * We can `clone` a git repository.
+    
+      ```bash
+      git clone <repo-url>
+      ```
+
+## Staging changes
+
+
+* Before you can save a version (called a [commit]{.important}), you need to
+  tell Git which changes you want to include.  This is called
+  [staging]{.important}
 
 ```bash
 git add <file>  # e.g., git add my_document.txt
 ```
 
-To see what's been staged, use:
+* If we replace `<file>` by `.`, then everything that was changed will be staged.
 
+* To see what's been staged, use:
 
 ```bash
 git status
 ```
 
+## Committing changes & viewing history
 
-## Committing Changes
 
-
-Now you can save a version of your files
+* A [commit]{.important} saves your [staged changes]{.important}.
 
 ```bash
 git commit -m "Descriptive message"
 ```
 
-The -m flag lets you add a message describing the changes you made.  [Good
-commit messages are essential!]{.important} They help you and others understand
-the history of the project.
+* The `-m` flag lets you [pair the staged changes]{.important} with a
+  [message]{.important} describing the changes you made. 
+  
+  
+* [Good commit messages are essential!]{.important} They help you and others
+  understand the history of the project.
 
-## Viewing History
-
-To see the history of commits, use:
+* To see the history of commits (the commit messages, author, and date of each
+  commit), use:
 
 ```bash
 git log
 ```
 
-This will show you the commit messages, author, and date of each commit
-
-## Cloning a Repository
-
-If you want to work on a project that's already on GitHub (or another
-platform), you can "clone" it:
-
-```bash
-git clone <URL>
-```
-
-This downloads a copy of the repository to your computer.  You can find the URL
-on the platform where the project is hosted.
-
-
-## Pushing and Pulling (Very High Level)
-
-* [Pushing]{.importat2}: Uploading your changes to a remote repository (like on
-  GitHub).
-
-* [Pulling]{.importat2}: Downloading changes from a remote repository to your
-  local computer.
-  
-This is how collaboration happens!  We'll cover this in more detail later.
-
-
-## Branches
-
-Introduce the concept. "Think of branches as different versions of your project
-you can work on independently." git branch, git checkout. Very basic example.
-
-## Pull request \& merging
-
-
-Requesting to merge changes from one branch into another. "This is how teams
-collaborate." Mention merge conflicts briefly: "Sometimes Git can't
-automatically combine changes, and you have to fix them." Don't go into conflict
-resolution in detail.
-
-
 ## The `.gitignore` file
 
-Explain its purpose: Telling Git which files to ignore (e.g., temporary files,
-sensitive data). Show a very simple example.
+* The `.gitignore` file is [text file]{.important} that [tells Git]{.important}
+  which [files and directories to ignore]{.important}.  This prevents them from
+  being accidentally added to your repository and keeps your commit history
+  clean.
 
-Suggestive: what to ignore
+* [Exclude unnecessary files]{.important2}: Avoid committing temporary files,
+  log files, or system-specific files that clutter your repository.
 
-## Add somewhere
+* [Protect sensitive data]{.important2}: Prevent accidentally committing
+  passwords, API keys, or other confidential information.
 
-* pull requests
+* [Example `.gitignore`]{.important2}:
 
-* merge conflicts
+```
+.DS_Store      # macOS file
+*.tmp          # Temporary files
+config.ini     # Sensitive configuration
+my_secret_key  # Never commit secrets!
+```
 
-* gitignore
+
+## Pushing & pulling
+
+* [Pushing]{.important2}: Uploading your changes to a remote repository (like on
+  GitHub). After a commit, to upload our changes to the remote repository, we run:
+  
+  ```bash
+  git push
+  ```
+
+* [Pulling]{.important2}: Downloading changes from a remote repository to your
+  local computer.
+  
+  ```bash
+  git pull
+  ```
+  
+* [Best practice]{.important2}: Run `git pull` before starting to edit a file to
+  [avoid conflicts]{.important}.
+
+
+## There is much more out there
+
+* [Branches]{.important2}
+
+* [Pull requests]{.important2} 
+
+* [Merging]{.important2}
+
+## Live example
+
 
 # Conclusion
 
@@ -229,6 +268,8 @@ Suggestive: what to ignore
 * [Official Git documentation](https://git-scm.com/doc)
   
 * [Happy Git and GitHub for the useR](https://happygitwithr.com/)
+
+* [Git practice](https://gitexercises.fracz.com/): more advanced exercises
 
 ## Next steps
 
