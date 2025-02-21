@@ -3,7 +3,12 @@
 ::: {#OrderedList}
 :::
 
-:::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-godoy2025note .csl-entry}
+**Godoy, L. da C.**, Prates, M., & Quintana, F. (2025). A note on defining
+positive definite functions. *Biometrika*, (under review).
+:::
+
 ::: {#ref-michelin2025fast .csl-entry}
 Michelin, L., **Godoy, L. da C.**, Ramos, H. S., & Prates, M. O. (2025).
 Fast mixture spatial regression: A mixture in the geographical and
@@ -249,4 +254,4 @@ element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *0*(0), 14653125241268755.
 <https://doi.org/10.1177/14653125241268755>
 :::
-::::::::::::::::::::::::::::::::::::
+:::::::::::::::::::::::::::::::::::::
