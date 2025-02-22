@@ -1,7 +1,7 @@
 all: publications
 	@quarto render
 
-style:=apa-cv.csl
+style:=lcg-cv.csl
 
 publications: pubs.bib $(style) lua-refs.lua
 	@quarto pandoc -L lua-refs.lua \

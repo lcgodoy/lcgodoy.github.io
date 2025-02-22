@@ -1,0 +1,33 @@
+---
+title: |
+  Git \& Friends
+description: |
+    Talk given at the EEB Department at UCSC
+author: 
+  - name: Lucas da Cunha Godoy
+  - name: Maya Zeff
+date: "2025-02-03"
+categories:
+  - code
+  - git
+  - Version control
+---
+
+### Details
+
+* **Date**: Nov 02, 2025
+
+* **Location**: Santa Cruz, CA - Brazil
+
+* [Slides](https://lcgodoy.me/slides/2025-git)
+
+### Abstract
+
+A brief presentation about version control focused on `git` with a lightning
+introduction to the `terminal`.
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-git" title="Slides"></iframe>
+```
