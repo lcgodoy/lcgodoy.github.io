@@ -24,8 +24,8 @@ tramp
 /eshell/lastdir
 
 # docs folder is not useful anymore
-/docs/
-/docs/*
+docs/
+docs/*
   
 # elpa packages
 /elpa/
