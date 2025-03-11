@@ -1,38 +1,45 @@
 [
   {
-    "objectID": "talks/2025-git/index.html",
-    "href": "talks/2025-git/index.html",
-    "title": "Git & Friends",
-    "section": "",
-    "text": "Details\n\nDate: Nov 02, 2025\nLocation: Santa Cruz, CA - Brazil\nSlides\n\n\n\nAbstract\nA brief presentation about version control focused on git with a lightning introduction to the terminal.\n\n\nSlides"
-  },
-  {
-    "objectID": "talks/2024-ucsc/index.html",
-    "href": "talks/2024-ucsc/index.html",
+    "objectID": "talks/2025-ucsf/index.html",
+    "href": "talks/2025-ucsf/index.html",
     "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
     "section": "",
-    "text": "Details\n\nDate: Oct 21, 2024\nLocation: Santa Cruz, CA\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and predictions. The spatial structure of the data significantly impacts valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function for this model, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios involve areal data, and another demonstrates its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.\n\n\nSlides"
+    "text": "Details\n\nDate: Nov 21, 2024\nLocation: Porto Alegre, RS - Brazil\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is crucial for analyzing spatial data and influencing parameter estimation and predictions. Existing models for areal data often struggle to differentiate between different polygon shapes, while data fusion models face computational challenges with larger datasets. To address these limitations, we propose the Hausdorff-Gaussian process (HGP), a versatile model using the Hausdorff distance to capture spatial dependence in point and areal data. We introduce a valid correlation function, accommodating various modeling techniques, including geostatistical and areal models, and integrate it into generalized linear mixed-effects models for data fusion. We demonstrate the HGP’s competitive performance regarding goodness-of-fit and prediction through simulations and real-world applications involving both areal data and data fusion. The HGP offers a flexible and robust solution for modeling diverse spatial data with potential public health and climate science applications.\n\n\nSlides"
   },
   {
-    "objectID": "talks/2024-jsm/index.html",
-    "href": "talks/2024-jsm/index.html",
-    "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
+    "objectID": "talks/2024-ufrgs/index.html",
+    "href": "talks/2024-ufrgs/index.html",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
     "section": "",
-    "text": "Details\n\nDate: Aug 4, 2024\nLocation: Portlant, OR\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and out-of-sample predictions. The spatial structure and geometry of the data significantly impact valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models, while effective, rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model class utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function within the HGP framework, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing change of support and data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios: one involving areal data and another demonstrating its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.\n\n\nSlides"
+    "text": "Details\n\nDate: Nov 21, 2024\nLocation: Porto Alegre, RS - Brazil\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and predictions. The spatial structure of the data significantly impacts valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function for this model, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios involve areal data, and another demonstrates its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.\n\n\nSlides"
   },
   {
-    "objectID": "talks/2024-cobal/index.html",
-    "href": "talks/2024-cobal/index.html",
-    "title": "Spatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes",
+    "objectID": "talks/2024-ness/index.html",
+    "href": "talks/2024-ness/index.html",
+    "title": "HAUSDORFF–GAUSSIAN PROCESS WITH A SPATIOTEMPORAL APPLICATION",
     "section": "",
-    "text": "Details\n\nDate: Dec 05, 2024\nLocation: Belo Horizonte, MG - Brazil\nSlides\n\n\n\nAbstract\nTuberculosis (TB) remains a significant global health challenge, and Brazil exemplifies the complexities of controlling this infectious disease. Reliable estimates and forecasts of TB incidence rates are crucial to guide public health policies. This study focuses on the high-burden municipalities of Eastern Rio Grande do Sul, Brazil. We propose a novel spatiotemporal model based on the Hausdorff-Gaussian process to analyze TB incidence data. This model incorporates spatial dependence dictated by the Hausdorff distance, allowing it to “borrow strength” from municipalities and generate more reliable estimates, particularly for smaller areas. Our analysis has two primary goals. First, we aim to generate accurate TB incidence estimates by incorporating municipality-specific characteristics through covariates and a spatiotemporal random effect. The model delivers trustworthy expected incidence rates, consequently allowing for calculating standardized incidence ratios (SIRs). Second, our model offers predictive capabilities, forecasting TB incidence ratesone year ahead to support proactive public health planning. We demonstrate our model’s effectiveness and competitive performance against other specialized areal data models. The insights gained from this study can guide policymakers in developing effective TB control strategies.\n\n\nSlides"
+    "text": "Details\n\nDate: May 23, 2024\nLocation: Storrs, CT\nSlides\n\n\n\nAbstract\nTuberculosis (TB) remains a significant global health challenge, and Brazil exemplifies the complexities of controlling this infectious disease. Reliable estimates and forecasts of TB incidence rates are crucial to guide public health policies. This study focuses on the high-burden municipalities of Eastern Rio Grande do Sul, Brazil. We propose a novel spatiotemporal model based on the Hausdorff-Gaussian process to analyze TB incidence data. This model incorporates spatial dependence dictated by the Hausdorff distance, allowing it to “borrow strength” from neighboring municipalities and generate more reliable estimates, particularly for smaller areas. Our analysis has two primary goals. First, we aim to generate accurate TB incidence estimates by incorporating municipality-specific characteristics through covariates and a spatiotemporal random effect. The model delivers trustworthy expected incidence rates, consequently allowing for calculating standardized incidence ratios (SIRs). Second, our model offers predictive capabilities, forecasting TB incidence rates one year ahead to support proactive public health planning. We demonstrate our model’s effectiveness and competitive performance against other specialized areal data models. The insights gained from this study can guide policymakers in developing effective TB control strategies.\n\n\nSlides"
   },
   {
-    "objectID": "talks/2018-csds/index.html",
-    "href": "talks/2018-csds/index.html",
-    "title": "Voronoi Data Linkage: Extracting Information from Polygons to Points",
+    "objectID": "talks/2024-defense/index.html",
+    "href": "talks/2024-defense/index.html",
+    "title": "Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications",
     "section": "",
-    "text": "Details\n\nDate: October 16, 2018\nLocation: Salvador, Brazil\nSlides\n\n\n\nSlides"
+    "text": "Details\n\nDate: April 10, 2024\nLocation: Storrs, CT\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is crucial for analyzing spatial and spatiotemporal data, as it directly influences parameter estimation and prediction accuracy. The unique structure and geometry of spatial data demand tailored approaches for valid statistical inference. Traditional areal data models, often reliant on adjacency matrices, may not adequately capture the nuances of polygons with varying sizes and shapes. Data fusion models, while effective, can become computationally prohibitive for even moderately large datasets due to their reliance on intensive numerical integrals.\nTo address these challenges, we propose the Hausdorff-Gaussian Process~(HGP), a flexible model class that employs the Hausdorff distance to quantify spatial dependence in both point and areal data. We establish a valid correlation function for the HGP, facilitating its use in diverse modeling techniques, including geostatistical and areal models. Seamless integration into generalized linear mixed-effects models expands its applicability, making it particularly well-suited for tackling change of support and data fusion problems.\nOur comprehensive simulation study and applications to three real-world datasets validate the HGP’s efficacy. Applications with both areal and fused spatial data demonstrate our model’s capabilities. Additionally, we adapt the HGP for spatiotemporal modeling of areal Tuberculosis data using a separable model. Results indicate that the HGP delivers competitive goodness-of-fit and prediction performance compared to specialized models. In conclusion, the HGP provides a versatile and robust framework for modeling spatial data across various types and geometries, holding significant promise for applications in fields like public health and climate science.\n\n\nSlides"
+  },
+  {
+    "objectID": "talks/2018-rbras/index.html",
+    "href": "talks/2018-rbras/index.html",
+    "title": "Visualizing intramunicipality votes distribution",
+    "section": "",
+    "text": "Details\n\nDate: May 24, 2018\nLocation: Curitiba, Brazil\nSlides\n\n\n\nAbstract\nIn Brazil, socioeconomic data are available at census tracts (polygons), while election data are available at voting locations (point-referenced). The misaligned data make it challenging to study the association between election outcomes and socioeconomic variables. Given that the voters are assigned to the nearest electoral sections, we use Voronoi tessellation to associate each voting station with a Voronoi polygon. Areal interpolation is used to change the spatial support of the socioeconomic data.\n\n\nSlides"
+  },
+  {
+    "objectID": "talks.html",
+    "href": "talks.html",
+    "title": "Talks",
+    "section": "",
+    "text": "Past\n\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\nSTATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the Department of Epidemiology & Biostatistics at University of California San Francisco \n\n\n\n\n\nMar 12, 2025\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nGit & Friends\n\n\n\n\n\n\ncode\n\n\ngit\n\n\nVersion control\n\n\n\nTalk given at the EEB Department at UCSC \n\n\n\n\n\nFeb 3, 2025\n\n\nLucas da Cunha Godoy, Maya Zeff\n\n\n\n\n\n\n\nSpatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes\n\n\n\n\n\n\nSpatiotemporal statistics\n\n\nGaussian process\n\n\n\nTalk given at the XVII Encontro Brasileiro de Estatística Bayesiana and VII Congresso Bayesiano da América Latina \n\n\n\n\n\nDec 5, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nSTATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the Department of Statistics at Universidade Federal do Rio Grande do Sul \n\n\n\n\n\nNov 21, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nSTATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the Department of Statistics at UCSC \n\n\n\n\n\nOct 21, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nFROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the 2024 JSM \n\n\n\n\n\nAug 4, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nHAUSDORFF–GAUSSIAN PROCESS WITH A SPATIOTEMPORAL APPLICATION\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\nDisease mapping\n\n\nTuberculosis\n\n\nBrasil\n\n\n\nTalk given at the 37th NESS\n\n\n\n\n\nMay 23, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nHausdorff–Gaussian Process with Spatial and Spatiotemporal Applications\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian processes\n\n\nAir pollution\n\n\nDisease mapping\n\n\n\nPhD defense\n\n\n\n\n\nApr 10, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nVoronoi Data Linkage: Extracting Information from Polygons to Points\n\n\n\n\n\n\nSpatial statistics\n\n\nAreal interpolation\n\n\nElections\n\n\nBrasil\n\n\n\nTalk given in the 1st Conference on Statistics and Data Science\n\n\n\n\n\nOct 16, 2018\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nVisualizing intramunicipality votes distribution\n\n\n\n\n\n\nSpatial statistics\n\n\nAreal interpolation\n\n\nElections\n\n\nBrasil\n\n\n\nTalk given at the 63rd RBRAS\n\n\n\n\n\nMay 24, 2018\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "slides/2025-git/index.html#what-is-version-control-and-why-should-i-care",
@@ -1015,38 +1022,255 @@
     "text": "References\n\n\nBesag, J. (1974), “Spatial interaction and the statistical analysis of lattice systems,” Journal of the Royal Statistical Society. Series B (Methodological), JSTOR, 192–236.\n\n\nBesag, J., York, J., and Mollié, A. (1991), “Bayesian image restoration, with two applications in spatial statistics,” Annals of the Institute of Statistical Mathematics, 43, 1–20.\n\n\nCressie, N. (1993), Statistics for spatial data, Wiley series in probability and statistics, Wiley.\n\n\nDatta, A., Banerjee, S., Hodges, J. S., and Gao, L. (2019), “Spatial disease mapping using directed acyclic graph auto-regressive (DAGAR) models,” Bayesian analysis, NIH Public Access, 14, 1221.\n\n\nDiggle, P. J., Tawn, J. A., and Moyeed, R. A. (1998), “Model-based geostatistics,” Journal of the Royal Statistical Society Series C: Applied Statistics, Oxford University Press, 47, 299–350.\n\n\nHoman, M. D., and Gelman, A. (2014), “The No-U-turn sampler: Adaptively setting path lengths in hamiltonian Monte Carlo,” Journal of Machine Learning Research, JMLR.org, 15, 1593–1623.\n\n\nLi, D., Tang, W., and Banerjee, S. (2023), “Inference for Gaussian processes with Matérn covariogram on compact Riemannian manifolds,” Journal of Machine Learning Research, 24, 1–26.\n\n\nMin, D., Zhilin, L., and Xiaoyong, C. (2007), “Extended Hausdorff distance for spatial objects in GIS,” International Journal of Geographical Information Science, Taylor & Francis, 21, 459–475.\n\n\nMoraga, P., Cramb, S. M., Mengersen, K. L., and Pagano, M. (2017), “A geostatistical model for combined analysis of point-level and area-level data using INLA and SPDE,” Spatial Statistics, Elsevier, 21, 27–41.\n\n\nPalacios, M. B., and Steel, M. F. J. (2006), “Non-Gaussian Bayesian geostatistical modeling,” Journal of the American Statistical Association, Taylor & Francis, 101, 604–618.\n\n\nSendov, B. (2004), “Hausdorff distance and image processing,” Russian Mathematical Surveys, IOP Publishing, 59, 319. https://doi.org/10.1070/RM2004v059n02ABEH000721.\n\n\nVehtari, A., Gelman, A., Simpson, D., Carpenter, B., and Bürkner, P.-C. (2021), “Rank-normalization, folding, and localization: An improved \\(\\hat{R}\\) for assessing convergence of MCMC (with discussion),” Bayesian Analysis, International Society for Bayesian Analysis, 16, 667–718.\n\n\nZheng, X., Kottas, A., and Sansó, B. (2023), “Nearest-neighbor mixture models for non-gaussian spatial processes,” Bayesian Analysis, International Society for Bayesian Analysis, 18, 1191–1222."
   },
   {
-    "objectID": "talks.html",
-    "href": "talks.html",
-    "title": "Talks",
-    "section": "",
-    "text": "Past\n\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n\n\n\n\n\nGit & Friends\n\n\n\n\n\n\ncode\n\n\ngit\n\n\nVersion control\n\n\n\nTalk given at the EEB Department at UCSC \n\n\n\n\n\nFeb 3, 2025\n\n\nLucas da Cunha Godoy, Maya Zeff\n\n\n\n\n\n\n\nSpatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes\n\n\n\n\n\n\nSpatiotemporal statistics\n\n\nGaussian process\n\n\n\nTalk given at the XVII Encontro Brasileiro de Estatística Bayesiana and VII Congresso Bayesiano da América Latina \n\n\n\n\n\nDec 5, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nSTATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the Department of Statistics at Universidade Federal do Rio Grande do Sul \n\n\n\n\n\nNov 21, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nSTATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the Department of Statistics at UCSC \n\n\n\n\n\nOct 21, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nFROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\n\nTalk given at the 2024 JSM \n\n\n\n\n\nAug 4, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nHAUSDORFF–GAUSSIAN PROCESS WITH A SPATIOTEMPORAL APPLICATION\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian process\n\n\nDisease mapping\n\n\nTuberculosis\n\n\nBrasil\n\n\n\nTalk given at the 37th NESS\n\n\n\n\n\nMay 23, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nHausdorff–Gaussian Process with Spatial and Spatiotemporal Applications\n\n\n\n\n\n\nSpatial statistics\n\n\nGaussian processes\n\n\nAir pollution\n\n\nDisease mapping\n\n\n\nPhD defense\n\n\n\n\n\nApr 10, 2024\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nVoronoi Data Linkage: Extracting Information from Polygons to Points\n\n\n\n\n\n\nSpatial statistics\n\n\nAreal interpolation\n\n\nElections\n\n\nBrasil\n\n\n\nTalk given in the 1st Conference on Statistics and Data Science\n\n\n\n\n\nOct 16, 2018\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\n\nVisualizing intramunicipality votes distribution\n\n\n\n\n\n\nSpatial statistics\n\n\nAreal interpolation\n\n\nElections\n\n\nBrasil\n\n\n\nTalk given at the 63rd RBRAS\n\n\n\n\n\nMay 24, 2018\n\n\nLucas da Cunha Godoy\n\n\n\n\n\n\nNo matching items"
+    "objectID": "slides/2025-ucsf/index.html#spatial-statistics",
+    "href": "slides/2025-ucsf/index.html#spatial-statistics",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Spatial Statistics",
+    "text": "Spatial Statistics\n\nTaking into account spatial dependence possibly present in data is a foremost aspect of spatial statistics.\nGeneral spatial model (Cressie 1993): \\(\\{\nZ(\\mathbf{s}) \\; : \\; \\mathbf{s} \\in D \\}\\), where \\(D\\) is an index set.\nStatistical inference depends heavily on the spatial structure/geometry of the observed spatial data.\n\n\n\n\nGeometry\nBranch\nIndex set\n\n\n\n\nAreas/polygons\nAreal models\nCountable\n\n\nPoints\nGeostatistics\nContinuum\n\n\nMixed\nSpatial Data Fusion\n\n\n\n\n\n\nChallenges arise when working with data from different sources:\n\nChange of support\nSpatial misalignment\nData fusion itself.\n\n\nLoosely speaking, this means the GP has stationary mean, variance, and a correlation function such that the correlation between two data points depends solely on their distance.\n\nCommon assumptions are stationarity and isotropy.\nImportance in spatial statistics: predominant foundation of geostatistical modeling.\nCompletely specified by mean and covariance functions.\n\nThe main reasons these models are not applied to areal data are:\n\nCalculating distance between areal spatial units is non-trivial;\nThe commonly used areal models are computationally efficient."
   },
   {
-    "objectID": "talks/2018-rbras/index.html",
-    "href": "talks/2018-rbras/index.html",
-    "title": "Visualizing intramunicipality votes distribution",
-    "section": "",
-    "text": "Details\n\nDate: May 24, 2018\nLocation: Curitiba, Brazil\nSlides\n\n\n\nAbstract\nIn Brazil, socioeconomic data are available at census tracts (polygons), while election data are available at voting locations (point-referenced). The misaligned data make it challenging to study the association between election outcomes and socioeconomic variables. Given that the voters are assigned to the nearest electoral sections, we use Voronoi tessellation to associate each voting station with a Voronoi polygon. Areal interpolation is used to change the spatial support of the socioeconomic data.\n\n\nSlides"
+    "objectID": "slides/2025-ucsf/index.html#classic-models-for-spatial-data",
+    "href": "slides/2025-ucsf/index.html#classic-models-for-spatial-data",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Classic Models for Spatial Data",
+    "text": "Classic Models for Spatial Data\n\nAreal data\n\nCAR (Besag 1974), ICAR, BYM (Besag et al. 1991), DAGAR (Datta et al. 2019).\n\nPoint-referenced data\n\nGaussian processes (GP), Nearest-neighbor mixture processes (Zheng et al. 2023)\n\nMixed/fused data\n\n“Aggregated” GP (AGP) (Moraga et al. 2017): \\[\nZ(\\mathbf{s}_i)\n= \\begin{cases}\nZ(\\mathbf{s}_i), & \\text{if } \\mathcal{A}(\\mathbf{s}_i) = 0 \\\\\n{\\mathcal{A}(\\mathbf{s}_i)}^{-1}\n\\int_{\\mathcal{A}(\\mathbf{s}_i)} Z(\\mathbf{s}) \\mathrm{d}\\mathbf{s}, & \\text{if }\n\\mathcal{A}(\\mathbf{s}_i) &gt; 0\n\\end{cases}\n\\]\n\n\n\n\nAreal models are usually heteroscedastic; The marginal variances decrease with the number of neighbors;\nData fusion models are also heteroscedastic (unless all the polygons are of the same size); computationally prohibitive for moderately large datasets; arbitrary choice of grid resolution."
   },
   {
-    "objectID": "talks/2024-defense/index.html",
-    "href": "talks/2024-defense/index.html",
-    "title": "Hausdorff–Gaussian Process with Spatial and Spatiotemporal Applications",
-    "section": "",
-    "text": "Details\n\nDate: April 10, 2024\nLocation: Storrs, CT\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is crucial for analyzing spatial and spatiotemporal data, as it directly influences parameter estimation and prediction accuracy. The unique structure and geometry of spatial data demand tailored approaches for valid statistical inference. Traditional areal data models, often reliant on adjacency matrices, may not adequately capture the nuances of polygons with varying sizes and shapes. Data fusion models, while effective, can become computationally prohibitive for even moderately large datasets due to their reliance on intensive numerical integrals.\nTo address these challenges, we propose the Hausdorff-Gaussian Process~(HGP), a flexible model class that employs the Hausdorff distance to quantify spatial dependence in both point and areal data. We establish a valid correlation function for the HGP, facilitating its use in diverse modeling techniques, including geostatistical and areal models. Seamless integration into generalized linear mixed-effects models expands its applicability, making it particularly well-suited for tackling change of support and data fusion problems.\nOur comprehensive simulation study and applications to three real-world datasets validate the HGP’s efficacy. Applications with both areal and fused spatial data demonstrate our model’s capabilities. Additionally, we adapt the HGP for spatiotemporal modeling of areal Tuberculosis data using a separable model. Results indicate that the HGP delivers competitive goodness-of-fit and prediction performance compared to specialized models. In conclusion, the HGP provides a versatile and robust framework for modeling spatial data across various types and geometries, holding significant promise for applications in fields like public health and climate science.\n\n\nSlides"
+    "objectID": "slides/2025-ucsf/index.html#research-questions",
+    "href": "slides/2025-ucsf/index.html#research-questions",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Research Questions",
+    "text": "Research Questions\n\nThe main research questions we are interested in are:\n\nCan we propose a model for spatial data that accomodates areal, point-referrenced, and fused data?\nIf so, is this model competitive when compared to specialized models?\n\nProposal: An isotropic GP defined on a flexible index set.\nMain challenge: Defining a valid correlation function."
   },
   {
-    "objectID": "talks/2024-ness/index.html",
-    "href": "talks/2024-ness/index.html",
-    "title": "HAUSDORFF–GAUSSIAN PROCESS WITH A SPATIOTEMPORAL APPLICATION",
-    "section": "",
-    "text": "Details\n\nDate: May 23, 2024\nLocation: Storrs, CT\nSlides\n\n\n\nAbstract\nTuberculosis (TB) remains a significant global health challenge, and Brazil exemplifies the complexities of controlling this infectious disease. Reliable estimates and forecasts of TB incidence rates are crucial to guide public health policies. This study focuses on the high-burden municipalities of Eastern Rio Grande do Sul, Brazil. We propose a novel spatiotemporal model based on the Hausdorff-Gaussian process to analyze TB incidence data. This model incorporates spatial dependence dictated by the Hausdorff distance, allowing it to “borrow strength” from neighboring municipalities and generate more reliable estimates, particularly for smaller areas. Our analysis has two primary goals. First, we aim to generate accurate TB incidence estimates by incorporating municipality-specific characteristics through covariates and a spatiotemporal random effect. The model delivers trustworthy expected incidence rates, consequently allowing for calculating standardized incidence ratios (SIRs). Second, our model offers predictive capabilities, forecasting TB incidence rates one year ahead to support proactive public health planning. We demonstrate our model’s effectiveness and competitive performance against other specialized areal data models. The insights gained from this study can guide policymakers in developing effective TB control strategies.\n\n\nSlides"
+    "objectID": "slides/2025-ucsf/index.html#preliminaries",
+    "href": "slides/2025-ucsf/index.html#preliminaries",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Preliminaries",
+    "text": "Preliminaries\n\nPoint-referenced and areal spatial units are (closed and bounded) sets.\nWe need to generalize distance between points to distance between sets.\nIdeally, this distance should:\n\nTake into account the shape, size, and orientation of spatial sample units.\nBe “spatially interpretable”."
   },
   {
-    "objectID": "talks/2024-ufrgs/index.html",
-    "href": "talks/2024-ufrgs/index.html",
+    "objectID": "slides/2025-ucsf/index.html#distances-between-sets",
+    "href": "slides/2025-ucsf/index.html#distances-between-sets",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Distances between sets",
+    "text": "Distances between sets\n\nMetric space: \\((D, d)\\), where \\(D\\) is a spatial region of interest.\nDistance between a point and a set: \\(d(x, A) = \\inf_{a \\in A}\nd(x, a)\\), where \\(d(x, y)\\) is the distance between any two elements \\(x, y \\in\nD\\)\nDirected Hausdorff distance: \\[{\\vec h}(A, B) = \\sup_{a \\in A}\nd(a, B)\\]\nHausdorff distance: \\[h(A, B) = \\max \\left \\{ \\vec{h}(A, B),\n\\vec{h}(B, A) \\right \\}\\]\n\n\n\nNote that if \\(A\\) and \\(B\\) are both singletons, then \\(h(A, B) = d(A, B)\\).\n\nMeric Properties: (1) Symmetry: \\(d(x, y) = d(y, x)\\); (2) Nonnegativeness: \\(d(x,\ny) \\geq 0\\) and \\(d(x, x) = 0\\); (3)Positiveness: \\(d(x, y) = 0 \\implies x = y\\); (4) Triangle inequality: \\(d(x, y) \\leq d(x, z) + d(z, y)\\)"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#hausdorff-distance-for-spatial-data-analysis",
+    "href": "slides/2025-ucsf/index.html#hausdorff-distance-for-spatial-data-analysis",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Hausdorff Distance for Spatial Data Analysis",
+    "text": "Hausdorff Distance for Spatial Data Analysis\n\nStudy region: In spatial statistics, \\(D\\) is tipically a closed and bounded subset of \\(\\mathbb{R}^2\\).\nIn this context, the Hausdorff distance is a metric (Appendix C, Molchanov 2005).\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nMetric on \\(D \\setminus \\varnothing\\)\nThe Hausdorff distance ability to account for spatial units’ shapes, sizes and orientation(Min et al. 2007) renders it an interesting tool to achieve our goals.\nMoreover, it can distinguish between overlapping, nested, and disjointed regions.\nIn the figure: (1) The dashed lines denote the Hausdorff distances; (2) The infimum distance between to sets is zero for the three cases; (3) Distance between centroids is the same for the first two figures."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#the-hgp",
+    "href": "slides/2025-ucsf/index.html#the-hgp",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "The HGP",
+    "text": "The HGP\n\nIndex set: \\(\\mathcal{B}(D)\\) represents the closed and bounded subsets of \\(D \\subset \\mathbb{R}^2\\).\n\\(Z(\\mathbf{s}) \\sim \\mathrm{HGP}\\{m(\\mathbf{s}), v(\\mathbf{s}), r(h)\\}\\), where \\(\\mathbf{s} \\in \\mathcal{B}(D)\\).\nMean function: \\(m(\\mathbf{s}) = \\mathbb{E}[Z(\\mathbf{s})]\\)\nCovariance function: \\(\\mathrm{Cov}(Z(\\mathbf{s}_1),\nZ(\\mathbf{s}_2)) = v(\\mathbf{s}_1) v(\\mathbf{s}_2) r(h(\\mathbf{s}_1,\n\\mathbf{s}_2))\\)\nSD function: \\(v(\\mathbf{s}) =\n\\sqrt{\\mathrm{Var}(Z(\\mathbf{s}))}\\)\nCorrelation function: \\(r(h) =\n\\mathrm{Cor}(Z(\\mathbf{s}_1), Z(\\mathbf{s}_2)),\\) where \\(h\\) denotes the Hausdorff distance between \\(\\mathbf{s}_1, \\mathbf{s}_2 \\in\n\\mathcal{B}(D)\\).\n\n\n\nIdeally, we want bounded, compact, and non-empty sets for the Hausdorff distance to be a metric..\nIn \\(\\mathbb{R}^2\\), a compact subset is bounded.\nempty is a subset of any set -&gt; it is bounded bc a subset of a bounded set is bounded itself.\nMean and SD functions can be informed by covariates.\nThe ensure the validity of the process, the function \\(r(\\cdot)\\) must be positive definite.\nComplex functional parametric space.\nInference is simplified (or possible) by assuming parametric forms to those functions.\nMean and SD functions can be informed by covariates.\nThe ensure the validity of the process, the function \\(r(\\cdot)\\) must be positive definite.\nComplex functional parametric space.\nInference is simplified (or possible) by assuming parametric forms to those functions.\nThe SD function allows the HGP to accommodate both homoscedastic and heteroscedastic scenarios."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#the-vmathbfs-function",
+    "href": "slides/2025-ucsf/index.html#the-vmathbfs-function",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "The \\(v(\\mathbf{s})\\) function",
+    "text": "The \\(v(\\mathbf{s})\\) function\nWe may defined: \\[v(\\mathbf{s}) = \\exp \\{ \\alpha_0 + \\alpha_1 w(\\mathbf{s})\n\\},\\] where \\(w(\\mathbf{s})\\) is a covariate available for any \\(\\mathbf{s} \\in\n\\mathcal{B}(D)\\).\n\nUseful special cases:\n\nHomoscedastic: \\(w(\\mathbf{s}) = 0\\) (consequence, \\(\\sigma =\n\\exp \\{ \\alpha_0 \\}\\))\nData Fusion: \\(w(\\mathbf{s}) =\n\\mathbb{1}(\\mathcal{A}(\\mathbf{s}) &gt; 0)\\).\nArea dependent: \\(w(\\mathbf{s}) = \\mathcal{A}(\\mathbf{s})\\)\n\nAlthough flexible, one has to be careful when choosing this function to ensure the process validity (Palacios and Steel 2006).\n\n\n\nfor data fusion: \\(\\sigma_a = \\exp \\{ \\alpha_0 + \\alpha_1 \\}\\)."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#ensuring-the-process-validity",
+    "href": "slides/2025-ucsf/index.html#ensuring-the-process-validity",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Ensuring the process’ validity",
+    "text": "Ensuring the process’ validity\nFor a valid process, its correlation function must satisfy the following properties:\n\nDiminish with increasing distance: \\(\\lim_{h \\to \\infty}r(h) = 0\\).\nBounded from above by 1: \\(r(0) = 1\\).\nPositive definiteness (PD): yields positive definite correlation matrices for all its finite-dimensional marginal distributions.\nUnfortunately, functions that are guaranteed to be positive definite on \\((\\mathbb{R}^2, \\lVert \\cdot\n\\rVert_2)\\) are not necessarily positive definite on other metric spaces (Li et al. 2023)."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#pd-and-empirical-assessment",
+    "href": "slides/2025-ucsf/index.html#pd-and-empirical-assessment",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "PD and Empirical Assessment",
+    "text": "PD and Empirical Assessment\n\nDefinition: A real function \\(k\\) on a metric space \\((D, d)\\) is PD if it is continuous and satisfies:\n\\[ \\sum_{i = 1}^{m} \\sum_{j = 1}^{m} a_i a_j k(\\mathbf{s}_i, \\mathbf{s}_j)\n\\geq 0 \\]\nfor real numbers \\(a_1, \\ldots, a_m\\) and \\(\\mathbf{s}_1, \\ldots, \\mathbf{s}_m\n\\in D\\).\nNecessary condition:: All the eigen values of the resulting correlation matrix must be non-negative.\nEmpirical assessment: We can check for PD by examining the smallest eigenvalue of the correlation matrix across the parameter space."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#the-powered-exponential-correlation-pec-function",
+    "href": "slides/2025-ucsf/index.html#the-powered-exponential-correlation-pec-function",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "The Powered Exponential Correlation (PEC) Function",
+    "text": "The Powered Exponential Correlation (PEC) Function\n\nPEC function: \\[r(h; \\phi, \\nu) = \\exp\\left \\{ -\n\\frac{h^{\\nu}}{\\phi^{\\nu}}\\right \\},\\] where \\(\\nu\\) is a smoothness parameter and \\(\\phi\\) governs the range of the spatial dependence.\n\n\n\nParametrization: We reparametrize this function with \\(\\rho =\n{\\log(10)}^{1 / \\nu} \\phi\\).\nInterpretation: \\(\\rho\\) is the distance at which the spatial correlation reduces to \\(0.10\\).\n\n\n\n\nexplain \\(\\rho\\)."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#visualizing-the-pec-function",
+    "href": "slides/2025-ucsf/index.html#visualizing-the-pec-function",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Visualizing the PEC function",
+    "text": "Visualizing the PEC function"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#empirical-assessment-of-pecs-positive-definiteness",
+    "href": "slides/2025-ucsf/index.html#empirical-assessment-of-pecs-positive-definiteness",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Empirical Assessment of PEC’s Positive Definiteness",
+    "text": "Empirical Assessment of PEC’s Positive Definiteness\n\n\n\nthe graph displays the smallest eigenvalue of the correlation matrix induced by \\(\\rho\\) (x-axis) and \\(\\nu\\) (y-axis).\nThese matrices are based on the two spatial applications we will discuss in the next chapter.\nThe transparent regions indicate the regions of the parametric space where rho is smaller than 0."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#hgp-recap",
+    "href": "slides/2025-ucsf/index.html#hgp-recap",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "HGP Recap",
+    "text": "HGP Recap\n\nFlexibility: A process that handles point-referrenced, areal, and mixed spatial data by construction.\nHausdorff distance: Enables HGP’s correlation function to account for the shape, size, and orientation of spatial objects.\nPEC Function Validity: A valid HGP depends on selecting an appropriate PEC correlation function.\nEmpirical assessments: When analyzing a new dataset or trying a new correlation function, it is imperative to empirically assess the validity of the function.\n\n\n\n\n\n\nflowchart LR\n    A(Flexible index set) ==&gt; B(GP)\n    B ==&gt; E(((HGP)))\n    C(Hausdorff distance) ==&gt; D(PEC)\n    D ==&gt; E"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#spatial-glmm",
+    "href": "slides/2025-ucsf/index.html#spatial-glmm",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Spatial GLMM",
+    "text": "Spatial GLMM\nA generalized linear mixed effects model (GLMM) can be written as \\[\\begin{aligned}\n& Y(\\mathbf{s}_i) \\mid \\mathbf{x}_i, Z(\\mathbf{s}_i) \\overset{{\\rm ind}}{\\sim}\n  f(\\cdot \\mid \\mu_i, \\boldsymbol{\\gamma}) \\\\\n& g(\\mu_i) = \\mathbf{x}_i \\boldsymbol{\\beta} +\n  Z(\\mathbf{s}_i).\n\\end{aligned}\\]\n\nProbability distribution: \\(f(\\cdot)\\)\nConditional mean: \\(\\mu_i = \\mathbb{E}[Y(\\mathbf{s}_i) \\mid\n\\mathbf{x}_i, Z(\\mathbf{s}_i)]\\)\nLink function: \\(g(\\cdot)\\)\nModel parameters: \\(\\boldsymbol{\\theta} =\n{\\{\\boldsymbol{\\beta}^\\top, \\boldsymbol{\\sigma}^\\top,\n\\boldsymbol{\\delta}^\\top, \\boldsymbol{\\gamma}^\\top \\}}^\\top\\)\nJoint density: \\(p(\\mathbf{y} \\mid \\mathbf{z}, \\boldsymbol{\\theta}) =\n\\prod_{i = 1}^n f(y(\\mathbf{s}_i) \\mid \\mu_i, \\boldsymbol{\\gamma})\\)\n\n\n\nRealizations of random variables are represented by lowercase letters.\nModel paramers are greek letters.\nUnder a frequentist perspective, we consider the random effects to follow an HGP.\nFor Bayesian inference, we use the HGP as a prior for the random effects.\nResponse variable \\(Y\\) at a spatial unit \\(s\\) is modeled with an appropriate distribution (e.g., Poisson, Bernoulli).\nCovariates (\\(X\\)) and spatial random effects (\\(Z\\)) explain variation in the conditional mean (\\(\\mu\\)).\nThe HGP defines the spatial random effects (\\(Z\\)), capturing spatial correlation with the Hausdorff distance and a correlation function."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#priors",
+    "href": "slides/2025-ucsf/index.html#priors",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Priors",
+    "text": "Priors\n\nIndependent normal priors for the regression coefficients: \\(\\boldsymbol{\\beta} \\sim \\mathcal{N}(\\mathbf{0}, 10 \\mathbf{I})\\)\nHGP prior for the latent random effects: \\(\\mathbf{Z} \\sim\n\\mathrm{HGP}\\{0, v(\\cdot), r(\\cdot) \\}\\)\nExponential prior for the spatial dependence parameter: \\(\\rho\n\\sim \\mathrm{Exp}(a_\\rho)\\), where \\(a_{\\rho} = - \\log(p_{\\rho}) / \\rho_0\\).\n\n\\(a_\\rho\\) is chosen such that \\(\\mathbb{P}(\\rho \\geq \\rho_0) = p_\\rho\\).\n\nHomoscedastic variance: \\(v(\\mathbf{s}) =\n\\sqrt{\\mathrm{Var}(Z(\\mathbf{s}))} = \\sigma \\sim t_{+}(3)\\)\nHeteroscedastic HGP: \\(\\alpha \\sim \\mathcal{N}(\\mathbf{0},\n\\mathbf{I})\\), where \\(v(\\mathbf{s}) = \\exp \\{ \\alpha_0 + \\sum_i \\alpha_i w_i(\\mathbf{s}) \\}\\).\n\n\n\nFor \\(\\rho\\), the prior is inspired in penalized complexity priors. A conservative, but reasonable, choice for its hyperparameter is setting \\(a_\\rho\\) such that \\(\\rho_0\\) is a surprisingly low practical range and \\(p_rho\\) is a small probability (i.e., around .01)"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#bayesian-inference-model-assessment",
+    "href": "slides/2025-ucsf/index.html#bayesian-inference-model-assessment",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Bayesian Inference & Model Assessment",
+    "text": "Bayesian Inference & Model Assessment\n\nPosterior: \\(\\pi(\\boldsymbol{\\theta} \\mid \\mathbf{y},\n\\mathbf{z}) \\propto p(\\mathbf{y} \\mid \\mathbf{z}, \\boldsymbol{\\theta})\np(\\mathbf{z} \\mid \\boldsymbol{\\theta}) \\pi(\\boldsymbol{\\theta})\\)\nMCMC sampler: No-U-Turn (Homan and Gelman 2014).\nConvergence assessment: traceplots and split-\\({\\hat{R}}\\) (Vehtari et al. 2021).\nGoodness-of-fit criteria: LOOIC (lower values indicate better fit)\nPosterior predictive distributions: \\(p(\\mathbf{y}^{\\ast} \\mid\n\\mathbf{y})\\)\nPredictions assessment: Interval Score (IS) and RMSP (lower values indicate better fit)\n\n\n\nPoint and interval estimates: median and percentiles (\\(0.025\\) and \\(0.975\\)) of the marginal MCMC samples.\nParameters initialized by random sampling from their priors.\nRandom effects initialized from a standard normal distribution.\n\\(a_\\rho\\) is chosen so that: \\(\\mathbb{P}(\\rho &gt; U) = p_\\rho\\). In particular, \\(a_\\rho = - \\log(p_\\rho) / \\rho_0\\).\n\\(\\nu\\) hard to be estimated.\n\nPredictions:\n\nuse the properties of GP and multivariate Normal distribution to obtain the closed-form distribution of the vector of spatial random effects \\(\\mathbf{Z}^\\ast\\) (Diggle et al. 1998);\nsample \\(\\mathbf{z}^\\ast_{(b)}\\) from the distribution derived in the previous step;\nsample \\(\\mathbf{y}^{\\ast}_{(b)}\\) from \\(p(\\mathbf{y}^{\\ast} \\mid \\boldsymbol{\\theta}_{(b)},\n\\mathbf{z}^{\\ast}_{(b)})\\), where \\(\\boldsymbol{\\theta}_{(b)}\\) is the \\(b\\)-th MCMC sample of \\(\\boldsymbol{\\theta}\\)."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#bayesian-modeling-recap",
+    "href": "slides/2025-ucsf/index.html#bayesian-modeling-recap",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Bayesian Modeling Recap",
+    "text": "Bayesian Modeling Recap\n\nHGP as a prior for the random effects disribution in a GLMM.\nBayesian inference through MCMC.\nUncertainty quantification of predictions through the posterior predictive distributions.\n\n\nDAGAR priors: \\[\n\\begin{aligned}\n  \\pi(\\beta_0) & \\propto 1 \\\\\n  \\beta_1 & \\sim N(0, 1000^2) \\\\\n  \\tau & \\sim Gamma(2, 1) \\\\\n  \\psi & \\sim U(0, 1).\n\\end{aligned}\n\\] - Precision matrix is defined based on the order of the observations and adjacency matrix (and the two parameters)"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#respiratory-disease-hospitalization-in-glasgow",
+    "href": "slides/2025-ucsf/index.html#respiratory-disease-hospitalization-in-glasgow",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Respiratory Disease Hospitalization in Glasgow",
+    "text": "Respiratory Disease Hospitalization in Glasgow"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#respiratory-disease-hospitalization-in-glasgow-1",
+    "href": "slides/2025-ucsf/index.html#respiratory-disease-hospitalization-in-glasgow-1",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Respiratory Disease Hospitalization in Glasgow",
+    "text": "Respiratory Disease Hospitalization in Glasgow\n\\[\\begin{aligned}\n& (Y(\\mathbf{s}_i) \\mid x_i, z(\\mathbf{s}_i)) \\sim \\text{Poisson}(E_i \\mu_i) \\\\\n& \\log(\\mu_i) = \\beta_0 + x_i \\beta_1 + z(\\mathbf{s}_i)\n\\end{aligned}\\]\n\nSample units: 134 intermediate zones (IZ), where the \\(i\\)-th IZ is denoted \\(\\mathbf{s}_i\\).\nNumber of hospitalizations: \\(\\mathbf{Y} = {(Y(\\mathbf{s}_1),\n\\ldots, Y(\\mathbf{s}_n))}^\\top\\).\nExpected number of hospitalizations based on the national age- and sex-standardized rates: \\(E_i\\).\nPercentage of people classified as income deprived: \\(x_i\\).\n\n\n\nData from the north portion of the river Clyde in the Great Glasgow and Clyde health board in Scotland.\nAssumption: Conditional on \\(\\mathbf{Z}\\), \\(\\mathbf{Y}\\) are mutually independent.\nExplain goals of the analysis–estimate risks adjusted for income deprivation, compare methods.\n\\(\\mu_i\\) is the expected SIR at region \\(i\\).\nOutline the modeling choices (HGP, DAGAR, BYM), briefly mention priors."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#disease-mapping-estimation-gof",
+    "href": "slides/2025-ucsf/index.html#disease-mapping-estimation-gof",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Disease Mapping: Estimation & GOF",
+    "text": "Disease Mapping: Estimation & GOF\n\n\n\n\n\n\n\n\n\n\nHGP\nDAGAR\n\n\n\n\n\\(\\beta_0\\)\n-0.21 (-0.268, -0.139)\n-0.26 (-0.450, -0.137)\n\n\n\\(\\beta_1\\)\n0.33 (0.284, 0.368)\n0.31 (0.258, 0.370)\n\n\n\\(\\sigma\\)\n0.19 (0.155, 0.234)\n0.30 (0.218, 0.484)\n\n\n\\(\\rho\\)\n2.25 (0.159, 6.948)\n\n\n\n\\(\\psi\\)\n\n0.43 (0.069, 0.827)\n\n\n\n\n\n\n\n\n\n\n\n\nLOOIC\n1081.0\n1081.9\n\n\n\n\n\n\nmedian (95% CI)\nsimilar estimates for covariate\nHGP indicates weak spatial correlation\nDAGAR and BYM spatial dependence are not helpful as they indicate the spatial correlation goes from weak to strong (according to the CI)"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#disease-mapping-spatial-dependence",
+    "href": "slides/2025-ucsf/index.html#disease-mapping-spatial-dependence",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Disease Mapping: Spatial Dependence",
+    "text": "Disease Mapping: Spatial Dependence\n\n\n\nHGP provides more insight into spatial dependence\nWe could also plot the correlation function itself"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#disease-mapping-adjusted-sir",
+    "href": "slides/2025-ucsf/index.html#disease-mapping-adjusted-sir",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Disease Mapping: Adjusted SIR",
+    "text": "Disease Mapping: Adjusted SIR\n\n\n\nFitted values are similar among the three models\nSome regions with very low risks are shrunk toward a “regional mean”"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#air-pollution-in-ventura-and-los-angeles",
+    "href": "slides/2025-ucsf/index.html#air-pollution-in-ventura-and-los-angeles",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Air Pollution in Ventura and Los Angeles",
+    "text": "Air Pollution in Ventura and Los Angeles\n\n\n\n\n\n\n\\[(Y(\\mathbf{s}_i) \\mid z(\\mathbf{s}_i)) \\sim\n  \\mathcal{N}(\\beta_0 + z(\\mathbf{s}_i), \\tau^2)\\]\n\nPM2.5: \\(\\mathbf{Y} = {(Y(\\mathbf{s}_1), \\ldots,\nY(\\mathbf{s}_n))}^\\top\\).\nPoint-referrenced data from 19 measurement stations available daily from 1999 to date;\nSatellite-derived estimates (2010–2012) at 184 areal units.\n\n\n\n \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\ngoals: (1); estimate model parameters using both sources. (2) use satellite data to help with interpolation.\nsquare areas (average size \\(\\approx\\) 101.95 km2)\ndata fusion challenges\nadaptability of the hgp to different problems.\nPm25 scale is micrometre per cubic meter: one one-millionth of a meter.\nconditional on \\(z\\) the \\(y\\)s are mutually independent.\nPriors on random effects: AGP1 and 2; heteroscedastic HGP with different variances for areal and point-referrenced data."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#agp-approximation",
+    "href": "slides/2025-ucsf/index.html#agp-approximation",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "AGP Approximation",
+    "text": "AGP Approximation"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#air-pollution-estimation-and-prediction-assessment",
+    "href": "slides/2025-ucsf/index.html#air-pollution-estimation-and-prediction-assessment",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Air Pollution: Estimation and Prediction Assessment",
+    "text": "Air Pollution: Estimation and Prediction Assessment\n\n\n\n\n\n\n\n\n\n\n\nHGP\n\\(\\rm AGP_1\\)\n\\(\\rm AGP_2\\)\n\n\n\n\n\\(\\beta\\)\n5.61 (4.69, 6.45)\n6.22 (2.16, 10.10)\n6.19 (5.88, 6.48)\n\n\n\\(\\rho\\)\n13.83 (7.82, 23.61)\n13.16 (5.14, 30.24)\n0.63 (0.46, 0.83)\n\n\n\\(\\tau\\)\n0.18 (0.07, 0.31)\n1.39 (1.24, 1.56)\n0.54 (0.39, 0.72)\n\n\n\\(\\sigma\\)\n3.85 (2.92, 5.18)\n1.70 (0.96, 2.91)\n2.41 (2.024, 2.84)\n\n\n\\(\\sigma_a\\)\n1.24 (1.04, 1.51)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nRMSP\n1.05\n1.45\n1.64\n\n\nWidth\n3.57\n2.53\n9.67\n\n\nCPP\n95.5\n78.6\n95.5\n\n\nIS\n4.80\n15.11\n13.65\n\n\n\n\n\n\n\\(\\rho\\) rescaled to 100s of km.\nstaggering difference in estimates of the same model with different meshes."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#air-pollution-change-of-support",
+    "href": "slides/2025-ucsf/index.html#air-pollution-change-of-support",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Air Pollution: Change-of-Support",
+    "text": "Air Pollution: Change-of-Support\n\n\n\nFigure confirms what we learned from 10-fold CV and simulation studies.\nHGP allows to use data from different sources seamlessly\nNo dependence on meshes/grids\nApparently, a parsimonious compromise between the two meshes.\nOnce again, the AGP seems highly dependend on the mesh and this is not highlighted in the literature."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#applications-key-findings",
+    "href": "slides/2025-ucsf/index.html#applications-key-findings",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Applications: key findings",
+    "text": "Applications: key findings\n\nThe proposed method consistently demonstrated performance comparable to specialized models tailored for areal and fused data.\nUnlike traditional areal models, the HGP’s marginal variances are independent of the number of neighbors.\nThe HGP model simplifies data fusion by bypassing the need to define arbitrary grids for numerical integral evaluation, eliminating this step each time the joint probability distribution of the data and parameters is calculated.\nAcross both applications, the HGP provides an interpretable spatial dependence parameter and a spatial correlation function."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#highlights",
+    "href": "slides/2025-ucsf/index.html#highlights",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Highlights",
+    "text": "Highlights\nThe HGP has proven to be a powerful model that offers:\n\nVersatility: accomodates diverse spatial data types.\nPerformance: competitive against models designed for specific spatial data types.\nReliable predictions: prediction intervals with near nominal frequentist coverage.\nOur conclusions are further supported by a comprehensive simulation study, detailed in our available preprint.\n\n\nKey Takeaway: The HGP’s versatility and performance make it a valuable tool in your spatial analysis toolkit."
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#future-work-and-limitations",
+    "href": "slides/2025-ucsf/index.html#future-work-and-limitations",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "Future work and Limitations",
+    "text": "Future work and Limitations\n\nExtensions:\n\nnon-Euclidean spaces\nBig data\n\nLimitations:\n\nBig “n” problem inherited from geostatistics\nUnclear how to incorporate anisotropy\nDifficulties in obtaining spectral densities for correlation functions"
+  },
+  {
+    "objectID": "slides/2025-ucsf/index.html#references",
+    "href": "slides/2025-ucsf/index.html#references",
     "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
     "section": "",
-    "text": "Details\n\nDate: Nov 21, 2024\nLocation: Porto Alegre, RS - Brazil\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and predictions. The spatial structure of the data significantly impacts valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function for this model, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios involve areal data, and another demonstrates its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.\n\n\nSlides"
+    "text": "References\n\n\nBesag, J. (1974), “Spatial interaction and the statistical analysis of lattice systems,” Journal of the Royal Statistical Society. Series B (Methodological), JSTOR, 192–236.\n\n\nBesag, J., York, J., and Mollié, A. (1991), “Bayesian image restoration, with two applications in spatial statistics,” Annals of the Institute of Statistical Mathematics, 43, 1–20.\n\n\nCressie, N. (1993), Statistics for spatial data, Wiley series in probability and statistics, Wiley.\n\n\nDatta, A., Banerjee, S., Hodges, J. S., and Gao, L. (2019), “Spatial disease mapping using directed acyclic graph auto-regressive (DAGAR) models,” Bayesian analysis, NIH Public Access, 14, 1221.\n\n\nDiggle, P. J., Tawn, J. A., and Moyeed, R. A. (1998), “Model-based geostatistics,” Journal of the Royal Statistical Society Series C: Applied Statistics, Oxford University Press, 47, 299–350.\n\n\nHoman, M. D., and Gelman, A. (2014), “The No-U-turn sampler: Adaptively setting path lengths in hamiltonian Monte Carlo,” Journal of Machine Learning Research, JMLR.org, 15, 1593–1623.\n\n\nLi, D., Tang, W., and Banerjee, S. (2023), “Inference for Gaussian processes with Matérn covariogram on compact Riemannian manifolds,” Journal of Machine Learning Research, 24, 1–26.\n\n\nMin, D., Zhilin, L., and Xiaoyong, C. (2007), “Extended Hausdorff distance for spatial objects in GIS,” International Journal of Geographical Information Science, Taylor & Francis, 21, 459–475.\n\n\nMolchanov, I. S. (2005), Theory of random sets, Probability and its applications, London, England: Springer. https://doi.org/10.1007/1-84628-150-4.\n\n\nMoraga, P., Cramb, S. M., Mengersen, K. L., and Pagano, M. (2017), “A geostatistical model for combined analysis of point-level and area-level data using INLA and SPDE,” Spatial Statistics, Elsevier, 21, 27–41.\n\n\nPalacios, M. B., and Steel, M. F. J. (2006), “Non-Gaussian Bayesian geostatistical modeling,” Journal of the American Statistical Association, Taylor & Francis, 101, 604–618.\n\n\nVehtari, A., Gelman, A., Simpson, D., Carpenter, B., and Bürkner, P.-C. (2021), “Rank-normalization, folding, and localization: An improved \\(\\hat{R}\\) for assessing convergence of MCMC (with discussion),” Bayesian Analysis, International Society for Bayesian Analysis, 16, 667–718.\n\n\nZheng, X., Kottas, A., and Sansó, B. (2023), “Nearest-neighbor mixture models for non-gaussian spatial processes,” Bayesian Analysis, International Society for Bayesian Analysis, 18, 1191–1222."
+  },
+  {
+    "objectID": "talks/2018-csds/index.html",
+    "href": "talks/2018-csds/index.html",
+    "title": "Voronoi Data Linkage: Extracting Information from Polygons to Points",
+    "section": "",
+    "text": "Details\n\nDate: October 16, 2018\nLocation: Salvador, Brazil\nSlides\n\n\n\nSlides"
+  },
+  {
+    "objectID": "talks/2024-cobal/index.html",
+    "href": "talks/2024-cobal/index.html",
+    "title": "Spatiotemporal Analysis of Tuberculosis using Hausdorff–Gaussian Processes",
+    "section": "",
+    "text": "Details\n\nDate: Dec 05, 2024\nLocation: Belo Horizonte, MG - Brazil\nSlides\n\n\n\nAbstract\nTuberculosis (TB) remains a significant global health challenge, and Brazil exemplifies the complexities of controlling this infectious disease. Reliable estimates and forecasts of TB incidence rates are crucial to guide public health policies. This study focuses on the high-burden municipalities of Eastern Rio Grande do Sul, Brazil. We propose a novel spatiotemporal model based on the Hausdorff-Gaussian process to analyze TB incidence data. This model incorporates spatial dependence dictated by the Hausdorff distance, allowing it to “borrow strength” from municipalities and generate more reliable estimates, particularly for smaller areas. Our analysis has two primary goals. First, we aim to generate accurate TB incidence estimates by incorporating municipality-specific characteristics through covariates and a spatiotemporal random effect. The model delivers trustworthy expected incidence rates, consequently allowing for calculating standardized incidence ratios (SIRs). Second, our model offers predictive capabilities, forecasting TB incidence ratesone year ahead to support proactive public health planning. We demonstrate our model’s effectiveness and competitive performance against other specialized areal data models. The insights gained from this study can guide policymakers in developing effective TB control strategies.\n\n\nSlides"
+  },
+  {
+    "objectID": "talks/2024-jsm/index.html",
+    "href": "talks/2024-jsm/index.html",
+    "title": "FROM POINT TO POLYGON: A UNIFIED FRAMEWORK FOR MODELING SPATIAL DEPENDENCE",
+    "section": "",
+    "text": "Details\n\nDate: Aug 4, 2024\nLocation: Portlant, OR\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and out-of-sample predictions. The spatial structure and geometry of the data significantly impact valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models, while effective, rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model class utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function within the HGP framework, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing change of support and data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios: one involving areal data and another demonstrating its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.\n\n\nSlides"
+  },
+  {
+    "objectID": "talks/2024-ucsc/index.html",
+    "href": "talks/2024-ucsc/index.html",
+    "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
+    "section": "",
+    "text": "Details\n\nDate: Oct 21, 2024\nLocation: Santa Cruz, CA\nSlides\n\n\n\nAbstract\nAccurate modeling of spatial dependence is pivotal in analyzing spatial data, influencing parameter estimation and predictions. The spatial structure of the data significantly impacts valid statistical inference. Existing models for areal data often rely on adjacency matrices, struggling to differentiate between polygons of varying sizes and shapes. Conversely, data fusion models rely on computationally intensive numerical integrals, presenting challenges for moderately large datasets. In response to these issues, we propose the Hausdorff-Gaussian process (HGP), a versatile model utilizing the Hausdorff distance to capture spatial dependence in both point and areal data. We introduce a valid correlation function for this model, accommodating diverse modeling techniques, including geostatistical and areal models. Integration into generalized linear mixed-effects models enhances its applicability, particularly in addressing data fusion challenges. We validate our approach through a comprehensive simulation study and application to two real-world scenarios involve areal data, and another demonstrates its effectiveness in data fusion. The results suggest that the HGP is competitive with specialized models regarding goodness-of-fit and prediction performances. In summary, the HGP offers a flexible and robust solution for modeling spatial data of various types and shapes, with potential applications spanning fields such as public health and climate science.\n\n\nSlides"
+  },
+  {
+    "objectID": "talks/2025-git/index.html",
+    "href": "talks/2025-git/index.html",
+    "title": "Git & Friends",
+    "section": "",
+    "text": "Details\n\nDate: Nov 02, 2025\nLocation: Santa Cruz, CA - Brazil\nSlides\n\n\n\nAbstract\nA brief presentation about version control focused on git with a lightning introduction to the terminal.\n\n\nSlides"
   }
 ]
