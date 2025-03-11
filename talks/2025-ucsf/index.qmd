@@ -14,9 +14,9 @@ categories:
 
 ### Details
 
-* **Date**: Nov 21, 2024
+* **Date**: Mar 12, 2025
 
-* **Location**: Porto Alegre, RS - Brazil
+* **Location**: San Francisco, CA - USA
 
 * [Slides](https://lcgodoy.me/slides/2025-ucsf)
 
