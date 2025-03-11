@@ -1,0 +1,993 @@
+---
+title: |
+  STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION
+  WITH HAUSDORFF-GAUSSIAN PROCESSES
+subtitle: |
+  Available at [lcgodoy.me/slides/2025-ucsf/](https://lcgodoy.me/slides/2025-ucsf/)
+author:
+  - name: Lucas da Cunha Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+institute: Department of Epidemiology \& Biostatistics -- UCSF
+date: 2025-03-12
+bibliography: references.bib
+csl: styles/asa.csl
+title-slide-attributes:
+  data-background-image: qr-code.png
+  data-background-size: 30%
+  data-background-position: 90% 90%
+format:
+  revealjs:
+    theme: [styles/jsm.scss]
+    filters: [styles/appendix.lua]
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    html-math-method:
+      method: mathjax
+      url: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML"
+---
+
+
+```{r}
+#| label: setup
+
+library(sf)
+library(spdep)
+library(ggplot2)
+library(dplyr)
+
+options(knitr.kable.NA = "")
+
+bins_sturges <-
+  function(x) diff(range(x)) / nclass.Sturges(x)
+
+get_color <- function(x, regex_element,
+                      pos_element = 2,
+                      split = " ") {
+  stopifnot(length(regex_element) == 1)
+  stopifnot(length(pos_element) == 1)
+  x[grepl(regex_element, x)] |>
+    strsplit(split = split) |>
+    sapply(\(y) y[pos_element]) |>
+    gsub(";$", "", x = _)
+}
+
+
+scss <- readLines("styles/jsm.scss")
+bck <- get_color(scss, "^\\$body-bg", 2)
+sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
+fg <- get_color(scss, "^\\$body-color", 2)
+
+theme_set(theme_void() +
+          theme(plot.background = element_rect(fill = bck,
+                                               color = bck),
+                panel.background = element_rect(fill = bck,
+                                                color = bck)))
+
+
+my_theme <-
+  theme_bw() +
+  theme(plot.background = element_rect(fill = bck,
+                                       color = bck),
+        panel.background = element_rect(fill = bck,
+                                        color = bck),
+        panel.grid = element_blank(),
+        line = element_line(color = fg),
+        text = element_text(color = fg),
+        rect = element_rect(color = fg),
+        axis.ticks = element_line(color = fg))
+
+
+dt_df <- readRDS("data/df.rds") |>
+  arrange(id)
+
+bord <- readRDS("data/border_counties.rds")
+
+data(GGHB.IZ, package = "CARBayesdata")
+data(respiratorydata, package = "CARBayesdata")
+
+my_dt <- merge(x = GGHB.IZ,
+               y = respiratorydata, by = "IZ",
+               all.x = FALSE) |>
+  mutate(scenario = "Scenario 3 (areal only)")
+```
+
+
+# Introduction {.section_slide visibility="uncounted"}
+
+
+##  Spatial Statistics
+
+\newcommand\indicator{1\kern-0.25em\text{l}}
+\newcommand\REALS{1\kern-0.2em\text{R}}
+\newcommand\E{\mathbb{E}}
+\newcommand\dd{\mathrm{d}}
+
+```{r}
+knitr::knit_hooks$set(crop = knitr::hook_pdfcrop)
+```
+
+- Taking into account [spatial dependence]{.important} possibly present in data
+  is a foremost aspect of spatial statistics.
+
+- [General spatial model]{.important2} [@cressie1993statistics]: $\{
+  Z(\mathbf{s}) \; : \; \mathbf{s} \in D \}$, where $D$ is an [index
+  set]{.important}.
+
+- Statistical [inference depends]{.important} heavily on the spatial
+  [structure/geometry]{.important} of the observed spatial data.
+
+| Geometry       | Branch              | Index set |
+|:--------------:|:-------------------:|:---------:|
+| Areas/polygons | Areal models        | Countable |
+| Points         | Geostatistics       | Continuum |
+| Mixed          | Spatial Data Fusion |           |
+
+: {.striped}
+
+
+::: {.notes}
+
+- Challenges arise when working with data from different sources:
+  
+  - Change of support
+  
+  - Spatial misalignment
+  
+  - Data fusion itself.
+
+Loosely speaking, this means the GP has stationary mean, variance, and a
+correlation function such that the correlation between two data points depends
+solely on their distance.
+
+- Common assumptions are [stationarity]{.important} and
+  [isotropy]{.important}.
+
+- [Importance in spatial statistics]{.important2}: predominant foundation of
+  geostatistical modeling.
+
+- Completely specified by mean and covariance functions.
+
+The main reasons these models are not applied to areal data are:
+
+1. Calculating distance between areal spatial units is non-trivial;
+    
+1. The commonly used areal models are computationally efficient.
+
+:::
+
+
+## Classic Models for Spatial Data
+
+* Areal data
+
+    * _CAR [@besag1974spatial], ICAR, BYM [@besag1991bayesian],
+      [DAGAR]{.important} [@datta2019spatial]_.
+
+* Point-referenced data
+
+    * _Gaussian processes (GP)_, _Nearest-neighbor mixture processes [@zheng2023nearest]_
+
+* Mixed/fused data
+
+    * _"Aggregated" GP ([AGP]{.important2}) [@moraga2017geostatistical]_:
+      $$
+      Z(\mathbf{s}_i)
+      = \begin{cases}
+      Z(\mathbf{s}_i), & \text{if } \mathcal{A}(\mathbf{s}_i) = 0 \\
+      {\mathcal{A}(\mathbf{s}_i)}^{-1}
+      \int_{\mathcal{A}(\mathbf{s}_i)} Z(\mathbf{s}) \dd \mathbf{s}, & \text{if }
+      \mathcal{A}(\mathbf{s}_i) > 0
+      \end{cases}
+      $$
+
+::: {.notes}
+
+- Areal models are usually heteroscedastic; The marginal variances decrease with
+  the number of neighbors;
+  
+- Data fusion models are also heteroscedastic (unless all the polygons are of
+  the same size); computationally prohibitive for moderately large datasets;
+  arbitrary choice of grid resolution.
+
+:::
+
+## Research Questions
+
+- The main [research questions]{.important} we are interested in are:
+
+  1. Can we propose a [model]{.important} for spatial data that accomodates
+     [areal, point-referrenced, and fused data]{.important}?
+
+  1. If so, is this model [competitive]{.important} when compared [to
+     specialized models]{.important}?
+
+- [Proposal]{.important2}: An [isotropic]{.important} GP defined on a [flexible
+  index set]{.important}.
+
+- [Main challenge]{.important2}: Defining a [valid correlation
+  function]{.important}.
+
+<!-- - The robustness of the method is showcased by two simulation studies and three -->
+<!--   applications. -->
+
+# Hausdorff--Gaussian Process (HGP) {.section_slide visibility="uncounted"}
+
+## Preliminaries {.center}
+
+- [Point-referenced]{.important} and [areal]{.important} spatial units
+  [are]{.important} (closed and bounded) [sets]{.important}.
+
+
+- We need to generalize distance between points to [distance between
+  sets]{.important}.
+  
+  
+- Ideally, this distance should: 
+  1. [Take into account]{.important} the [shape, size, and
+     orientation]{.important} of spatial sample units.
+  2. Be ["spatially interpretable"]{.important}.
+
+
+## Distances between sets
+
+- [Metric space]{.important2}: $(D, d)$, where $D$ is a spatial region of
+  interest.
+
+- [Distance between a point and a set]{.important2}: $d(x, A) = \inf_{a \in A}
+  d(x, a)$, where $d(x, y)$ is the distance between any two elements $x, y \in
+  D$
+
+- [Directed Hausdorff distance]{.important2}: $${\vec h}(A, B) = \sup_{a \in A}
+  d(a, B)$$
+
+- [Hausdorff distance]{.important2}: $$h(A, B) = \max \left \{ \vec{h}(A, B),
+  \vec{h}(B, A) \right \}$$
+
+:::{.notes}
+
+- Note that if $A$ and $B$ are both singletons, then $h(A, B) = d(A, B)$.
+
+Meric Properties: (1) Symmetry: $d(x, y) = d(y, x)$; (2) Nonnegativeness: $d(x,
+y) \geq 0$ and $d(x, x) = 0$; (3)Positiveness: $d(x, y) = 0 \implies x = y$; (4)
+Triangle inequality: $d(x, y) \leq d(x, z) + d(z, y)$
+
+
+:::
+
+
+## Hausdorff Distance for Spatial Data Analysis
+
+- [Study region]{.important2}: In spatial statistics, $D$ is tipically a [closed
+  and bounded]{.important} subset of $\mathbb{R}^2$.
+
+- In this context, the [Hausdorff distance is a metric]{.important}
+  [Appendix C, @molchanov2005theory].
+
+```{r}
+#| label: haus-dist
+#| fig-height: 6
+#| layout-ncol: 3
+#| file: code/fig-hausdorff.R
+#| eval: true
+```
+
+:::{.notes}
+
+- Metric on $D \setminus \varnothing$
+
+- The Hausdorff distance ability to account for spatial units' [shapes, sizes
+  and orientation]{.important}[@min2007extended] renders it an interesting tool
+  to achieve our goals.
+
+- Moreover, it can [distinguish]{.important} between [overlapping, nested, and
+  disjointed regions]{.important}.
+
+- In the figure: (1) The dashed lines denote the Hausdorff distances; (2) The
+  infimum distance between to sets is zero for the three cases; (3) Distance
+  between centroids is the same for the first two figures.
+
+:::
+
+
+## The HGP
+
+
+* [Index set]{.important2}: $\mathcal{B}(D)$ represents the [closed and
+  bounded]{.important} subsets of $D \subset \mathbb{R}^2$.
+
+* $Z(\mathbf{s}) \sim \mathrm{HGP}\{m(\mathbf{s}), v(\mathbf{s}), r(h)\}$, where
+  $\mathbf{s} \in \mathcal{B}(D)$.
+
+- [Mean function]{.important2}:
+  $m(\mathbf{s}) = \E[Z(\mathbf{s})]$
+  
+- [Covariance function]{.important2}: $\mathrm{Cov}(Z(\mathbf{s}_1),
+  Z(\mathbf{s}_2)) = v(\mathbf{s}_1) v(\mathbf{s}_2) r(h(\mathbf{s}_1,
+  \mathbf{s}_2))$
+  
+- [SD function]{.important2}: $v(\mathbf{s}) =
+  \sqrt{\mathrm{Var}(Z(\mathbf{s}))}$ 
+  
+- [Correlation function]{.important2}: $r(h) =
+  \mathrm{Cor}(Z(\mathbf{s}_1), Z(\mathbf{s}_2)),$ where $h$ denotes the
+  [Hausdorff distance]{.important} between $\mathbf{s}_1, \mathbf{s}_2 \in
+  \mathcal{B}(D)$.
+
+
+:::{.notes}
+
+- Ideally, we want bounded, compact, and non-empty sets for the Hausdorff
+  distance to be a metric..
+
+- In $\mathbb{R}^2$, a compact subset is bounded.
+
+- empty is a subset of any set -> it is bounded bc a subset of a bounded set is
+  bounded itself.
+
+- Mean and SD functions can be informed by covariates.
+
+- The ensure the validity of the process, the function $r(\cdot)$ must be
+  positive definite.
+
+- Complex functional parametric space. 
+
+- Inference is simplified (or possible) by assuming parametric forms to those
+  functions.
+
+
+- Mean and SD functions can be informed by covariates.
+
+- The ensure the validity of the process, the function $r(\cdot)$ must be
+  positive definite.
+
+- Complex functional parametric space. 
+
+- Inference is simplified (or possible) by assuming parametric forms to those
+  functions.
+
+- The SD function allows the HGP to accommodate both [homoscedastic and
+  heteroscedastic scenarios]{.important}.
+
+:::
+
+
+## The $v(\mathbf{s})$ function
+
+
+We may defined: $$v(\mathbf{s}) = \exp \{ \alpha_0 + \alpha_1 w(\mathbf{s})
+\},$$ where $w(\mathbf{s})$ is a covariate available for any $\mathbf{s} \in
+\mathcal{B}(D)$.
+
+- Useful special cases:
+
+    - [Homoscedastic]{.important2}: $w(\mathbf{s}) = 0$ (consequence, $\sigma =
+      \exp \{ \alpha_0 \}$)
+
+    - [Data Fusion]{.important2}: $w(\mathbf{s}) =
+      \mathbb{1}(\mathcal{A}(\mathbf{s}) > 0)$.
+    
+    - [Area dependent]{.important2}: $w(\mathbf{s}) = \mathcal{A}(\mathbf{s})$
+
+- Although flexible, one has to be [careful]{.important} when choosing this
+  function to ensure the [process validity]{.important} [@palacios2006non].
+
+::: {.notes}
+
+- for data fusion: $\sigma_a = \exp \{ \alpha_0 + \alpha_1 \}$.
+
+:::
+
+
+## Ensuring the process' validity
+
+For a valid process, its [correlation function]{.important} must satisfy the following
+properties:
+  
+
+- [Diminish with increasing distance]{.important2}: $\lim_{h \to \infty}r(h) = 0$.
+
+
+- [Bounded from above by 1]{.important2}: $r(0) = 1$.
+
+
+- [Positive definiteness (PD)]{.important2}: yields positive definite [correlation
+  matrices]{.important} for all its finite-dimensional marginal distributions.
+
+
+- Unfortunately, functions that are [guaranteed]{.important} to be
+  [positive definite]{.important} on [$(\mathbb{R}^2, \lVert \cdot
+  \rVert_2)$]{.important} are [not]{.important} necessarily positive definite on
+  [other metric spaces]{.important} [@li2023inference].
+
+## PD and Empirical Assessment
+
+- [Definition:]{.important2} A real function $k$ on a metric space $(D, d)$ is
+  [PD]{.important} if it is continuous and satisfies:
+  
+  $$ \sum_{i = 1}^{m} \sum_{j = 1}^{m} a_i a_j k(\mathbf{s}_i, \mathbf{s}_j)
+\geq 0 $$ 
+  
+  for real numbers $a_1, \ldots, a_m$ and $\mathbf{s}_1, \ldots, \mathbf{s}_m
+  \in D$.
+
+- [Necessary condition:]{.important2}: All the [eigen values]{.important} of the
+  resulting correlation matrix must be [non-negative]{.important}.
+  
+- [Empirical assessment:]{.important2} We can check for [PD]{.important} by
+  examining the [smallest eigenvalue]{.important} of the [correlation
+  matrix]{.important} across the parameter space.
+
+## The Powered Exponential Correlation (PEC) Function
+
+- [PEC function]{.important2}: $$r(h; \phi, \nu) = \exp\left \{ -
+  \frac{h^{\nu}}{\phi^{\nu}}\right \},$$ where $\nu$ is a [smoothness
+  parameter]{.important} and $\phi$ governs the range of the [spatial
+  dependence]{.important}.
+
+:::{.incremental}
+- [Parametrization]{.important2}: We reparametrize this function with $\rho =
+  {\log(10)}^{1 / \nu} \phi$.
+
+- [Interpretation]{.important2}: $\rho$ is the [distance]{.important} at which
+  the [spatial correlation reduces to $0.10$]{.important}.
+:::
+
+::: {.notes}
+
+- explain $\rho$.
+
+:::
+
+
+## Visualizing the PEC function
+
+```{r}
+#| label: pec-function
+#| file: code/fig-pec.R
+```
+
+## Empirical Assessment of PEC's Positive Definiteness
+
+```{r}
+#| label: psd-empirical
+#| file: code/fig-psd.R
+#| fig-align: center
+```
+
+:::{.notes}
+
+- the graph displays the smallest eigenvalue of the correlation matrix induced
+  by $\rho$ (x-axis) and $\nu$ (y-axis).
+  
+- These matrices are based on the two spatial applications we will discuss in
+  the next chapter.
+  
+- The transparent regions indicate the regions of the parametric space where rho
+  is smaller than 0.
+
+:::
+
+## HGP Recap
+
+- [Flexibility]{.important2}: A process that handles [point-referrenced, areal,
+  and mixed spatial data]{.important} by construction.
+
+- [Hausdorff distance]{.important2}: Enables HGP's correlation function to
+  account for the [shape, size, and orientation]{.important} of spatial objects.
+
+- [PEC Function Validity]{.important2}: A [valid HGP]{.important} depends on
+  selecting an [appropriate PEC correlation]{.important} function.
+  
+- [Empirical assessments]{.important2}: When analyzing a [new dataset or trying
+  a new correlation function]{.important2}, it is imperative to [empirically
+  assess the validity]{.important} of the function.
+
+```{mermaid}
+%%| fig-align: center
+flowchart LR
+    A(Flexible index set) ==> B(GP)
+    B ==> E(((HGP)))
+    C(Hausdorff distance) ==> D(PEC)
+    D ==> E
+```
+
+
+# Spatial modeling {.section_slide visibility="uncounted"}
+
+
+## Spatial GLMM
+
+A generalized linear mixed effects model ([GLMM]{.important}) can be written as
+$$\begin{aligned}
+& Y(\mathbf{s}_i) \mid \mathbf{x}_i, Z(\mathbf{s}_i) \overset{{\rm ind}}{\sim}
+  f(\cdot \mid \mu_i, \boldsymbol{\gamma}) \\
+& g(\mu_i) = \mathbf{x}_i \boldsymbol{\beta} +
+  Z(\mathbf{s}_i).
+\end{aligned}$$
+
+- [Probability distribution]{.important2}: $f(\cdot)$
+
+- [Conditional mean]{.important2}: $\mu_i = \E[Y(\mathbf{s}_i) \mid
+  \mathbf{x}_i, Z(\mathbf{s}_i)]$
+
+- [Link function]{.important2}: $g(\cdot)$
+
+- [Model parameters]{.important2}: $\boldsymbol{\theta} =
+  {\{\boldsymbol{\beta}^\top, \boldsymbol{\sigma}^\top,
+  \boldsymbol{\delta}^\top, \boldsymbol{\gamma}^\top \}}^\top$
+  
+- [Joint density]{.important2}: $p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta}) =
+  \prod_{i = 1}^n f(y(\mathbf{s}_i) \mid \mu_i, \boldsymbol{\gamma})$
+
+:::{.notes}
+
+- Realizations of random variables are represented by lowercase letters.
+
+- Model paramers are greek letters.
+
+- Under a frequentist perspective, we consider the random effects to follow an
+  HGP.
+  
+- For Bayesian inference, we use the HGP as a prior for the random effects.
+
+- Response variable $Y$ at a spatial unit $s$ is modeled with an appropriate
+  distribution (e.g., Poisson, Bernoulli).
+
+- Covariates ($X$) and spatial random effects ($Z$) explain variation in the
+  conditional mean ($\mu$).
+
+- The HGP defines the spatial random effects ($Z$), capturing spatial
+  correlation with the Hausdorff distance and a correlation function.
+
+:::
+
+## Priors
+
+- Independent normal priors for the [regression coefficients]{.important}:
+$\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
+  
+  
+- HGP prior for the [latent random effects]{.important}: $\mathbf{Z} \sim
+  \mathrm{HGP}\{0, v(\cdot), r(\cdot) \}$
+
+
+- Exponential prior for the [spatial dependence]{.important} parameter: $\rho
+\sim \mathrm{Exp}(a_\rho)$, where $a_{\rho} = - \log(p_{\rho}) / \rho_0$. 
+    - $a_\rho$ is chosen such that $\mathbb{P}(\rho \geq \rho_0) = p_\rho$.
+
+
+- [Homoscedastic variance]{.important2}: $v(\mathbf{s}) =
+  \sqrt{\mathrm{Var}(Z(\mathbf{s}))} = \sigma \sim t_{+}(3)$
+
+
+- [Heteroscedastic HGP]{.important2}: $\alpha \sim \mathcal{N}(\mathbf{0},
+\mathbf{I})$, where $v(\mathbf{s}) = \exp \{ \alpha_0 + \sum_i \alpha_i w_i(\mathbf{s}) \}$.
+
+:::{.notes}
+
+- For $\rho$, the prior is inspired in penalized complexity priors. A
+  conservative, but reasonable, choice for its hyperparameter is setting
+  $a_\rho$ such that $\rho_0$ is a surprisingly low practical range and $p_rho$
+  is a small probability (i.e., around .01)
+
+:::
+
+## Bayesian Inference \& Model Assessment
+
+
+- [Posterior]{.important2}: $\pi(\boldsymbol{\theta} \mid \mathbf{y},
+  \mathbf{z}) \propto p(\mathbf{y} \mid \mathbf{z}, \boldsymbol{\theta})
+  p(\mathbf{z} \mid \boldsymbol{\theta}) \pi(\boldsymbol{\theta})$
+
+- [MCMC sampler]{.important2}: No-U-Turn [@hoffman2014no].
+
+- [Convergence assessment]{.important2}: traceplots and split-${\hat{R}}$
+  [@vehtari2021rank].
+
+- [Goodness-of-fit criteria]{.important2}: LOOIC ([lower values indicate better
+  fit]{.important})
+  
+- [Posterior predictive distributions]{.important2}: $p(\mathbf{y}^{\ast} \mid
+  \mathbf{y})$
+
+- [Predictions assessment]{.important2}: Interval Score (IS) and RMSP ([lower
+  values indicate better fit]{.important})
+
+
+:::{.notes}
+
+- Point and interval estimates: median and percentiles ($0.025$
+  and $0.975$) of the marginal MCMC samples.
+  
+- Parameters initialized by random sampling from their priors.
+
+- Random effects initialized from a standard normal distribution.
+
+- $a_\rho$ is chosen so that: $\mathbb{P}(\rho > U) = p_\rho$. In particular,
+  $a_\rho = - \log(p_\rho) / \rho_0$.
+
+- $\nu$ hard to be estimated.
+
+
+
+Predictions:
+
+1. use the properties of GP and multivariate Normal distribution to obtain the
+   closed-form distribution of the vector of spatial random effects
+   $\mathbf{Z}^\ast$ [@diggle1998model];
+
+2. sample $\mathbf{z}^\ast_{(b)}$ from the distribution derived in the previous
+   step;
+
+3. sample $\mathbf{y}^{\ast}_{(b)}$ from $p(\mathbf{y}^{\ast} \mid \boldsymbol{\theta}_{(b)},
+   \mathbf{z}^{\ast}_{(b)})$, where $\boldsymbol{\theta}_{(b)}$ is the $b$-th MCMC sample of
+   $\boldsymbol{\theta}$.
+
+:::
+
+
+## Bayesian Modeling Recap {.center}
+
+
+- [HGP]{.important} as a prior for the random effects disribution in a
+  [GLMM]{.important}.
+  
+- Bayesian inference through [MCMC]{.important}.
+
+- Uncertainty quantification of predictions through the [posterior predictive
+  distributions]{.important}.
+
+
+:::{.notes}
+DAGAR priors:
+$$
+\begin{aligned}
+  \pi(\beta_0) & \propto 1 \\
+  \beta_1 & \sim N(0, 1000^2) \\
+  \tau & \sim Gamma(2, 1) \\
+  \psi & \sim U(0, 1).
+\end{aligned}
+$$
+- Precision matrix is defined based on the order of the observations and
+adjacency matrix (and the two parameters)
+:::
+
+
+# Areal Data Application {.section_slide visibility="uncounted"}
+
+## Respiratory Disease Hospitalization in Glasgow
+
+```{r}
+#| label: sirobs
+#| file: code/fig-scotobs.R
+#| crop: true
+#| fig-align: center
+#| fig-dpi: 900
+```
+
+## Respiratory Disease Hospitalization in Glasgow
+
+
+$$\begin{aligned}
+& (Y(\mathbf{s}_i) \mid x_i, z(\mathbf{s}_i)) \sim \text{Poisson}(E_i \mu_i) \\
+& \log(\mu_i) = \beta_0 + x_i \beta_1 + z(\mathbf{s}_i)
+\end{aligned}$$
+
+
+- [Sample units]{.important2}: 134 intermediate zones (IZ), where the $i$-th IZ
+  is denoted $\mathbf{s}_i$.
+
+- [Number of hospitalizations]{.important2}: $\mathbf{Y} = {(Y(\mathbf{s}_1),
+  \ldots, Y(\mathbf{s}_n))}^\top$.
+
+- [Expected number of hospitalizations]{.important2} based on the national age-
+  and sex-standardized rates: $E_i$.
+
+- [Percentage of people]{.important} classified as [income
+  deprived]{.important}: $x_i$.
+
+
+:::{.notes}
+
+- Data from the north portion of the river Clyde in the Great Glasgow and Clyde
+  health board in Scotland.
+
+- Assumption: Conditional on $\mathbf{Z}$, $\mathbf{Y}$ are mutually
+  independent.
+
+- Explain goals of the analysis--estimate risks adjusted for income deprivation,
+  compare methods.
+
+- $\mu_i$ is the expected SIR at region $i$.
+
+- Outline the modeling choices (HGP, DAGAR, BYM), briefly mention priors.
+
+:::
+
+
+## Disease Mapping: Estimation \& GOF
+
+:::{.fw}
+
+|           | HGP                               | DAGAR                             |
+|:----------|:----------------------------------|:----------------------------------|
+| $\beta_0$ | -0.21 (-0.268, -0.139)            | -0.26 (-0.450, -0.137)            |
+| $\beta_1$ | 0.33 (0.284, 0.368)               | 0.31 (0.258, 0.370)               |
+| $\sigma$  | 0.19 (0.155, 0.234)               | 0.30 (0.218, 0.484)               |
+| $\rho$    | [2.25 (0.159, 6.948)]{.important} |                                   |
+| $\psi$    |                                   | [0.43 (0.069, 0.827)]{.important} |
+|           |                                   |                                   |
+|           |                                   |                                   |
+| LOOIC     | [1081.0]{.important}              | 1081.9                            |
+
+: {.striped}
+
+:::
+
+
+:::{.notes}
+
+- median (95% CI)
+
+- similar estimates for covariate
+
+- HGP indicates weak spatial correlation
+
+- DAGAR and BYM spatial dependence are not helpful as they indicate the spatial
+  correlation goes from weak to strong (according to the CI)
+
+:::
+
+
+## Disease Mapping: Spatial Dependence
+
+```{r}
+#| label: scotrho
+#| file: code/fig-scotrho.R
+#| crop: true
+#| fig-align: center
+```
+
+:::{.notes}
+
+- HGP provides more insight into spatial dependence
+
+- We could also plot the correlation function itself
+
+:::
+
+
+## Disease Mapping: Adjusted SIR {.center}
+
+```{r}
+#| label: sirfit
+#| file: code/fig-scotsir.R
+#| crop: true
+#| fig-align: center
+#| fig-dpi: 900
+```
+
+:::{.notes}
+
+- Fitted values are similar among the three models
+
+- Some regions with very low risks are shrunk toward a "regional mean"
+
+:::
+
+# Data Fusion Application {.section_slide visibility="uncounted"}
+
+## Air Pollution in Ventura and Los Angeles
+
+::: {layout="[ 0.5, -0.05, 0.45 ]"}
+
+::::{#first-column}
+
+$$(Y(\mathbf{s}_i) \mid z(\mathbf{s}_i)) \sim
+  \mathcal{N}(\beta_0 + z(\mathbf{s}_i), \tau^2)$$
+
+
+- [PM~2.5~]{.important2}: $\mathbf{Y} = {(Y(\mathbf{s}_1), \ldots,
+  Y(\mathbf{s}_n))}^\top$.
+
+- [Point-referrenced data]{.important2} from 19 measurement stations available
+  daily from 1999 to date;
+
+- [Satellite-derived]{.important2} estimates (2010--2012) at 184 areal units.
+
+::::
+
+::::{#second-column}
+
+```{r}
+#| label: pm25-map1
+#| crop: true
+#| fig-align: center
+
+dt_df |>
+  ggplot(data = _) +
+  geom_sf(data = dt_df,
+          aes(fill = pm25),
+          size = 3,
+          shape = 21,
+          col = fg) +
+  scale_fill_viridis_c(expression(PM[2.5]), option = "H") +
+  geom_sf(data = bord, color = 1,
+          fill = "transparent",
+          lwd = .8) +
+  theme(legend.position = "bottom")
+```
+
+::::
+
+:::
+
+:::{.notes}
+
+- goals: (1); estimate model parameters using both sources. (2) use satellite
+  data to help with interpolation.
+
+- square areas (average size $\approx$ 101.95 km^2^)
+
+- data fusion challenges
+
+- adaptability of the hgp to different problems.
+
+- Pm25 scale is micrometre per cubic meter: one one-millionth of a meter.
+
+- conditional on $z$ the $y$s are mutually independent.
+
+- Priors on random effects: AGP1 and 2; heteroscedastic HGP with different
+  variances for areal and point-referrenced data.
+
+:::
+
+## AGP Approximation  {.section_slide visibility="uncounted"}
+
+```{r}
+#| label: meshes-lam
+#| crop: true
+#| fig-align: center
+#| layout-ncol: 2
+library(INLA)
+meshes <- readRDS("data/meshes-la.rds")
+par(bg = sec_bck)
+plot(meshes[[1]], lwd = .25,
+     col = col2,
+     vertex.color = col2,
+     edge.color = col2)
+plot(meshes[[2]], lwd = .25,
+     col = col2,
+     vertex.color = col2,
+     edge.color = col2)
+rm(meshes)
+```
+
+
+## Air Pollution: Estimation and Prediction Assessment {.center transition="zoom-in slide-out" transition-speed="slow"}
+
+:::{.fw}
+
+|            | HGP                               | $\rm AGP_1$                       | $\rm AGP_2$                     |
+|:-----------|:----------------------------------|:----------------------------------|:--------------------------------|
+| $\beta$    | 5.61 (4.69, 6.45)                 | 6.22 (2.16, 10.10)                | 6.19 (5.88, 6.48)               |
+| $\rho$     | [13.83 (7.82, 23.61)]{.important} | [13.16 (5.14, 30.24)]{.important} | [0.63 (0.46, 0.83)]{.important} |
+| $\tau$     | 0.18 (0.07, 0.31)                 | 1.39 (1.24, 1.56)                 | 0.54 (0.39, 0.72)               |
+| $\sigma$   | 3.85 (2.92, 5.18)                 | 1.70 (0.96, 2.91)                 | 2.41 (2.024, 2.84)              |
+| $\sigma_a$ | 1.24 (1.04, 1.51)                 |                                   |                                 |
+|            |                                   |                                   |                                 |
+|            |                                   |                                   |                                 |
+| RMSP       | [1.05]{.important}                | 1.45                              | 1.64                            |
+| Width      | 3.57                              | [2.53]{.important}                | 9.67                            |
+| CPP        | 95.5                              | 78.6                              | 95.5                            |
+| IS         | [4.80]{.important}                | 15.11                             | 13.65                           |
+
+: {.striped}
+
+:::
+
+:::{.notes}
+
+- $\rho$ rescaled to 100s of km.
+
+- staggering difference in estimates of the same model with different meshes.
+
+:::
+
+## Air Pollution: Change-of-Support
+
+
+```{r}
+#| label: lacos
+#| file: code/fig-lacos.R
+#| crop: true
+#| fig-align: center
+```
+
+:::{.notes}
+
+- Figure confirms what we learned from 10-fold CV and simulation studies.
+
+- HGP allows to use data from different sources seamlessly
+
+- No dependence on meshes/grids
+
+- Apparently, a parsimonious compromise between the two meshes.
+
+- Once again, the AGP seems highly dependend on the mesh and this is not
+  highlighted in the literature.
+
+:::
+
+
+## Applications: key findings
+
+
+- The proposed method consistently demonstrated [performance comparable to
+  specialized models]{.important} tailored for areal and fused data.
+  
+- Unlike traditional areal models, the HGP's [marginal variances]{.important}
+  are [independent]{.important} of the [number of neighbors]{.important}.
+  
+- The HGP model [simplifies data fusion]{.important} by [bypassing]{.important}
+  the need to define [arbitrary grids]{.important} for [numerical
+  integral]{.important} evaluation, eliminating this step each time the joint
+  probability distribution of the data and parameters is calculated.
+  
+- Across both applications, the HGP provides an [interpretable spatial
+  dependence]{.important} parameter and a spatial correlation function.
+
+
+# Closing remarks {.section_slide visibility="uncounted"}
+
+## Highlights
+
+The HGP has proven to be a powerful model that offers:
+
+- [Versatility]{.important2}: accomodates diverse spatial data types.
+
+- [Performance]{.important2}: competitive against models designed for specific
+  spatial data types.
+
+- [Reliable predictions]{.important2}: prediction intervals with near nominal
+  frequentist coverage.
+
+- Our conclusions are further supported by a comprehensive [simulation
+  study]{.important}, detailed in our available
+  [preprint](https://arxiv.org/abs/2208.07900).
+
+::: {.notes}
+
+Key Takeaway: The HGP's versatility and performance make it a valuable tool in
+your spatial analysis toolkit.
+
+:::
+
+## Future work and Limitations
+
+- [Extensions]{.important2}: 
+  - non-Euclidean spaces
+  - Big data
+
+- [Limitations]{.important2}: 
+  - Big "n" problem inherited from geostatistics
+  - Unclear how to incorporate anisotropy 
+  - Difficulties in obtaining spectral densities for correlation functions
+
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
+
+# Thank you! {.unlisted .section_slide visibility="uncounted"}
+
+![](qr-code-end.png){fig-align="center"}
