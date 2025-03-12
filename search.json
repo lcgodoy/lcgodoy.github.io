@@ -1089,7 +1089,7 @@
     "href": "slides/2025-ucsf/index.html#pd-and-empirical-assessment",
     "title": "STATISTICAL INFERENCES AND PREDICTIONS FOR AREAL DATA AND SPATIAL DATA FUSION WITH HAUSDORFF-GAUSSIAN PROCESSES",
     "section": "PD and Empirical Assessment",
-    "text": "PD and Empirical Assessment\n\nDefinition: A real function \\(k\\) on a metric space \\((D, d)\\) is PD if it is continuous and satisfies:\n\\[ \\sum_{i = 1}^{m} \\sum_{j = 1}^{m} a_i a_j k(\\mathbf{s}_i, \\mathbf{s}_j)\n\\geq 0 \\]\nfor real numbers \\(a_1, \\ldots, a_m\\) and \\(\\mathbf{s}_1, \\ldots, \\mathbf{s}_m\n\\in D\\).\nNecessary condition:: All the eigen values of the resulting correlation matrix must be non-negative.\nEmpirical assessment: We can check for PD by examining the smallest eigenvalue of the correlation matrix across the parameter space."
+    "text": "PD and Empirical Assessment\n\nDefinition: A real function \\(k\\) on a metric space \\((D, d)\\) is PD if it is continuous and satisfies:\n\\[ \\sum_{i = 1}^{m} \\sum_{j = 1}^{m} a_i a_j k(\\mathbf{s}_i, \\mathbf{s}_j)\n\\geq 0 \\]\nfor real numbers \\(a_1, \\ldots, a_m\\) and \\(\\mathbf{s}_1, \\ldots, \\mathbf{s}_m\n\\in D\\).\nNecessary condition: All the eigen values of the resulting correlation matrix must be non-negative.\nEmpirical assessment: We can check for PD by examining the smallest eigenvalue of the correlation matrix across the parameter space."
   },
   {
     "objectID": "slides/2025-ucsf/index.html#the-powered-exponential-correlation-pec-function",
