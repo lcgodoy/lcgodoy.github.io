@@ -418,7 +418,7 @@ properties:
   for real numbers $a_1, \ldots, a_m$ and $\mathbf{s}_1, \ldots, \mathbf{s}_m
   \in D$.
 
-- [Necessary condition]{.important2}: All the [eigen values]{.important} of the
+- [Necessary condition]{.important2}: All the [eigenvalues]{.important} of the
   resulting correlation matrix must be [non-negative]{.important}.
   
 - [Empirical assessment]{.important2}: We can check for [PD]{.important} by
@@ -490,15 +490,6 @@ properties:
   a new correlation function]{.important}, it is imperative to [empirically
   assess the validity]{.important} of the function.
 
-```{mermaid}
-%%| fig-align: center
-flowchart LR
-    A(Flexible index set) ==> B(GP)
-    B ==> E(((HGP)))
-    C(Hausdorff distance) ==> D(PEC)
-    D ==> E
-```
-
 
 # Spatial modeling {.section_slide visibility="uncounted"}
 
@@ -546,37 +537,6 @@ $$\begin{aligned}
 
 - The HGP defines the spatial random effects ($Z$), capturing spatial
   correlation with the Hausdorff distance and a correlation function.
-
-:::
-
-## Priors
-
-- Independent normal priors for the [regression coefficients]{.important}:
-$\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
-  
-  
-- HGP prior for the [latent random effects]{.important}: $\mathbf{Z} \sim
-  \mathrm{HGP}\{0, v(\cdot), r(\cdot) \}$
-
-
-- Exponential prior for the [spatial dependence]{.important} parameter: $\rho
-\sim \mathrm{Exp}(a_\rho)$, where $a_{\rho} = - \log(p_{\rho}) / \rho_0$. 
-    - $a_\rho$ is chosen such that $\mathbb{P}(\rho \geq \rho_0) = p_\rho$.
-
-
-- [Homoscedastic variance]{.important2}: $v(\mathbf{s}) =
-  \sqrt{\mathrm{Var}(Z(\mathbf{s}))} = \sigma \sim t_{+}(3)$
-
-
-- [Heteroscedastic HGP]{.important2}: $\alpha \sim \mathcal{N}(\mathbf{0},
-\mathbf{I})$, where $v(\mathbf{s}) = \exp \{ \alpha_0 + \sum_i \alpha_i w_i(\mathbf{s}) \}$.
-
-:::{.notes}
-
-- For $\rho$, the prior is inspired in penalized complexity priors. A
-  conservative, but reasonable, choice for its hyperparameter is setting
-  $a_\rho$ such that $\rho_0$ is a surprisingly low practical range and $p_rho$
-  is a small probability (i.e., around .01)
 
 :::
 
@@ -630,6 +590,38 @@ Predictions:
 3. sample $\mathbf{y}^{\ast}_{(b)}$ from $p(\mathbf{y}^{\ast} \mid \boldsymbol{\theta}_{(b)},
    \mathbf{z}^{\ast}_{(b)})$, where $\boldsymbol{\theta}_{(b)}$ is the $b$-th MCMC sample of
    $\boldsymbol{\theta}$.
+
+:::
+
+
+## Priors
+
+- Independent normal priors for the [regression coefficients]{.important}:
+$\boldsymbol{\beta} \sim \mathcal{N}(\mathbf{0}, 10 \mathbf{I})$
+  
+  
+- HGP prior for the [latent random effects]{.important}: $\mathbf{Z} \sim
+  \mathrm{HGP}\{0, v(\cdot), r(\cdot) \}$
+
+
+- Exponential prior for the [spatial dependence]{.important} parameter: $\rho
+\sim \mathrm{Exp}(a_\rho)$, where $a_{\rho} = - \log(p_{\rho}) / \rho_0$. 
+    - $a_\rho$ is chosen such that $\mathbb{P}(\rho \geq \rho_0) = p_\rho$.
+
+
+- [Homoscedastic variance]{.important2}: $v(\mathbf{s}) =
+  \sqrt{\mathrm{Var}(Z(\mathbf{s}))} = \sigma \sim t_{+}(3)$
+
+
+- [Heteroscedastic HGP]{.important2}: $\alpha \sim \mathcal{N}(\mathbf{0},
+\mathbf{I})$, where $v(\mathbf{s}) = \exp \{ \alpha_0 + \sum_i \alpha_i w_i(\mathbf{s}) \}$.
+
+:::{.notes}
+
+- For $\rho$, the prior is inspired in penalized complexity priors. A
+  conservative, but reasonable, choice for its hyperparameter is setting
+  $a_\rho$ such that $\rho_0$ is a surprisingly low practical range and $p_rho$
+  is a small probability (i.e., around .01)
 
 :::
 
