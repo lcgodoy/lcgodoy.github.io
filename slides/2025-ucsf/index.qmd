@@ -150,7 +150,7 @@ solely on their distance.
 - Common assumptions are [stationarity]{.important} and
   [isotropy]{.important}.
 
-- [Importance in spatial statistics]{.important2}: predominant foundation of
+- [Importance in spatial statistics:]{.important2} predominant foundation of
   geostatistical modeling.
 
 - Completely specified by mean and covariance functions.
@@ -409,7 +409,7 @@ properties:
 
 ## PD and Empirical Assessment
 
-- [Definition:]{.important2} A real function $k$ on a metric space $(D, d)$ is
+- [Definition]{.important2}: A real function $k$ on a metric space $(D, d)$ is
   [PD]{.important} if it is continuous and satisfies:
   
   $$ \sum_{i = 1}^{m} \sum_{j = 1}^{m} a_i a_j k(\mathbf{s}_i, \mathbf{s}_j)
@@ -418,10 +418,10 @@ properties:
   for real numbers $a_1, \ldots, a_m$ and $\mathbf{s}_1, \ldots, \mathbf{s}_m
   \in D$.
 
-- [Necessary condition:]{.important2}: All the [eigen values]{.important} of the
+- [Necessary condition]{.important2}: All the [eigen values]{.important} of the
   resulting correlation matrix must be [non-negative]{.important}.
   
-- [Empirical assessment:]{.important2} We can check for [PD]{.important} by
+- [Empirical assessment]{.important2}: We can check for [PD]{.important} by
   examining the [smallest eigenvalue]{.important} of the [correlation
   matrix]{.important} across the parameter space.
 
@@ -487,7 +487,7 @@ properties:
   selecting an [appropriate PEC correlation]{.important} function.
   
 - [Empirical assessments]{.important2}: When analyzing a [new dataset or trying
-  a new correlation function]{.important2}, it is imperative to [empirically
+  a new correlation function]{.important}, it is imperative to [empirically
   assess the validity]{.important} of the function.
 
 ```{mermaid}
