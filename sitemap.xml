@@ -2,94 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://lcgodoy.me/talks/2025-ucsf/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2024-ufrgs/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2024-ness/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2024-defense/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
-    <loc>https://lcgodoy.me/talks/2018-rbras/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.574Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/talks.html</loc>
-    <lastmod>2025-03-12T15:44:52.574Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/slides/2025-git/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.565Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/slides/2024-ucsc/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.555Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/slides/2024-cobal/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.323Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/posts/models/models.html</loc>
-    <lastmod>2025-03-12T15:44:52.299Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/posts/jupyter_hpc/jupyter_hpc.html</loc>
-    <lastmod>2025-03-12T15:44:52.298Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/blog.html</loc>
-    <lastmod>2025-03-12T15:44:52.297Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.298Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/posts/lmnet/2021-06-23-lmnnet.html</loc>
-    <lastmod>2025-03-12T15:44:52.298Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/publications.html</loc>
-    <lastmod>2025-03-12T15:44:52.320Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/slides/2024-jsm/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.447Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/slides/2024-ufrgs/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.564Z</lastmod>
-  </url>
-  <url>
-    <loc>https://lcgodoy.me/slides/2025-ucsf/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.574Z</lastmod>
+    <loc>https://lcgodoy.me/talks/2021-ness/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2018-csds/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.574Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/slides/2025-ucsf/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.553Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/slides/2024-ufrgs/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.544Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/slides/2024-jsm/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.427Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/publications.html</loc>
+    <lastmod>2025-03-13T16:06:42.265Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/posts/lmnet/2021-06-23-lmnnet.html</loc>
+    <lastmod>2025-03-13T16:06:42.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/blog.html</loc>
+    <lastmod>2025-03-13T16:06:42.243Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/posts/jupyter_hpc/jupyter_hpc.html</loc>
+    <lastmod>2025-03-13T16:06:42.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/posts/models/models.html</loc>
+    <lastmod>2025-03-13T16:06:42.244Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/slides/2024-cobal/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.304Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/slides/2024-ucsc/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.535Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/slides/2025-git/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.544Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/talks.html</loc>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
+  </url>
+  <url>
+    <loc>https://lcgodoy.me/talks/2018-rbras/index.html</loc>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2024-cobal/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.574Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2024-jsm/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2024-ucsc/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
   <url>
     <loc>https://lcgodoy.me/talks/2025-git/index.html</loc>
-    <lastmod>2025-03-12T15:44:52.575Z</lastmod>
+    <lastmod>2025-03-13T16:06:42.554Z</lastmod>
   </url>
 </urlset>
