@@ -1,0 +1,48 @@
+---
+title: "Spatially misaligned data: An application to the 2018 Brazilian Presidential Election"
+description: "Talk given at the 34^th^ NESS"
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2021-10-01"
+categories:
+  - Spatial statistics
+  - Elections
+  - Voronoi tesselation
+  - Brasil
+---
+
+### Details
+
+* **Date**: October 01, 2021
+
+* **Location**: Providence, RI, USA.
+
+* [Slides](https://lcgodoy.me/slides/2021-ness/)
+
+### Abstract
+
+In Brazil, socioeconomic data are available at census tracts (polygons), while
+election data are available at voting locations (point-referenced). The
+misaligned data makes studying the association between election outcomes and
+socioeconomic variables challenging. Since voters are assigned to the nearest
+electoral sections, we use Voronoi tessellation to associate each voting station
+with a Voronoi polygon. Socioeconomic variables for each polygon are then
+constructed from such data at the census tract level, assuming that both sets of
+areal data were constructed from the same underlying Gaussian random field
+(GRF). Predictions for the Voronoi cells are derived from the underlying GRF
+with estimated parameters. Since the socioeconomic variables are not normally
+distributed, we also consider a nonparametric approach that uses spatial areal
+interpolation to construct data for the Voronoi cells from the census tract
+data. The interpolated outputs are used as a baseline. Our simulation study
+shows that the method based on an underlying GRF is robust in prediction under
+model misspecification. In application to the 2018 Brazilian presidential
+election in Belo Horizonte, more socioeconomically deprived regions were found
+to have a higher percentage of null votes. The methods are publicly available in
+an R package `smile`.
+
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2021-ness" title="Slides"></iframe>
+```
