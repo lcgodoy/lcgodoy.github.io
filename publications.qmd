@@ -5,17 +5,16 @@
 
 :::::::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-pandya2025using .csl-entry}
-\[1\] Pandya, S. S., Cunha Godoy, L. da, Alexander, C. S., Schneider,
-D., & Harknett, K. (2025). Using worker surveys to detect labor
-standards non-compliance. *Statistics and Public Policy*, (under
-review).
+\[1\] Pandya, S. S., **Godoy, L. da C.**, Alexander, C. S., Schneider, D., &
+Harknett, K. (2025). Using worker surveys to detect labor standards
+non-compliance. *Statistics and Public Policy*, (under review).
 :::
 
 ::: {#ref-fredston2025dynamic .csl-entry}
-\[2\] Fredston, A., Ovando, D., Cunha Godoy, L. da, Kong, J., Muffley,
-B., Thorson, J. T., & Pinsky, M. (2025). Dynamic range models improve
-the near-term forecast for a marine species on the move. *Ecology
-Letters*, (under review). <https://doi.org/10.32942/X24D00>
+\[2\] Fredston, A., Ovando, D., **Godoy, L. da C.**, Kong, J., Muffley, B.,
+Thorson, J. T., & Pinsky, M. (2025). Dynamic range models improve the
+near-term forecast for a marine species on the move. *Ecology Letters*,
+(under review). <https://doi.org/10.32942/X24D00>
 :::
 
 ::: {#ref-godoy2025note .csl-entry}
