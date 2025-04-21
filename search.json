@@ -53,21 +53,21 @@
     "href": "slides/2025-slmdrmr/index.html#the-challenge-limits-of-sdms",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "The Challenge & Limits of SDMs",
-    "text": "The Challenge & Limits of SDMs\n\nCritical Challenge: Predicting species’ responses to global environmental change is vital for conservation and management.\nUsual Tool: Species Distribution Models (SDMs) have been the workhorse, correlating occurrences with environmental variables.\nLimitations of SDMs:\n\nCorrelative: Struggle to predict responses under novel future conditions (Pagel and Schurr 2012).\nEquilibrium Assumption: Often violated; don’t handle lags in species movement, growth, or decline well (Guisan and Thuiller 2005).\nLack Mechanism: Don’t explicitly model the underlying biological processes."
+    "text": "The Challenge & Limits of SDMs\n\nCritical Challenge: Predicting species’ responses to global environmental change is vital for conservation and management.\nUsual Tool: Species Distribution Models (SDMs) have been the workhorse, correlating occurrences with environmental variables.\nLimitations of SDMs:\n\nCorrelative: Struggle to predict responses under novel future conditions (Pagel and Schurr 2012).\nEquilibrium Assumption: Often violated (Guisan and Thuiller 2005).\nLack Mechanism: Don’t explicitly model the underlying biological processes."
   },
   {
     "objectID": "slides/2025-slmdrmr/index.html#dynamic-range-models-drms-a-mechanistic-approach",
     "href": "slides/2025-slmdrmr/index.html#dynamic-range-models-drms-a-mechanistic-approach",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Dynamic Range Models (DRMs): A Mechanistic Approach",
-    "text": "Dynamic Range Models (DRMs): A Mechanistic Approach\n\nDRMs explicitly incorporate demographic processes and movement that drive range dynamics (Pagel and Schurr 2012).\nAllows linking environmental drivers directly to specific processes\nPotential for more robust forecasting under novel conditions.\nWhy are they rarely in practice? Despite conceptual appeal, DRMs have been underutilized due to their complexity and computational fitting challenges."
+    "text": "Dynamic Range Models (DRMs): A Mechanistic Approach\n\nDRMs explicitly incorporate demographic processes that drive range dynamics (Pagel and Schurr 2012).\nAllows linking environmental drivers directly to specific processes\nPotential for more robust forecasting under novel conditions.\nWhy are they rarely in practice? Despite conceptual appeal, DRMs have been underutilized due to their complexity and computational fitting challenges."
   },
   {
     "objectID": "slides/2025-slmdrmr/index.html#introducing-drmr-making-drms-accessible",
     "href": "slides/2025-slmdrmr/index.html#introducing-drmr-making-drms-accessible",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Introducing drmr: Making DRMs Accessible",
-    "text": "Introducing drmr: Making DRMs Accessible\n\nGoal: Bridge the gap between DRM potential and practical application.\nKey Features:\n\nDevelops and applies age-structured DRMs in a Bayesian framework.\nUser-friendly interface.\nLeverages Stan via cmdstanr for efficient fitting (Gabry et al. 2024).\nEasily relate environmental drivers to specific rates (recruitment, mortality, optional movement)."
+    "text": "Introducing drmr: Making DRMs Accessible\n\nGoal: Bridge the gap between DRM potential and practical application.\nKey Features:\n\nDevelops and applies age-structured DRMs in a Bayesian framework.\nUser-friendly interface.\nLeverages Stan via cmdstanr for efficient fitting (Gabry et al. 2024).\nEasily relate environmental drivers to specific recruitment and survival."
   },
   {
     "objectID": "slides/2025-slmdrmr/index.html#zero-augmented-probability-distributions",
@@ -109,7 +109,7 @@
     "href": "slides/2025-slmdrmr/index.html#movement",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Movement",
-    "text": "Movement\n\nMovement is an important process affecting species’ densities.\nDue to a high computational cost, we offer only a simple way to account for movement.\nWe estimate the probability of individuals remaining in the same site between two time points (\\(\\zeta\\)), and divide the probability of moving (\\(1 - \\zeta\\)) evenly across neighboring sites."
+    "text": "Movement\n\nMovement is an important process affecting species’ densities.\nDue to a high computational cost, we offer only a simple way to account for movement.\nWe estimate the probability of individuals remaining in the same site (\\(\\zeta\\)) between two time points, and divide the probability of moving (\\(1 - \\zeta\\)) evenly across neighboring sites."
   },
   {
     "objectID": "slides/2025-slmdrmr/index.html#main-functions",
@@ -151,7 +151,7 @@
     "href": "slides/2025-slmdrmr/index.html#toggles-and-increased-model-complexity",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Toggles and increased model complexity",
-    "text": "Toggles and increased model complexity\n\n\n\n\n\n\n\n\nToggle\nDescription\nDefault State\n\n\n\n\ncloglog\nUse the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used.\nOff\n\n\nmovement\nEnable the movement routine as described in the paper.\nOff\n\n\nest_surv\nEstimate survival probabilities within the model.\nOn\n\n\nest_init\nEstimate \\(\\lambda\\) initial values.\nOff (this one has many options)\n\n\ntime_ar\nInclude an AR(1) term for recruitment.\nOff"
+    "text": "Toggles and increased model complexity\n\n\n\n\n\n\n\n\nToggle\nDescription\nDefault State\n\n\n\n\ncloglog\nUse the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used.\nOff\n\n\nmovement\nEnable the movement routine as described.\nOff\n\n\nest_surv\nEstimate survival probabilities within the model.\nOn\n\n\nest_init\nEstimate \\(\\lambda\\) initial values.\nOff (this one has many options)\n\n\ntime_ar\nInclude an AR(1) term for recruitment.\nOff"
   },
   {
     "objectID": "slides/2025-slmdrmr/index.html#models-fitted-to-this-example",
