@@ -2,7 +2,7 @@
 title: |
   `drmr`: A Bayesian approach to Dynamic Range Models in `R`
 description: |
-    Talk given at GCRG lab meeting.
+    Talk given at GCRG Spring lab meeting.
 author: 
   - name: Lucas da Cunha Godoy
 date: "2025-04-21"
