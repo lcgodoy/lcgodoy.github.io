@@ -2,7 +2,7 @@
 title: |
   `drmr`: A Bayesian approach to Dynamic Range Models in `R`
 subtitle: |
-  Available at [lcgodoy.me/slides/2025-git/](https://lcgodoy.me/slides/2025-slmdrmr/)
+  Available at [lcgodoy.me/slides/2025-slmdrmr/](https://lcgodoy.me/slides/2025-slmdrmr/)
 author:
   - name: Lucas da Cunha Godoy
     orcid: 0000-0003-4265-972X
@@ -168,17 +168,17 @@ cores <- 4
   variables]{.important}.
 
 * [Limitations of SDMs]{.important2}:
-    * [Correlative]{.important2}: Struggle to predict responses under *novel*
-      future conditions [@pagel2012forecasting].
-    * [Equilibrium Assumption]{.important2}: Often violated; don't handle lags
-      in species movement, growth, or decline well [@guisan2005predicting].
+    * [Correlative]{.important2}: Struggle to predict responses under [novel
+      future]{.important} conditions [@pagel2012forecasting].
+    * [Equilibrium Assumption]{.important2}: Often violated
+      [@guisan2005predicting].
     * [Lack Mechanism]{.important2}: [Don't explicitly]{.important} model the
       [underlying biological processes]{.important}.
 
 ## Dynamic Range Models (DRMs): A Mechanistic Approach
 
 * [DRMs]{.important} explicitly [incorporate demographic processes]{.important}
-  and movement that drive range dynamics [@pagel2012forecasting].
+  that drive range dynamics [@pagel2012forecasting].
 
 * Allows linking [environmental]{.important} drivers directly to [specific
   processes]{.important}
@@ -200,8 +200,7 @@ cores <- 4
     * User-friendly interface.
     * Leverages `Stan` via `cmdstanr` for efficient fitting
       [@gabry2024cmdstanr].
-    * Easily relate environmental drivers to specific rates (recruitment,
-      mortality, optional movement).
+    * Easily relate environmental drivers to specific recruitment and survival.
 
 # Preliminary
   
@@ -295,7 +294,7 @@ $$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
   account for movement.
   
 * We estimate the [probability of individuals remaining]{.important} in the same
-  site between two time points ($\zeta$), and [divide]{.important} the
+  site ($\zeta$) between two time points, and [divide]{.important} the
   probability of [moving]{.important} ($1 - \zeta$) evenly across [neighboring
   sites]{.important}.
 
@@ -374,13 +373,13 @@ baseline$stanfit$summary(variables = c("phi", "beta_r"))
 ## Toggles and increased model complexity
 
 
-| Toggle       | Description                                                                                                               | Default State                   |
-|--------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------|
-| `cloglog`    | Use the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used. | Off                             |
-| `movement`   | Enable the movement routine as described in the paper.                                                                    | Off                             |
-| `est_surv`   | Estimate survival probabilities within the model.                                                                         | On                              |
-| `est_init`   | Estimate $\lambda$ initial values.                                                                                      | Off (this one has many options) |
-| `time_ar`    | Include an AR(1) term for recruitment.                                                                                  | Off                             |
+| Toggle     | Description                                                                                                                | Default State                   |
+|------------|----------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| `cloglog`  | Use the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used. | Off                             |
+| `movement` | Enable the movement routine as described.                                                                                  | Off                             |
+| `est_surv` | Estimate survival probabilities within the model.                                                                          | On                              |
+| `est_init` | Estimate $\lambda$ initial values.                                                                                         | Off (this one has many options) |
+| `time_ar`  | Include an AR(1) term for recruitment.                                                                                     | Off                             |
 
 
 ## Models fitted to this example
