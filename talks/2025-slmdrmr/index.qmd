@@ -1,0 +1,47 @@
+---
+title: |
+  `drmr`: A Bayesian approach to Dynamic Range Models in `R`
+description: |
+    Talk given at GCRG lab meeting.
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2025-04-21"
+categories:
+  - Species distribution models
+  - Population dynamics
+---
+
+### Details
+
+* **Date**: Mar 12, 2025
+
+* **Location**: San Francisco, CA - USA
+
+* [Slides](https://lcgodoy.me/slides/2025-slmdrmr)
+
+### Abstract
+
+Predicting species' responses to environmental change is a critical challenge in
+ecology. Traditional species distribution models (SDMs) often rely on
+correlative relationships with strong equilibrium assumptions and limited skill
+at forecasting distributions under novel conditions. Dynamic range models (DRMs)
+offer a more mechanistic approach by explicitly incorporating the demographic
+processes (recruitment, death, movement) that drive range dynamics. However, the
+complexity of DRMs has hindered their widespread adoption. We introduce `drmr`,
+an open-source `R` package that substantially lowers the barrier to entry for
+DRM applications. `drmr` provides a user-friendly framework for building,
+fitting, visualizing, evaluating, and projecting age-structured DRMs, leveraging
+the power of `Stan` for efficient Bayesian inference. Users can readily relate
+environmental drivers to demographic processes based on observations for a
+species across space and time. Models can be tailored to specific ecological
+systems, and competing hypotheses can be tested for range shift mechanisms.  By
+explicitly modeling demographic processes and their environmental drivers,
+`drmr` provides a powerful and accessible tool for ecologists to understand and
+predict changes in species distributions, thereby contributing to improved
+conservation planning and management in the face of global change.
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-slmdrmr" title="Slides"></iframe>
+```

@@ -1,0 +1,573 @@
+---
+title: |
+  `drmr`: A Bayesian approach to Dynamic Range Models in `R`
+subtitle: |
+  Available at [lcgodoy.me/slides/2025-git/](https://lcgodoy.me/slides/2025-slmdrmr/)
+author:
+  - name: Lucas da Cunha Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+date: 2025-04-21
+bibliography: references.bib
+csl: styles/asa.csl
+execute: 
+  cache: false
+format:
+  revealjs:
+    center: true
+    theme: [styles/jsm.scss]
+    filters:
+      - styles/appendix.lua
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    code-overflow: wrap
+---
+
+```{r}
+#| label: setup
+#| eval: true
+#| echo: false
+#| output: false
+
+library(dplyr)
+library(ggplot2)
+library(bayesplot)
+library(sf)
+library(drmr)
+library(patchwork)
+library(cmdstanr)
+
+options(knitr.kable.NA = "")
+
+bins_sturges <-
+  function(x) diff(range(x)) / nclass.Sturges(x)
+
+get_color <- function(x, regex_element,
+                      pos_element = 2,
+                      split = " ") {
+  stopifnot(length(regex_element) == 1)
+  stopifnot(length(pos_element) == 1)
+  x[grepl(regex_element, x)] |>
+    strsplit(split = split) |>
+    sapply(\(y) y[pos_element]) |>
+    gsub(";$", "", x = _)
+}
+
+scss <- readLines("styles/jsm.scss")
+bck <- get_color(scss, "^\\$body-bg", 2)
+sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
+fg <- get_color(scss, "^\\$body-color", 2)
+
+
+theme_set(theme_void() +
+          theme(plot.background = element_rect(fill = bck,
+                                               color = bck),
+                panel.background = element_rect(fill = bck,
+                                                color = bck)))
+
+
+my_theme <-
+  theme_bw() +
+  theme(plot.background = element_rect(fill = bck,
+                                       color = bck),
+        panel.background = element_rect(fill = bck,
+                                        color = bck),
+        panel.grid = element_blank(),
+        line = element_line(color = fg),
+        text = element_text(color = fg),
+        rect = element_rect(color = fg),
+        axis.ticks = element_line(color = fg))
+
+## loading data
+data(sum_fl)
+
+## loading map
+map_name <- system.file("maps/sum_fl.shp", package = "drmr")
+
+polygons <- st_read(map_name)
+
+## reserving 5 years for forecast assessment
+first_year_forecast <- max(sum_fl$year) - 4
+
+## "year to id"
+first_id_forecast <-
+  first_year_forecast - min(sum_fl$year) + 1
+
+years_all <- order(unique(sum_fl$year))
+years_train <- years_all[years_all < first_id_forecast]
+years_test <- years_all[years_all >= first_id_forecast]
+
+dat_test <- sum_fl |>
+  filter(year >= first_year_forecast)
+
+dat_train <- sum_fl |>
+  filter(year < first_year_forecast)
+
+##--- centering covariates (for improved mcmc efficiency) ---
+
+avgs <- c("stemp" = mean(dat_train$stemp),
+          "btemp" = mean(dat_train$btemp),
+          "depth" = mean(dat_train$depth),
+          "n_hauls" = mean(dat_train$n_hauls),
+          "lat" = mean(dat_train$lat),
+          "lon" = mean(dat_train$lon))
+
+min_year <- dat_train$year |>
+  min()
+
+## centering covariates
+dat_train <- dat_train |>
+  mutate(c_stemp = stemp - avgs["stemp"],
+         c_btemp = btemp - avgs["btemp"],
+         c_hauls = n_hauls - avgs["n_hauls"],
+         ## depth = depth - avgs["depth"],
+         c_lat   = lat - avgs["lat"],
+         c_lon   = lon - avgs["lon"],
+         time  = year - min_year)
+
+dat_test <- dat_test |>
+  mutate(c_stemp = stemp - avgs["stemp"],
+         c_btemp = btemp - avgs["btemp"],
+         c_hauls = n_hauls - avgs["n_hauls"],
+         ## depth = depth - avgs["depth"],
+         c_lat   = lat - avgs["lat"],
+         c_lon   = lon - avgs["lon"],
+         time  = year - min_year)
+
+##--- turning response into density: 1k individuals per km2 ----
+
+dat_train <- dat_train |>
+  mutate(dens = 1000 * y / area_km2,
+         .before = y)
+
+dat_test <- dat_test |>
+  mutate(dens = 1000 * y / area_km2,
+         .before = y)
+
+chains <- 4
+cores <- 4
+
+```
+
+# Introduction
+
+## The Challenge & Limits of SDMs
+
+* [Critical Challenge]{.important2}: Predicting species' responses to global
+  environmental change is vital for conservation and management.
+
+* [Usual Tool]{.important2}: Species Distribution Models (SDMs) have been the
+  workhorse, [correlating]{.important} occurrences with [environmental
+  variables]{.important}.
+
+* [Limitations of SDMs]{.important2}:
+    * [Correlative]{.important2}: Struggle to predict responses under *novel*
+      future conditions [@pagel2012forecasting].
+    * [Equilibrium Assumption]{.important2}: Often violated; don't handle lags
+      in species movement, growth, or decline well [@guisan2005predicting].
+    * [Lack Mechanism]{.important2}: [Don't explicitly]{.important} model the
+      [underlying biological processes]{.important}.
+
+## Dynamic Range Models (DRMs): A Mechanistic Approach
+
+* [DRMs]{.important} explicitly [incorporate demographic processes]{.important}
+  and movement that drive range dynamics [@pagel2012forecasting].
+
+* Allows linking [environmental]{.important} drivers directly to [specific
+  processes]{.important}
+
+* Potential for more [robust forecasting]{.important} under [novel]{.important}
+  conditions.
+
+* [Why are they rarely in practice?]{.important2} Despite conceptual appeal,
+  DRMs have been underutilized due to their [complexity]{.important} and
+  [computational]{.important} fitting [challenges]{.important}.
+
+## Introducing `drmr`: Making DRMs Accessible
+
+* [Goal]{.important2}: Bridge the gap between DRM potential and practical
+  application.
+
+* [Key Features]{.important2}:
+    * Develops and applies age-structured DRMs in a Bayesian framework.
+    * User-friendly interface.
+    * Leverages `Stan` via `cmdstanr` for efficient fitting
+      [@gabry2024cmdstanr].
+    * Easily relate environmental drivers to specific rates (recruitment,
+      mortality, optional movement).
+
+# Preliminary
+  
+## Zero-augmented probability distributions
+
+* [Species' densities]{.important} are non-negative [continuous]{.important}
+  variables.
+
+* [Zero-augmented vs. Zero-inflated Distributions]{.important2}:
+    * [Zero-inflated]{.important2} models apply to [discrete]{.important}
+      distributions (e.g., Poisson counts). They [increase]{.important}
+      (inflate) the probability of observing zeros, which is already a possible
+      outcome ($P(Y = 0) > 0$) in the base distribution.
+    * [Zero-augmented]{.important2} models apply to [continuous]{.important}
+      distributions (e.g., densities). Since $P(Y = 0)$ is theoretically $0$ for
+      continuous variables, these models [add]{.important} a discrete
+      probability mass specifically at zero, augmenting the possibilities to
+      include exact zeros.
+
+## Zero-augmented probability density function (PDF)
+
+$$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
+  \text{ if } y_{t, i} = 0, \\ (1 - \rho_{t, i}) g(y_{t, i} \mid \mu_{t, i},
+  \phi), & \text{ if } y_{t, i} > 0, \end{cases} $$
+
+* $\rho_{t, i} = \mathrm{Pr}(Y_{t, i} = 0)$ is the [probability of
+  absence]{.important}.
+
+* $g(\cdot \mid \mu_{t, i}, \phi)$ is the [pdf]{.important} of a continuous
+  [probability distribution]{.important}.
+  
+* $\mu_{t, i}$ is the [expected value]{.important} (theoretical mean) of $Y_{t,
+  i}$ provided the species is present at time $t$ and site $i$.
+
+# Age-structured DRM
+
+## Setup
+
+* [$Y_{a, t, i}$]{.important2}: [Unobserved]{.important} density of individuals
+  of age $a$, time $t$ and site $i$.
+
+* [$\lambda_{a, t, i}$]{.important2}: Expected age-specific density.
+
+* [$Y_{t, i} = \sum_{a} Y_{a, t, i}$]{.important2}: [Observed]{.important}
+  density of individuals of all ages at time $t$ and site $i$.
+
+* [$\mu_{t, i} = \sum_{a} \lambda_{a, t, i}$]{.important2}: Expected "overall"
+  density.
+
+* [Biological processes]{.important} are encoded through [$\lambda_{a, t, i}$]{.important}.
+
+* [Key processes]{.important2}: recruitment, survival, and movement
+
+## Recruitment
+
+* [Expected density for recruits]{.important2}: 
+  $$ \lambda_{1, t, i} = \exp \{ \psi_{t, i} \} $$
+
+* Where $\psi_{t, i}$ is the expected [log-transformed recruitment]{.important}
+  at time $t$ and site $i$.
+  
+* We assume the expected log-transformed [recruitment relates]{.important} to
+  the [environmental drivers]{.important} as follows: $$ \psi_{t, i} =
+  \boldsymbol{\beta}^{\top}_r \mathbf{x}^{(r)}_{t, i} $$
+
+* It is also possible to [incorporate temporal dependence]{.important} to
+  recruitment through an [AR(1)]{.important} process.
+
+## Survival
+
+* [Expected density at age $a$, time $t$, and patch $i$]{.important2}: $$
+  \lambda_{a, t, i} = \lambda_{a - 1, t - 1, i} \cdot s_{a - 1, t - 1, i} $$
+
+* $s_{a, t, i}$ represents [survival rates]{.important}.
+  
+* We assume the log-transformed [survival rates relate]{.important} to the
+  [environmental drivers]{.important} as follows: $$ \log(s_{a, t, i}) =
+  \boldsymbol{\beta}^{\top}_s \mathbf{x}^{(s)}_{t, i} - f_{a, t} $$
+
+* [External information]{.important2}: [additional mortality
+  sources]{.important} can be incorporated to the survival rates as well. Above,
+  $f_{a, t}$ is the instantaneous mortality rate for individuals of age $a$ at
+  time $t$. Examples: fishing mortality, hunting, etc.
+
+## Movement
+
+* [Movement]{.important2} is an important process [affecting species'
+  densities]{.important}.
+
+* Due to a [high computational]{.important} cost, we offer only a simple way to
+  account for movement.
+  
+* We estimate the [probability of individuals remaining]{.important} in the same
+  site between two time points ($\zeta$), and [divide]{.important} the
+  probability of [moving]{.important} ($1 - \zeta$) evenly across [neighboring
+  sites]{.important}.
+
+# The `drmr` Package & Case Study
+
+## Main Functions
+
+* [Fitting]{.important2}: `fit_drm`, `fit_sdm`
+
+* [Forecasting]{.important2}: `predict_drm`, `predict_sdm`
+
+* [Visualization]{.important2}: `marg_rec`, `marg_surv`, `marg_pabs`
+
+* [Simulation]{.important2}: `pop_dyn`, `model_sim`, `pp_sim`
+
+## Summer Flounder Dataset
+
+* An example analysis uses [Summer flounder]{.important} (_Paralichthys
+  dentatus_) data from 1982-2016 NOAA [bottom trawl surveys]{.important}
+  [@fredston2025dynamic] to illustrate the [package's features]{.important}.
+
+* The data spans the US Atlantic coast (Cape Hatteras, NC
+  to the Canada/Maine border) and was [aggregated from individual hauls into 10
+  latitudinal patches]{.important} with varying areas.
+
+* [Response variable]{.important2}: Density (count per unit area).
+
+* [Environmental drivers]{.important2}: SST and SBT.
+
+## Patches/sites
+
+```{r}
+library(leaflet)
+leaflet(polygons) %>%
+  addPolygons(color = "#000000") %>%
+  addTiles()
+```
+
+
+## Fitting a simple model
+
+* [Default model]{.important2}: two age groups with [constant density and
+  recruitment across time/space]{.important}, and sets a fixed survival rate of
+  $0.70$ between age classes.
+
+* [Output]{.important2}: is a list containing a `stanfit` object, equivalent to
+  `cmdstanr::sample()` output, allowing full access to `cmdstanr`'s features for
+  diagnostics, plotting, and assessment.
+
+```{r}
+#| label: vanilla-drm
+#| eval: true
+#| echo: true
+#| output: false
+
+library(drmr) ## load package
+data(sum_fl)  ## load data
+baseline <-
+  fit_drm(.data = dat_train,  ## dataset
+          y_col = "dens",     ## response variable
+          time_col = "year",  ## variable storing time
+          site_col = "patch", ## variable storing "patch/site" id
+          seed = 202505)      ## seed
+```
+
+## Parameter estimates & diagnostics
+
+* The `$summary` method allows for checking the parameter estimates easily
+```{r}
+#| label: vanilla-est
+#| eval: true
+#| echo: true
+baseline$stanfit$summary(variables = c("phi", "beta_r"))
+```
+
+## Toggles and increased model complexity
+
+
+| Toggle       | Description                                                                                                               | Default State                   |
+|--------------|---------------------------------------------------------------------------------------------------------------------------|---------------------------------|
+| `cloglog`    | Use the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used. | Off                             |
+| `movement`   | Enable the movement routine as described in the paper.                                                                    | Off                             |
+| `est_surv`   | Estimate survival probabilities within the model.                                                                         | On                              |
+| `est_init`   | Estimate $\lambda$ initial values.                                                                                      | Off (this one has many options) |
+| `time_ar`    | Include an AR(1) term for recruitment.                                                                                  | Off                             |
+
+
+## Models fitted to this example
+
+| Model       | Description                                                                                                                        |
+|-------------|------------------------------------------------------------------------------------------------------------------------------------|
+| `baseline`  | Baseline model                                                                                                                     |
+| `drm_1`     | Recruitment as a quadratic function of SST, and probability of absence depending on number of hauls, SST and SBT                       |
+| `drm_2`     | Same as `drm_1` + estimating constant survival rates                                                                             |
+| `drm_3`     | Same as `drm_2` + AR(1) for recruitment                                                                                            |
+| `drm_4`     | Same as `drm_3` + movement and increasing number of age-classes to 6                                                               |
+| `drm_5`     | Same as `drm_3` and increasing number of age-classes to 6                                                                          |
+| `drm_6`     | Same as `drm_3` + fishing mortality for specific age-classes at each time point (16 age-classes)                                   |
+| `drm_7`     | probability of absence as `drm_3`; AR(1) for recruitment (but constant across patches) and survival depending on SBT                   |
+| `sdm`       | A zero-augmented Gamma SDM with the absence probability as in `drm_3` and conditional density as a quadratic function of SST. |
+
+## Code for fitting a complex model
+
+```{r}
+#| label: complex-drm
+#| eval: false
+#| echo: true
+#| output: false
+
+drm_4 <-
+  fit_drm(.data = dat_train,
+          y_col = "dens",
+          time_col = "year",
+          site_col = "patch",
+          family = "gamma",
+          seed = 202505,
+          formula_zero = ~ 1 + c_hauls + c_btemp + c_stemp,
+          formula_rec = ~ 1 + c_stemp + I(c_stemp * c_stemp),
+          formula_surv = ~ 1,
+          n_ages = 6,
+          adj_mat = adj_mat, ## A matrix for movement routine
+          ages_movement = c(0, 0, 1, 1, 1, 0), ## ages allowed to move
+          .toggles = list(est_surv = 1,
+                          time_ar = 1,
+                          movement = 1),
+          init = "pathfinder")
+```
+
+## Estimating relationship between processes and environmental variables
+
+* Recruitment and SST:
+
+```{r}
+#| label: rec-rel
+#| eval: false
+#| echo: true
+
+newdata_rec <- data.frame(c_stemp =
+                            seq(from = quantile(dat_train$c_stemp, .05),
+                                to = quantile(dat_train$c_stemp, .95),
+                                length.out = 200))
+
+rec_samples_3 <- marg_rec(drm_3, newdata_rec)
+```
+
+* Survival and SBT:
+
+```{r}
+#| label: surv-rel
+#| eval: false
+#| echo: true
+
+newdata_surv <- data.frame(c_btemp =
+                             seq(from = quantile(dat_train$c_btemp, .05),
+                                 to = quantile(dat_train$c_btemp, .95),
+                                 length.out = 200))
+
+surv_samples <- marg_surv(drm_7, newdata_surv)
+```
+
+## Estimated relationship between processes and environmental variables
+
+```{r}
+#| label: plot
+#| eval: true
+#| echo: false
+#| layout-ncol: 2
+
+rec_summary <- readRDS("data/rec.rds")
+surv_summary <- readRDS("data/surv.rds")
+
+ggplot(data = rec_summary,
+       aes(x = stemp,
+           y = m,
+           color = model,
+           fill = model)) +
+  geom_ribbon(aes(ymin = l, ymax = u),
+              alpha = .4,
+              color = "transparent",
+              linewidth = 1.2) +
+  geom_line(linewidth = 1.2) +
+  my_theme +
+  guides(fill = "none") +
+  labs(color = "Model",
+       fill = "Model",
+       x = "SST (in Celsius)",
+       y = "Est. recruitment (per km2)") +
+  theme(legend.position = "inside",
+        legend.position.inside = c(0.175, 0.75))
+
+ggplot(data = surv_summary,
+       aes(x = btemp,
+           y = m)) +
+  geom_ribbon(aes(ymin = l, ymax = u),
+              alpha = .4,
+              color = "transparent",
+              fill = 2,
+              linewidth = 1.2) +
+  geom_line(linewidth = 1.2) +
+  my_theme +
+  labs(x = "SBT (in Celsius)",
+       y = "Est. survival")
+```
+
+## Forecasting
+
+* The code for obtaining out-of-sample predictions is quite intuitive.
+
+* We only need to provide the output for a model fit, a new dataset (where we
+  want the predictions), and a seed:
+  
+```{r}
+#| label: forecast
+#| eval: false
+#| echo: true
+
+forecast_3 <- predict_drm(drm = drm_3,
+                          new_data = dat_test,
+                          past_data = filter(dat_train,
+                                             year == max(year)),
+                          seed = 125,
+                          cores = 4)
+```
+
+## Comparing models
+
+
+| Model      |     $\Delta$-LOOIC |               RMSE |                IS |                PIC |               Time |
+|:-----------|-------------------:|-------------------:|------------------:|-------------------:|-------------------:|
+| `drm_3`    | [0.00]{.important} |               8.98 | [8.60]{.important} | [78.0]{.important} |              13.34 |
+| `sdm`      |              -6.07 |              12.04 |             12.72 |               60.0 |               3.88 |
+| `drm_4`    |              -7.35 |               8.30 |              8.87 |               84.0 |               28.7 |
+| `drm_5`    |              -7.74 | [8.23]{.important} |              8.96 |               86.0 |              19.24 |
+| `drm_7`    |             -10.41 |               8.75 |              8.97 |               78.0 |              22.73 |
+| `drm_6`    |             -18.04 |              10.22 |             10.49 |               86.0 |              33.73 |
+| `drm_1`    |             -22.49 |              11.17 |             10.68 |               68.0 |               4.67 |
+| `drm_2`    |             -32.32 |              10.73 |             10.29 |               68.0 |               4.44 |
+| `baseline` |            -163.85 |              14.44 |             12.98 |               74.0 | [1.35]{.important} |
+
+
+# Concluding remarks
+
+## Highlights
+
+* The `drmr` substantially lowers the barrier for ecologists to use the DRM in
+  their applications.
+
+* The code is easy to use and takes advantage of what has been developed for
+  `Stan`: visualization, diagnostic tools, and estimation.
+
+* `drmr` allows for empirically testing which processes are more important to
+  predict the distribution of a species.
+  
+* The more complex a model is, the more (and better) data we need to be able to
+  estimate those relationships.
+
+## Future work
+
+* Application to NE Mackerel
+
+* More options for spatial and temporal random effects for specific processes
+
+* Other population dynamic models (e.g., Ricker, Belverton-Holt)
+
+* GAM-like non-parametric relationships between processes and the environment
+
+* Support for length-composition data
+
+* More realistic movement routines
+
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
