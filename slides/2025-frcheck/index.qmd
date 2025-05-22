@@ -207,6 +207,40 @@ Here is a summary of the text in three bullet points:
 
 :::
 
+## More about data availability
+
+:::: {.columns}
+
+::: {.column width="40%"}
+![](img/dist.png)
+:::
+
+::: {.column width="60%"}
+
+| Survey     | Distribution   | Start | Age structure                     |
+|:-----------|:---------------|:------|:----------------------------------|
+| IESSNS     | Summer feeding | 2010  | Age and size composition (Age 3+) |
+| BTS        | Overwinter     | 1965  | Age-0 abundance index             |
+| Egg Survey | Spawning       | 1992  | No age structure                  |
+
+:::
+
+::::
+
+:::{.notes}
+
+* BTS
+  * Can be used to estimate an index of recruitment
+  * Recruitment index would be spatially invariant
+  * Environmental determinants of recruitment?
+
+* Triennial Mackerel and Horse Mackerel Egg Survey
+  * Can be used to estimate SSB
+  * Useful for spatially invariant S-R relationship
+
+
+:::
+
 
 ## What's next?
 
