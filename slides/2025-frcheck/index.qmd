@@ -1,0 +1,226 @@
+---
+title: |
+  FinRisk check-in
+subtitle: |
+  Available at [lcgodoy.me/slides/2025-frcheck/](https://lcgodoy.me/slides/2025-frcheck/)
+author:
+  - name: Lucas da C. Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+  - name: Mark Morales
+    orcid: 0000-0001-8562-7037
+    email: |
+      mamamora@ucsc.com
+    affiliations: EEB Department, UCSC
+  - name: Malin Pinsky
+    orcid: 0000-0002-8523-8952
+    email: |
+      mpinsky@ucsc.com
+    affiliations: EEB Department, UCSC
+date: 2025-05-21
+bibliography: references.bib
+csl: styles/asa.csl
+execute: 
+  cache: false
+  freeze: true
+title-slide-attributes:
+  data-background-image: logo.png
+  data-background-size: 30%
+  data-background-position: 90% 90%
+format:
+  revealjs:
+    center: true
+    theme: [styles/fr.scss]
+    filters:
+      - styles/appendix.lua
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    code-overflow: wrap
+---
+
+```{r}
+#| label: setup
+#| eval: true
+#| echo: false
+#| output: false
+
+library(dplyr)
+library(ggplot2)
+library(bayesplot)
+library(sf)
+library(drmr)
+library(patchwork)
+library(cmdstanr)
+library(arrow)
+
+options(knitr.kable.NA = "")
+
+bins_sturges <-
+  function(x) diff(range(x)) / nclass.Sturges(x)
+
+get_color <- function(x, regex_element,
+                      pos_element = 2,
+                      split = " ") {
+  stopifnot(length(regex_element) == 1)
+  stopifnot(length(pos_element) == 1)
+  x[grepl(regex_element, x)] |>
+    strsplit(split = split) |>
+    sapply(\(y) y[pos_element]) |>
+    gsub(";$", "", x = _)
+}
+
+scss <- readLines("styles/fr.scss")
+bck <- get_color(scss, "^\\$body-bg", 2)
+sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
+fg <- get_color(scss, "^\\$body-color", 2)
+
+
+theme_set(theme_void() +
+          theme(plot.background = element_rect(fill = bck,
+                                               color = bck),
+                panel.background = element_rect(fill = bck,
+                                                color = bck)))
+
+col1 <- get_color(scss, "^\\$link-color", 2)
+col2 <- get_color(scss, "^\\$selection-bg", 2)
+col3 <- get_color(scss, "^\\$body-color", 2)
+
+my_theme <-
+  theme_bw() +
+  theme(plot.background = element_rect(fill = bck,
+                                       color = bck),
+        panel.background = element_rect(fill = bck,
+                                        color = bck),
+        panel.grid = element_blank(),
+        line = element_line(color = fg),
+        text = element_text(color = fg),
+        rect = element_rect(color = fg),
+        axis.ticks = element_line(color = fg))
+```
+
+## `drmr` package
+
+* [DRMs]{.important} explicitly [incorporate demographic processes]{.important}
+  that drive range dynamics [@pagel2012forecasting]. They allow for linking
+  [environmental]{.important} drivers directly to [specific
+  processes]{.important} and have the potential for more [robust
+  forecasting]{.important} under [novel]{.important} conditions.
+  
+* [`drmr` goal]{.important2}: Bridge the gap between DRM potential and practical
+  application.
+
+* Check out [online](https://pinskylab.github.io/drmr/).
+
+## Spoiler: Comparison to an SDM
+
+```{r}
+#| label: plot
+#| eval: true
+#| echo: false
+
+sum_out <-
+  open_dataset("data/sumf.parquet") |>
+  filter(year != 2012) |>
+  collect()
+
+ggplot(data = sum_out) +
+  geom_vline(xintercept = 2012,
+             lty = 2) +
+  geom_ribbon(aes(x = year,
+                  ymin = l, ymax = u,
+                  fill = model,
+                  color = model),
+              alpha = .4) +
+  geom_line(aes(x = year, y = m, color = model)) +
+  geom_point(aes(x = year, y = dens)) +
+  scale_color_manual(values = c(col1, col2)) +
+  scale_fill_manual(values = c(col1, col2)) +
+  facet_wrap(model ~ patch) +
+  scale_y_continuous(breaks = scales::trans_breaks(identity, identity,
+                                                   n = 3),
+                     trans = "log1p") +
+  my_theme
+```
+
+
+## More spoilers
+
+
+| Species                | Model | RMSE  | IS (80%) |
+|------------------------|-------|-------|----------|
+| Summer flounder        | DRM   | 9.49  | 7.83     |
+|                        | SDM   | 13.20 | 11.80    |
+| Red-bellied woodpecker | DRM   | 4.49  | 8.68     |
+|                        | SDM   | 6.86  | 6.20     |
+
+
+## What about _FinRisk_?
+
+* [Key Environmental Drivers]{.important2}: NEA Mackerel distribution is
+  primarily driven by SST, prey availability, and stock size. Mackerel [density
+  peaks]{.important} around [$8.5$ to $12^\circ$]{.important} [@ono2024effect]
+  with [no ocurrences]{.important} registered when [temperature is below
+  $4.8^\circ$]{.important} [@olafsdottir2019geographical]
+
+* [Data Availability]{.important2}: Data available from [various
+  surveys]{.important} (Egg Survey for spawning/SSB; Bottom Trawl for
+  juveniles). No [single survey offers complete coverage of all life
+  stages]{.important} or the entire distribution annually.
+
+* [IESSNS]{.important2}: The International Ecosystem Summer Survey in the Nordic
+  Seas (IESSNS) is likely the [most appropriate]{.important} for
+  [adult]{.important} summer feeding distribution, providing annual,
+  age-disaggregated abundance indices and tracking distribution.
+
+::: {.notes}
+
+Here is a summary of the text in three bullet points:
+
+* **Environmental Drivers:** Prey availability (such as mesozooplankton) and
+  stock size (SSB) are also key drivers, particularly affecting feeding
+  locations and distribution, with temperature often being the most critical
+  predictor, especially for younger fish and in northern areas.
+
+* **Data Availability:** Information on NEA Mackerel is gathered from various
+  sources, including commercial fishery sampling, tagging studies, and several
+  internationally coordinated surveys. The triennial Mackerel and Horse Mackerel
+  Egg Survey is crucial for understanding spawning distribution and estimating
+  spawning stock biomass (SSB). Juvenile (age-0) mackerel distribution is
+  estimated using data from multiple bottom trawl surveys. However, no single
+  survey provides comprehensive data covering all life stages, the entire annual
+  cycle, and the full spatial distribution of the stock.
+
+* **IESSNS as Most Appropriate Data Source:** Given its annual coverage since
+  2010, focus on the summer feeding season for adult (age 3+) mackerel across
+  the Nordic Seas, and its ability to provide reliable age-disaggregated
+  abundance indices while tracking the stock's variable distribution, the
+  International Ecosystem Summer Survey in the Nordic Seas (IESSNS) is likely
+  the most appropriate single data source for understanding the dynamics of this
+  critical life stage and region.
+
+:::
+
+
+## What's next?
+
+* [Preliminary results]{.important} for FinRisk September meeting
+
+* Taylor the package code to the [NEA species]{.important}
+
+* [Simulation based inference]{.important2}: Neural Bayes Estimators [@sainsbury2024likelihood]
+
+* Coordinate how (and what) the [results]{.important} would be more
+  [useful]{.important} for the [translational tools]{.important} and the
+  [financial risk]{.important} analyses
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
