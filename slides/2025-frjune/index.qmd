@@ -1,0 +1,266 @@
+---
+title: |
+  FinRisk -- June 2025 Update
+author:
+  - name: Lucas da C. Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+  - name: Mark Morales
+    orcid: 0000-0001-8562-7037
+    email: |
+      mamamora@ucsc.com
+    affiliations: EEB Department, UCSC
+  - name: Malin Pinsky
+    orcid: 0000-0002-8523-8952
+    email: |
+      mpinsky@ucsc.com
+    affiliations: EEB Department, UCSC
+date: 2025-06-23
+bibliography: references.bib
+csl: styles/asa.csl
+execute: 
+  cache: false
+  freeze: true
+title-slide-attributes:
+  data-background-image: logo.png
+  data-background-size: 30%
+  data-background-position: 90% 90%
+format:
+  revealjs:
+    center: true
+    theme: [styles/fr.scss]
+    filters:
+      - styles/appendix.lua
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    code-overflow: wrap
+---
+
+```{r}
+#| label: setup
+#| eval: true
+#| echo: false
+#| output: false
+
+library(dplyr)
+library(ggplot2)
+library(sf)
+library(arrow)
+library(geoarrow)
+
+options(knitr.kable.NA = "")
+
+bins_sturges <-
+  function(x) diff(range(x)) / nclass.Sturges(x)
+
+get_color <- function(x, regex_element,
+                      pos_element = 2,
+                      split = " ") {
+  stopifnot(length(regex_element) == 1)
+  stopifnot(length(pos_element) == 1)
+  x[grepl(regex_element, x)] |>
+    strsplit(split = split) |>
+    sapply(\(y) y[pos_element]) |>
+    gsub(";$", "", x = _)
+}
+
+scss <- readLines("styles/fr.scss")
+bck <- get_color(scss, "^\\$body-bg", 2)
+sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
+fg <- get_color(scss, "^\\$body-color", 2)
+
+
+theme_set(theme_void() +
+          theme(plot.background = element_rect(fill = bck,
+                                               color = bck),
+                panel.background = element_rect(fill = bck,
+                                                color = bck)))
+
+col1 <- get_color(scss, "^\\$link-color", 2)
+col2 <- get_color(scss, "^\\$selection-bg", 2)
+col3 <- get_color(scss, "^\\$body-color", 2)
+
+my_theme <-
+  theme_bw() +
+  theme(plot.background = element_rect(fill = bck,
+                                       color = bck),
+        panel.background = element_rect(fill = bck,
+                                        color = bck),
+        panel.grid = element_blank(),
+        line = element_line(color = fg),
+        text = element_text(color = fg),
+        rect = element_rect(color = fg),
+        axis.ticks = element_line(color = fg))
+
+##--- datasets ----
+
+hauls_all <-
+  open_dataset("data/hauls.parquet") |>
+  st_as_sf()
+
+my_cmd <- "unzip -p %s -x '*.txt'"
+fpath <- "data/Biotic_IESSNS_DK_2018_2024-11-20T12.43.13.923.zip"
+meta <- data.table::fread(cmd = sprintf(my_cmd, fpath),
+                          fill = TRUE)
+
+ices_rec <- open_dataset("data/ices_rec.parquet") |>
+  st_as_sf()
+
+ices_rec <-
+  ices_rec |>
+  mutate(haul_n = if_else(is.na(haul_n), 0, haul_n),
+         survey = case_when(survey_ac > 0 & survey_bt > 0 ~ "Bottom/Acoustic",
+                            survey_ac > 0                 ~ "Acoustic",
+                            survey_bt > 0                 ~ "Bottom",
+                            is.na(survey_ac)              ~ "None",
+                            TRUE                          ~ "None"))
+```
+
+
+## Overview
+
+* `drmr` package: got authors approval to submit the current version of the
+  paper. Package documentation available
+  [here](https://pinskylab.github.io/drmr/).
+
+* In the last meeting, we briefly talked about data availability and key
+  environmental drivers to study Mackerel's distribution.
+
+* A lot of time spent looking for the data and processing it.
+
+* The data from the survey we identified as the most approprate is "sparsely
+  available".
+
+| Survey     | Distribution   | Start | Age structure                     |
+|:-----------|:---------------|:------|:----------------------------------|
+| **IESSNS** | Summer feeding | 2010  | Age and size composition (Age 3+) |
+| BTS        | Overwinter     | 1965  | Age-0 abundance index             |
+| Egg Survey | Spawning       | 1992  | No age structure                  |
+
+
+## IESSNS data
+
+* Previous papers using IESSNS data [e.g.; @ono2024effect] mention the data is
+  available from the _Planning Group on Northeast Atlantic Pelagic Ecosystem
+  Surveys (PGNAPES)_
+
+* I could not find that data on the ICES portal.
+
+* I connectect with Anna Heiða Ólafsdóttir, she pointed that the PGNAPES data is
+  not publicly available. Some of it is available through a hard to find ICES
+  portal.
+
+## Data processing
+
+```{r}
+#| label: messy data
+
+head(meta) |>
+  knitr::kable()
+```
+
+## Hauls 
+
+```{r}
+hauls_all |>
+  filter(type == "Acoustic") |>
+  ggplot(data = _) +
+  geom_sf(aes(color = country)) +
+  facet_wrap(~ year) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank())
+```
+
+## Hauls 2024
+
+```{r}
+hauls_all |>
+  filter(type == "Acoustic",
+         year == 2024) |>
+  mapview::mapview(zcol = "country")
+```
+
+## Incorporating BT
+
+```{r}
+hauls_all |>
+  filter(year %in% c(1984, 1994, 2004, 2014, 2020, 2024)) |>
+  mutate(survey = if_else(survey == "IESSNS", survey, "BT")) |>
+  ggplot(data = _) +
+  geom_sf(aes(color = survey)) +
+  facet_grid( ~ year) +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        legend.position = "bottom")
+```
+
+## ICES "rectangles"
+
+```{r}
+ices_rec |>
+  filter(year %in% c(1984, 1994, 2004, 2014, 2020, 2024)) |>
+  ggplot(data = _) +
+  geom_sf(aes(fill = nf * 60 / haul_tot)) +
+  scale_fill_viridis_c("CPUE",
+                       option = "H", trans = "log1p") +
+  facet_wrap( ~ year) +
+  theme_bw() +
+  theme(axis.text.x = element_blank(),
+        strip.background = element_rect(fill = "white"),
+        panel.grid = element_blank())
+```
+
+
+## CPUE (across all surveys) over time
+
+```{r}
+ices_rec |>
+  st_drop_geometry() |>
+  filter(!is.na(nf)) |>
+  group_by(year, survey) |>
+  summarise(nf = sum(nf),
+            biom = sum(biom),
+            haul_tot = sum(haul_tot)) |>
+  ungroup() |>
+  mutate(cpue = nf * 60 / haul_tot) |>
+  ggplot(data = _,
+         aes(x = year,
+             y = cpue,
+             color = survey)) +
+  geom_vline(xintercept = 2010, lty = 2) +
+  geom_smooth(se = FALSE) +
+  geom_point() +
+  scale_y_continuous(trans = "log1p") +
+  theme_minimal() +
+  labs(y = NULL, x = "Year")
+```
+
+
+## Next Steps & Questions
+
+* More data processing :(
+
+* Although the spatiotemporal coverage we have is challenging, these are the
+  circumstanes where model-based approaches (e.g., DRM) "shine"
+
+* For the models, I need to be careful and think about how to incorporate the
+  information from the different surveys (suggestions welcome)
+
+* What spatial resolution would be best for the translational tools and
+  economical risk part of the project?
+
+* Is the main goal to quantify range shifts or are we aiming at forecasting
+  abundance / Biomass?
+
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
