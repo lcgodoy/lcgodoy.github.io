@@ -63,11 +63,12 @@ third trimester: A retrospective cohort study. *Biomedicines*, *13*(4).
 :::
 
 ::: {#ref-sieger2025effect .csl-entry}
-\[9\] Sieger, M., Goldsborough, E. J., Nichols, C., **Godoy, L. da C.**,
-Moore, T. E., Chen, S., Terplan, M., Griffin, B. A., & Patrick, S. W.
-(2025). Connecticut's novel prenatal substance exposure policy is
+\[9\] Sieger, M. L., **Godoy, L. da C.**, Moore, T. E., Nichols, C.,
+Goldsborough, E. J., Chen, S., Terplan, M., Griffin, B. A., & Patrick,
+S. W. (2025). Connecticut's novel prenatal substance exposure policy is
 associated with declining CPS reports and foster placements. *Health
-Affairs*, *44*(7). <https://doi.org/10.1377/hlthaff.2024.01160>
+Affairs*, *44*(7), 821--829.
+<https://doi.org/10.1377/hlthaff.2024.01160>
 :::
 
 ::: {#ref-chaluparambil2024age .csl-entry}
