@@ -1,0 +1,157 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+$presentation-heading-font: "Roboto Slab", serif !default;
+$font-family-sans-serif: "Lato", sans-serif !default;
+
+$vibrant_blue: #268bd2;
+$vibrant_pink: #d33682;
+
+$solarized_bg: #fdf6e3;
+$solarized_body: #657b83;
+
+// colors
+$body-bg: $solarized_bg !default;
+$body-color: $solarized_body !default;
+$link-color: $vibrant_blue !default;
+$selection-bg: $vibrant_pink !default;
+
+$secondary_bg: $solarized_body;
+$secondary_body: $solarized_bg;
+
+// headings
+// $presentation-heading-font: "League Gothic", sans-serif !default;
+$presentation-heading-color: #003c6c !default;
+$presentation-heading-text-transform: uppercase !default;
+$presentation-font-size-root: 35px;
+
+// code blocks
+$code-block-border-color: #d8d8d8 !default;
+
+/*-- scss:rules --*/
+
+html * {
+    color-profile: sRGB;
+    rendering-intent: auto;
+}
+
+.important {
+    color: $selection-bg;
+    font-weight: bolder;
+}
+
+.important2 {
+    color: $link-color;
+    font-weight: bolder;
+}
+
+/*-- section slide --*/
+
+.section_slide {
+    background-color: $secondary_bg !important; 
+    color: $presentation-heading-color !important;
+}
+
+.section_slide h1 h2 {
+    color: $presentation-heading-color;
+}
+
+/*-- title slide --*/
+
+#title-slide {
+  text-align: left;
+
+  .title {
+    color: $body-color;
+    font-size: 1.4em;
+    // font-weight: 350;
+    font-weight: bolder;
+  }
+
+  .subtitle {
+    color: $selection-bg;
+    font-style: italic;
+    margin-top: 0em;
+    font-weight: lighter;
+  }
+
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-style: italic;
+    // font-size: 80%;
+    // color: #7F7F7F;
+  }
+
+  .author,
+  .quarto-title-author-name {
+    color: $body-color;
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+
+}
+
+/*-- helps to align content --*/
+
+.v-center-container {
+    display: flex;
+    align-items: center;
+    height: 90%;
+}
+
+/*-- tables --*/
+
+.table-striped {
+    > tbody > tr:nth-of-type(odd) > * {
+        background-color: $secondary_bg;
+    }
+}
+
+.reveal table {
+  // height: auto; /* Adjust table width to fit content up to the available slide space */
+  margin: auto;
+  border-collapse: collapse;
+  border-spacing: 0;
+  font-size: 0.8em;
+}
+
+.reveal table th,
+.reveal table td {
+  border: none; /* Remove internal row lines */
+  padding: .23em; /* Adjust padding as needed */
+  text-align: left; /* Adjust text alignment as needed */
+  font-weight: normal; /* Lighter font weight for main table text */
+}
+
+/* Adds a bottom border to the table header row for distinction */
+.reveal table thead th,
+.reveal .slides table tr:last-child td,
+.reveal .slides table {
+  border-bottom: 2px solid #D3D3D3; /* Dark grey color for the bottom border */
+}
+
+/* Make column headers bold */
+.reveal table thead th {
+  font-weight: bold;
+}
+
+/* Styling table captions */
+.reveal table caption {
+  // color: #666666; /* Dark grey color for the caption */
+  font-variant: small-caps; /* Use small caps for the caption text */
+}
+
+.fw table {
+    width: 100%;
+}

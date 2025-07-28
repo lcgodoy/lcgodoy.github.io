@@ -1,0 +1,595 @@
+---
+title: |
+  `drmr`: A Bayesian approach to Dynamic Range Models in `R`
+subtitle: |
+  Available at [lcgodoy.me/slides/2025-esa/](https://lcgodoy.me/slides/2025-esa/)
+author:
+  - name: Lucas da Cunha Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+date: 2025-07-28
+bibliography: references.bib
+csl: styles/asa.csl
+execute: 
+  cache: false
+format:
+  revealjs:
+    center: true
+    theme: [styles/esa.scss]
+    filters:
+      - styles/appendix.lua
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    code-overflow: wrap
+---
+
+```{r}
+#| label: setup
+#| eval: true
+#| echo: false
+#| output: false
+
+library(dplyr)
+library(ggplot2)
+library(bayesplot)
+library(sf)
+library(drmr)
+library(patchwork)
+library(cmdstanr)
+
+options(knitr.kable.NA = "")
+
+bins_sturges <-
+  function(x) diff(range(x)) / nclass.Sturges(x)
+
+get_color <- function(x, regex_element,
+                      pos_element = 2,
+                      split = " ") {
+  stopifnot(length(regex_element) == 1)
+  stopifnot(length(pos_element) == 1)
+  x[grepl(regex_element, x)] |>
+    strsplit(split = split) |>
+    sapply(\(y) y[pos_element]) |>
+    gsub(";$", "", x = _)
+}
+
+scss <- readLines("styles/jsm.scss")
+bck <- get_color(scss, "^\\$body-bg", 2)
+sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
+fg <- get_color(scss, "^\\$body-color", 2)
+
+
+theme_set(theme_void() +
+          theme(plot.background = element_rect(fill = bck,
+                                               color = bck),
+                panel.background = element_rect(fill = bck,
+                                                color = bck)))
+
+
+my_theme <-
+  theme_bw() +
+  theme(plot.background = element_rect(fill = bck,
+                                       color = bck),
+        panel.background = element_rect(fill = bck,
+                                        color = bck),
+        panel.grid = element_blank(),
+        line = element_line(color = fg),
+        text = element_text(color = fg),
+        rect = element_rect(color = fg),
+        axis.ticks = element_line(color = fg))
+
+## loading data
+data(sum_fl)
+
+## loading map
+map_name <- system.file("maps/sum_fl.shp", package = "drmr")
+
+polygons <- st_read(map_name)
+
+## reserving 5 years for forecast assessment
+first_year_forecast <- max(sum_fl$year) - 4
+
+## "year to id"
+first_id_forecast <-
+  first_year_forecast - min(sum_fl$year) + 1
+
+years_all <- order(unique(sum_fl$year))
+years_train <- years_all[years_all < first_id_forecast]
+years_test <- years_all[years_all >= first_id_forecast]
+
+dat_test <- sum_fl |>
+  filter(year >= first_year_forecast)
+
+dat_train <- sum_fl |>
+  filter(year < first_year_forecast)
+
+##--- centering covariates (for improved mcmc efficiency) ---
+
+avgs <- c("stemp" = mean(dat_train$stemp),
+          "btemp" = mean(dat_train$btemp),
+          "depth" = mean(dat_train$depth),
+          "n_hauls" = mean(dat_train$n_hauls),
+          "lat" = mean(dat_train$lat),
+          "lon" = mean(dat_train$lon))
+
+min_year <- dat_train$year |>
+  min()
+
+## centering covariates
+dat_train <- dat_train |>
+  mutate(c_stemp = stemp - avgs["stemp"],
+         c_btemp = btemp - avgs["btemp"],
+         c_hauls = n_hauls - avgs["n_hauls"],
+         ## depth = depth - avgs["depth"],
+         c_lat   = lat - avgs["lat"],
+         c_lon   = lon - avgs["lon"],
+         time  = year - min_year)
+
+dat_test <- dat_test |>
+  mutate(c_stemp = stemp - avgs["stemp"],
+         c_btemp = btemp - avgs["btemp"],
+         c_hauls = n_hauls - avgs["n_hauls"],
+         ## depth = depth - avgs["depth"],
+         c_lat   = lat - avgs["lat"],
+         c_lon   = lon - avgs["lon"],
+         time  = year - min_year)
+
+##--- turning response into density: 1k individuals per km2 ----
+
+dat_train <- dat_train |>
+  mutate(dens = 1000 * y / area_km2,
+         .before = y)
+
+dat_test <- dat_test |>
+  mutate(dens = 1000 * y / area_km2,
+         .before = y)
+
+chains <- 4
+cores <- 4
+
+```
+
+# Introduction
+
+## The Challenge & Limits of SDMs
+
+* [Critical Challenge]{.important2}: Predicting species' responses to global
+  environmental change is vital for conservation and management.
+
+* [Usual Tool]{.important2}: Species Distribution Models (SDMs) have been the
+  workhorse, [correlating]{.important} occurrences with [environmental
+  variables]{.important}.
+
+* [Limitations of SDMs]{.important2}:
+    * Struggle to predict responses under [novel future]{.important} conditions
+      [@pagel2012forecasting].
+    * [Equilibrium Assumption]{.important2}: Often violated
+      [@guisan2005predicting].
+    * [Lack Mechanism]{.important2}: They [do not explicitly]{.important} model
+      the [underlying biological processes]{.important}.
+
+## Dynamic Range Models (DRMs): A Mechanistic Approach
+
+* [DRMs]{.important} explicitly [incorporate demographic processes]{.important}
+  that drive range dynamics [@pagel2012forecasting].
+
+* Allows linking [environmental]{.important} drivers directly to [specific
+  processes]{.important}.
+
+* Potential for more [robust forecasting]{.important} under [novel]{.important}
+  conditions.
+
+* [Why are they rarely in practice?]{.important2} Despite conceptual appeal,
+  DRMs have been underutilized due to their [complexity]{.important} and
+  [computational]{.important} fitting [challenges]{.important}.
+
+## Introducing `drmr`: Making DRMs Accessible
+
+* [Goal]{.important2}: Bridge the gap between DRM potential and practical
+  application.
+
+* [Key Features]{.important2}:
+    * Develops and applies age-structured DRMs in a Bayesian framework.
+    * User-friendly interface.
+    * Leverages `Stan` via `cmdstanr` for efficient fitting
+      [@gabry2024cmdstanr].
+    * Easily relate environmental drivers to specific recruitment and survival.
+
+# Age-structured DRM
+
+## Setup
+
+* [$Y_{a, t, i}$]{.important2}: [Unobserved density]{.important} of individuals
+  of age $a$, time $t$ and site $i$.
+
+* [$\lambda_{a, t, i}$]{.important2}: Expected age-specific density.
+
+* [$Y_{t, i} = \sum_{a} Y_{a, t, i}$]{.important2}: [Observed
+  density]{.important} of individuals of all ages at time $t$ and site $i$.
+
+* [$\mu_{t, i} = \sum_{a} \lambda_{a, t, i}$]{.important2}: Expected "overall"
+  density.
+  
+* [$\rho_{t, i}$]{.important2}: Probability of absence (i.e., $\mathrm{P}(Y_{t,
+  i} = 0)$).
+
+* [Biological processes]{.important} are encoded through [$\lambda_{a, t, i}$]{.important}.
+
+* [Key processes]{.important2}: recruitment, survival, and movement
+
+## Modeling assumption and zero-augmented probability density functions (pdf)
+
+$$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
+  \text{ if } y_{t, i} = 0, \\ (1 - \rho_{t, i}) g(y_{t, i} \mid \mu_{t, i},
+  \phi), & \text{ if } y_{t, i} > 0, \end{cases} $$
+
+* $g(\cdot \mid \mu_{t, i}, \phi)$ is the [pdf]{.important} of a continuous
+  [probability distribution]{.important}.
+  
+* $\mu_{t, i}$ is the [expected value]{.important} (theoretical mean) of $Y_{t,
+  i}$ provided the species is present at time $t$ and site $i$.
+
+* $\phi$ is a nuisance parameter.
+
+## What you are about to see {visibility="uncounted"}
+
+![](img/meme.jpeg){width=75%}
+
+## Modeling assumptions diagram
+
+```{mermaid}
+flowchart TD
+    A["$$\lambda_{1, t, i} = \exp \{ \mathbf{\beta}^{\top}_r \mathbf{x}^{(r)}_{t, i} + z^{(r)}_{t, i} \} $$"]
+    B["$$\lambda_{a, t, i} = \lambda_{a - 1, t - 1, i} \cdot s_{a - 1, t - 1, i} $$"]
+    C(("$$\mu_{t, i}$$"))
+    D("$$\mathrm{logit}(\rho_{t, i}) = \boldsymbol{\beta}^{\top}_{t} \mathbf{x}^{(t)}_{t, i} $$")
+    E["$$\log(s_{a, t, i}) = \boldsymbol{\beta}^{\top}_s \mathbf{x}^{(s)}_{t, i} + z^{(s)}_{t, i} - f_{a, t}$$"]
+    F{"$$Y_{t, i}$$"}
+    G(("$$\phi$$"))
+    A --->B
+    E --->B
+    B-- $$\sum_a$$ -->C
+    C-.->F
+    D-.->F
+    G-.->F
+```
+
+## Diagram v2
+
+```{mermaid}
+graph TD
+    subgraph "Demographic processes"
+        %% Inputs and Parameters for lambda1
+        xr["$$\mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\lambda_{1, t, i}$$"));
+        zr(("$$z^{(r)}_{t, i}$$")) --> lambda1;
+        betar(("$$\boldsymbol{\beta}_r$$")) --> lambda1;
+
+        %% Recursive part for lambda_a
+        subgraph "Time t-1"
+            xs["$$\mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
+            zs(("$$z^{(s)}_{t - 1, i}$$")) --> s_prev;
+            betas(("$$\boldsymbol{\beta}_s$$")) --> s_prev;
+            f["$$f_{a - 1, t - 1}$$"] --> s_prev;
+            lambda_prev("$$\lambda_{a - 1, t - 1, i}$$")
+            s_prev("$$s_{a - 1, t - 1, i}$$")
+        end
+        
+        lambda_prev --> lambda_a(("$$\lambda_{a, t, i}$$"));
+        s_prev --> lambda_a;
+    end
+
+    %% Mean calculation
+    lambda_a --> mu(("$$\mu_{t, i}$$"));
+
+    subgraph "Zero-augmentation"
+        xt["$$\mathbf{x}^{(t)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
+        betat(("$$\boldsymbol{\beta}_t$$")) --> rho;
+    end
+
+    %% Final Observation
+    mu --> Y{"$$Y_{t, i}$$"};
+
+    %% Other components
+    phi(("$$\phi$$")) --> Y;
+    rho --> Y;
+```
+
+## Code & workflow
+
+![](img/fitting.png)
+
+<!-- ## Toggles and model complexity -->
+
+<!-- | Toggle     | Description                                                                                                                | Default State                   | -->
+<!-- |------------|----------------------------------------------------------------------------------------------------------------------------|---------------------------------| -->
+<!-- | `rho_mu`   | Use the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used. | On                              | -->
+<!-- | `cloglog`  | Use the complementary log-log (cloglog) link function for absence probability. If off, the logistic link function is used. | Off                             | -->
+<!-- | `movement` | Enable the movement routine as described.                                                                                  | Off                             | -->
+<!-- | `est_surv` | Estimate survival probabilities within the model.                                                                          | On                              | -->
+<!-- | `est_init` | Estimate $\lambda$ initial values.                                                                                         | Off (this one has many options) | -->
+<!-- | `minit`    | Initial values driven by mortality rates.                                                                                  | Off                             | -->
+<!-- | `iid_re`   | Include an IID random effect.                                                                                              | `"none"`                        | -->
+<!-- | `ar_re`    | Include an AR(1) random effect.                                                                                            | `"none"`                        | -->
+<!-- | `sp_re`    | Include an iCAR random effect.                                                                                             | `"none"`                        | -->
+
+
+# Illustration with real data
+
+## Summer Flounder Dataset
+
+* An example analysis uses [Summer flounder]{.important} (_Paralichthys
+  dentatus_) data from 1982-2016 NOAA [bottom trawl surveys]{.important}
+  [@fredston2025dynamic] to illustrate the [package's features]{.important}.
+
+* The data spans the US Atlantic coast (Cape Hatteras, NC
+  to the Canada/Maine border) and was [aggregated from individual hauls into 10
+  latitudinal patches]{.important} with varying areas.
+
+* [Response variable]{.important2}: Density (count per unit area).
+
+* [Environmental drivers]{.important2}: SST and SBT.
+
+## Patches/sites
+
+```{r}
+library(leaflet)
+leaflet(polygons) %>%
+  addPolygons(color = "#000000") %>%
+  addTiles()
+```
+
+
+## Models fitted to the data
+
+| Model      | Description                                                                                                                                                                                       |
+|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| DRM (rec)  | Recruitment as a quadratic function of SST, AR(1) random effect for recruitment, Fishing mortality, Movement, Absence probability as a function of effort (number of hauls) and estimated density |
+| DRM (surv) | Surival as a quadratic function of SBT, AR(1) random effect for recruitment, Fishing mortality, Movement, Absence probability as a function of effort (number of hauls) and estimated density     |
+| GLM-SDM    | A zero-augmented LogNormal SDM with the absence probability as a function of the number of hauls (a measure of effort).                                                                           |
+
+## Code for DRM (rec)
+
+```{r}
+#| label: drm-rec
+#| eval: false
+#| echo: true
+#| output: false
+
+drm_rec <-
+  fit_drm(.data = dat_train,
+          y_col = "dens", ## response variable: density
+          time_col = "year", ## vector of time points
+          site_col = "patch",
+          family = "gamma", ## other options: lognormal, loglogistic
+          seed = 202505,
+          formula_zero = ~ 1 + c_hauls,
+          formula_rec = ~ 1 + c_sst + I(c_sst * c_sst),
+          formula_surv = ~ 1,
+          f_mort = f_train,
+          n_ages = NROW(f_train),
+          adj_mat = adj_mat, ## A matrix for movement routine
+          ages_movement = c(0, 0,
+                            rep(1, 12),
+                            0, 0), ## ages allowed to move
+          .toggles = list(ar_re = "rec",
+                          movement = 1,
+                          est_surv = 1,
+                          est_init = 0,
+                          minit = 1),
+          .priors = list(pr_phi_a = 1, pr_phi_b = .1,
+                         pr_alpha_a = 4.2, pr_alpha_b = 5.8,
+                         pr_zeta_a = 7, pr_zeta_b = 3))
+```
+
+## Code for DRM (rec)
+
+```{r}
+#| label: drm-surv
+#| eval: false
+#| echo: true
+#| output: false
+
+drm_surv <-
+  fit_drm(.data = dat_train,
+          y_col = "dens", ## response variable: density
+          time_col = "year", ## vector of time points
+          site_col = "patch",
+          family = "gamma", ## other options: lognormal, loglogistic
+          seed = 202505,
+          formula_zero = ~ 1 + c_hauls,
+          formula_rec = ~ 1,
+          formula_surv = ~ 1 + c_sbt + I(c_sst * c_sbt),
+          f_mort = f_train,
+          n_ages = NROW(f_train),
+          adj_mat = adj_mat, ## A matrix for movement routine
+          ages_movement = c(0, 0,
+                            rep(1, 12),
+                            0, 0), ## ages allowed to move
+          .toggles = list(ar_re = "rec", ## other options: "surv", "dens"
+                          movement = 1,
+                          est_surv = 1,
+                          est_init = 0,
+                          minit = 1),
+          .priors = list(pr_phi_a = 1, pr_phi_b = .1,
+                         pr_alpha_a = 4.2, pr_alpha_b = 5.8,
+                         pr_zeta_a = 7, pr_zeta_b = 3))
+```
+
+
+## Effect of environmental variables on specific processes
+
+* Recruitment and SST:
+
+```{r}
+#| label: rec-rel
+#| eval: false
+#| echo: true
+
+newdata_rec <- data.frame(c_sst =
+                            seq(from = quantile(dat_train$c_sst, .05),
+                                to = quantile(dat_train$c_sst, .95),
+                                length.out = 200))
+
+rec_samples <- marg_rec(drm_rec, newdata_rec)
+```
+
+* Survival and SBT:
+
+```{r}
+#| label: surv-rel
+#| eval: false
+#| echo: true
+
+newdata_surv <- data.frame(c_sbt =
+                             seq(from = quantile(dat_train$c_sbt, .05),
+                                 to = quantile(dat_train$c_sbt, .95),
+                                 length.out = 200))
+
+surv_samples <- marg_surv(drm_surv, newdata_surv)
+```
+
+## Effect of environmental variables
+
+```{r}
+#| label: plot
+#| eval: true
+#| echo: false
+#| layout-ncol: 2
+
+rec_summary <- readRDS("data/rec.rds")
+surv_summary <- readRDS("data/surv.rds")
+
+ggplot(data = rec_summary,
+       aes(x = stemp,
+           y = m)) +
+  geom_ribbon(aes(ymin = l, ymax = u),
+              fill = "gray50",
+              color = "transparent",
+              linewidth = 1.2) +
+  geom_line(color = "white", linewidth = 1.2) +
+  my_theme +
+  labs(x = "SST (in Celsius)",
+       y = "Est. recruitment (per km2)")
+
+ggplot(data = surv_summary,
+         aes(x = btemp,
+             y = m)) +
+  geom_ribbon(aes(ymin = l, ymax = u),
+              fill = "gray50",
+              color = "transparent",
+              linewidth = 1.2) +
+  geom_line(color = "white", linewidth = 1.2) +
+  my_theme +
+  labs(x = "SBT (in Celsius)",
+       y = "Est. survival")
+```
+
+## Forecasting
+
+* The code for obtaining out-of-sample predictions is quite intuitive.
+
+* We only need to provide the output for a model fit, a new dataset (where we
+  want the predictions), and a seed:
+  
+```{r}
+#| label: forecast-code
+#| eval: false
+#| echo: true
+
+forecast_rec <- predict_drm(drm = drm_rec,
+                            new_data = dat_test,
+                            past_data = filter(dat_train,
+                                               year == max(year)),
+                            seed = 125,
+                            cores = 4)
+```
+
+
+## Forecasts visualization
+
+```{r}
+#| label: forecast
+#| eval: true
+#| echo: false
+
+forecast_fig <- readRDS("data/for_fig.rds")
+
+ggplot(data = forecast_fig) +
+  geom_vline(xintercept = first_year_forecast,
+             lty = 2) +
+  geom_ribbon(aes(x = year,
+                  ymin = q10, ymax = q90,
+                  fill = model,
+                  color = model),
+              alpha = .4) +
+  geom_line(aes(x = year, y = median,
+                color = model)) +
+  geom_point(aes(x = year, y = dens),
+             size = .5) +
+  facet_grid(patch ~ model, scales = "free_y") +
+  scale_y_continuous(breaks = scales::trans_breaks(identity,
+                                                   identity,
+                                                   n = 3),
+                     trans = "log1p") +
+  theme_bw() +
+  guides(color = "none",
+         fill = "none") +
+  labs(y = "Density (in hundreds of individuals per square-km)",
+       x = "Year") +
+  theme(strip.background = element_rect(fill = "white"))
+```
+
+
+## Comparing models
+
+| Model      | RMSE |   IS |  PIC |
+|:-----------|-----:|-----:|-----:|
+| DRM (rec)  | 0.08 | 0.74 | 90.0 |
+| DRM (surv) | 0.10 | 1.01 | 96.0 |
+| GLM-SDM    | 0.14 | 1.18 | 74.0 |
+
+
+# Concluding remarks
+
+## Highlights
+
+* The `drmr` substantially lowers the barrier for ecologists to use the DRM in
+  their applications.
+
+* The code is easy to use and takes advantage of what has been developed for
+  `Stan`: visualization, diagnostic tools, and estimation.
+
+* `drmr` allows for empirically testing which processes are more important to
+  predict the distribution of a species.
+  
+* The more complex a model is, the more (and better) data we need to be able to
+  estimate those relationships.
+
+
+## Future work
+
+* Include population dynamic models that explicitly relate adult density to
+  recruitment (e.g., Ricker, Belverton-Holt)
+
+* GAM-like non-parametric relationships between processes and the environment
+
+* Support for length-composition data
+
+* More realistic movement routines
+
+## Acknowledgements
+
+* Malin, Alexa, Jude, Jeewantha, Mark, and many others.
+
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
