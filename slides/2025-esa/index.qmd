@@ -9,7 +9,7 @@ author:
     email: |
       ldcgodoy@ucsc.com
     affiliations: EEB Department, UCSC
-date: 2025-07-28
+date: 2025-07-29
 bibliography: references.bib
 csl: styles/asa.csl
 execute: 
@@ -60,11 +60,12 @@ get_color <- function(x, regex_element,
     gsub(";$", "", x = _)
 }
 
-scss <- readLines("styles/jsm.scss")
+scss <- readLines("styles/esa.scss")
 bck <- get_color(scss, "^\\$body-bg", 2)
 sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
 fg <- get_color(scss, "^\\$body-color", 2)
-
+curve_bck1 <- get_color(scss, "^\\$link-color", 2)
+curve_bck2 <- get_color(scss, "^\\$selection-bg", 2)
 
 theme_set(theme_void() +
           theme(plot.background = element_rect(fill = bck,
@@ -170,10 +171,10 @@ cores <- 4
 * [Limitations of SDMs]{.important2}:
     * Struggle to predict responses under [novel future]{.important} conditions
       [@pagel2012forecasting].
-    * [Equilibrium Assumption]{.important2}: Often violated
-      [@guisan2005predicting].
     * [Lack Mechanism]{.important2}: They [do not explicitly]{.important} model
       the [underlying biological processes]{.important}.
+    * [Equilibrium Assumption]{.important2}: Often violated
+      [@guisan2005predicting].
 
 ## Dynamic Range Models (DRMs): A Mechanistic Approach
 
@@ -188,7 +189,7 @@ cores <- 4
 
 * [Why are they rarely in practice?]{.important2} Despite conceptual appeal,
   DRMs have been underutilized due to their [complexity]{.important} and
-  [computational]{.important} fitting [challenges]{.important}.
+  [computational challenges]{.important} to fit these models.
 
 ## Introducing `drmr`: Making DRMs Accessible
 
@@ -196,89 +197,68 @@ cores <- 4
   application.
 
 * [Key Features]{.important2}:
-    * Develops and applies age-structured DRMs in a Bayesian framework.
-    * User-friendly interface.
+    * Makes age-structured DRMs readily available in a Bayesian framework.
     * Leverages `Stan` via `cmdstanr` for efficient fitting
       [@gabry2024cmdstanr].
+    * User-friendly interface.
     * Easily relate environmental drivers to specific recruitment and survival.
 
 # Age-structured DRM
 
-## Setup
+## Setup & Notation
 
-* [$Y_{a, t, i}$]{.important2}: [Unobserved density]{.important} of individuals
-  of age $a$, time $t$ and site $i$.
+* $Y_{a, t, i}$: [Unobserved density]{.important} of individuals of age $a$,
+  time $t$ and site $i$.
 
-* [$\lambda_{a, t, i}$]{.important2}: Expected age-specific density.
+* $Y_{t, i} = \sum_{a} Y_{a, t, i}$: [Observed density]{.important} of
+  individuals (all ages) at time $t$ and site $i$.
 
-* [$Y_{t, i} = \sum_{a} Y_{a, t, i}$]{.important2}: [Observed
-  density]{.important} of individuals of all ages at time $t$ and site $i$.
+* $\lambda_{a, t, i}$: [Expected age-specific density]{.important}.
+  * [Biological processes]{.important2} (recruitment, survival, and movement)
+    are encoded through these parameters.
 
-* [$\mu_{t, i} = \sum_{a} \lambda_{a, t, i}$]{.important2}: Expected "overall"
-  density.
+* $\mu_{t, i} = \sum_{a} \lambda_{a, t, i}$: [Expected total
+  density]{.important}.
   
-* [$\rho_{t, i}$]{.important2}: Probability of absence (i.e., $\mathrm{P}(Y_{t,
-  i} = 0)$).
+* $\rho_{t, i} = \mathrm{P}(Y_{t, i} = 0)$: [Probability of
+  absence]{.important}.
 
-* [Biological processes]{.important} are encoded through [$\lambda_{a, t, i}$]{.important}.
 
-* [Key processes]{.important2}: recruitment, survival, and movement
-
-## Modeling assumption and zero-augmented probability density functions (pdf)
+## Modeling assumption: Zero-augmented probability density function (pdf)
 
 $$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
   \text{ if } y_{t, i} = 0, \\ (1 - \rho_{t, i}) g(y_{t, i} \mid \mu_{t, i},
-  \phi), & \text{ if } y_{t, i} > 0, \end{cases} $$
+  \phi), & \text{ if } y_{t, i} > 0. \end{cases} $$
 
-* $g(\cdot \mid \mu_{t, i}, \phi)$ is the [pdf]{.important} of a continuous
-  [probability distribution]{.important}.
+* $y_{t, i}$ is a realization of $Y_{t, i}$.
+
+* $g(\cdot \mid \mu_{t, i}, \phi)$ is the [pdf]{.important} of a [continuous
+  probability distribution]{.important}.
   
-* $\mu_{t, i}$ is the [expected value]{.important} (theoretical mean) of $Y_{t,
-  i}$ provided the species is present at time $t$ and site $i$.
-
 * $\phi$ is a nuisance parameter.
 
-## What you are about to see {visibility="uncounted"}
+## Let's look at some model assumptions! {visibility="uncounted"}
 
 ![](img/meme.jpeg){width=75%}
 
-## Modeling assumptions diagram
-
-```{mermaid}
-flowchart TD
-    A["$$\lambda_{1, t, i} = \exp \{ \mathbf{\beta}^{\top}_r \mathbf{x}^{(r)}_{t, i} + z^{(r)}_{t, i} \} $$"]
-    B["$$\lambda_{a, t, i} = \lambda_{a - 1, t - 1, i} \cdot s_{a - 1, t - 1, i} $$"]
-    C(("$$\mu_{t, i}$$"))
-    D("$$\mathrm{logit}(\rho_{t, i}) = \boldsymbol{\beta}^{\top}_{t} \mathbf{x}^{(t)}_{t, i} $$")
-    E["$$\log(s_{a, t, i}) = \boldsymbol{\beta}^{\top}_s \mathbf{x}^{(s)}_{t, i} + z^{(s)}_{t, i} - f_{a, t}$$"]
-    F{"$$Y_{t, i}$$"}
-    G(("$$\phi$$"))
-    A --->B
-    E --->B
-    B-- $$\sum_a$$ -->C
-    C-.->F
-    D-.->F
-    G-.->F
-```
-
-## Diagram v2
+## Demographic processes
 
 ```{mermaid}
 graph TD
     subgraph "Demographic processes"
         %% Inputs and Parameters for lambda1
         xr["$$\mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\lambda_{1, t, i}$$"));
-        zr(("$$z^{(r)}_{t, i}$$")) --> lambda1;
         betar(("$$\boldsymbol{\beta}_r$$")) --> lambda1;
+        zr(("$$z^{(r)}_{t, i}$$")) --> lambda1;
 
         %% Recursive part for lambda_a
         subgraph "Time t-1"
             xs["$$\mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
-            zs(("$$z^{(s)}_{t - 1, i}$$")) --> s_prev;
             betas(("$$\boldsymbol{\beta}_s$$")) --> s_prev;
+            zs(("$$z^{(s)}_{t - 1, i}$$")) --> s_prev;
             f["$$f_{a - 1, t - 1}$$"] --> s_prev;
-            lambda_prev("$$\lambda_{a - 1, t - 1, i}$$")
-            s_prev("$$s_{a - 1, t - 1, i}$$")
+            lambda_prev(("$$\lambda_{a - 1, t - 1, i}$$"))
+            s_prev(("$$s_{a - 1, t - 1, i}$$"))
         end
         
         lambda_prev --> lambda_a(("$$\lambda_{a, t, i}$$"));
@@ -289,8 +269,8 @@ graph TD
     lambda_a --> mu(("$$\mu_{t, i}$$"));
 
 subgraph "Zero-augmentation"
-        xt["$$\mathbf{x}^{(t)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
-        betat(("$$\boldsymbol{\beta}_t$$")) --> rho;
+        xt["$$\mathbf{x}^{(p)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
+        betat(("$$\boldsymbol{\beta}_p$$")) --> rho;
     end
 
     %% Final Observation
@@ -336,23 +316,13 @@ subgraph "Zero-augmentation"
 
 * [Environmental drivers]{.important2}: SST and SBT.
 
-## Patches/sites
-
-```{r}
-library(leaflet)
-leaflet(polygons) %>%
-  addPolygons(color = "#000000") %>%
-  addTiles()
-```
-
-
 ## Models fitted to the data
 
-| Model      | Description                                                                                                                                                                                       |
-|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| DRM (rec)  | Recruitment as a quadratic function of SST, AR(1) random effect for recruitment, Fishing mortality, Movement, Absence probability as a function of effort (number of hauls) and estimated density |
-| DRM (surv) | Surival as a quadratic function of SBT, AR(1) random effect for recruitment, Fishing mortality, Movement, Absence probability as a function of effort (number of hauls) and estimated density     |
-| GLM-SDM    | A zero-augmented LogNormal SDM with the absence probability as a function of the number of hauls (a measure of effort).                                                                           |
+| Model          | Non-neg. PDF | $\rho_{i, t}$              | Recruitment (or Density) | Survival                  |
+|:---------------|:------------:|:--------------------------:|--------------------------|---------------------------|
+| **DRM (rec)**  | Gamma        | Effort + estimated density | SST + SST^2^ + AR(1)     | Intercept + $f_{a, t}$    |
+| **DRM (surv)** | Gamma        | Effort + estimated density | AR(1)                    | SBT + SBT^2^ + $f_{a, t}$ |
+| **SDM (GLM)**  | LogNormal    | Effort                     | SST + SST^2^             |                           |
 
 ## Code for DRM (rec)
 
@@ -378,7 +348,7 @@ drm_rec <-
           ages_movement = c(0, 0,
                             rep(1, 12),
                             0, 0), ## ages allowed to move
-          .toggles = list(ar_re = "rec",
+          .toggles = list(ar_re = "rec", ## other options: "surv", "dens"
                           movement = 1,
                           est_surv = 1,
                           est_init = 0,
@@ -388,7 +358,7 @@ drm_rec <-
                          pr_zeta_a = 7, pr_zeta_b = 3))
 ```
 
-## Code for DRM (rec)
+## Code for DRM (surv)
 
 ```{r}
 #| label: drm-surv
@@ -462,6 +432,7 @@ surv_samples <- marg_surv(drm_surv, newdata_surv)
 #| eval: true
 #| echo: false
 #| layout-ncol: 2
+#| height: 80%
 
 rec_summary <- readRDS("data/rec.rds")
 surv_summary <- readRDS("data/surv.rds")
@@ -470,11 +441,13 @@ ggplot(data = rec_summary,
        aes(x = stemp,
            y = m)) +
   geom_ribbon(aes(ymin = l, ymax = u),
-              fill = "gray50",
+              fill = curve_bck2,
               color = "transparent",
               linewidth = 1.2) +
-  geom_line(color = "white", linewidth = 1.2) +
+  geom_line(color = bck, linewidth = 1.2) +
   my_theme +
+  theme(axis.text = element_text(size = 15),
+        axis.title = element_text(size = 20)) +
   labs(x = "SST (in Celsius)",
        y = "Est. recruitment (per km2)")
 
@@ -482,37 +455,44 @@ ggplot(data = surv_summary,
          aes(x = btemp,
              y = m)) +
   geom_ribbon(aes(ymin = l, ymax = u),
-              fill = "gray50",
+              fill = curve_bck2,
               color = "transparent",
               linewidth = 1.2) +
-  geom_line(color = "white", linewidth = 1.2) +
+  geom_line(color = bck, linewidth = 1.2) +
   my_theme +
+  theme(axis.text = element_text(size = 15),
+        axis.title = element_text(size = 20)) +
   labs(x = "SBT (in Celsius)",
        y = "Est. survival")
 ```
 
 ## Forecasting
 
-* The code for obtaining out-of-sample predictions is quite intuitive.
+* The `predict_drm` function requires at least three arguments: 
+  * `drm`: Output of a `fit_drm` call
+  * `new_data`: A `data.frame` where we seek to obtain predictions
+  * `seed`: For reproducibility
 
-* We only need to provide the output for a model fit, a new dataset (where we
-  want the predictions), and a seed:
-  
 ```{r}
 #| label: forecast-code
 #| eval: false
 #| echo: true
 
-forecast_rec <- predict_drm(drm = drm_rec,
-                            new_data = dat_test,
-                            past_data = filter(dat_train,
-                                               year == max(year)),
-                            seed = 125,
-                            cores = 4)
+forecast_rec <- predict_drm(drm = drm_rec,                         # Required
+                            new_data = dat_test,                   # Required
+                            seed = 152,                            # Required
+                            f_test = f_test,                       # Optional
+                            past_data = filter(dat_train,          # Optional
+                                               year == max(year)))
 ```
 
+* When $f_{a, t}$ is used at the time of model fit, we also need to provide
+  `f_test` to `predict_drm`.
 
-## Forecasts visualization
+* `past_data` is necessary when survival is a function of environmental
+  variables.
+  
+## Forecasts visualization & comparison
 
 ```{r}
 #| label: forecast
@@ -525,36 +505,37 @@ ggplot(data = forecast_fig) +
   geom_vline(xintercept = first_year_forecast,
              lty = 2) +
   geom_ribbon(aes(x = year,
-                  ymin = q10, ymax = q90,
-                  fill = model,
-                  color = model),
+                  ymin = q10, ymax = q90),
+              fill = curve_bck2,
+              color = curve_bck2,
               alpha = .4) +
-  geom_line(aes(x = year, y = median,
-                color = model)) +
+  geom_line(aes(x = year, y = median),
+            color = curve_bck2) +
   geom_point(aes(x = year, y = dens),
-             size = .5) +
+             size = .5,
+             color = curve_bck1) +
   facet_grid(patch ~ model, scales = "free_y") +
   scale_y_continuous(breaks = scales::trans_breaks(identity,
                                                    identity,
                                                    n = 3),
                      trans = "log1p") +
-  theme_bw() +
+  my_theme +
   guides(color = "none",
          fill = "none") +
   labs(y = "Density (in hundreds of individuals per square-km)",
        x = "Year") +
-  theme(strip.background = element_rect(fill = "white"))
+  theme(strip.background = element_rect(fill = bck, color = fg))
 ```
 
+::: {.notes}
 
-## Comparing models
+* DRM (rec): best point predictions (RMSE = 0.08)
 
-| Model      | RMSE |   IS |  PIC |
-|:-----------|-----:|-----:|-----:|
-| DRM (rec)  | 0.08 | 0.74 | 90.0 |
-| DRM (surv) | 0.10 | 1.01 | 96.0 |
-| GLM-SDM    | 0.14 | 1.18 | 74.0 |
+* DRM (rec): best interval predictions (IS = 0.74)
 
+* GLM: worst in all comparison metrics.
+
+:::
 
 # Concluding remarks
 

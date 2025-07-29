@@ -18,13 +18,18 @@ $font-family-sans-serif: "Lato", sans-serif !default;
 $presentation-font-size-root: 35px;
 
 // Core Colors
-$body-bg: $clr-alabaster !default;
-$body-color: $clr-charcoal !default;
-$link-color: $clr-sea-blue !default;
-$selection-bg: $clr-teal !default;
-$selection-color: $clr-white !default;
+// $body-bg: $clr-alabaster !default;
+// $selection-color: $clr-white !default;
+// $body-color: $clr-charcoal !default;
+// $link-color: $clr-sea-blue !default;
+// $selection-bg: $clr-teal !default;
+$body-bg: #F8F9FA !default;
+$selection-color: #FFFFFF !default;
+$body-color: #2F4858 !default;
+$link-color: #0077B6 !default;
+$selection-bg: #48BCA3 !default;
 
-$secondary_bg: $clr-sand; // Using the dark charcoal for section slide backgrounds
+$secondary_bg: #B99C6B; // Using the dark charcoal for section slide backgrounds
 
 // Headings
 $presentation-heading-color: $clr-sea-blue !default;
@@ -46,7 +51,6 @@ $mermaid-fg-color--lightest: lighten($clr-slate-grey, 20%);
 $mermaid-bg-color--lighter: lighten($clr-charcoal, 10%);
 $mermaid-bg-color--lightest: lighten($clr-charcoal, 20%);
 $mermaid-font-family: $font-family-sans-serif;
-$mermaid-font-size: 0.9em;
 $mermaid-label-bg-color: $body-bg;
 $mermaid-label-fg-color: $clr-sea-blue;
 $mermaid-node-bg-color: rgba($clr-sea-blue, 0.1);
