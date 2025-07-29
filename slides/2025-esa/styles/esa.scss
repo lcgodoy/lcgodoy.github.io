@@ -46,6 +46,7 @@ $mermaid-fg-color--lightest: lighten($clr-slate-grey, 20%);
 $mermaid-bg-color--lighter: lighten($clr-charcoal, 10%);
 $mermaid-bg-color--lightest: lighten($clr-charcoal, 20%);
 $mermaid-font-family: $font-family-sans-serif;
+$mermaid-font-size: 0.9em;
 $mermaid-label-bg-color: $body-bg;
 $mermaid-label-fg-color: $clr-sea-blue;
 $mermaid-node-bg-color: rgba($clr-sea-blue, 0.1);

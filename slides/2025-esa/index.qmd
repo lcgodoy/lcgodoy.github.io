@@ -288,7 +288,7 @@ graph TD
     %% Mean calculation
     lambda_a --> mu(("$$\mu_{t, i}$$"));
 
-    subgraph "Zero-augmentation"
+subgraph "Zero-augmentation"
         xt["$$\mathbf{x}^{(t)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
         betat(("$$\boldsymbol{\beta}_t$$")) --> rho;
     end
