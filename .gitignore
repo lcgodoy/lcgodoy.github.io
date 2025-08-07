@@ -23,9 +23,9 @@ tramp
 /eshell/history
 /eshell/lastdir
 
-# docs folder is not useful anymore
-docs/
-docs/*
+# Slides scratch
+
+slides/scratch/*
   
 # elpa packages
 /elpa/
