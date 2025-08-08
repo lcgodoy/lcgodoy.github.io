@@ -14,10 +14,15 @@ bibliography: references.bib
 csl: styles/asa.csl
 execute: 
   cache: false
+title-slide-attributes:
+  data-background-image: img/qr-code.png
+  data-background-size: 30%
+  data-background-position: 90% 90%
 format:
   revealjs:
     center: true
     theme: [styles/esa.scss]
+    logo: img/logo.png
     filters:
       - styles/appendix.lua
     embed-resources: true
@@ -241,7 +246,7 @@ $$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
 
 ![](img/meme.jpeg){width=75%}
 
-## Demographic processes
+## Demographic processes {auto-animate=true}
 
 ```{mermaid}
 graph TD
@@ -281,6 +286,55 @@ subgraph "Zero-augmentation"
     rho --> Y;
 ```
 
+## Recruitment {auto-animate=true}
+
+```{mermaid}
+%%| fig-align: center
+graph TD
+    xr["$$\Large  \mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\Large \lambda_{1, t, i}$$"));
+    betar(("$$\Large \boldsymbol{\beta}_r$$")) --> lambda1;
+    zr(("$$\Large z^{(r)}_{t, i}$$")) --> lambda1;
+```
+
+## Survival {auto-animate=true}
+
+```{mermaid}
+%%| fig-align: center
+graph TD
+    subgraph "Time t-1"
+        xs["$$\Large \mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
+        betas(("$$\Large  \boldsymbol{\beta}_s$$")) --> s_prev;
+        zs(("$$\Large  z^{(s)}_{t - 1, i}$$")) --> s_prev;
+        f["$$\Large  f_{a - 1, t - 1}$$"] --> s_prev;
+        lambda_prev(("$$\Large \lambda_{a - 1, t - 1, i}$$"))
+        s_prev(("$$\Large s_{a - 1, t - 1, i}$$"))
+    end
+        
+    lambda_prev --> lambda_a(("$$\Large \lambda_{a, t, i}$$"));
+    s_prev --> lambda_a;
+```
+
+## Process and Observation error {auto-animate=true}
+
+```{mermaid}
+%%| fig-align: center
+graph TD
+    %% Mean calculation
+    lambda_a(("$$\Large \lambda_{a, t, i}$$"));
+    lambda_a -- $$\Large \sum_a \lambda_{a, t, i}$$ --> mu(("$$\Large \mu_{t, i}$$"));
+
+subgraph "P(Y = 0)"
+    xt["$$\Large \mathbf{x}^{(p)}_{t, i}$$"] --> rho(("$$\Large \rho_{t, i}$$"));
+    betat(("$$\Large \boldsymbol{\beta}_p$$")) --> rho;
+end
+
+%% Final Observation
+    mu --> Y{"$$\Large Y_{t, i}$$"};
+    %% Other components
+    phi(("$$\Large \phi$$")) --> Y;
+    rho --> Y;
+```
+
 ## Code & workflow
 
 ![](img/fitting.png)
@@ -315,6 +369,12 @@ subgraph "Zero-augmentation"
 * [Response variable]{.important2}: Density (count per unit area).
 
 * [Environmental drivers]{.important2}: SST and SBT.
+
+![](img/sf.png){.absolute bottom=10 right=85 width="120" height="120"}
+
+::: aside
+Figure source: [ASMFC](https://asmfc.org/species/summer-flounder/)
+:::
 
 ## Models fitted to the data
 
@@ -393,37 +453,37 @@ drm_surv <-
 ```
 
 
-## Effect of environmental variables on specific processes
+<!-- ## Effect of environmental variables on specific processes -->
 
-* Recruitment and SST:
+<!-- * Recruitment and SST: -->
 
-```{r}
-#| label: rec-rel
-#| eval: false
-#| echo: true
+<!-- ```{r} -->
+<!-- #| label: rec-rel -->
+<!-- #| eval: false -->
+<!-- #| echo: true -->
 
-newdata_rec <- data.frame(c_sst =
-                            seq(from = quantile(dat_train$c_sst, .05),
-                                to = quantile(dat_train$c_sst, .95),
-                                length.out = 200))
+<!-- newdata_rec <- data.frame(c_sst = -->
+<!--                             seq(from = quantile(dat_train$c_sst, .05), -->
+<!--                                 to = quantile(dat_train$c_sst, .95), -->
+<!--                                 length.out = 200)) -->
 
-rec_samples <- marg_rec(drm_rec, newdata_rec)
-```
+<!-- rec_samples <- marg_rec(drm_rec, newdata_rec) -->
+<!-- ``` -->
 
-* Survival and SBT:
+<!-- * Survival and SBT: -->
 
-```{r}
-#| label: surv-rel
-#| eval: false
-#| echo: true
+<!-- ```{r} -->
+<!-- #| label: surv-rel -->
+<!-- #| eval: false -->
+<!-- #| echo: true -->
 
-newdata_surv <- data.frame(c_sbt =
-                             seq(from = quantile(dat_train$c_sbt, .05),
-                                 to = quantile(dat_train$c_sbt, .95),
-                                 length.out = 200))
+<!-- newdata_surv <- data.frame(c_sbt = -->
+<!--                              seq(from = quantile(dat_train$c_sbt, .05), -->
+<!--                                  to = quantile(dat_train$c_sbt, .95), -->
+<!--                                  length.out = 200)) -->
 
-surv_samples <- marg_surv(drm_surv, newdata_surv)
-```
+<!-- surv_samples <- marg_surv(drm_surv, newdata_surv) -->
+<!-- ``` -->
 
 ## Effect of environmental variables
 
@@ -567,7 +627,11 @@ ggplot(data = forecast_fig) +
 
 ## Acknowledgements
 
-* Malin, Alexa, Jude, Jeewantha, Mark, and many others.
+
+![](img/logo.png){.absolute bottom=10 right=85 width="200" height="200"}
+
+![](img/finrisk.png){.absolute top=10 left=85 width="200" height="100"}
+
 
 ---
 
