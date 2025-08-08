@@ -246,45 +246,6 @@ $$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
 
 ![](img/meme.jpeg){width=75%}
 
-## Demographic processes {auto-animate=true}
-
-```{mermaid}
-graph TD
-    subgraph "Demographic processes"
-        %% Inputs and Parameters for lambda1
-        xr["$$\mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\lambda_{1, t, i}$$"));
-        betar(("$$\boldsymbol{\beta}_r$$")) --> lambda1;
-        zr(("$$z^{(r)}_{t, i}$$")) --> lambda1;
-
-        %% Recursive part for lambda_a
-        subgraph "Time t-1"
-            xs["$$\mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
-            betas(("$$\boldsymbol{\beta}_s$$")) --> s_prev;
-            zs(("$$z^{(s)}_{t - 1, i}$$")) --> s_prev;
-            f["$$f_{a - 1, t - 1}$$"] --> s_prev;
-            lambda_prev(("$$\lambda_{a - 1, t - 1, i}$$"))
-            s_prev(("$$s_{a - 1, t - 1, i}$$"))
-        end
-        
-        lambda_prev --> lambda_a(("$$\lambda_{a, t, i}$$"));
-        s_prev --> lambda_a;
-    end
-
-    %% Mean calculation
-    lambda_a --> mu(("$$\mu_{t, i}$$"));
-
-subgraph "Zero-augmentation"
-        xt["$$\mathbf{x}^{(p)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
-        betat(("$$\boldsymbol{\beta}_p$$")) --> rho;
-    end
-
-    %% Final Observation
-    mu --> Y{"$$Y_{t, i}$$"};
-
-    %% Other components
-    phi(("$$\phi$$")) --> Y;
-    rho --> Y;
-```
 
 ## Recruitment {auto-animate=true}
 
@@ -334,6 +295,47 @@ end
     phi(("$$\Large \phi$$")) --> Y;
     rho --> Y;
 ```
+
+## Demographic processes {auto-animate=true}
+
+```{mermaid}
+graph TD
+    subgraph "Demographic processes"
+        %% Inputs and Parameters for lambda1
+        xr["$$\mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\lambda_{1, t, i}$$"));
+        betar(("$$\boldsymbol{\beta}_r$$")) --> lambda1;
+        zr(("$$z^{(r)}_{t, i}$$")) --> lambda1;
+
+        %% Recursive part for lambda_a
+        subgraph "Time t-1"
+            xs["$$\mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
+            betas(("$$\boldsymbol{\beta}_s$$")) --> s_prev;
+            zs(("$$z^{(s)}_{t - 1, i}$$")) --> s_prev;
+            f["$$f_{a - 1, t - 1}$$"] --> s_prev;
+            lambda_prev(("$$\lambda_{a - 1, t - 1, i}$$"))
+            s_prev(("$$s_{a - 1, t - 1, i}$$"))
+        end
+        
+        lambda_prev --> lambda_a(("$$\lambda_{a, t, i}$$"));
+        s_prev --> lambda_a;
+    end
+
+    %% Mean calculation
+    lambda_a --> mu(("$$\mu_{t, i}$$"));
+
+subgraph "Zero-augmentation"
+        xt["$$\mathbf{x}^{(p)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
+        betat(("$$\boldsymbol{\beta}_p$$")) --> rho;
+    end
+
+    %% Final Observation
+    mu --> Y{"$$Y_{t, i}$$"};
+
+    %% Other components
+    phi(("$$\phi$$")) --> Y;
+    rho --> Y;
+```
+
 
 ## Code & workflow
 
@@ -625,13 +627,14 @@ ggplot(data = forecast_fig) +
 
 * More realistic movement routines
 
-## Acknowledgements
 
+## Acknowledgments
 
-![](img/logo.png){.absolute bottom=10 right=85 width="200" height="200"}
+:::{layout-ncol=2}
+![](img/logo.png)
 
-![](img/finrisk.png){.absolute top=10 left=85 width="200" height="100"}
-
+![](img/finrisk.png)
+:::
 
 ---
 
