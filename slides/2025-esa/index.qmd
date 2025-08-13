@@ -248,7 +248,7 @@ cores <- 4
 
 * The [density of individuals]{.important} who [survive from the previous
   year]{.important} and their respective [estimated survival rate]{.important}:
-  $$ \lambda_{a, t, i} = s_{a - t, t - 1, i} \cdot \lambda_{a - t, t - 1, i}, $$
+  $$ \lambda_{a, t, i} = s_{a - 1, t - 1, i} \cdot \lambda_{a - 1, t - 1, i}, $$
   where $$\log(s_{a, t, i}) = \mathbf{x}^{(s)}_{t, i}
   \mathbf{\beta}_{s} + z^{(s)}_{t, i} - f_{a, t}$$
 :::
