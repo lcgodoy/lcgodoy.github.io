@@ -312,49 +312,21 @@
     "href": "slides/2025-esa/index.html#setup-notation",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Setup & Notation",
-    "text": "Setup & Notation\n\n\\(Y_{a, t, i}\\): Unobserved density of individuals of age \\(a\\), time \\(t\\) and site \\(i\\).\n\\(Y_{t, i} = \\sum_{a} Y_{a, t, i}\\): Observed density of individuals (all ages) at time \\(t\\) and site \\(i\\).\n\\(\\lambda_{a, t, i}\\): Expected age-specific density.\n\nBiological processes (recruitment, survival, and movement) are encoded through these parameters.\n\n\\(\\mu_{t, i} = \\sum_{a} \\lambda_{a, t, i}\\): Expected total density.\n\\(\\rho_{t, i} = \\mathrm{P}(Y_{t, i} = 0)\\): Probability of absence."
+    "text": "Setup & Notation\n\n\\(Y_{t, i}\\) is the observed density of individuals (all ages) at time \\(t\\) and site \\(i\\), and it follows a zero-augmented probability distribution.\n\\(\\rho_{t, i} = \\mathrm{P}(Y_{t, i} = 0)\\): Probability of absence.\n\\(\\mu_{t, i} = \\sum_{a} \\lambda_{a, t, i}\\): Expected total density.\n\\(\\lambda_{a, t, i}\\): Expected age-specific density.\n\nBiological processes (recruitment, survival, and movement) are encoded through these parameters.\n\n\n\n\n\\(g(\\cdot \\mid \\mu_{t, i}, \\phi)\\) is the pdf of a continuous probability distribution.\n\\(\\phi\\) is a nuisance parameter."
   },
   {
-    "objectID": "slides/2025-esa/index.html#modeling-assumption-zero-augmented-probability-density-function-pdf",
-    "href": "slides/2025-esa/index.html#modeling-assumption-zero-augmented-probability-density-function-pdf",
+    "objectID": "slides/2025-esa/index.html#model-assumptions",
+    "href": "slides/2025-esa/index.html#model-assumptions",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Modeling assumption: Zero-augmented probability density function (pdf)",
-    "text": "Modeling assumption: Zero-augmented probability density function (pdf)\n\\[ f(y_{t, i} \\mid \\mu_{t, i}, \\phi, \\rho_{t, i}) = \\begin{cases} \\rho_{t, i}, &\n  \\text{ if } y_{t, i} = 0, \\\\ (1 - \\rho_{t, i}) g(y_{t, i} \\mid \\mu_{t, i},\n  \\phi), & \\text{ if } y_{t, i} &gt; 0. \\end{cases} \\]\n\n\\(y_{t, i}\\) is a realization of \\(Y_{t, i}\\).\n\\(g(\\cdot \\mid \\mu_{t, i}, \\phi)\\) is the pdf of a continuous probability distribution.\n\\(\\phi\\) is a nuisance parameter."
+    "section": "Model assumptions!",
+    "text": "Model assumptions!"
   },
   {
-    "objectID": "slides/2025-esa/index.html#lets-look-at-some-model-assumptions",
-    "href": "slides/2025-esa/index.html#lets-look-at-some-model-assumptions",
+    "objectID": "slides/2025-esa/index.html#recruitment-survival",
+    "href": "slides/2025-esa/index.html#recruitment-survival",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Let’s look at some model assumptions!",
-    "text": "Let’s look at some model assumptions!"
-  },
-  {
-    "objectID": "slides/2025-esa/index.html#recruitment",
-    "href": "slides/2025-esa/index.html#recruitment",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Recruitment",
-    "text": "Recruitment\n\n\n\n\n\ngraph TD\n    xr[\"$$\\Large  \\mathbf{x}^{(r)}_{t, i}$$\"] --&gt; lambda1((\"$$\\Large \\lambda_{1, t, i}$$\"));\n    betar((\"$$\\Large \\boldsymbol{\\beta}_r$$\")) --&gt; lambda1;\n    zr((\"$$\\Large z^{(r)}_{t, i}$$\")) --&gt; lambda1;"
-  },
-  {
-    "objectID": "slides/2025-esa/index.html#survival",
-    "href": "slides/2025-esa/index.html#survival",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Survival",
-    "text": "Survival\n\n\n\n\n\ngraph TD\n    subgraph \"Time t-1\"\n        xs[\"$$\\Large \\mathbf{x}^{(s)}_{t - 1, i}$$\"] --&gt; s_prev;\n        betas((\"$$\\Large  \\boldsymbol{\\beta}_s$$\")) --&gt; s_prev;\n        zs((\"$$\\Large  z^{(s)}_{t - 1, i}$$\")) --&gt; s_prev;\n        f[\"$$\\Large  f_{a - 1, t - 1}$$\"] --&gt; s_prev;\n        lambda_prev((\"$$\\Large \\lambda_{a - 1, t - 1, i}$$\"))\n        s_prev((\"$$\\Large s_{a - 1, t - 1, i}$$\"))\n    end\n        \n    lambda_prev --&gt; lambda_a((\"$$\\Large \\lambda_{a, t, i}$$\"));\n    s_prev --&gt; lambda_a;"
-  },
-  {
-    "objectID": "slides/2025-esa/index.html#process-and-observation-error",
-    "href": "slides/2025-esa/index.html#process-and-observation-error",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Process and Observation error",
-    "text": "Process and Observation error\n\n\n\n\n\ngraph TD\n    %% Mean calculation\n    lambda_a((\"$$\\Large \\lambda_{a, t, i}$$\"));\n    lambda_a -- $$\\Large \\sum_a \\lambda_{a, t, i}$$ --&gt; mu((\"$$\\Large \\mu_{t, i}$$\"));\n\nsubgraph \"P(Y = 0)\"\n    xt[\"$$\\Large \\mathbf{x}^{(p)}_{t, i}$$\"] --&gt; rho((\"$$\\Large \\rho_{t, i}$$\"));\n    betat((\"$$\\Large \\boldsymbol{\\beta}_p$$\")) --&gt; rho;\nend\n\n%% Final Observation\n    mu --&gt; Y{\"$$\\Large Y_{t, i}$$\"};\n    %% Other components\n    phi((\"$$\\Large \\phi$$\")) --&gt; Y;\n    rho --&gt; Y;"
-  },
-  {
-    "objectID": "slides/2025-esa/index.html#demographic-processes",
-    "href": "slides/2025-esa/index.html#demographic-processes",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Demographic processes",
-    "text": "Demographic processes\n\n\n\n\n\ngraph TD\n    subgraph \"Demographic processes\"\n        %% Inputs and Parameters for lambda1\n        xr[\"$$\\mathbf{x}^{(r)}_{t, i}$$\"] --&gt; lambda1((\"$$\\lambda_{1, t, i}$$\"));\n        betar((\"$$\\boldsymbol{\\beta}_r$$\")) --&gt; lambda1;\n        zr((\"$$z^{(r)}_{t, i}$$\")) --&gt; lambda1;\n\n        %% Recursive part for lambda_a\n        subgraph \"Time t-1\"\n            xs[\"$$\\mathbf{x}^{(s)}_{t - 1, i}$$\"] --&gt; s_prev;\n            betas((\"$$\\boldsymbol{\\beta}_s$$\")) --&gt; s_prev;\n            zs((\"$$z^{(s)}_{t - 1, i}$$\")) --&gt; s_prev;\n            f[\"$$f_{a - 1, t - 1}$$\"] --&gt; s_prev;\n            lambda_prev((\"$$\\lambda_{a - 1, t - 1, i}$$\"))\n            s_prev((\"$$s_{a - 1, t - 1, i}$$\"))\n        end\n        \n        lambda_prev --&gt; lambda_a((\"$$\\lambda_{a, t, i}$$\"));\n        s_prev --&gt; lambda_a;\n    end\n\n    %% Mean calculation\n    lambda_a --&gt; mu((\"$$\\mu_{t, i}$$\"));\n\nsubgraph \"Zero-augmentation\"\n        xt[\"$$\\mathbf{x}^{(p)}_{t, i}$$\"] --&gt; rho((\"$$\\rho_{t, i}$$\"));\n        betat((\"$$\\boldsymbol{\\beta}_p$$\")) --&gt; rho;\n    end\n\n    %% Final Observation\n    mu --&gt; Y{\"$$Y_{t, i}$$\"};\n\n    %% Other components\n    phi((\"$$\\phi$$\")) --&gt; Y;\n    rho --&gt; Y;"
+    "section": "Recruitment & survival",
+    "text": "Recruitment & survival\n\nThe recruitment density is driven by the environmental conditions in the current year: \\[ \\log(\\lambda_{1, t, i}) =\n\\mathbf{x}^{(r)}_{t, i} \\mathbf{\\beta}_{r} + z^{(r)}_{t, i} \\]\nThe density of individuals who survive from the previous year and their respective estimated survival rate: \\[ \\lambda_{a, t, i} = s_{a - t, t - 1, i} \\cdot \\lambda_{a - t, t - 1, i}, \\] where \\[\\log(s_{a, t, i}) = \\mathbf{x}^{(s)}_{t, i}\n\\mathbf{\\beta}_{s} + z^{(s)}_{t, i} - f_{a, t}\\]\n\n\n\nModel can only be as good as the data…\n\\(Y_{a, t, i}\\): Unobserved density of individuals of age \\(a\\), time \\(t\\) and site \\(i\\).\n\\(Y_{t, i} = \\sum_{a} Y_{a, t, i}\\): Observed density of individuals (all ages) at time \\(t\\) and site \\(i\\).\n\\(\\lambda_{a, t, i}\\): Expected age-specific density.\n\nBiological processes (recruitment, survival, and movement) are encoded through these parameters.\n\n\\(\\mu_{t, i} = \\sum_{a} \\lambda_{a, t, i}\\): Expected total density.\n\n\n\n\nforgot my own comments."
   },
   {
     "objectID": "slides/2025-esa/index.html#code-workflow",
@@ -378,18 +350,11 @@
     "text": "Models fitted to the data\n\n\n\n\n\n\n\n\n\n\nModel\nNon-neg. PDF\n\\(\\rho_{i, t}\\)\nRecruitment (or Density)\nSurvival\n\n\n\n\nDRM (rec)\nGamma\nEffort + estimated density\nSST + SST2 + AR(1)\nIntercept + \\(f_{a, t}\\)\n\n\nDRM (surv)\nGamma\nEffort + estimated density\nAR(1)\nSBT + SBT2 + \\(f_{a, t}\\)\n\n\nSDM (GLM)\nLogNormal\nEffort\nSST + SST2"
   },
   {
-    "objectID": "slides/2025-esa/index.html#code-for-drm-rec",
-    "href": "slides/2025-esa/index.html#code-for-drm-rec",
+    "objectID": "slides/2025-esa/index.html#sample-code-for-drm-rec",
+    "href": "slides/2025-esa/index.html#sample-code-for-drm-rec",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Code for DRM (rec)",
-    "text": "Code for DRM (rec)\n\ndrm_rec &lt;-\n  fit_drm(.data = dat_train,\n          y_col = \"dens\", ## response variable: density\n          time_col = \"year\", ## vector of time points\n          site_col = \"patch\",\n          family = \"gamma\", ## other options: lognormal, loglogistic\n          seed = 202505,\n          formula_zero = ~ 1 + c_hauls,\n          formula_rec = ~ 1 + c_sst + I(c_sst * c_sst),\n          formula_surv = ~ 1,\n          f_mort = f_train,\n          n_ages = NROW(f_train),\n          adj_mat = adj_mat, ## A matrix for movement routine\n          ages_movement = c(0, 0,\n                            rep(1, 12),\n                            0, 0), ## ages allowed to move\n          .toggles = list(ar_re = \"rec\", ## other options: \"surv\", \"dens\"\n                          movement = 1,\n                          est_surv = 1,\n                          est_init = 0,\n                          minit = 1),\n          .priors = list(pr_phi_a = 1, pr_phi_b = .1,\n                         pr_alpha_a = 4.2, pr_alpha_b = 5.8,\n                         pr_zeta_a = 7, pr_zeta_b = 3))"
-  },
-  {
-    "objectID": "slides/2025-esa/index.html#code-for-drm-surv",
-    "href": "slides/2025-esa/index.html#code-for-drm-surv",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Code for DRM (surv)",
-    "text": "Code for DRM (surv)\n\ndrm_surv &lt;-\n  fit_drm(.data = dat_train,\n          y_col = \"dens\", ## response variable: density\n          time_col = \"year\", ## vector of time points\n          site_col = \"patch\",\n          family = \"gamma\", ## other options: lognormal, loglogistic\n          seed = 202505,\n          formula_zero = ~ 1 + c_hauls,\n          formula_rec = ~ 1,\n          formula_surv = ~ 1 + c_sbt + I(c_sst * c_sbt),\n          f_mort = f_train,\n          n_ages = NROW(f_train),\n          adj_mat = adj_mat, ## A matrix for movement routine\n          ages_movement = c(0, 0,\n                            rep(1, 12),\n                            0, 0), ## ages allowed to move\n          .toggles = list(ar_re = \"rec\", ## other options: \"surv\", \"dens\"\n                          movement = 1,\n                          est_surv = 1,\n                          est_init = 0,\n                          minit = 1),\n          .priors = list(pr_phi_a = 1, pr_phi_b = .1,\n                         pr_alpha_a = 4.2, pr_alpha_b = 5.8,\n                         pr_zeta_a = 7, pr_zeta_b = 3))"
+    "section": "Sample code for DRM (rec)",
+    "text": "Sample code for DRM (rec)\n\ndrm_rec &lt;-\n  fit_drm(.data = dat_train,\n          y_col = \"dens\", ## response variable: density\n          time_col = \"year\", ## vector of time points\n          site_col = \"patch\",\n          family = \"gamma\", ## other options: lognormal, loglogistic\n          seed = 202505,\n          formula_zero = ~ 1 + c_hauls,\n          formula_rec = ~ 1 + c_sst + I(c_sst * c_sst),\n          formula_surv = ~ 1,\n          f_mort = f_train,\n          n_ages = NROW(f_train),\n          adj_mat = adj_mat, ## A matrix for movement routine\n          ages_movement = c(0, 0,\n                            rep(1, 12),\n                            0, 0), ## ages allowed to move\n          .toggles = list(ar_re = \"rec\", ## other options: \"surv\", \"dens\"\n                          movement = 1,\n                          est_surv = 1,\n                          est_init = 0,\n                          minit = 1),\n          .priors = list(pr_phi_a = 1, pr_phi_b = .1,\n                         pr_alpha_a = 4.2, pr_alpha_b = 5.8,\n                         pr_zeta_a = 7, pr_zeta_b = 3))"
   },
   {
     "objectID": "slides/2025-esa/index.html#effect-of-environmental-variables",
@@ -399,11 +364,11 @@
     "text": "Effect of environmental variables"
   },
   {
-    "objectID": "slides/2025-esa/index.html#forecasting",
-    "href": "slides/2025-esa/index.html#forecasting",
+    "objectID": "slides/2025-esa/index.html#sample-code-for-forecasting",
+    "href": "slides/2025-esa/index.html#sample-code-for-forecasting",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "Forecasting",
-    "text": "Forecasting\n\nThe predict_drm function requires at least three arguments:\n\ndrm: Output of a fit_drm call\nnew_data: A data.frame where we seek to obtain predictions\nseed: For reproducibility\n\n\n\nforecast_rec &lt;- predict_drm(drm = drm_rec,                         # Required\n                            new_data = dat_test,                   # Required\n                            seed = 152,                            # Required\n                            f_test = f_test,                       # Optional\n                            past_data = filter(dat_train,          # Optional\n                                               year == max(year)))\n\n\nWhen \\(f_{a, t}\\) is used at the time of model fit, we also need to provide f_test to predict_drm.\npast_data is necessary when survival is a function of environmental variables."
+    "section": "Sample code for forecasting",
+    "text": "Sample code for forecasting\n\nThe predict_drm function requires at least three arguments:\n\ndrm: Output of a fit_drm call\nnew_data: A data.frame where we seek to obtain predictions\nseed: For reproducibility\n\n\n\nforecast_rec &lt;- predict_drm(drm = drm_rec,                         # Required\n                            new_data = dat_test,                   # Required\n                            seed = 152,                            # Required\n                            f_test = f_test,                       # Optional\n                            past_data = filter(dat_train,          # Optional\n                                               year == max(year)))\n\n\n\nWhen \\(f_{a, t}\\) is used at the time of model fit, we also need to provide f_test to predict_drm.\npast_data is necessary when survival is a function of environmental variables."
   },
   {
     "objectID": "slides/2025-esa/index.html#forecasts-visualization-comparison",
@@ -424,7 +389,7 @@
     "href": "slides/2025-esa/index.html#future-work",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Future work",
-    "text": "Future work\n\nInclude population dynamic models that explicitly relate adult density to recruitment (e.g., Ricker, Belverton-Holt)\nGAM-like non-parametric relationships between processes and the environment\nSupport for length-composition data\nMore realistic movement routines"
+    "text": "Future work\n\nInclude population dynamic models that explicitly relate adult density to recruitment (e.g., Ricker, Belverton-Holt)\nGAM-like non-parametric relationships between processes and the environment\nSupport for length-composition data\nMore realistic movement/dispersal routines"
   },
   {
     "objectID": "slides/2025-esa/index.html#acknowledgments",
