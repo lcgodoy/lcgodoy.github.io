@@ -9,7 +9,7 @@ author:
     email: |
       ldcgodoy@ucsc.com
     affiliations: EEB Department, UCSC
-date: 2025-07-29
+date: 2025-08-13
 bibliography: references.bib
 csl: styles/asa.csl
 execute: 
@@ -77,7 +77,6 @@ theme_set(theme_void() +
                                                color = bck),
                 panel.background = element_rect(fill = bck,
                                                 color = bck)))
-
 
 my_theme <-
   theme_bw() +
@@ -159,7 +158,6 @@ dat_test <- dat_test |>
 
 chains <- 4
 cores <- 4
-
 ```
 
 # Introduction
@@ -212,6 +210,53 @@ cores <- 4
 
 ## Setup & Notation
 
+:::{.incremental}
+* $Y_{t, i}$ is the [observed density]{.important} of individuals (all ages) at
+  time $t$ and site $i$, and it follows a [zero-augmented probability
+  distribution]{.important}.
+
+* $\rho_{t, i} = \mathrm{P}(Y_{t, i} = 0)$: [Probability of
+  absence]{.important}.
+
+* $\mu_{t, i} = \sum_{a} \lambda_{a, t, i}$: [Expected total
+  density]{.important}.
+
+* $\lambda_{a, t, i}$: [Expected age-specific density]{.important}.
+  * [Biological processes]{.important2} (recruitment, survival, and movement)
+    are encoded through these parameters.
+:::
+
+::: {.notes}
+
+* $g(\cdot \mid \mu_{t, i}, \phi)$ is the [pdf]{.important} of a [continuous
+  probability distribution]{.important}.
+
+* $\phi$ is a nuisance parameter.
+
+:::
+
+## Model assumptions! {visibility="uncounted"}
+
+![](img/meme.jpeg){.nostretch width=75% fig-align="center"}
+
+## Recruitment & survival
+
+:::{.incremental}
+* The [recruitment]{.important} density is driven by the environmental
+  conditions in the current year: $$ \log(\lambda_{1, t, i}) =
+  \mathbf{x}^{(r)}_{t, i} \mathbf{\beta}_{r} + z^{(r)}_{t, i} $$
+
+* The [density of individuals]{.important} who [survive from the previous
+  year]{.important} and their respective [estimated survival rate]{.important}:
+  $$ \lambda_{a, t, i} = s_{a - t, t - 1, i} \cdot \lambda_{a - t, t - 1, i}, $$
+  where $$\log(s_{a, t, i}) = \mathbf{x}^{(s)}_{t, i}
+  \mathbf{\beta}_{s} + z^{(s)}_{t, i} - f_{a, t}$$
+:::
+
+:::{.notes}
+
+* Model can only be as good as the data...
+
 * $Y_{a, t, i}$: [Unobserved density]{.important} of individuals of age $a$,
   time $t$ and site $i$.
 
@@ -224,117 +269,14 @@ cores <- 4
 
 * $\mu_{t, i} = \sum_{a} \lambda_{a, t, i}$: [Expected total
   density]{.important}.
-  
-* $\rho_{t, i} = \mathrm{P}(Y_{t, i} = 0)$: [Probability of
-  absence]{.important}.
 
+:::
 
-## Modeling assumption: Zero-augmented probability density function (pdf)
+:::{.notes}
 
-$$ f(y_{t, i} \mid \mu_{t, i}, \phi, \rho_{t, i}) = \begin{cases} \rho_{t, i}, &
-  \text{ if } y_{t, i} = 0, \\ (1 - \rho_{t, i}) g(y_{t, i} \mid \mu_{t, i},
-  \phi), & \text{ if } y_{t, i} > 0. \end{cases} $$
+* forgot my own comments.
 
-* $y_{t, i}$ is a realization of $Y_{t, i}$.
-
-* $g(\cdot \mid \mu_{t, i}, \phi)$ is the [pdf]{.important} of a [continuous
-  probability distribution]{.important}.
-  
-* $\phi$ is a nuisance parameter.
-
-## Let's look at some model assumptions! {visibility="uncounted"}
-
-![](img/meme.jpeg){width=75%}
-
-
-## Recruitment {auto-animate=true}
-
-```{mermaid}
-%%| fig-align: center
-graph TD
-    xr["$$\Large  \mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\Large \lambda_{1, t, i}$$"));
-    betar(("$$\Large \boldsymbol{\beta}_r$$")) --> lambda1;
-    zr(("$$\Large z^{(r)}_{t, i}$$")) --> lambda1;
-```
-
-## Survival {auto-animate=true}
-
-```{mermaid}
-%%| fig-align: center
-graph TD
-    subgraph "Time t-1"
-        xs["$$\Large \mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
-        betas(("$$\Large  \boldsymbol{\beta}_s$$")) --> s_prev;
-        zs(("$$\Large  z^{(s)}_{t - 1, i}$$")) --> s_prev;
-        f["$$\Large  f_{a - 1, t - 1}$$"] --> s_prev;
-        lambda_prev(("$$\Large \lambda_{a - 1, t - 1, i}$$"))
-        s_prev(("$$\Large s_{a - 1, t - 1, i}$$"))
-    end
-        
-    lambda_prev --> lambda_a(("$$\Large \lambda_{a, t, i}$$"));
-    s_prev --> lambda_a;
-```
-
-## Process and Observation error {auto-animate=true}
-
-```{mermaid}
-%%| fig-align: center
-graph TD
-    %% Mean calculation
-    lambda_a(("$$\Large \lambda_{a, t, i}$$"));
-    lambda_a -- $$\Large \sum_a \lambda_{a, t, i}$$ --> mu(("$$\Large \mu_{t, i}$$"));
-
-subgraph "P(Y = 0)"
-    xt["$$\Large \mathbf{x}^{(p)}_{t, i}$$"] --> rho(("$$\Large \rho_{t, i}$$"));
-    betat(("$$\Large \boldsymbol{\beta}_p$$")) --> rho;
-end
-
-%% Final Observation
-    mu --> Y{"$$\Large Y_{t, i}$$"};
-    %% Other components
-    phi(("$$\Large \phi$$")) --> Y;
-    rho --> Y;
-```
-
-## Demographic processes {auto-animate=true}
-
-```{mermaid}
-graph TD
-    subgraph "Demographic processes"
-        %% Inputs and Parameters for lambda1
-        xr["$$\mathbf{x}^{(r)}_{t, i}$$"] --> lambda1(("$$\lambda_{1, t, i}$$"));
-        betar(("$$\boldsymbol{\beta}_r$$")) --> lambda1;
-        zr(("$$z^{(r)}_{t, i}$$")) --> lambda1;
-
-        %% Recursive part for lambda_a
-        subgraph "Time t-1"
-            xs["$$\mathbf{x}^{(s)}_{t - 1, i}$$"] --> s_prev;
-            betas(("$$\boldsymbol{\beta}_s$$")) --> s_prev;
-            zs(("$$z^{(s)}_{t - 1, i}$$")) --> s_prev;
-            f["$$f_{a - 1, t - 1}$$"] --> s_prev;
-            lambda_prev(("$$\lambda_{a - 1, t - 1, i}$$"))
-            s_prev(("$$s_{a - 1, t - 1, i}$$"))
-        end
-        
-        lambda_prev --> lambda_a(("$$\lambda_{a, t, i}$$"));
-        s_prev --> lambda_a;
-    end
-
-    %% Mean calculation
-    lambda_a --> mu(("$$\mu_{t, i}$$"));
-
-subgraph "Zero-augmentation"
-        xt["$$\mathbf{x}^{(p)}_{t, i}$$"] --> rho(("$$\rho_{t, i}$$"));
-        betat(("$$\boldsymbol{\beta}_p$$")) --> rho;
-    end
-
-    %% Final Observation
-    mu --> Y{"$$Y_{t, i}$$"};
-
-    %% Other components
-    phi(("$$\phi$$")) --> Y;
-    rho --> Y;
-```
+:::
 
 
 ## Code & workflow
@@ -386,7 +328,7 @@ Figure source: [ASMFC](https://asmfc.org/species/summer-flounder/)
 | **DRM (surv)** | Gamma        | Effort + estimated density | AR(1)                    | SBT + SBT^2^ + $f_{a, t}$ |
 | **SDM (GLM)**  | LogNormal    | Effort                     | SST + SST^2^             |                           |
 
-## Code for DRM (rec)
+## Sample code for DRM (rec)
 
 ```{r}
 #| label: drm-rec
@@ -420,39 +362,39 @@ drm_rec <-
                          pr_zeta_a = 7, pr_zeta_b = 3))
 ```
 
-## Code for DRM (surv)
+<!-- ## Code for DRM (surv) -->
 
-```{r}
-#| label: drm-surv
-#| eval: false
-#| echo: true
-#| output: false
+<!-- ```{r} -->
+<!-- #| label: drm-surv -->
+<!-- #| eval: false -->
+<!-- #| echo: true -->
+<!-- #| output: false -->
 
-drm_surv <-
-  fit_drm(.data = dat_train,
-          y_col = "dens", ## response variable: density
-          time_col = "year", ## vector of time points
-          site_col = "patch",
-          family = "gamma", ## other options: lognormal, loglogistic
-          seed = 202505,
-          formula_zero = ~ 1 + c_hauls,
-          formula_rec = ~ 1,
-          formula_surv = ~ 1 + c_sbt + I(c_sst * c_sbt),
-          f_mort = f_train,
-          n_ages = NROW(f_train),
-          adj_mat = adj_mat, ## A matrix for movement routine
-          ages_movement = c(0, 0,
-                            rep(1, 12),
-                            0, 0), ## ages allowed to move
-          .toggles = list(ar_re = "rec", ## other options: "surv", "dens"
-                          movement = 1,
-                          est_surv = 1,
-                          est_init = 0,
-                          minit = 1),
-          .priors = list(pr_phi_a = 1, pr_phi_b = .1,
-                         pr_alpha_a = 4.2, pr_alpha_b = 5.8,
-                         pr_zeta_a = 7, pr_zeta_b = 3))
-```
+<!-- drm_surv <- -->
+<!--   fit_drm(.data = dat_train, -->
+<!--           y_col = "dens", ## response variable: density -->
+<!--           time_col = "year", ## vector of time points -->
+<!--           site_col = "patch", -->
+<!--           family = "gamma", ## other options: lognormal, loglogistic -->
+<!--           seed = 202505, -->
+<!--           formula_zero = ~ 1 + c_hauls, -->
+<!--           formula_rec = ~ 1, -->
+<!--           formula_surv = ~ 1 + c_sbt + I(c_sst * c_sbt), -->
+<!--           f_mort = f_train, -->
+<!--           n_ages = NROW(f_train), -->
+<!--           adj_mat = adj_mat, ## A matrix for movement routine -->
+<!--           ages_movement = c(0, 0, -->
+<!--                             rep(1, 12), -->
+<!--                             0, 0), ## ages allowed to move -->
+<!--           .toggles = list(ar_re = "rec", ## other options: "surv", "dens" -->
+<!--                           movement = 1, -->
+<!--                           est_surv = 1, -->
+<!--                           est_init = 0, -->
+<!--                           minit = 1), -->
+<!--           .priors = list(pr_phi_a = 1, pr_phi_b = .1, -->
+<!--                          pr_alpha_a = 4.2, pr_alpha_b = 5.8, -->
+<!--                          pr_zeta_a = 7, pr_zeta_b = 3)) -->
+<!-- ``` -->
 
 
 <!-- ## Effect of environmental variables on specific processes -->
@@ -528,7 +470,7 @@ ggplot(data = surv_summary,
        y = "Est. survival")
 ```
 
-## Forecasting
+## Sample code for forecasting
 
 * The `predict_drm` function requires at least three arguments: 
   * `drm`: Output of a `fit_drm` call
@@ -548,13 +490,18 @@ forecast_rec <- predict_drm(drm = drm_rec,                         # Required
                                                year == max(year)))
 ```
 
+:::{.notes}
+
 * When $f_{a, t}$ is used at the time of model fit, we also need to provide
   `f_test` to `predict_drm`.
 
 * `past_data` is necessary when survival is a function of environmental
   variables.
-  
+
+:::
+
 ## Forecasts visualization & comparison
+
 
 ```{r}
 #| label: forecast
@@ -603,29 +550,30 @@ ggplot(data = forecast_fig) +
 
 ## Highlights
 
-* The `drmr` substantially lowers the barrier for ecologists to use the DRM in
-  their applications.
+* The `drmr` substantially [lowers the barrier]{.important} for
+  [ecologists]{.important} to use the [DRM in their applications]{.important}.
 
-* The code is easy to use and takes advantage of what has been developed for
-  `Stan`: visualization, diagnostic tools, and estimation.
+* The code is [easy to use]{.important} and takes advantage of what has been
+  developed for `Stan`: visualization, diagnostic tools, and estimation.
 
-* `drmr` allows for empirically testing which processes are more important to
-  predict the distribution of a species.
+* `drmr` allows for [empirically testing]{.important} which
+  [processes]{.important} are more [important to predict]{.important} the
+  distribution of a [species]{.important}.
   
 * The more complex a model is, the more (and better) data we need to be able to
   estimate those relationships.
 
-
 ## Future work
 
-* Include population dynamic models that explicitly relate adult density to
-  recruitment (e.g., Ricker, Belverton-Holt)
+* Include population dynamic models that [explicitly relate adult density to
+  recruitment]{.important} (e.g., Ricker, Belverton-Holt)
 
-* GAM-like non-parametric relationships between processes and the environment
+* [GAM]{.important}-like non-parametric relationships between [processes and the
+  environment]{.important}
 
-* Support for length-composition data
+* Support for [length-composition data]{.important}
 
-* More realistic movement routines
+* More [realistic movement/dispersal]{.important} routines
 
 
 ## Acknowledgments
