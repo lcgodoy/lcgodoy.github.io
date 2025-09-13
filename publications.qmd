@@ -292,5 +292,6 @@ Results from the women's dermatologic society mentorship survey.
 Bandyopadhyay, D. (2021). Can Gaussian Markov random fields handle
 spatial confounding? *Journal of the Indian Statistical Association*,
 *59*(2), 197--220.
+<https://drive.google.com/file/d/1rmxyH_7IDp8KFtIGxb6Jw_auNNbMKB3A/view>
 :::
 :::::::::::::::::::::::::::::::::::::::::
