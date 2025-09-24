@@ -1,0 +1,159 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+// New Color Palette
+$clr-dark-slate: #4A586E;   // Primary text, dark accents
+$clr-steel-blue: #377BA5;   // Headings, links, primary accents
+$clr-teal: #42A898;         // Secondary accents, selections
+$clr-aqua: #50C99C;         // Tertiary accents, highlights on dark backgrounds
+$clr-mint: #65F0A5;         // Subtle highlights, light backgrounds (e.g., table stripes)
+$clr-brown: #A18377;        // Borders, subdued/auxiliary text
+$clr-white: #FFFFFF;
+$clr-light-grey: #f0f0f0;   // Fallback light grey for very subtle elements
+
+// Base Typography
+$presentation-heading-font: "Roboto Slab", serif !default;
+$font-family-sans-serif: "Lato", sans-serif !default;
+$presentation-font-size-root: 35px; // As per your original file
+
+// Core Colors
+// $body-bg: $clr-white !default;
+$body-bg: #FFFFFF !default;
+// $body-color: $clr-dark-slate !default;
+$body-color: #4A586E !default;
+// $link-color: $clr-steel-blue !default;
+$link-color: #377BA5 !default;
+// $selection-bg: $clr-teal !default;
+$selection-bg: #42A898 !default;
+// $selection-color: $clr-white !default; // Explicitly set text color for selections
+$selection-color: #FFFFFF !default; // Explicitly set text color for selections
+
+$secondary_bg: #4A586E;
+
+// Headings
+// $presentation-heading-font: "League Gothic", sans-serif !default; // Kept your original commented out
+$presentation-heading-color: $clr-steel-blue !default; // Using a prominent color from the palette
+$presentation-heading-text-transform: uppercase !default;
+
+// Code Blocks
+$code-block-border-color: mix($clr-brown, $clr-white, 70%) !default; // Light brownish-grey, less intrusive
+
+// Table specific colors
+$table-border-color: mix($clr-brown, $clr-white, 50%) !default; // A visible but not overpowering border
+$table-stripe-bg: mix($clr-mint, $clr-white, 15%) !default; // Very subtle mint for stripes
+
+/*-- scss:rules --*/
+
+html * {
+  color-profile: sRGB; // Your original rule
+  rendering-intent: auto; // Your original rule
+}
+
+.important {
+  color: $clr-teal; // Using a strong accent color
+  font-weight: bolder;
+}
+
+.important2 {
+  color: $clr-aqua; // A distinct, secondary accent color
+  font-weight: bolder;
+}
+
+/*-- section slide --*/
+.section_slide {
+  background-color: $clr-dark-slate !important; // Dark background for contrast
+  color: $clr-white; // White text for readability
+
+  h1, h2, h3, h4, h5, h6 { // Ensuring all heading levels are covered
+    color: $clr-aqua; // Light and vibrant heading color on dark background
+  }
+}
+
+/*-- title slide --*/
+#title-slide {
+  text-align: left;
+
+  .title {
+    color: $clr-steel-blue; // Primary heading color
+    font-size: 1.4em;
+    font-weight: bolder;
+  }
+
+  .subtitle {
+    color: $clr-teal; // Complementary color for subtitle
+    font-style: italic;
+    margin-top: 0em;
+    font-weight: lighter;
+  }
+
+  .institute,
+  .quarto-title-affiliation,
+  .quarto-title-author-email {
+    font-style: italic;
+    color: $clr-brown; // Subdued color for less prominent info
+    // font-size: 80%; // Your original commented out
+    // color: #7F7F7F; // Your original commented out
+  }
+
+  .author,
+  .quarto-title-author-name {
+    color: $clr-dark-slate; // Standard text color
+  }
+
+  .quarto-title-authors {
+    display: flex;
+    justify-content: left;
+
+    .quarto-title-author {
+      padding-left: 0em;
+      padding-right: 0em;
+      width: 100%;
+    }
+  }
+}
+
+/*-- helps to align content --*/
+.v-center-container { // Your original rule
+  display: flex;
+  align-items: center;
+  height: 90%;
+}
+
+/*-- tables --*/
+.table-striped {
+  > tbody > tr:nth-of-type(odd) > * {
+    background-color: $table-stripe-bg; // Applying new subtle stripe color
+  }
+}
+
+.reveal table {
+  margin: auto;
+  border-collapse: collapse; // Ensures borders are neat
+  border-spacing: 0;
+  font-size: 0.8em;
+  border-bottom: 2px solid $table-border-color; // Main bottom border for the table
+}
+
+.reveal table th,
+.reveal table td {
+  border: none; // Removing default internal borders
+  padding: .23em;
+  text-align: left;
+  font-weight: normal;
+}
+
+.reveal table thead th {
+  border-bottom: 2px solid $table-border-color; // Distinct border for header row
+  font-weight: bold; // Making column headers bold as per your original rule
+}
+
+/* Styling table captions */
+.reveal table caption {
+  color: $clr-brown; // Using a subdued palette color
+  font-variant: small-caps; // As per your original rule
+}
+
+.fw table { // Your original rule
+  width: 100%;
+}

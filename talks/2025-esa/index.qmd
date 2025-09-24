@@ -1,0 +1,57 @@
+---
+title: |
+  `drmr`: A Bayesian approach to Dynamic Range Models in `R`
+description: |
+    Talk given at ESA 2025.
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2025-08-13"
+categories:
+  - Species distribution models
+  - Population dynamics
+---
+
+### Details
+
+* **Date**: Aug 13, 2025
+
+* **Location**: Baltimore, MD - USA
+
+* [Slides](https://lcgodoy.me/slides/2025-esa)
+
+### Abstract
+
+Predicting species' responses to environmental change is a critical challenge in
+ecology. Traditional species distribution models (SDMs) often rely on
+correlative relationships, limiting their ability to forecast distributions
+under novel conditions. Dynamic range models (DRMs) offer a more mechanistic
+approach by explicitly incorporating demographic processes (e.g., recruitment,
+survival, and movement) that drive range dynamics. However, the complexity of
+DRMs has hindered their widespread adoption. We introduce `drmr`, an open-source
+`R` package that significantly lowers the barrier to entry for DRM
+applications. `drmr` provides a user-friendly framework for building, fitting,
+and projecting age-structured DRMs, leveraging the power of `Stan` for efficient
+Bayesian inference. Users can readily relate environmental drivers to ecological
+processes such as recruitment and mortality. There is also an option to allow
+for movement and limit the age groups that can move. This flexibility allows
+researchers to tailor models to specific ecological systems and test competing
+hypotheses about the factors driving change in species distributions. The
+package facilitates the integration of spatially and temporally explicit
+environmental data and provides tools for model evaluation, visualization, and
+projection under future scenarios. Through simulation studies, we demonstrate
+that `drmr`-based DRMs outperform traditional SDMs in forecasting accuracy under
+environmental change. `drmr` provides a powerful and accessible tool for
+ecologists to develop and apply mechanistic DRMs. An application using Summer
+Flounder data corroborates the findings of the simulation study.  Specifically,
+the DRM's root mean square error of prediction was 43% smaller than that of the
+comparable SDM. By explicitly modeling demographic processes and their
+environmental drivers, `drmr` enables more robust predictions of species
+distributions, contributing to improved conservation planning and management in
+the face of global change.
+
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-esa" title="Slides"></iframe>
+```

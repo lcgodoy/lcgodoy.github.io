@@ -1,0 +1,43 @@
+---
+title: |
+  On Spatial Statistics and Sets
+description: |
+    Talk given at the Department of Epidemiology \& Biostatistics at University of California San Francisco
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2025-08-18"
+categories:
+  - Spatial statistics
+  - Gaussian process
+---
+
+### Details
+
+* **Date**: Mar 12, 2025
+
+* **Location**: Santiago, Chile (Remote)
+
+* [Slides](https://lcgodoy.me/slides/2025-puc)
+
+### Abstract
+
+Accurate modeling of spatial dependence is crucial for analyzing spatial data
+and influencing parameter estimation and predictions. Existing models for areal
+data often struggle to differentiate between different polygon shapes, while
+data fusion models face computational challenges with larger datasets. To
+address these limitations, we propose the Hausdorff-Gaussian process (HGP), a
+versatile model using the Hausdorff distance to capture spatial dependence in
+point and areal data. We introduce a valid correlation function, accommodating
+various modeling techniques, including geostatistical and areal models, and
+integrate it into generalized linear mixed-effects models for data fusion. We
+demonstrate the HGP's competitive performance regarding goodness-of-fit and
+prediction through simulations and real-world applications involving both areal
+data and data fusion. The HGP offers a flexible and robust solution for modeling
+diverse spatial data with potential public health and climate science
+applications.
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-puc" title="Slides"></iframe>
+```

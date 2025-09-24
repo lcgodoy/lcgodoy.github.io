@@ -1,0 +1,167 @@
+/*-- scss:defaults --*/
+
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto+Slab:wght@100..900&display=swap');
+
+// UCSC-Inspired Color Palette (ucsc.edu/brand) - ACCESSIBILITY ENHANCED
+$ucsc-blue: #00458C;      // Official UCSC Blue. Great contrast on light backgrounds (8.28:1).
+$ucsc-gold: #FDC700;      // Official UCSC Gold. Use for backgrounds/borders, NOT for text on light backgrounds.
+$ucsc-gold-accessible: #C65102; // A darker gold for text, meets WCAG AA (4.54:1).
+$ucsc-midnight: #002C5A;  // A darker blue for primary text and dark backgrounds. High contrast (11.8:1).
+$ucsc-ocean: #A9D0F5;      // A light, misty blue for secondary accents or text on dark backgrounds.
+$ucsc-slate: #58595B;      // A neutral grey for borders and subdued text.
+$clr-background: #F8F9FA; // A clean, very light off-white for the main background.
+$clr-white: #FFFFFF;
+
+// Base Typography
+$presentation-heading-font: "Roboto Slab", serif !default;
+$font-family-sans-serif: "Lato", sans-serif !default;
+$presentation-font-size-root: 35px;
+
+// Core Colors
+$body-bg: #F8F9FA !default;
+$body-color: #002C5A !default;
+$link-color: #00458C !default;
+$selection-bg: #0f76de !default;
+$selection-color: #FFFFFF !default;
+
+// Background for section slides (e.g., slides with just a title)
+$secondary_bg: #A9D0F5;
+
+// Headings
+$presentation-heading-color: $ucsc-blue !default;
+$presentation-heading-text-transform: uppercase !default;
+
+// Code Blocks
+$code-block-border-color: mix($ucsc-slate, $clr-white, 40%) !default;
+
+// Table specific colors
+$table-border-color: mix($ucsc-slate, $clr-white, 50%) !default;
+$table-stripe-bg: mix($ucsc-blue, $clr-white, 10%) !default; // A very subtle blue tint for stripes
+
+// Mermaid variables
+$mermaid-bg-color: $body-bg;
+$mermaid-edge-color: $ucsc-slate;
+$mermaid-fg-color: $body-color;
+$mermaid-fg-color--lighter: lighten($ucsc-slate, 15%);
+$mermaid-fg-color--lightest: lighten($ucsc-slate, 30%);
+$mermaid-bg-color--lighter: lighten($ucsc-midnight, 10%);
+$mermaid-bg-color--lightest: lighten($ucsc-midnight, 20%);
+$mermaid-font-family: $font-family-sans-serif;
+$mermaid-label-bg-color: $body-bg;
+$mermaid-label-fg-color: $ucsc-blue;
+$mermaid-node-bg-color: rgba($ucsc-blue, 0.1);
+$mermaid-node-fg-color: $ucsc-blue;
+
+/*-- scss:rules --*/
+
+html * {
+    color-profile: sRGB;
+    rendering-intent: auto;
+}
+
+// Use for primary highlighted text - ACCESSIBLE VERSION
+.important {
+    color: #0f76de;
+    font-weight: bolder;
+}
+
+// Use for secondary highlighted text. This already has great contrast.
+.important2 {
+    color: $ucsc-gold-accessible;
+    font-weight: bolder;
+}
+
+/*-- section slide --*/
+.section_slide {
+    background-color: $secondary_bg !important; 
+    h1, h2, h3, h4, h5, h6 {
+        color: $ucsc-ocean; // Using the light ocean blue for headings on dark backgrounds
+    }
+}
+
+/*-- title slide --*/
+#title-slide {
+    text-align: left;
+
+    .title {
+        color: $ucsc-blue;
+        font-size: 1.4em;
+        font-weight: bolder;
+    }
+
+    .subtitle {
+        // Here we use the accessible gold since it's text on a light background
+        color: $ucsc-gold-accessible;
+        font-style: italic;
+        margin-top: 0em;
+        font-weight: lighter;
+    }
+
+    .institute,
+    .quarto-title-affiliation,
+    .quarto-title-author-email {
+        font-style: italic;
+        color: $ucsc-slate;
+    }
+
+    .author,
+    .quarto-title-author-name {
+        color: $ucsc-midnight;
+    }
+
+    .quarto-title-authors {
+        display: flex;
+        justify-content: left;
+
+        .quarto-title-author {
+            padding-left: 0em;
+            padding-right: 0em;
+            width: 100%;
+        }
+    }
+}
+
+/*-- helps to align content --*/
+.v-center-container {
+    display: flex;
+    align-items: center;
+    height: 90%;
+}
+
+/*-- tables --*/
+.table-striped {
+    > tbody > tr:nth-of-type(odd) > * {
+        background-color: $table-stripe-bg;
+    }
+}
+
+.reveal table {
+    margin: auto;
+    border-collapse: collapse;
+    border-spacing: 0;
+    font-size: 0.8em;
+    border-bottom: 2px solid $table-border-color;
+}
+
+.reveal table th,
+.reveal table td {
+    border: none;
+    padding: .23em;
+    text-align: left;
+    font-weight: normal;
+}
+
+.reveal table thead th {
+    border-bottom: 2px solid $table-border-color;
+    font-weight: bold;
+}
+
+/* Styling table captions */
+.reveal table caption {
+    color: $ucsc-slate;
+    font-variant: small-caps;
+}
+
+.fw table {
+    width: 100%;
+}

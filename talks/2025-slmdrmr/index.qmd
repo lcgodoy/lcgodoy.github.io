@@ -5,7 +5,7 @@ description: |
     Talk given at GCRG Spring lab meeting.
 author: 
   - name: Lucas da Cunha Godoy
-date: "2025-04-21"
+date: "2025-03-12"
 categories:
   - Species distribution models
   - Population dynamics
