@@ -41,21 +41,27 @@ near-term forecast for a marine species on the move. *Ecology Letters*.
 <https://doi.org/10.32942/X24D00>
 :::
 
+::: {#ref-rpkg:smile .csl-entry}
+\[6\] **Godoy, L. da C.** (2025). *[smile]{.nocase}: Spatial misalignment,
+interpolation, linkage, and estimation*.
+<https://doi.org/10.32614/CRAN.package.smile>
+:::
+
 ::: {#ref-godoy2025note .csl-entry}
-\[6\] **Godoy, L. da C.**, Prates, M., & Quintana, F. (2025). *A note on
+\[7\] **Godoy, L. da C.**, Prates, M., & Quintana, F. (2025). *A note on
 defining positive definite functions*.
 <https://arxiv.org/abs/2502.15146>
 :::
 
 ::: {#ref-hernandez2025heat .csl-entry}
-\[7\] Hernández, G. G., Seemann, J. R., **Godoy, L. da C.**, Slot, M., &
+\[8\] Hernández, G. G., Seemann, J. R., **Godoy, L. da C.**, Slot, M., &
 García-Robledo, C. (2025). *Heat tolerance of tropical herbaceous plants
 increases with elevation*. Cold Spring Harbor Laboratory.
 <https://doi.org/10.1101/2025.03.12.642681>
 :::
 
 ::: {#ref-michelin2025fast .csl-entry}
-\[8\] Michelin, L., **Godoy, L. da C.**, Ramos, H. S., & Prates, M. O.
+\[9\] Michelin, L., **Godoy, L. da C.**, Ramos, H. S., & Prates, M. O.
 (2025). Fast mixture spatial regression: A mixture in the geographical
 and feature space applied to predict porosity in the Post-salt. *Spatial
 Statistics*, *65*, 100873.
@@ -63,7 +69,7 @@ Statistics*, *65*, 100873.
 :::
 
 ::: {#ref-moriarty2025findings .csl-entry}
-\[9\] Moriarty, K. L., Manfredi, K., Carrel, P., Kryzanski, E.,
+\[10\] Moriarty, K. L., Manfredi, K., Carrel, P., Kryzanski, E.,
 Schwartz, D. A., **Godoy, L. da C.**, Kuo, C.-L., & Shields, A. (2025).
 Findings of reduced head circumference with COVID-19 infection in the
 third trimester: A retrospective cohort study. *Biomedicines*, *13*(4).
@@ -71,7 +77,7 @@ third trimester: A retrospective cohort study. *Biomedicines*, *13*(4).
 :::
 
 ::: {#ref-sieger2025effect .csl-entry}
-\[10\] Sieger, M. L., **Godoy, L. da C.**, Moore, T. E., Nichols, C.,
+\[11\] Sieger, M. L., **Godoy, L. da C.**, Moore, T. E., Nichols, C.,
 Goldsborough, E. J., Chen, S., Terplan, M., Griffin, B. A., & Patrick,
 S. W. (2025). Connecticut's novel prenatal substance exposure policy is
 associated with declining CPS reports and foster placements. *Health
@@ -80,14 +86,14 @@ Affairs*, *44*(7), 821--829.
 :::
 
 ::: {#ref-chaluparambil2024age .csl-entry}
-\[11\] Chaluparambil, M., Abu-Arqub, S., Kuo, C.-L., **Godoy, L. da C.**,
+\[12\] Chaluparambil, M., Abu-Arqub, S., Kuo, C.-L., **Godoy, L. da C.**,
 Upadhyay, M., & Yadav, S. (2024). Age-stratified assessment of
 orthodontic tooth movement outcomes with clear aligners. *Progress in
 Orthodontics*, *25*(1), 43. <https://doi.org/10.1186/s40510-024-00542-2>
 :::
 
 ::: {#ref-abu2024perceptions .csl-entry}
-\[12\] Abu-Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, &
+\[13\] Abu-Arqub, S., Al-Moghrabi, D., Kuo, C.-L., **Godoy, L. da C.**, &
 Uribe, F. (2024). Perceptions and utilization of tele-orthodontics: A
 survey of the members of the American Association of Orthodontists.
 *Progress in Orthodontics*, *25*(1), 16.
@@ -95,7 +101,7 @@ survey of the members of the American Association of Orthodontists.
 :::
 
 ::: {#ref-abuarqub2024retrospective .csl-entry}
-\[13\] Abu-Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L.,
+\[14\] Abu-Arqub, S., Greene, R., Greene, S., Laing, K., Kuo, C.-L.,
 **Godoy, L. da C.**, & Uribe, F. (2024). Retrospective evaluation of the
 success rate and factors associated with the stability of alveolar ridge
 orthodontic miniscrews: Pilot study. *Journal of the World Federation of
@@ -104,7 +110,7 @@ https://doi.org/<https://doi.org/10.1016/j.ejwf.2024.02.001>
 :::
 
 ::: {#ref-andreyeva2024federal .csl-entry}
-\[14\] Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L.
+\[15\] Andreyeva, T., Moore, T. E., **Godoy, L. da C.**, & Kenney, E. L.
 (2024). Federal nutrition assistance for young children: Underutilized
 and unequally accessed. *American Journal of Preventive Medicine*,
 *66*(1), 18--26.
@@ -112,7 +118,7 @@ https://doi.org/<https://doi.org/10.1016/j.amepre.2023.09.008>
 :::
 
 ::: {#ref-fryc2024prevalence .csl-entry}
-\[15\] Fryc, G. A., **Godoy, L. da C.**, Kuo, C.-L., & Lurie, A. G. (2024).
+\[16\] Fryc, G. A., **Godoy, L. da C.**, Kuo, C.-L., & Lurie, A. G. (2024).
 Prevalence of likely retro-odontoid pseudotumor in patients receiving
 dental CBCT examinations. *Oral Surgery, Oral Medicine, Oral Pathology
 and Oral Radiology*, *137*(3), 301--309.
@@ -120,14 +126,8 @@ and Oral Radiology*, *137*(3), 301--309.
 :::
 
 ::: {#ref-rpkg:sapo .csl-entry}
-\[16\] **Godoy, L. da C.** (2024). *[sapo]{.nocase}: Spatial association of
+\[17\] **Godoy, L. da C.** (2024). *[sapo]{.nocase}: Spatial association of
 different types of polygon*. <https://CRAN.R-project.org/package=sapo>
-:::
-
-::: {#ref-rpkg:smile .csl-entry}
-\[17\] **Godoy, L. da C.** (2024). *[smile]{.nocase}: Spatial misalignment,
-interpolation, linkage, and estimation*.
-<https://doi.org/10.32614/CRAN.package.smile>
 :::
 
 ::: {#ref-godoy2024statistical .csl-entry}
@@ -140,8 +140,7 @@ Environmental Statistics*. <https://doi.org/10.48550/arXiv.2208.07900>
 ::: {#ref-godoy2024voronoi .csl-entry}
 \[19\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2024). Voronoi linkage
 between mismatching voting stations and census tracts in analyzing the
-2018 Brazilian presidential election data. *New England Journal of
-Statistics in Data Science*.
+2018 Brazilian presidential election data. *Spatial Statistics*.
 :::
 
 ::: {#ref-irsheid2024comparative .csl-entry}
