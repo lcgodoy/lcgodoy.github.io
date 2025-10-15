@@ -1,0 +1,122 @@
+\begin{tikzpicture}[
+  node distance=1.5cm and 2.5cm, % Default horizontal distance
+  % --- STYLES ---
+  % Style for core modeling process plates
+  process_plate/.style={
+    rectangle, rounded corners=3pt, draw=blue!80, line width=1pt,
+    fill=none, inner sep=8pt
+  },
+  % Style for all data input plates
+  io_plate/.style={
+    rectangle, rounded corners=3pt, draw=teal!80, line width=1pt,
+    fill=none, inner sep=8pt
+  },
+  % NEW: Style for final output/goal plates
+  output_plate/.style={
+    rectangle, rounded corners=3pt, draw=green!60!black, line width=1pt,
+    fill=none, inner sep=8pt
+  },
+  % Style for the decision diamond
+  decision/.style={
+    diamond, aspect=1.5, draw=orange!80, fill=orange!10, line width=1pt,
+    minimum width=2cm, minimum height=1cm, align=center
+  },
+  % --- Inner Content Styles ---
+  content_node/.style={
+    rectangle, fill=white, draw=gray!50, align=center, text width=3.2cm
+  },
+  % CORRECTED: Added '/.style' to the definition
+  table_content_style/.style={
+    rectangle, fill=white, draw=gray!50, align=center
+  },
+  title_node/.style={
+    font=\large\bfseries, color=gray!80!black,
+  },
+  % --- Arrow Styles ---
+  arrow/.style={->, line width=1pt, >={Stealth[length=2.5mm, width=1.5mm]}},
+  loop/.style={->, line width=1pt, color=red!70!black, >={Stealth[length=2.5mm, width=1.5mm]}}
+  ]
+
+  % === MAIN WORKFLOW (Center Column) ===
+  % Step 1: Input Data
+  \node[table_content_style] (table) {
+    \ttfamily\small
+    \begin{tabular}{cccc}
+      \textbf{t} & \textbf{p} & \textbf{y} & \textbf{x} \\
+      \hline
+      1 & 1 & 10.2 & 3.4 \\
+      1 & 2 & 9.8  & 3.5 \\
+      \vdots & \vdots & \vdots & \vdots
+    \end{tabular}
+  };
+  \node[title_node, above=3mm of table] (data_title) {Input Data};
+  \node[io_plate, fit=(data_title) (table)] (data) {};
+
+  % Step 2: Fit Model
+  \node[content_node, below=of data] (fit_content) {\texttt{fit\_drm()}};
+  \node[title_node, above=3mm of fit_content] (fit_title) {Fit Model};
+  \node[process_plate, fit=(fit_title) (fit_content)] (fit) {};
+
+  % Step 3: Diagnose MCMC
+  \node[content_node, below=of fit] (diagnose_content) {
+    \footnotesize \texttt{summary()}, trace and empirical density plots};
+  \node[title_node, above=3mm of diagnose_content] (diagnose_title) {Diagnose MCMC};
+  \node[process_plate, fit=(diagnose_title) (diagnose_content)] (diagnose) {};
+
+  % Step 4: Decision
+  \node[decision, below=of diagnose] (check) {Converged?};
+
+
+  % === LEFT BRANCH (Refinement Loop) ===
+  \node[content_node, left=3.5cm of check] (refine_content) { \footnotesize Change
+    \texttt{family}, priors, and/or rethink underlying process};
+  \node[title_node, above=3mm of refine_content] (refine_title) {Refine Model};
+  \node[process_plate, fit=(refine_title) (refine_content)] (refine) {};
+
+
+  % === RIGHT BRANCH (Analysis Path) ===
+  % Outputs
+  \node[content_node, text width=2.5cm, right=3.5cm of diagnose] (understand_content) {
+    \texttt{marg\_rec()} \\ \texttt{marg\_surv()} \\ \texttt{marg\_pabs()}
+  };
+  \node[title_node, above=3mm of understand_content] (understand_title) {Understand};
+  \node[output_plate, fit=(understand_title) (understand_content)] (understand) {}; % Applied new style
+
+  \node[content_node, text width=2.5cm, below=of understand] (forecast_content) {
+    \texttt{predict\_drm()}
+  };
+  \node[title_node, above=3mm of forecast_content] (forecast_title) {Forecast};
+  \node[output_plate, fit=(forecast_title) (forecast_content)] (forecast) {}; % Applied new style
+
+  % New Data Inputs for the right branch (stacked vertically for clarity)
+  \node[table_content_style, right=of understand] (x_table) {
+    \ttfamily\small \begin{tabular}{c} \textbf{x} \\ \hline 1.1 \\ 2.3 \\ \vdots \end{tabular}
+  };
+  \node[title_node, font=\small\bfseries, above=2mm of x_table] (x_title) {New Data};
+  \node[io_plate, inner sep=5pt, fit=(x_title) (x_table)] (x_data) {};
+
+  \node[table_content_style, below=of x_data] (x_table2) {
+    \ttfamily\small \begin{tabular}{ccc} \textbf{t} & \textbf{p} & \textbf{x} \\ \hline 1&1&3.4 \\ 1&2&1.5 \\ \vdots&\vdots&\vdots \end{tabular}
+  };
+  \node[title_node, font=\small\bfseries, above=2mm of x_table2] (x_title2) {New Data};
+  \node[io_plate, inner sep=5pt, fit=(x_title2) (x_table2)] (x_data2) {};
+
+
+  % --- ARROWS ---
+  % Main flow
+  \draw[arrow] (data) -- (fit);
+  \draw[arrow] (fit) -- (diagnose);
+  \draw[arrow] (diagnose) -- (check);
+  % Loop
+  \draw[arrow] (check) -- node[above] {No} (refine);
+  \draw[loop] (refine.north) |- node[pos=0.25, right, font=\small] {Re-fit} (fit.west);
+  % Side inputs
+  \draw[arrow] (x_data) -- (understand);
+  \draw[arrow] (x_data2) -- (forecast);
+  % Fork
+  \path (check.east) -- (check -| understand.west) coordinate[pos=0.5] (fork);
+  \draw[arrow] (check.east) -- node[above, pos=0.25] {Yes} (fork);
+  \draw[arrow] (fork) |- (understand.west);
+  \draw[arrow] (fork) |- (forecast.west);
+
+\end{tikzpicture}

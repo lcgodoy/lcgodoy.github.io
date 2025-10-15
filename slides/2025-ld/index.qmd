@@ -1,0 +1,265 @@
+---
+title: |
+  `drmr`: A Bayesian approach to Dynamic Range Models in `R`
+subtitle: |
+  Available at [lcgodoy.me/slides/2025-ld/](https://lcgodoy.me/slides/2025-ld/)
+author:
+  - name: Lucas da Cunha Godoy
+    orcid: 0000-0003-4265-972X
+    email: |
+      ldcgodoy@ucsc.com
+    affiliations: EEB Department, UCSC
+date: 2025-10-22
+bibliography: references.bib
+csl: styles/asa.csl
+execute: 
+  cache: false
+title-slide-attributes:
+  data-background-image: img/qr-code.svg
+  data-background-size: 30%
+  data-background-position: 90% 90%
+format:
+  revealjs:
+    center: true
+    theme: [styles/esa.scss]
+    logo: img/logo.png
+    filters:
+      - styles/appendix.lua
+    embed-resources: true
+    self-contained-math: true
+    toc: true
+    toc-depth: 1
+    smaller: false
+    slide-number: c/t
+    navigation-mode: linear
+    code-overflow: wrap
+---
+
+```{r}
+#| label: setup
+#| eval: true
+#| echo: false
+#| output: false
+
+library(dplyr)
+library(ggplot2)
+library(bayesplot)
+library(sf)
+library(drmr)
+library(patchwork)
+library(cmdstanr)
+
+options(knitr.kable.NA = "")
+
+bins_sturges <-
+  function(x) diff(range(x)) / nclass.Sturges(x)
+
+get_color <- function(x, regex_element,
+                      pos_element = 2,
+                      split = " ") {
+  stopifnot(length(regex_element) == 1)
+  stopifnot(length(pos_element) == 1)
+  x[grepl(regex_element, x)] |>
+    strsplit(split = split) |>
+    sapply(\(y) y[pos_element]) |>
+    gsub(";$", "", x = _)
+}
+
+scss <- readLines("styles/esa.scss")
+bck <- get_color(scss, "^\\$body-bg", 2)
+sec_bck <- get_color(scss, "^\\$secondary_bg", 2)
+fg <- get_color(scss, "^\\$body-color", 2)
+curve_bck1 <- get_color(scss, "^\\$link-color", 2)
+curve_bck2 <- get_color(scss, "^\\$selection-bg", 2)
+
+theme_set(theme_void() +
+          theme(plot.background = element_rect(fill = bck,
+                                               color = bck),
+                panel.background = element_rect(fill = bck,
+                                                color = bck)))
+
+my_theme <-
+  theme_bw() +
+  theme(plot.background = element_rect(fill = bck,
+                                       color = bck),
+        panel.background = element_rect(fill = bck,
+                                        color = bck),
+        panel.grid = element_blank(),
+        line = element_line(color = fg),
+        text = element_text(color = fg),
+        rect = element_rect(color = fg),
+        axis.ticks = element_line(color = fg))
+```
+
+## The Challenge & Limits of SDMs
+
+* [Critical Challenge]{.important2}: Predicting species' responses to global
+  environmental change is vital for conservation and management.
+
+* [Usual Tool]{.important2}: Species Distribution Models (SDMs) have been the
+  workhorse, [correlating]{.important} occurrences with [environmental
+  variables]{.important}.
+
+* [Limitations of SDMs]{.important2}:
+    * Struggle to predict responses under [novel future]{.important} conditions
+      [@pagel2012forecasting].
+    * [Lack Mechanism]{.important2}: They [do not explicitly]{.important} model
+      the [underlying biological processes]{.important}.
+    * [Equilibrium Assumption]{.important2}: Often violated
+      [@guisan2005predicting].
+
+## Improving the Forecast
+
+![](img/urban.svg){fig-align="center"}
+
+::: aside
+Figure adapted from @urban2016improving.
+:::
+
+## What Traditional SDMs Do
+
+![](img/urban-sdm.svg){fig-align="center"}
+
+::: aside
+Figure adapted from @urban2016improving.
+:::
+
+## DRMs: A Mechanistic Approach
+
+![](img/urban-drm.svg){fig-align="center"}
+
+::: aside
+Figure adapted from @urban2016improving.
+:::
+
+:::{.notes}
+
+* [Why are they rarely in practice?]{.important2} Despite conceptual appeal,
+  DRMs have been underutilized due to their [complexity]{.important} and
+  [computational challenges]{.important} to fit these models.
+
+* [Packages]{.important2}: Most existing open-source packages focus on
+  simulation of mechaniscit models (e.g., `RangeShiftR` @malchow2021rangeshiftr
+  or `rangr` @markowsk2025rangr), and packages that fit mechanistic models to
+  data (`poems`, @fordham2021poems) often assume demographic rates to be static.
+
+:::
+
+## The `drmr` package
+
+* [What is it?]{.important2}: An open-source `R` package for fitting (and
+  forecasting) Dynamic Range Models in a Bayesian framework.
+
+* [Key Features]{.important2}:
+    * Leverages `Stan` via `cmdstanr` for efficient fitting
+      [@gabry2024cmdstanr].
+    * User-friendly interface.
+    * Easily relate environmental drivers to recruitment and survival rates.
+
+:::{.notes}
+
+* [DRMs]{.important} explicitly [incorporate demographic processes]{.important}
+  that drive range dynamics [@pagel2012forecasting].
+
+* Allows linking [environmental]{.important} drivers directly to [specific
+  processes]{.important}.
+
+* Potential for more [robust forecasting]{.important} under [novel]{.important}
+  conditions.
+
+* [Why are they rarely in practice?]{.important2} Despite conceptual appeal,
+  DRMs have been underutilized due to their [complexity]{.important} and
+  [computational challenges]{.important} to fit these models.
+
+:::
+
+## A diagram {visibility="uncounted"}
+
+![](img/meme.jpeg){.nostretch width=75% fig-align="center"}
+
+## A diagram
+
+![](img/fitting.png)
+
+
+## Case Studies
+
+* We compared a DRM fit with the `drmr` package to a traditional SDM using data
+  for: [Summer flounder]{.important} (_Paralichthys dentatus_) and Red-bellied
+  woodpecker (_Melanerpes carolinus_).
+
+* [Out-of-sample predictions]{.important2}: 
+  * [Summer flounder]{.important}: The RMSE was 43% lower and the IS
+    was 37% lower when compared to a traditional SDM.
+  * [Red-bellied woordpecker]{.important}: The improvement on the predictions
+    was modest.
+
+
+## Environment-Dependent Demographic Rates
+
+```{r}
+#| label: plot
+#| eval: true
+#| echo: false
+#| layout-ncol: 2
+#| height: 80%
+
+rec_summary <- readRDS("data/rec.rds")
+surv_summary <- readRDS("data/surv.rds")
+
+ggplot(data = rec_summary,
+       aes(x = stemp,
+           y = m)) +
+  geom_ribbon(aes(ymin = l, ymax = u),
+              fill = curve_bck2,
+              color = "transparent",
+              linewidth = 1.2) +
+  geom_line(color = bck, linewidth = 1.2) +
+  my_theme +
+  theme(axis.text = element_text(size = 15),
+        axis.title = element_text(size = 20)) +
+  labs(x = "SST (in Celsius)",
+       y = "Est. recruitment (per km2)")
+
+ggplot(data = surv_summary,
+         aes(x = btemp,
+             y = m)) +
+  geom_ribbon(aes(ymin = l, ymax = u),
+              fill = curve_bck2,
+              color = "transparent",
+              linewidth = 1.2) +
+  geom_line(color = bck, linewidth = 1.2) +
+  my_theme +
+  theme(axis.text = element_text(size = 15),
+        axis.title = element_text(size = 20)) +
+  labs(x = "SBT (in Celsius)",
+       y = "Est. survival")
+```
+
+## Concluding remarks
+
+* [Summary]{.important2}: The `drmr` substantially [lowers the
+  barrier]{.important} for [ecologists]{.important} to use the [DRM in their
+  applications]{.important}.
+
+* [Impact]{.important2}: A user-friendly tool which enables:
+  * Testing which mechanistic hypotheses are more likely to drive speces
+    distributions changes;
+  * Generate more robust ecological forecasts
+
+* [Availability]{.important2}: `drmr` is open-source and will be available on
+  GitHub once the review process is over.
+
+## Acknowledgments
+
+:::{layout-ncol=2}
+![](img/logo.png)
+
+![](img/finrisk.png)
+:::
+
+---
+
+### References {visibility="uncounted"}
+
+<div id="refs"></div>
