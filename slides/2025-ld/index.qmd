@@ -93,8 +93,17 @@ my_theme <-
 
 ## The Challenge & Limits of SDMs
 
-* [Critical Challenge]{.important2}: Predicting species' responses to global
-  environmental change is vital for conservation and management.
+* [Critical Challenge]{.important2}: [Predicting species']{.important} responses
+  to [global]{.important} environmental [change]{.important}
+
+* [Usual Tool]{.important2}: Species Distribution Models (SDMs).
+
+* [Limitations of SDMs]{.important2}:
+    * [Novel future conditions]{.important} [@pagel2012forecasting]
+    * [Lack Mechanism]{.important}
+    * [Equilibrium Assumption]{.important} [@guisan2005predicting]
+
+:::{.notes}
 
 * [Usual Tool]{.important2}: Species Distribution Models (SDMs) have been the
   workhorse, [correlating]{.important} occurrences with [environmental
@@ -107,6 +116,8 @@ my_theme <-
       the [underlying biological processes]{.important}.
     * [Equilibrium Assumption]{.important2}: Often violated
       [@guisan2005predicting].
+
+:::
 
 ## Improving the Forecast
 
@@ -145,44 +156,76 @@ Figure adapted from @urban2016improving.
 
 :::
 
-## The `drmr` package
+<!-- ## A diagram {visibility="uncounted"} -->
 
-* [What is it?]{.important2}: An open-source `R` package for fitting (and
-  forecasting) Dynamic Range Models in a Bayesian framework.
+<!-- ![](img/meme.jpeg){.nostretch width=75% fig-align="center"} -->
 
-* [Key Features]{.important2}:
-    * Leverages `Stan` via `cmdstanr` for efficient fitting
-      [@gabry2024cmdstanr].
-    * User-friendly interface.
-    * Easily relate environmental drivers to recruitment and survival rates.
+<!-- ## A diagram -->
 
-:::{.notes}
-
-* [DRMs]{.important} explicitly [incorporate demographic processes]{.important}
-  that drive range dynamics [@pagel2012forecasting].
-
-* Allows linking [environmental]{.important} drivers directly to [specific
-  processes]{.important}.
-
-* Potential for more [robust forecasting]{.important} under [novel]{.important}
-  conditions.
-
-* [Why are they rarely in practice?]{.important2} Despite conceptual appeal,
-  DRMs have been underutilized due to their [complexity]{.important} and
-  [computational challenges]{.important} to fit these models.
-
-:::
-
-## A diagram {visibility="uncounted"}
-
-![](img/meme.jpeg){.nostretch width=75% fig-align="center"}
-
-## A diagram
-
-![](img/fitting.png)
-
+<!-- ![](img/fitting.png) -->
 
 ## Case Studies
+
+:::: {.columns}
+
+::: {.column width="50%"}
+:::: {.r-stack}
+![](img/sf-real.png){.fragment fragment-index="1" height="250" align="center"}
+![](img/sf-spongebob.png){.fragment fragment-index="2" height="250" align="center"}
+::::
+:::
+
+::: {.column width="50%"}
+:::: {.r-stack}
+![](img/rbw-1.jpeg){.fragment fragment-index="1" height="250" align="center"}
+![](img/woody-wpk.png){.fragment fragment-index="2" height="250" align="center"}
+::::
+:::
+
+::::
+
+::: {.aside}
+Figures sources: [Top-left](https://marinefishesofgeorgia.org/summer-flounder/),
+[top-right](https://birdsofnewengland.com/), [bottom-left](https://thespongeclub.com),
+[bottom-right](https://en.wikipedia.org/wiki/Woody_Woodpecker).
+:::
+
+## Forecasts Visual Comparison
+
+```{r}
+#| label: forecast
+#| eval: true
+#| echo: false
+
+forecast_fig <- readRDS("data/for_fig.rds")
+
+ggplot(data = forecast_fig) +
+  geom_vline(xintercept = 2019,
+             lty = 2) +
+  geom_ribbon(aes(x = year,
+                  ymin = q10, ymax = q90),
+              fill = curve_bck2,
+              color = curve_bck2,
+              alpha = .4) +
+  geom_line(aes(x = year, y = median),
+            color = curve_bck2) +
+  geom_point(aes(x = year, y = dens),
+             size = .5,
+             color = curve_bck1) +
+  facet_grid(patch ~ model, scales = "free_y") +
+  scale_y_continuous(breaks = scales::trans_breaks(identity,
+                                                   identity,
+                                                   n = 3),
+                     trans = "log1p") +
+  my_theme +
+  guides(color = "none",
+         fill = "none") +
+  labs(y = "Density (in hundreds of individuals per square-km)",
+       x = "Year") +
+  theme(strip.background = element_rect(fill = bck, color = fg))
+```
+
+::: {.notes}
 
 * We compared a DRM fit with the `drmr` package to a traditional SDM using data
   for: [Summer flounder]{.important} (_Paralichthys dentatus_) and Red-bellied
@@ -193,6 +236,8 @@ Figure adapted from @urban2016improving.
     was 37% lower when compared to a traditional SDM.
   * [Red-bellied woordpecker]{.important}: The improvement on the predictions
     was modest.
+
+:::
 
 
 ## Environment-Dependent Demographic Rates
