@@ -242,7 +242,7 @@
     "href": "slides/2025-ld/index.html#the-challenge-limits-of-sdms",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "The Challenge & Limits of SDMs",
-    "text": "The Challenge & Limits of SDMs\n\nCritical Challenge: Predicting species’ responses to global environmental change is vital for conservation and management.\nUsual Tool: Species Distribution Models (SDMs) have been the workhorse, correlating occurrences with environmental variables.\nLimitations of SDMs:\n\nStruggle to predict responses under novel future conditions (Pagel and Schurr 2012).\nLack Mechanism: They do not explicitly model the underlying biological processes.\nEquilibrium Assumption: Often violated (Guisan and Thuiller 2005)."
+    "text": "The Challenge & Limits of SDMs\n\nCritical Challenge: Predicting species’ responses to global environmental change\nUsual Tool: Species Distribution Models (SDMs).\nLimitations of SDMs:\n\nNovel future conditions (Pagel and Schurr 2012)\nLack Mechanism\nEquilibrium Assumption (Guisan and Thuiller 2005)\n\n\n\n\nUsual Tool: Species Distribution Models (SDMs) have been the workhorse, correlating occurrences with environmental variables.\nLimitations of SDMs:\n\nStruggle to predict responses under novel future conditions (Pagel and Schurr 2012).\nLack Mechanism: They do not explicitly model the underlying biological processes.\nEquilibrium Assumption: Often violated (Guisan and Thuiller 2005)."
   },
   {
     "objectID": "slides/2025-ld/index.html#improving-the-forecast",
@@ -263,35 +263,21 @@
     "href": "slides/2025-ld/index.html#drms-a-mechanistic-approach",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "DRMs: A Mechanistic Approach",
-    "text": "DRMs: A Mechanistic Approach\n\n\n\n\n\n\n\n\nWhy are they rarely in practice? Despite conceptual appeal, DRMs have been underutilized due to their complexity and computational challenges to fit these models.\nPackages: Most existing open-source packages focus on simulation of mechaniscit models (e.g., RangeShiftR Malchow et al. (2021) or rangr Markowska et al. (2025)), and packages that fit mechanistic models to data (poems, Fordham et al. (2021)) often assume demographic rates to be static.\n\n\n\nFigure adapted from Urban et al. (2016)."
-  },
-  {
-    "objectID": "slides/2025-ld/index.html#the-drmr-package",
-    "href": "slides/2025-ld/index.html#the-drmr-package",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "The drmr package",
-    "text": "The drmr package\n\nWhat is it?: An open-source R package for fitting (and forecasting) Dynamic Range Models in a Bayesian framework.\nKey Features:\n\nLeverages Stan via cmdstanr for efficient fitting (Gabry et al. 2024).\nUser-friendly interface.\nEasily relate environmental drivers to recruitment and survival rates.\n\n\n\n\nDRMs explicitly incorporate demographic processes that drive range dynamics (Pagel and Schurr 2012).\nAllows linking environmental drivers directly to specific processes.\nPotential for more robust forecasting under novel conditions.\nWhy are they rarely in practice? Despite conceptual appeal, DRMs have been underutilized due to their complexity and computational challenges to fit these models."
-  },
-  {
-    "objectID": "slides/2025-ld/index.html#a-diagram",
-    "href": "slides/2025-ld/index.html#a-diagram",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "A diagram",
-    "text": "A diagram"
-  },
-  {
-    "objectID": "slides/2025-ld/index.html#a-diagram-1",
-    "href": "slides/2025-ld/index.html#a-diagram-1",
-    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
-    "section": "A diagram",
-    "text": "A diagram"
+    "text": "DRMs: A Mechanistic Approach\n\n\n\n\n\n\n\n\nWhy are they rarely in practice? Despite conceptual appeal, DRMs have been underutilized due to their complexity and computational challenges to fit these models.\nPackages: Most existing open-source packages focus on simulation of mechaniscit models (e.g., RangeShiftR Malchow et al. (2021) or rangr Markowska et al. (2025)), and packages that fit mechanistic models to data (poems, Fordham et al. (2021)) often assume demographic rates to be static.\n\n\n\n\n\n\n\nFigure adapted from Urban et al. (2016)."
   },
   {
     "objectID": "slides/2025-ld/index.html#case-studies",
     "href": "slides/2025-ld/index.html#case-studies",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Case Studies",
-    "text": "Case Studies\n\nWe compared a DRM fit with the drmr package to a traditional SDM using data for: Summer flounder (Paralichthys dentatus) and Red-bellied woodpecker (Melanerpes carolinus).\nOut-of-sample predictions:\n\nSummer flounder: The RMSE was 43% lower and the IS was 37% lower when compared to a traditional SDM.\nRed-bellied woordpecker: The improvement on the predictions was modest."
+    "text": "Case Studies\n\n\n\n \n\n\n\n \n\n\n\n\nFigures sources: Top-left, top-right, bottom-left, bottom-right."
+  },
+  {
+    "objectID": "slides/2025-ld/index.html#forecasts-visual-comparison",
+    "href": "slides/2025-ld/index.html#forecasts-visual-comparison",
+    "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
+    "section": "Forecasts Visual Comparison",
+    "text": "Forecasts Visual Comparison\n\n\n\nWe compared a DRM fit with the drmr package to a traditional SDM using data for: Summer flounder (Paralichthys dentatus) and Red-bellied woodpecker (Melanerpes carolinus).\nOut-of-sample predictions:\n\nSummer flounder: The RMSE was 43% lower and the IS was 37% lower when compared to a traditional SDM.\nRed-bellied woordpecker: The improvement on the predictions was modest."
   },
   {
     "objectID": "slides/2025-ld/index.html#environment-dependent-demographic-rates",
@@ -319,7 +305,7 @@
     "href": "slides/2025-ld/index.html#references",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "",
-    "text": "References\n\n\nFordham, D. A., Haythorne, S., Brown, S. C., Buettel, J. C., and Brook, B. W. (2021), “poems: R package for simulating species’ range dynamics using pattern-oriented validation,” Methods in Ecology and Evolution, 12, 2364–2371. https://doi.org/https://doi.org/10.1111/2041-210X.13720.\n\n\nGabry, J., Češnovar, R., Johnson, A., and Bronder, S. (2024), cmdstanr: R interface to CmdStan.\n\n\nGuisan, A., and Thuiller, W. (2005), “Predicting species distribution: Offering more than simple habitat models,” Ecology letters, Wiley Online Library, 8, 993–1009. https://doi.org/https://doi.org/10.1111/j.1461-0248.2005.00792.x.\n\n\nMalchow, A.-K., Bocedi, G., Palmer, S. C. F., Travis, J. M. J., and Zurell, D. (2021), “RangeShiftR: An r package for individual-based simulation of spatial eco-evolutionary dynamics and species’ responses to environmental changes,” Ecography, 44, 1443–1452. https://doi.org/10.1111/ecog.05689.\n\n\nMarkowska, K., Malinowska, K., and Kuczyński, L. (2025), “Rangr: An r package for mechanistic, spatially explicit simulation of species range dynamics,” Methods in Ecology and Evolution, 16, 468–476. https://doi.org/10.1111/2041-210X.14475.\n\n\nPagel, J., and Schurr, F. M. (2012), “Forecasting species ranges by statistical estimation of ecological niches and spatial population dynamics,” Global Ecology and Biogeography, 21, 293–304. https://doi.org/https://doi.org/10.1111/j.1466-8238.2011.00663.x.\n\n\nUrban, M. C., Bocedi, G., Hendry, A. P., Mihoub, J.-B., Pe’er, G., Singer, A., Bridle, J. R., Crozier, L. G., Meester, L. D., Godsoe, W., Gonzalez, A., Hellmann, J. J., Holt, R. D., Huth, A., Johst, K., Krug, C. B., Leadley, P. W., Palmer, S. C. F., Pantel, J. H., Schmitz, A., Zollner, P. A., and Travis, J. M. J. (2016), “Improving the forecast for biodiversity under climate change,” Science, 353, aad8466. https://doi.org/10.1126/science.aad8466."
+    "text": "References\n\n\nFordham, D. A., Haythorne, S., Brown, S. C., Buettel, J. C., and Brook, B. W. (2021), “poems: R package for simulating species’ range dynamics using pattern-oriented validation,” Methods in Ecology and Evolution, 12, 2364–2371. https://doi.org/https://doi.org/10.1111/2041-210X.13720.\n\n\nGuisan, A., and Thuiller, W. (2005), “Predicting species distribution: Offering more than simple habitat models,” Ecology letters, Wiley Online Library, 8, 993–1009. https://doi.org/https://doi.org/10.1111/j.1461-0248.2005.00792.x.\n\n\nMalchow, A.-K., Bocedi, G., Palmer, S. C. F., Travis, J. M. J., and Zurell, D. (2021), “RangeShiftR: An r package for individual-based simulation of spatial eco-evolutionary dynamics and species’ responses to environmental changes,” Ecography, 44, 1443–1452. https://doi.org/10.1111/ecog.05689.\n\n\nMarkowska, K., Malinowska, K., and Kuczyński, L. (2025), “Rangr: An r package for mechanistic, spatially explicit simulation of species range dynamics,” Methods in Ecology and Evolution, 16, 468–476. https://doi.org/10.1111/2041-210X.14475.\n\n\nPagel, J., and Schurr, F. M. (2012), “Forecasting species ranges by statistical estimation of ecological niches and spatial population dynamics,” Global Ecology and Biogeography, 21, 293–304. https://doi.org/https://doi.org/10.1111/j.1466-8238.2011.00663.x.\n\n\nUrban, M. C., Bocedi, G., Hendry, A. P., Mihoub, J.-B., Pe’er, G., Singer, A., Bridle, J. R., Crozier, L. G., Meester, L. D., Godsoe, W., Gonzalez, A., Hellmann, J. J., Holt, R. D., Huth, A., Johst, K., Krug, C. B., Leadley, P. W., Palmer, S. C. F., Pantel, J. H., Schmitz, A., Zollner, P. A., and Travis, J. M. J. (2016), “Improving the forecast for biodiversity under climate change,” Science, 353, aad8466. https://doi.org/10.1126/science.aad8466."
   },
   {
     "objectID": "slides/2025-frjune/index.html#overview",
