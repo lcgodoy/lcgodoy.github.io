@@ -15,7 +15,7 @@ csl: styles/asa.csl
 execute: 
   cache: false
 title-slide-attributes:
-  data-background-image: img/qr-code.svg
+  data-background-image: img/qr-code.png
   data-background-size: 30%
   data-background-position: 90% 90%
 format:
@@ -200,7 +200,7 @@ Figures sources: [Top-left](https://marinefishesofgeorgia.org/summer-flounder/),
 forecast_fig <- readRDS("data/for_fig.rds")
 
 ggplot(data = forecast_fig) +
-  geom_vline(xintercept = 2019,
+  geom_vline(xintercept = 2012,
              lty = 2) +
   geom_ribbon(aes(x = year,
                   ymin = q10, ymax = q90),
@@ -288,7 +288,7 @@ ggplot(data = surv_summary,
   applications]{.important}.
 
 * [Impact]{.important2}: A user-friendly tool which enables:
-  * Testing which mechanistic hypotheses are more likely to drive speces
+  * Testing which mechanistic hypotheses are more likely to drive species
     distributions changes;
   * Generate more robust ecological forecasts
 
