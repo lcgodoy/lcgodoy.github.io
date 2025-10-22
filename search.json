@@ -291,7 +291,7 @@
     "href": "slides/2025-ld/index.html#concluding-remarks",
     "title": "drmr: A Bayesian approach to Dynamic Range Models in R",
     "section": "Concluding remarks",
-    "text": "Concluding remarks\n\nSummary: The drmr substantially lowers the barrier for ecologists to use the DRM in their applications.\nImpact: A user-friendly tool which enables:\n\nTesting which mechanistic hypotheses are more likely to drive speces distributions changes;\nGenerate more robust ecological forecasts\n\nAvailability: drmr is open-source and will be available on GitHub once the review process is over."
+    "text": "Concluding remarks\n\nSummary: The drmr substantially lowers the barrier for ecologists to use the DRM in their applications.\nImpact: A user-friendly tool which enables:\n\nTesting which mechanistic hypotheses are more likely to drive species distributions changes;\nGenerate more robust ecological forecasts\n\nAvailability: drmr is open-source and will be available on GitHub once the review process is over."
   },
   {
     "objectID": "slides/2025-ld/index.html#acknowledgments",
