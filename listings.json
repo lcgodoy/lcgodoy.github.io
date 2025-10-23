@@ -1,7 +1,16 @@
 [
   {
+    "listing": "/blog.html",
+    "items": [
+      "/posts/jupyter_hpc/jupyter_hpc.html",
+      "/posts/models/models.html",
+      "/posts/lmnet/2021-06-23-lmnnet.html"
+    ]
+  },
+  {
     "listing": "/talks.html",
     "items": [
+      "/talks/2025-ld/index.html",
       "/talks/2025-puc/index.html",
       "/talks/2025-esa/index.html",
       "/talks/2025-slmdrmr/index.html",
@@ -16,14 +25,6 @@
       "/talks/2021-ness/index.html",
       "/talks/2018-csds/index.html",
       "/talks/2018-rbras/index.html"
-    ]
-  },
-  {
-    "listing": "/blog.html",
-    "items": [
-      "/posts/jupyter_hpc/jupyter_hpc.html",
-      "/posts/models/models.html",
-      "/posts/lmnet/2021-06-23-lmnnet.html"
     ]
   }
 ]
