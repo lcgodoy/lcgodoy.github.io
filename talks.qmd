@@ -21,11 +21,6 @@ page-layout: full
 
 # Upcoming
 
-## October 2025
-
-* _`drmr`: A Bayesian approach to Dynamic Range Models in `R`_ -- Living Data
-  2025, Bogota, Colombia
-
 ## December 2025
 
 * _Gaussian Processes and spatial data fusion: Avoiding numerical integration_

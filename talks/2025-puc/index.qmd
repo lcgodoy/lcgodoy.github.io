@@ -2,7 +2,7 @@
 title: |
   On Spatial Statistics and Sets
 description: |
-    Talk given at the Department of Epidemiology \& Biostatistics at University of California San Francisco
+  Talk given remotely at Universidad Catolica de Chile, Department of Statistics
 author: 
   - name: Lucas da Cunha Godoy
 date: "2025-08-18"
