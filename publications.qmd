@@ -45,7 +45,7 @@ interpolation, linkage, and estimation*.
 inferences and predictions for areal data and spatial data fusion with
 Hausdorff--Gaussian processes. *Journal of Agricultural Biological and
 Environmental Statistics (to Appear)*.
-<https://doi.org/10.48550/arXiv.2208.07900>
+<https://doi.org/10.1007/s13253-025-00720-7>
 :::
 
 ::: {#ref-godoy2025voronoi .csl-entry}
