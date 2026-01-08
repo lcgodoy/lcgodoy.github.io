@@ -34,7 +34,7 @@ near-term forecast for a marine species on the move. *Ecology Letters*.
 <https://doi.org/10.32942/X24D00>
 :::
 
-::: {#ref-rpkg:smile .csl-entry}
+::: {#ref-Rpkg:smile .csl-entry}
 \[5\] **Godoy, L. da C.** (2025). *[smile]{.nocase}: Spatial misalignment,
 interpolation, linkage, and estimation*.
 <https://doi.org/10.32614/CRAN.package.smile>
@@ -133,9 +133,10 @@ and Oral Radiology*, *137*(3), 301--309.
 <https://doi.org/10.1016/j.oooo.2023.11.005>
 :::
 
-::: {#ref-rpkg:sapo .csl-entry}
+::: {#ref-Rpkg:sapo .csl-entry}
 \[18\] **Godoy, L. da C.** (2024). *[sapo]{.nocase}: Spatial association of
-different types of polygon*. <https://CRAN.R-project.org/package=sapo>
+different types of polygon*.
+<https://doi.org/10.32614/CRAN.package.sapo>
 :::
 
 ::: {#ref-irsheid2024comparative .csl-entry}
