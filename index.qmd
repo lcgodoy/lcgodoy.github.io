@@ -2,6 +2,13 @@
 about:
   template: jolla
   image: profile.jpg
+  links:
+    - icon: github
+      text: Github
+      href: https://github.com/lcgodoy
+    - icon: google-scholar
+      text: Google Scholar
+      href: https://scholar.google.com/citations?user=wzIw2_4AAAAJ&hl=en
 ---
 
 Hello there. It's Lucas. I recently earned a Ph.D. in Statistics from

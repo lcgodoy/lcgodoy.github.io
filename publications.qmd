@@ -4,14 +4,28 @@
 :::
 
 ::::::::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+::: {#ref-godoy2026statistical .csl-entry}
+\[1\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2026). Statistical
+inferences and predictions for areal data and spatial data fusion with
+Hausdorff--Gaussian processes. *Journal of Agricultural, Biological and
+Environmental Statistics*. <https://doi.org/10.1007/s13253-025-00720-7>
+:::
+
+::: {#ref-godoy2026voronoi .csl-entry}
+\[2\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2026). Voronoi linkage
+between mismatching voting stations and census tracts in analyzing the
+2018 Brazilian presidential election data. *Spatial Statistics*, *71*,
+100949. <https://doi.org/10.1016/j.spasta.2025.100949>
+:::
+
 ::: {#ref-pandya2025using .csl-entry}
-\[1\] Pandya, S. S., **Godoy, L. da C.**, Alexander, C. S., Schneider, D., &
+\[3\] Pandya, S. S., **Godoy, L. da C.**, Alexander, C. S., Schneider, D., &
 Harknett, K. (2025). Using worker surveys to detect labor standards
 non-compliance. *Statistics and Public Policy*.
 :::
 
 ::: {#ref-abuarqub2024accuracy .csl-entry}
-\[2\] Abu-Arqub, S., Hariharan, A., Banankhah, S., **Godoy, L. da C.**, Liu,
+\[4\] Abu-Arqub, S., Hariharan, A., Banankhah, S., **Godoy, L. da C.**, Liu,
 P., Kuo, C.-L., & Uribe, F. (2025). Accuracy of full arch scans using
 the itero element 2® intra-oral scanner: A clinical study. *Journal of
 Orthodontics*, *52*(2), 142--149.
@@ -19,7 +33,7 @@ Orthodontics*, *52*(2), 142--149.
 :::
 
 ::: {#ref-alnaggar2025polyploid .csl-entry}
-\[3\] Al-Naggar, I. M., Antony, M., Baker, D., Wang, L., Godoy, L. da
+\[5\] Al-Naggar, I. M., Antony, M., Baker, D., Wang, L., Godoy, L. da
 C., Kuo, C.-L., Fraser, M. O., Smith, P. P., Xu, M., & Kuchel, G. A.
 (2025). Polyploid superficial uroepithelial bladder barrier cells
 express features of cellular senescence across the lifespan and are
@@ -28,31 +42,16 @@ insensitive to senolytics. *Aging Cell*, *24*(2), e14399.
 :::
 
 ::: {#ref-fredston2025dynamic .csl-entry}
-\[4\] Fredston, A., Ovando, D., **Godoy, L. da C.**, Kong, J., Muffley, B.,
+\[6\] Fredston, A., Ovando, D., **Godoy, L. da C.**, Kong, J., Muffley, B.,
 Thorson, J. T., & Pinsky, M. (2025). Dynamic range models improve the
 near-term forecast for a marine species on the move. *Ecology Letters*.
 <https://doi.org/10.32942/X24D00>
 :::
 
 ::: {#ref-Rpkg:smile .csl-entry}
-\[5\] **Godoy, L. da C.** (2025). *[smile]{.nocase}: Spatial misalignment,
+\[7\] **Godoy, L. da C.** (2025). *[smile]{.nocase}: Spatial misalignment,
 interpolation, linkage, and estimation*.
 <https://doi.org/10.32614/CRAN.package.smile>
-:::
-
-::: {#ref-godoy2025statistical .csl-entry}
-\[6\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2025). Statistical
-inferences and predictions for areal data and spatial data fusion with
-Hausdorff--Gaussian processes. *Journal of Agricultural Biological and
-Environmental Statistics (to Appear)*.
-<https://doi.org/10.1007/s13253-025-00720-7>
-:::
-
-::: {#ref-godoy2025voronoi .csl-entry}
-\[7\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2025). Voronoi linkage
-between mismatching voting stations and census tracts in analyzing the
-2018 Brazilian presidential election data. *Spatial Statistics*.
-<https://doi.org/10.1016/j.spasta.2025.100949>
 :::
 
 ::: {#ref-godoy2025note .csl-entry}
