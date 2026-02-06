@@ -1,0 +1,40 @@
+---
+title: |
+  Gaussian processes and spatial data fusion: Avoiding numerical integration
+description: |
+    Computational and Methodological Statistics 2025
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2025-12-14"
+categories:
+  - Spatial statistics
+  - Gaussian process
+---
+
+### Details
+
+* **Date**: Dev 14, 2025
+
+* **Location**: Birbeck, UK
+
+* Slides unavailable for this talk.
+
+### Abstract
+
+Spatial Data Fusion (SDF) combines data on a single phenomenon collected at
+different spatial resolutions, such as point-referenced measurements from
+monitoring stations and areal data from satellites or computer models. Standard
+models assume both data types are realizations of a common Gaussian Process
+(GP), with areal data defined as spatial averages of this process. This
+approach, however, lacks a closed-form solution and requires numerical
+integration for approximation. This step is not only computationally expensive
+but also relies on an arbitrary grid selection, for which there is no consensus
+on an optimal resolution. As an alternative, we propose a generalization of the
+isotropic GP used in SDF. Our method defines the covariance function based on a
+distance between sets, allowing for a direct calculation of covariance between
+any combination of points and areas. This approach completely bypasses the need
+for integration. We establish the theoretical conditions that ensure our model
+is valid and illustrate the method's utility with an atmospheric temperature
+dataset. The proposed methodology offers a computationally efficient and
+conceptually simple alternative, removing the ambiguity of grid selection and
+providing a more robust solution for practitioners.

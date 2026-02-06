@@ -21,11 +21,8 @@ page-layout: full
 
 # Upcoming
 
-## December 2025
+## February 2026
 
-* _Gaussian Processes and spatial data fusion: Avoiding numerical integration_
-  -- 19th International Joint Conference on Computational and Financial
-  Econometrics (CFE) and Computational and Methodological Statistics
-  (CMStatistics), CFE-CMStatistics 2025, London, UK
+* _Bentley University_
 
 # Past

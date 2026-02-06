@@ -1,0 +1,50 @@
+---
+title: |
+  Set-indexed random fields: Theory and practice
+description: |
+    Talk given at the Department of Statistics at University of Connecticut
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2026-02-06"
+categories:
+  - Spatial statistics
+  - Random fields
+  - Covariance functions
+---
+
+### Details
+
+* **Date**: Feb 06, 2026
+
+* **Location**: Storrs, CT - USA
+
+* [Slides](https://lcgodoy.me/slides/2026-uconn)
+
+### Abstract
+
+Many modern spatial analyses involve observations recorded over spatial units of
+differing locations, sizes, and geometries, creating fundamental challenges for
+modeling dependence across spatial supports. Existing approaches model
+dependence by treating observations at different supports as aggregations of a
+common underlying continuous process, which leads to substantial computational
+and theoretical limitations. An alternative strategy avoids aggregation by
+defining isotropic stochastic processes directly on collections of spatial sets.
+However, ensuring positive definiteness for the resulting covariance functions
+remains a challenge. To resolve this, we introduce a framework for isotropic
+set-indexed random fields based on the ball–Hausdorff distance, defined as the
+Hausdorff distance between the minimum enclosing balls of bounded sets. We
+derive an explicit formula for this distance in terms of centers and radii. We
+show that broad classes of isotropic covariance functions, such as the Matérn,
+yields valid covariance functions when coupled with the proposed distance. Our
+construction reduces complex set-to-set dependence to low-dimensional geometric
+summaries, resulting in significant computational simplifications. We conclude
+with a surface temperature case study, fusing satellite and in situ measurements
+to reproduce high-resolution fields comparable to a gold-standard physical
+model.
+
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2026-uconn" title="Slides"></iframe>
+```
