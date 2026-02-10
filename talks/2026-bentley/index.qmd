@@ -1,0 +1,53 @@
+---
+title: |
+  `abslife`: 
+  A new package for estimating the lifetime distribution for left-truncated, discrete-time data with applications to asset-backed securities
+description: |
+    Talk given at the Department of Mathematical Sciences at Bentley University
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2026-02-10"
+categories:
+  - Asset-backed security
+  - Survival analysis
+  - Discrete time to event
+---
+
+### Details
+
+* **Date**: Feb 10, 2026
+
+* **Location**: Waltham, MA - USA
+
+* [Slides](https://lcgodoy.me/slides/2026-bentley)
+
+### Abstract
+
+The consumer auto lending market in the United States operates on a massive
+scale: consumer auto asset-backed securities~(ABS) issuance tops \$200 billion
+and total consumer automobile debt exceeds \$1,400 billion.  Despite this scale,
+there is a lack of ready-to-use software implementing rigorous statistical
+methods for the purposes of drawing inference on the lifetime distribution of
+individual consumer loans sampled from ABS.\@ Such tools would be beneficial to
+ABS investors because the source of the ABS level cash flow is the sum of its
+underlying individual assets.  Hence, investors require precise time-to-event
+distribution estimates to accurately model aggregate ABS trust level
+performance.  Furthermore, the convenience of statistical software designed for
+this purpose would be valuable in the high-paced environment of fixed-income
+trading.  The ABS data is nontrivial to analyze, however, and we begin by
+reviewing statistical methods for left-truncated, right-censored, discrete
+time-to-event data, including competing risks.  Next, we introduce asymptotic
+distributions for the cumulative and probability mass functions for the
+time-to-event distribution estimates.  We then present the `abslife` package for
+`R`, designed specifically to analyze such data. We illustrate the package's
+utility through an analysis of 275,948 consumer auto loans spanning four
+distinct ABS bonds, demonstrating how `abslife` enables financial analysts to
+perform robust inference and produce meaningful visualizations for discrete
+time-to-event data.
+
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2026-bentley" title="Slides"></iframe>
+```
