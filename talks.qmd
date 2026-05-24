@@ -21,8 +21,6 @@ page-layout: full
 
 # Upcoming
 
-## April 2026
-
-* _Species on the move_
+No upcoming talks for now.
 
 # Past

@@ -9,13 +9,13 @@ about:
 ---
 
 Hello there. It's Lucas. I recently earned a Ph.D. in Statistics from
-UConn. Soon after graduating, I have begun working with species distribution as
-a Postdoctoral researcher in the [Global Change Research
-Group](https://globalchange.sites.ucsc.edu/) at UCSC. My research interests
-primarily revolve around statistical computing, Bayesian inference, spatial
-statistics, and exploring innovative applications of statistical
-methodologies. Apart from that, I enjoy learning about programming languages and
-playing football (or soccer, pff).
+UConn. Soon after graduating, I began working with species distribution as a
+Postdoctoral researcher in the [Global Change Research
+Group](https://globalchange.sites.ucsc.edu/) at UCSC. Currently, I am an
+Assistant Professor at PUC Chile. My research interests primarily revolve around
+statistical computing, Bayesian inference, spatial statistics, and exploring
+innovative applications of statistical methodologies. Apart from that, I enjoy
+learning about programming languages and playing football (or soccer, pff).
 
 
 In this website, you'll find some of my blog posts, mainly discussing R or
