@@ -1,0 +1,52 @@
+---
+title: |
+  Modeling Tuberculosis in Rio Grande do Sul
+subtitle: |
+  Spatiotemporal Analysis via Nearest-Neighbor Gaussian Processes for Areal Data
+description: |
+  Talk given at the Geomed 2026
+author: 
+  - name: Lucas da Cunha Godoy
+date: "2026-06-18"
+categories:
+  - Spatiotemporal statistics
+  - Gaussian process
+---
+
+### Details
+
+* **Date**: Jun 28, 2026
+
+* **Location**: Pamplona - Spain
+
+* [Slides](https://lcgodoy.me/slides/2026-geomed)
+
+### Abstract
+
+Tuberculosis (TB) remains a critical public health challenge in Brazil,
+particularly in the state of Rio Grande do Sul (RS), where incidence rates (46.2
+cases per 100,000 inhabitants in 2021) exceed the national average
+(32.0). Designing effective intervention strategies requires reliable local risk
+estimates. However, analyzing municipal data is complicated by zero- inflation,
+small population sizes, and complex spatiotemporal dependencies. Standard
+disease mapping models typically rely on adjacency-based spatial
+structures. These approaches overlook the specific geometry of regions, often
+failing to account for the fact that large, sparsely populated municipalities
+exert a different spatial influence than small, densely populated ones.  To
+address these limitations, we propose a Generalized Linear Mixed Model to
+analyze TB incidence across 497 municipalities in RS from 2011 to 2021. We
+introduce a novel separable spatiotemporal extension of isotropic Gaussian
+Processes (GP) tailored for areal data. A key innovation is using the spatial
+covariance through the BallHausdorff distance, which explicitly accounts for the
+shape and size of the regions. We explicitly establish the validity
+(positive-definiteness) of these covariance functions. To ensure computational
+scalability, we implement a nearest-neighbor approximation for the spatial
+component.  This framework yields robust incidence estimates despite zero-heavy
+data and provides accurate one-year-ahead forecasts, offering policymakers
+critical tools to target social determinants and allocate resources effectively.
+
+### Slides
+
+```{=html}
+<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2026-geomed" title="Slides"></iframe>
+```
