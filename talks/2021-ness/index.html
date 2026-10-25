@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.10.18">
+<meta name="generator" content="quarto-1.10.19">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -45,10 +45,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-64a204ab8560d761af7679ceaba22944.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-bf27225e3a48a9273f3daa8f8e829971.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-dc749e14646b07126a6255034d6241f2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3cedb794e748e77b8a4df53ece4d4e53.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -184,7 +184,6 @@ ul.task-list li input[type="checkbox"] {
   <ul>
   <li><a href="#details" id="toc-details" class="nav-link active" data-scroll-target="#details">Details</a></li>
   <li><a href="#abstract" id="toc-abstract" class="nav-link" data-scroll-target="#abstract">Abstract</a></li>
-  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 <div class="toc-actions"><ul><li><a href="https://github.com/lcgodoy/lcgodoy.github.io/issues/new" class="toc-action"><i class="bi bi-github"></i>Report an issue</a></li></ul></div></nav>
     </div>
@@ -200,16 +199,11 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p><strong>Date</strong>: October 01, 2021</p></li>
 <li><p><strong>Location</strong>: Providence, RI, USA.</p></li>
-<li><p><a href="https://lcgodoy.me/slides/2021-ness/">Slides</a></p></li>
 </ul>
 </section>
 <section id="abstract" class="level3">
 <h3 class="anchored" data-anchor-id="abstract">Abstract</h3>
 <p>In Brazil, socioeconomic data are available at census tracts (polygons), while election data are available at voting locations (point-referenced). The misaligned data makes studying the association between election outcomes and socioeconomic variables challenging. Since voters are assigned to the nearest electoral sections, we use Voronoi tessellation to associate each voting station with a Voronoi polygon. Socioeconomic variables for each polygon are then constructed from such data at the census tract level, assuming that both sets of areal data were constructed from the same underlying Gaussian random field (GRF). Predictions for the Voronoi cells are derived from the underlying GRF with estimated parameters. Since the socioeconomic variables are not normally distributed, we also consider a nonparametric approach that uses spatial areal interpolation to construct data for the Voronoi cells from the census tract data. The interpolated outputs are used as a baseline. Our simulation study shows that the method based on an underlying GRF is robust in prediction under model misspecification. In application to the 2018 Brazilian presidential election in Belo Horizonte, more socioeconomically deprived regions were found to have a higher percentage of null votes. The methods are publicly available in an R package <code>smile</code>.</p>
-</section>
-<section id="slides" class="level3">
-<h3 class="anchored" data-anchor-id="slides">Slides</h3>
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2021-ness" title="Slides"></iframe>
 
 
 </section>
