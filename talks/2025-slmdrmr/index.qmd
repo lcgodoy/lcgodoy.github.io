@@ -17,8 +17,6 @@ categories:
 
 * **Location**: San Francisco, CA - USA
 
-* [Slides](https://lcgodoy.me/slides/2025-slmdrmr)
-
 ### Abstract
 
 Predicting species' responses to environmental change is a critical challenge in
@@ -39,9 +37,3 @@ explicitly modeling demographic processes and their environmental drivers,
 `drmr` provides a powerful and accessible tool for ecologists to understand and
 predict changes in species distributions, thereby contributing to improved
 conservation planning and management in the face of global change.
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-slmdrmr" title="Slides"></iframe>
-```

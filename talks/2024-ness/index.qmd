@@ -18,8 +18,6 @@ categories:
 
 * **Location**: Storrs, CT
 
-* [Slides](https://lcgodoy.me/slides/2024-ness/)
-
 ### Abstract
 
 Tuberculosis (TB) remains a significant global health challenge, and Brazil
@@ -40,10 +38,3 @@ incidence rates one year ahead to support proactive public health planning. We
 demonstrate our model's effectiveness and competitive performance against other
 specialized areal data models. The insights gained from this study can guide
 policymakers in developing effective TB control strategies.
-
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-ness" title="Slides"></iframe>
-```

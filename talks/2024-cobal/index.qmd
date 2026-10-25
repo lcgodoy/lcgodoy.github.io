@@ -17,8 +17,6 @@ categories:
 
 * **Location**: Belo Horizonte, MG - Brazil
 
-* [Slides](https://lcgodoy.me/slides/2024-cobal)
-
 ### Abstract
 
 Tuberculosis (TB) remains a significant global health challenge, and Brazil
@@ -39,9 +37,3 @@ proactive public health planning. We demonstrate our model's effectiveness and
 competitive performance against other specialized areal data models. The
 insights gained from this study can guide policymakers in developing effective
 TB control strategies.
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-cobal" title="Slides"></iframe>
-```

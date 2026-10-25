@@ -18,8 +18,6 @@ categories:
 
 * **Location**: Storrs, CT
 
-* [Slides](https://lcgodoy.me/slides/2024-defense/index.html)
-
 ### Abstract
 
 Accurate modeling of spatial dependence is crucial for analyzing spatial and
@@ -50,11 +48,3 @@ prediction performance compared to specialized models. In conclusion, the HGP
 provides a versatile and robust framework for modeling spatial data across
 various types and geometries, holding significant promise for applications in
 fields like public health and climate science.
-
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-defense/index.html" title="Slides"></iframe>
-```
-

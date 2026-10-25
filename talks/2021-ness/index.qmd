@@ -17,8 +17,6 @@ categories:
 
 * **Location**: Providence, RI, USA.
 
-* [Slides](https://lcgodoy.me/slides/2021-ness/)
-
 ### Abstract
 
 In Brazil, socioeconomic data are available at census tracts (polygons), while
@@ -39,10 +37,3 @@ model misspecification. In application to the 2018 Brazilian presidential
 election in Belo Horizonte, more socioeconomically deprived regions were found
 to have a higher percentage of null votes. The methods are publicly available in
 an R package `smile`.
-
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2021-ness" title="Slides"></iframe>
-```

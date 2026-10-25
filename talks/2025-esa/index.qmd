@@ -17,8 +17,6 @@ categories:
 
 * **Location**: Baltimore, MD - USA
 
-* [Slides](https://lcgodoy.me/slides/2025-esa)
-
 ### Abstract
 
 Predicting species' responses to environmental change is a critical challenge in
@@ -48,10 +46,3 @@ comparable SDM. By explicitly modeling demographic processes and their
 environmental drivers, `drmr` enables more robust predictions of species
 distributions, contributing to improved conservation planning and management in
 the face of global change.
-
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-esa" title="Slides"></iframe>
-```

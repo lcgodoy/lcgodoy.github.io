@@ -27,9 +27,6 @@ tramp
 docs/
 docs/*
 
-# Slides scratch
-slides/scratch/*
-  
 # elpa packages
 /elpa/
 

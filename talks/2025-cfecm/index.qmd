@@ -17,8 +17,6 @@ categories:
 
 * **Location**: Birbeck, UK
 
-* Slides unavailable for this talk.
-
 ### Abstract
 
 Spatial Data Fusion (SDF) combines data on a single phenomenon collected at

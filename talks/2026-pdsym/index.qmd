@@ -16,8 +16,6 @@ categories:
 
 * **Location**: Santa Cruz, CA - USA
 
-* [Slides](https://lcgodoy.me/slides/2026-pdsym)
-
 ### Abstract
 
 Many modern spatial analyses involve observations recorded over spatial units of
@@ -39,10 +37,3 @@ summaries, resulting in significant computational simplifications. We conclude
 with a surface temperature case study, fusing satellite and in situ measurements
 to reproduce high-resolution fields comparable to a gold-standard physical
 model.
-
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2026-pdsym" title="Slides"></iframe>
-```

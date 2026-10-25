@@ -18,8 +18,6 @@ categories:
 
 * **Location**: San Francisco, CA - USA
 
-* [Slides](https://lcgodoy.me/slides/2025-ucsf)
-
 ### Abstract
 
 Accurate modeling of spatial dependence is crucial for analyzing spatial data
@@ -36,9 +34,3 @@ prediction through simulations and real-world applications involving both areal
 data and data fusion. The HGP offers a flexible and robust solution for modeling
 diverse spatial data with potential public health and climate science
 applications.
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2025-ucsf" title="Slides"></iframe>
-```

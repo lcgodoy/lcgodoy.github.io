@@ -19,8 +19,6 @@ categories:
 
 * **Location**: Waltham, MA - USA
 
-* [Slides](https://lcgodoy.me/slides/2026-bentley)
-
 ### Abstract
 
 The consumer auto lending market in the United States operates on a massive
@@ -44,10 +42,3 @@ utility through an analysis of 275,948 consumer auto loans spanning four
 distinct ABS bonds, demonstrating how `abslife` enables financial analysts to
 perform robust inference and produce meaningful visualizations for discrete
 time-to-event data.
-
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2026-bentley" title="Slides"></iframe>
-```

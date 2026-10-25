@@ -18,8 +18,6 @@ categories:
 
 * **Location**: Porto Alegre, RS - Brazil
 
-* [Slides](https://lcgodoy.me/slides/2024-ufrgs)
-
 ### Abstract
 
 Accurate modeling of spatial dependence is pivotal in analyzing spatial data,
@@ -42,9 +40,3 @@ regarding goodness-of-fit and prediction performances. In summary, the HGP
 offers a flexible and robust solution for modeling spatial data of various types
 and shapes, with potential applications spanning fields such as public health
 and climate science.
-
-### Slides
-
-```{=html}
-<iframe width="100%" height="500" src="https://lcgodoy.me/slides/2024-ufrgs" title="Slides"></iframe>
-```
