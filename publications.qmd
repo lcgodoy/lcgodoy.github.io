@@ -3,17 +3,26 @@
 ::: {#list}
 :::
 
-:::::::::::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
+:::::::::::::::::::::::::::::::::::::::::::::: {#refs .references .csl-bib-body .hanging-indent entry-spacing="1" line-spacing="2"}
 ::: {#ref-hernandez2026keeping .csl-entry}
-\[41\] Hernández, G. G., Slot, M., **Godoy, L. da C.**, Castro-Lara, R.,
+\[43\] Hernández, G. G., Slot, M., **Godoy, L. da C.**, Castro-Lara, R.,
 Pérez-Enríquez, A., Seemann, J. R., & García-Robledo, C. (n.d.). Keeping
 up with the heat: Long-term dynamics and plasticity of heat tolerance in
 a tropical plant community. *New Phytologist*, *n/a*(n/a).
 <https://doi.org/10.1111/nph.71394>
 :::
 
+::: {#ref-blasiak2026mobilizing .csl-entry}
+\[42\] Blasiak, R., Conville, P., Cunningham, C., **Godoy, L. da C.**,
+Davis, M., Jouffray, J.-B., Morales, M., Mosnier, F., Nakayama, S.,
+Penrose, G., Pinsky, M. L., Selig, E. R., Wabnitz, C. C. C., Österblom,
+H., & Folke, C. (2026). Mobilizing the seafood industry for climate
+action. *Npj Ocean Sustainability*, *5*(1), 61.
+<https://doi.org/10.1038/s44183-026-00252-8>
+:::
+
 ::: {#ref-urban2026global .csl-entry}
-\[40\] Urban, M. C., Zurell, D., Bocedi, G., Gonzalez, A., Velazco, S.
+\[41\] Urban, M. C., Zurell, D., Bocedi, G., Gonzalez, A., Velazco, S.
 J. E., Bezeng, B. S., Briscoe, N. J., Brotons, L., Buckley, L. B.,
 Oliveira Junior, A. C. de, Cooke, R., Cunha Godoy, L. da, De Marco
 Júnior, P., Eddy, T. D., Ferrier, S., Guillera-Arroita, G., Isaac, N. J.
@@ -23,30 +32,40 @@ Ecology & Evolution*. <https://doi.org/10.1038/s41559-026-03123-0>
 :::
 
 ::: {#ref-godoy2026statistical .csl-entry}
-\[39\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2026). Statistical
+\[40\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2026). Statistical
 inferences and predictions for areal data and spatial data fusion with
 Hausdorff--Gaussian processes. *Journal of Agricultural, Biological and
 Environmental Statistics*. <https://doi.org/10.1007/s13253-025-00720-7>
 :::
 
 ::: {#ref-assuncao2026testing .csl-entry}
-\[38\] Assunção, R. M., & **Godoy, L. da C.** (2026). Testing independence
+\[39\] Assunção, R. M., & **Godoy, L. da C.** (2026). Testing independence
 of stationary spatial point processes in irregular polygonal domains.
 *Spatial Statistics*, *74*, 100989.
 <https://doi.org/10.1016/j.spasta.2026.100989>
 :::
 
 ::: {#ref-godoy2026isotropic .csl-entry}
-\[37\] **Godoy, L. da C.**, Prates, M. O., Quintana, F. A., & Yan, J.
+\[38\] **Godoy, L. da C.**, Prates, M. O., Quintana, F. A., & Yan, J.
 (2026). *Isotropic covariance functions for disparate spatial
 resolutions*. <https://arxiv.org/abs/2502.15146>
 :::
 
 ::: {#ref-godoy2026voronoi .csl-entry}
-\[36\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2026). Voronoi linkage
+\[37\] **Godoy, L. da C.**, Prates, M. O., & Yan, J. (2026). Voronoi linkage
 between mismatching voting stations and census tracts in analyzing the
 2018 Brazilian presidential election data. *Spatial Statistics*, *71*,
 100949. <https://doi.org/10.1016/j.spasta.2025.100949>
+:::
+
+::: {#ref-velazco2026protocol .csl-entry}
+\[36\] Velazco, S. J. E., Briscoe, N., Buckley, L., Cabral, J. S.,
+Cervantes Peralta, F., Cooke, R., Oliveira Junior, A. C. de, Ferrier,
+S., Gascoigne, S. J., **Godoy, L. da C.**, Guillera-Arroita, G., Isaac, N.
+J. B., Karger, D. N., Keuth, R., Lundquist, C. J., Merow, C., Purvis,
+A., Schifferle, K., Semple, A. E., ... Bocedi, G. (2026). A protocol for
+the biodiversity model intercomparison project: BMIP 1.0. *EGUsphere*,
+*2026*, 1--38. <https://doi.org/10.5194/egusphere-2026-5033>
 :::
 
 ::: {#ref-pandya2025using .csl-entry}
@@ -319,4 +338,4 @@ spatial confounding? *Journal of the Indian Statistical Association*,
 *59*(2), 197--220.
 <https://drive.google.com/file/d/1rmxyH_7IDp8KFtIGxb6Jw_auNNbMKB3A/view>
 :::
-::::::::::::::::::::::::::::::::::::::::::::
+::::::::::::::::::::::::::::::::::::::::::::::
